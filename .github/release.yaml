@@ -1,0 +1,23 @@
+changelog:
+  exclude:
+    labels:
+      - ignore
+  categories:
+    - title: 🛠 Breaking
+      labels:
+        - Semver-Major
+        - breaking-change
+    - title: 🎉 Feature
+      labels:
+        - Semver-Minor
+        - enhancement
+    - title: 🐛 Bugfix
+      labels:
+        - Semver-Patch
+        - bug
+    - title: 📚 Docs
+      labels:
+        - documentation
+    - title: Other
+      labels:
+        - '*'
