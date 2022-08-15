@@ -1,0 +1,1210 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: api+support@bunnyshell.com
+    name: API Support
+    url: https://www.bunnyshell.com/
+  description: Interact with Bunnyshell Platform
+  termsOfService: https://www.bunnyshell.com/bunnyshell-customer-agreement/
+  title: API Bunnyshell Environments
+  version: 1.0.1
+servers:
+- description: ""
+  url: https://api.environments.bunnyshell.com
+security:
+- oauth: []
+- ApiKeyAuth: []
+tags:
+- description: Component Resource
+  name: component
+- description: Environment Resource
+  name: environment
+- description: Event Resource
+  name: event
+- description: Organization Resource
+  name: organization
+- description: Project Resource
+  name: project
+paths:
+  /v1/components:
+    get:
+      deprecated: false
+      description: List service components matching any selected filters
+      operationId: ComponentList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by operationStatus
+        example: ready
+        explode: false
+        in: query
+        name: operationStatus
+        required: false
+        schema:
+          enum:
+          - ready
+          - queued
+          - building
+          - building_failed
+          - built
+          - deploying
+          - deployed
+          - deployment_failed
+          - updating
+          - updating_failed
+          - stopping
+          - stopping_failed
+          - stopped
+          - restarting
+          - restarting_failed
+          - running
+          - deleting
+          - deleting_failed
+          - deleted
+          - starting
+          - starting_failed
+          - aborted
+          - aborting
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by clusterStatus
+        example: not_available
+        explode: false
+        in: query
+        name: clusterStatus
+        required: false
+        schema:
+          enum:
+          - not_available
+          - err
+          - scheduling
+          - waiting
+          - err_starting
+          - crashing
+          - running_ok
+          - exited
+          - completed
+          - replica_scheduling
+          - replica_waiting
+          - replica_running_ok
+          - replica_ko
+          - replica_completed
+          - replica_issues_scheduling
+          - replica_issues_waiting
+          - replica_issues_running
+          - replica_issues_count
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by project
+        explode: false
+        in: query
+        name: project
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-component-collection'
+          description: component collection
+      summary: Retrieves the collection of component resources.
+      tags:
+      - component
+  /v1/components/{id}:
+    get:
+      deprecated: false
+      description: View a specific service component
+      operationId: ComponentView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/component-item'
+          description: component resource
+        "404":
+          description: Resource not found
+      summary: Retrieves a component resource.
+      tags:
+      - component
+  /v1/environments:
+    get:
+      deprecated: false
+      description: List environments matching any selected filters.
+      operationId: EnvironmentList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by type
+        example: primary
+        explode: false
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - primary
+          - ephemeral
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by operationStatus
+        example: ready
+        explode: false
+        in: query
+        name: operationStatus
+        required: false
+        schema:
+          enum:
+          - ready
+          - queued
+          - building
+          - building_failed
+          - built
+          - deploying
+          - deployed
+          - deployment_failed
+          - updating
+          - updating_failed
+          - stopping
+          - stopping_failed
+          - stopped
+          - restarting
+          - restarting_failed
+          - running
+          - deleting
+          - deleting_failed
+          - deleted
+          - starting
+          - starting_failed
+          - aborted
+          - aborting
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by project
+        explode: false
+        in: query
+        name: project
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-environment-collection'
+          description: environment collection
+      summary: Retrieves the collection of environment resources.
+      tags:
+      - environment
+  /v1/environments/{id}:
+    get:
+      deprecated: false
+      description: View a specific environment.
+      operationId: EnvironmentView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment-item'
+          description: environment resource
+        "404":
+          description: Resource not found
+      summary: Retrieves a environment resource.
+      tags:
+      - environment
+  /v1/environments/{id}/clone:
+    post:
+      deprecated: false
+      description: Clone an environment.
+      operationId: EnvironmentClone
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environment.CloneAction'
+        description: The new environment resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment-item'
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Creates a environment resource.
+      tags:
+      - environment
+  /v1/environments/{id}/delete:
+    post:
+      deprecated: false
+      description: Delete a specific environment.
+      operationId: EnvironmentDelete
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/event-item'
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Delete a specific environment.
+      tags:
+      - environment
+  /v1/environments/{id}/deploy:
+    post:
+      deprecated: false
+      description: Deploy an environment.
+      operationId: EnvironmentDeploy
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/event-item'
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Creates a environment resource.
+      tags:
+      - environment
+  /v1/environments/{id}/start:
+    post:
+      deprecated: false
+      description: Start an environment.
+      operationId: EnvironmentStart
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/event-item'
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Start an environment.
+      tags:
+      - environment
+  /v1/environments/{id}/stop:
+    post:
+      deprecated: false
+      description: Stop an environment.
+      operationId: EnvironmentStop
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/event-item'
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Creates a environment resource.
+      tags:
+      - environment
+  /v1/events:
+    get:
+      deprecated: false
+      description: List events matching any selected filters.
+      operationId: EventList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by type
+        example: env_create
+        explode: false
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - env_create
+          - env_create_ephemeral
+          - env_clone
+          - env_deploy
+          - env_delete
+          - env_delete_ephemeral
+          - env_start_manual
+          - env_start_auto
+          - env_stop_manual
+          - env_stop_auto
+          - env_abort_manual
+          - env_conv_eph_to_primary
+          - tf_delete_module_use
+          - tf_apply_module_use
+          - tf_sync_module_use
+          - build_settings_validated
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by status
+        example: new
+        explode: false
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - new
+          - in_progress
+          - success
+          - fail
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-event-collection'
+          description: event collection
+      summary: Retrieves the collection of event resources.
+      tags:
+      - event
+  /v1/events/{id}:
+    get:
+      deprecated: false
+      description: View a specific event.
+      operationId: EventView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/event-item'
+          description: event resource
+        "404":
+          description: Resource not found
+      summary: Retrieves a event resource.
+      tags:
+      - event
+  /v1/organizations:
+    get:
+      deprecated: false
+      description: List organization matching any selected filters.
+      operationId: OrganizationList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-organization-collection'
+          description: organization collection
+      summary: Retrieves the collection of organization resources.
+      tags:
+      - organization
+  /v1/organizations/{id}:
+    get:
+      deprecated: false
+      description: View a specific organization.
+      operationId: OrganizationView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/organization-item'
+          description: organization resource
+        "404":
+          description: Resource not found
+      summary: Retrieves a organization resource.
+      tags:
+      - organization
+  /v1/projects:
+    get:
+      deprecated: false
+      description: List projects matching any selected filters.
+      operationId: ProjectList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-project-collection'
+          description: project collection
+      summary: Retrieves the collection of project resources.
+      tags:
+      - project
+  /v1/projects/{id}:
+    get:
+      deprecated: false
+      description: View a specific project.
+      operationId: ProjectView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project-item'
+          description: project resource
+        "404":
+          description: Resource not found
+      summary: Retrieves a project resource.
+      tags:
+      - project
+components:
+  examples: {}
+  headers: {}
+  parameters: {}
+  requestBodies: {}
+  responses: {}
+  schemas:
+    component-collection:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      properties:
+        id:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        name:
+          description: Service component name
+          readOnly: true
+          type: string
+        clusterStatus:
+          description: Service component cluster status
+          readOnly: true
+          type: string
+        operationStatus:
+          description: Service component operation status
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+      type: object
+    component-item:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      properties:
+        id:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        name:
+          description: Service component name
+          readOnly: true
+          type: string
+        clusterStatus:
+          description: Service component cluster status
+          readOnly: true
+          type: string
+        operationStatus:
+          description: Service component operation status
+          readOnly: true
+          type: string
+        publicURLs:
+          description: Service component URLs
+          items:
+            type: string
+          readOnly: true
+          type: array
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+      type: object
+    environment-collection:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        id:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        type:
+          description: "Environment type: primary or ephemeral."
+          readOnly: true
+          type: string
+        name:
+          description: Environment name.
+          readOnly: true
+          type: string
+        operationStatus:
+          description: Environment operation status.
+          readOnly: true
+          type: string
+        project:
+          description: Project identifier.
+          readOnly: true
+          type: string
+      type: object
+    environment-item:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        id:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        type:
+          description: "Environment type: primary or ephemeral."
+          readOnly: true
+          type: string
+        name:
+          description: Environment name.
+          readOnly: true
+          type: string
+        totalComponents:
+          description: Service component identifier
+          readOnly: true
+          type: integer
+        operationStatus:
+          description: Environment operation status.
+          readOnly: true
+          type: string
+        project:
+          description: Project identifier.
+          readOnly: true
+          type: string
+      type: object
+    environment.CloneAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - name
+      type: object
+    environment.EventResource-item:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        id:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        type:
+          description: Event type.
+          readOnly: true
+          type: string
+        status:
+          description: Event operation status.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+        createdAt:
+          description: Event creation time.
+          format: date-time
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Event last update time.
+          format: date-time
+          readOnly: true
+          type: string
+      type: object
+    event-collection:
+      description: "An event represents an operation on an environment, integration\
+        \ or settings"
+      properties:
+        id:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        type:
+          description: Event type.
+          readOnly: true
+          type: string
+        status:
+          description: Event operation status.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    event-item:
+      description: "An event represents an operation on an environment, integration\
+        \ or settings"
+      properties:
+        id:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        type:
+          description: Event type.
+          readOnly: true
+          type: string
+        status:
+          description: Event operation status.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+        createdAt:
+          description: Event creation time.
+          format: date-time
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Event last update time.
+          format: date-time
+          readOnly: true
+          type: string
+      type: object
+    organization-collection:
+      description: An organization holds multiple projects and all the integrations
+        used by environments
+      properties:
+        id:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Organization name as defined in Bunnyshell UI.
+          readOnly: true
+          type: string
+        timezone:
+          description: Organization timezone as defined in Bunnyshell UI.
+          readOnly: true
+          type: string
+      type: object
+    organization-item:
+      description: An organization holds multiple projects and all the integrations
+        used by environments
+      properties:
+        id:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Organization name as defined in Bunnyshell UI.
+          readOnly: true
+          type: string
+        timezone:
+          description: Organization timezone as defined in Bunnyshell UI.
+          readOnly: true
+          type: string
+        totalUsers:
+          description: Organization total users.
+          readOnly: true
+          type: integer
+        totalProjects:
+          description: Organization total projects.
+          readOnly: true
+          type: integer
+        availableRegistries:
+          description: Organization total available registry integrations.
+          readOnly: true
+          type: integer
+        availableClusters:
+          description: Organization total available cluster integrations.
+          readOnly: true
+          type: integer
+        availableGitIntegration:
+          description: Organization total available git integrations.
+          readOnly: true
+          type: integer
+      type: object
+    paginated-component-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_component_collection'
+      type: object
+    paginated-environment-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_environment_collection'
+      type: object
+    paginated-event-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_event_collection'
+      type: object
+    paginated-organization-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_organization_collection'
+      type: object
+    paginated-project-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_project_collection'
+      type: object
+    paginated_itemsPerPage:
+      format: int32
+      type: integer
+    paginated_link_self:
+      properties:
+        href:
+          type: string
+      type: object
+    paginated_links:
+      properties:
+        self:
+          $ref: '#/components/schemas/paginated_link_self'
+        item:
+          items:
+            $ref: '#/components/schemas/paginated_link_self'
+          type: array
+      type: object
+    paginated_total:
+      format: int32
+      type: integer
+    project-collection:
+      description: A project holds multiple environments and shared secrets and settings.
+      properties:
+        id:
+          description: Project identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Project name.
+          readOnly: true
+          type: string
+        totalEnvironments:
+          description: Environment identifier.
+          readOnly: true
+          type: integer
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    project-item:
+      description: A project holds multiple environments and shared secrets and settings.
+      properties:
+        id:
+          description: Project identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Project name.
+          readOnly: true
+          type: string
+        totalEnvironments:
+          description: Environment identifier.
+          readOnly: true
+          type: integer
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    embedded_component_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/component-collection'
+          type: array
+      title: embedded-component-collection
+      type: object
+    embedded_environment_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/environment-collection'
+          type: array
+      title: embedded-environment-collection
+      type: object
+    embedded_event_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/event-collection'
+          type: array
+      title: embedded-event-collection
+      type: object
+    embedded_organization_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/organization-collection'
+          type: array
+      title: embedded-organization-collection
+      type: object
+    embedded_project_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/project-collection'
+          type: array
+      title: embedded-project-collection
+      type: object
+  securitySchemes:
+    oauth:
+      description: OAuth 2.0 password Grant
+      flows:
+        password:
+          refreshUrl: refresh
+          scopes: {}
+          tokenUrl: /token
+      type: oauth2
+    ApiKeyAuth:
+      description: Value for the X-Auth-Token header parameter.
+      in: header
+      name: X-Auth-Token
+      type: apiKey
