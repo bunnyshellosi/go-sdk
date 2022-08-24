@@ -3,7 +3,7 @@ API Bunnyshell Environments
 
 Interact with Bunnyshell Platform
 
-API version: 1.0.1
+API version: 1.1.0
 Contact: api+support@bunnyshell.com
 */
 
@@ -43,7 +43,7 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the API Bunnyshell Environments API v1.0.1
+// APIClient manages communication with the API Bunnyshell Environments API v1.1.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration

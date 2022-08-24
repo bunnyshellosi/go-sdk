@@ -7,7 +7,7 @@ info:
   description: Interact with Bunnyshell Platform
   termsOfService: https://www.bunnyshell.com/bunnyshell-customer-agreement/
   title: API Bunnyshell Environments
-  version: 1.0.1
+  version: 1.1.0
 servers:
 - description: ""
   url: https://api.environments.bunnyshell.com
@@ -180,6 +180,83 @@ paths:
         "404":
           description: Resource not found
       summary: Retrieves a component resource.
+      tags:
+      - component
+  /v1/components/{id}/remote-development/down:
+    post:
+      deprecated: false
+      description: Stop remote development on component
+      operationId: ComponentRemote_development_down
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "202":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/component-item'
+          description: component resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Creates a component resource.
+      tags:
+      - component
+  /v1/components/{id}/remote-development/up:
+    post:
+      deprecated: false
+      description: Prepare component for remote development
+      operationId: ComponentRemote_development_up
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/component.RemoteDevelopmentUp'
+        description: The new component resource
+        required: true
+      responses:
+        "202":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/component-item'
+          description: component resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+      summary: Creates a component resource.
       tags:
       - component
   /v1/environments:
@@ -424,6 +501,34 @@ paths:
         "404":
           description: Resource not found
       summary: Creates a environment resource.
+      tags:
+      - environment
+  /v1/environments/{id}/kube-config:
+    get:
+      deprecated: false
+      description: Download Kubernetes Config File
+      operationId: EnvironmentKube_config
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/x+yaml:
+              schema:
+                $ref: '#/components/schemas/environment.KubeConfig-kube-config.read'
+          description: environment resource
+        "404":
+          description: Resource not found
+      summary: Retrieves a environment resource.
       tags:
       - environment
   /v1/environments/{id}/start:
@@ -756,6 +861,65 @@ components:
   requestBodies: {}
   responses: {}
   schemas:
+    ArrayObject-kube-config.read:
+      type: object
+    Cluster-kube-config.read:
+      properties:
+        certificate-authority-data:
+          type: string
+        server:
+          type: string
+      required:
+      - certificate-authority-data
+      - server
+      type: object
+    ClusterWrapper-kube-config.read:
+      properties:
+        name:
+          type: string
+        cluster:
+          $ref: '#/components/schemas/Cluster-kube-config.read'
+      required:
+      - name
+      type: object
+    Context-kube-config.read:
+      properties:
+        cluster:
+          type: string
+        namespace:
+          type: string
+        user:
+          type: string
+      required:
+      - cluster
+      - namespace
+      - user
+      type: object
+    ContextWrapper-kube-config.read:
+      properties:
+        name:
+          type: string
+        context:
+          $ref: '#/components/schemas/Context-kube-config.read'
+      required:
+      - name
+      type: object
+    User-kube-config.read:
+      properties:
+        token:
+          type: string
+      required:
+      - token
+      type: object
+    UserWrapper-kube-config.read:
+      properties:
+        name:
+          type: string
+        user:
+          $ref: '#/components/schemas/User-kube-config.read'
+      required:
+      - name
+      type: object
     component-collection:
       description: A service component represents either an application or a group
         of applications as a single unit
@@ -778,6 +942,11 @@ components:
           type: string
         environment:
           description: Environment identifier.
+          readOnly: true
+          type: string
+        syncPath:
+          description: Service component sync path for remote development
+          nullable: true
           readOnly: true
           type: string
       type: object
@@ -810,6 +979,20 @@ components:
         environment:
           description: Environment identifier.
           readOnly: true
+          type: string
+        syncPath:
+          description: Service component sync path for remote development
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    component.RemoteDevelopmentUp:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      properties:
+        container:
+          maxLength: 255
+          nullable: true
           type: string
       type: object
     environment-collection:
@@ -906,6 +1089,34 @@ components:
           description: Event last update time.
           format: date-time
           readOnly: true
+          type: string
+      type: object
+    environment.KubeConfig-kube-config.read:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        apiVersion:
+          default: v1
+          example: v1
+          type: string
+        kind:
+          default: Config
+          example: Config
+          type: string
+        preferences:
+          type: object
+        clusters:
+          items:
+            $ref: '#/components/schemas/ClusterWrapper-kube-config.read'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/UserWrapper-kube-config.read'
+          type: array
+        contexts:
+          items:
+            $ref: '#/components/schemas/ContextWrapper-kube-config.read'
+          type: array
+        current-context:
           type: string
       type: object
     event-collection:
