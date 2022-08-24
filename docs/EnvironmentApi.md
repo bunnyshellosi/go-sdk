@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**EnvironmentClone**](EnvironmentApi.md#EnvironmentClone) | **Post** /v1/environments/{id}/clone | Creates a environment resource.
 [**EnvironmentDelete**](EnvironmentApi.md#EnvironmentDelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 [**EnvironmentDeploy**](EnvironmentApi.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Creates a environment resource.
+[**EnvironmentKubeConfig**](EnvironmentApi.md#EnvironmentKubeConfig) | **Get** /v1/environments/{id}/kube-config | Retrieves a environment resource.
 [**EnvironmentList**](EnvironmentApi.md#EnvironmentList) | **Get** /v1/environments | Retrieves the collection of environment resources.
 [**EnvironmentStart**](EnvironmentApi.md#EnvironmentStart) | **Post** /v1/environments/{id}/start | Start an environment.
 [**EnvironmentStop**](EnvironmentApi.md#EnvironmentStop) | **Post** /v1/environments/{id}/stop | Creates a environment resource.
@@ -224,6 +225,76 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/hal+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EnvironmentKubeConfig
+
+> EnvironmentKubeConfigKubeConfigRead EnvironmentKubeConfig(ctx, id).Execute()
+
+Retrieves a environment resource.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentKubeConfig(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentKubeConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentKubeConfig`: EnvironmentKubeConfigKubeConfigRead
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentApi.EnvironmentKubeConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentKubeConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**EnvironmentKubeConfigKubeConfigRead**](EnvironmentKubeConfigKubeConfigRead.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/x+yaml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

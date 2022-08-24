@@ -3,7 +3,7 @@ API Bunnyshell Environments
 
 Interact with Bunnyshell Platform
 
-API version: 1.0.1
+API version: 1.1.0
 Contact: api+support@bunnyshell.com
 */
 
