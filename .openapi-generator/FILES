@@ -25,7 +25,6 @@ docs/EmbeddedProjectCollection.md
 docs/EnvironmentApi.md
 docs/EnvironmentCloneAction.md
 docs/EnvironmentCollection.md
-docs/EnvironmentEventResourceItem.md
 docs/EnvironmentItem.md
 docs/EnvironmentKubeConfigKubeConfigRead.md
 docs/EventApi.md
@@ -41,6 +40,7 @@ docs/PaginatedLinkSelf.md
 docs/PaginatedLinks.md
 docs/PaginatedOrganizationCollection.md
 docs/PaginatedProjectCollection.md
+docs/ProblemGeneric.md
 docs/ProjectApi.md
 docs/ProjectCollection.md
 docs/ProjectItem.md
@@ -63,7 +63,6 @@ model_embedded_organization_collection.go
 model_embedded_project_collection.go
 model_environment_clone_action.go
 model_environment_collection.go
-model_environment_event_resource_item.go
 model_environment_item.go
 model_environment_kube_config_kube_config_read.go
 model_event_collection.go
@@ -77,6 +76,7 @@ model_paginated_link_self.go
 model_paginated_links.go
 model_paginated_organization_collection.go
 model_paginated_project_collection.go
+model_problem_generic.go
 model_project_collection.go
 model_project_item.go
 model_user_kube_config_read.go

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Links** | Pointer to [**PaginatedLinks**](PaginatedLinks.md) |  | [optional] 
 **TotalItems** | Pointer to **int32** |  | [optional] 
+**Page** | Pointer to **int32** |  | [optional] 
 **ItemsPerPage** | Pointer to **int32** |  | [optional] 
 **Embedded** | Pointer to [**EmbeddedComponentCollection**](EmbeddedComponentCollection.md) |  | [optional] 
 
@@ -77,6 +78,31 @@ SetTotalItems sets TotalItems field to given value.
 `func (o *PaginatedComponentCollection) HasTotalItems() bool`
 
 HasTotalItems returns a boolean if a field has been set.
+
+### GetPage
+
+`func (o *PaginatedComponentCollection) GetPage() int32`
+
+GetPage returns the Page field if non-nil, zero value otherwise.
+
+### GetPageOk
+
+`func (o *PaginatedComponentCollection) GetPageOk() (*int32, bool)`
+
+GetPageOk returns a tuple with the Page field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPage
+
+`func (o *PaginatedComponentCollection) SetPage(v int32)`
+
+SetPage sets Page field to given value.
+
+### HasPage
+
+`func (o *PaginatedComponentCollection) HasPage() bool`
+
+HasPage returns a boolean if a field has been set.
 
 ### GetItemsPerPage
 

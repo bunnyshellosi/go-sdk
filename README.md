@@ -115,7 +115,6 @@ Class | Method | HTTP request | Description
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
  - [EnvironmentCloneAction](docs/EnvironmentCloneAction.md)
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
- - [EnvironmentEventResourceItem](docs/EnvironmentEventResourceItem.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
  - [EventCollection](docs/EventCollection.md)
@@ -129,6 +128,7 @@ Class | Method | HTTP request | Description
  - [PaginatedLinks](docs/PaginatedLinks.md)
  - [PaginatedOrganizationCollection](docs/PaginatedOrganizationCollection.md)
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
+ - [ProblemGeneric](docs/ProblemGeneric.md)
  - [ProjectCollection](docs/ProjectCollection.md)
  - [ProjectItem](docs/ProjectItem.md)
  - [UserKubeConfigRead](docs/UserKubeConfigRead.md)
@@ -194,5 +194,5 @@ Each of these functions takes a value of the given basic type and returns a poin
 
 ## Author
 
-api+support@bunnyshell.com
+osi+support@bunnyshell.com
 
