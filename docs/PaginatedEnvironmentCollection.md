@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Links** | Pointer to [**PaginatedLinks**](PaginatedLinks.md) |  | [optional] 
 **TotalItems** | Pointer to **int32** |  | [optional] 
+**Page** | Pointer to **int32** |  | [optional] 
 **ItemsPerPage** | Pointer to **int32** |  | [optional] 
 **Embedded** | Pointer to [**EmbeddedEnvironmentCollection**](EmbeddedEnvironmentCollection.md) |  | [optional] 
 
@@ -77,6 +78,31 @@ SetTotalItems sets TotalItems field to given value.
 `func (o *PaginatedEnvironmentCollection) HasTotalItems() bool`
 
 HasTotalItems returns a boolean if a field has been set.
+
+### GetPage
+
+`func (o *PaginatedEnvironmentCollection) GetPage() int32`
+
+GetPage returns the Page field if non-nil, zero value otherwise.
+
+### GetPageOk
+
+`func (o *PaginatedEnvironmentCollection) GetPageOk() (*int32, bool)`
+
+GetPageOk returns a tuple with the Page field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPage
+
+`func (o *PaginatedEnvironmentCollection) SetPage(v int32)`
+
+SetPage sets Page field to given value.
+
+### HasPage
+
+`func (o *PaginatedEnvironmentCollection) HasPage() bool`
+
+HasPage returns a boolean if a field has been set.
 
 ### GetItemsPerPage
 
