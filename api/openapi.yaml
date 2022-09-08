@@ -153,7 +153,7 @@ paths:
           description: component collection
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -185,13 +185,13 @@ paths:
           description: component resource
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -229,25 +229,25 @@ paths:
           description: component resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -286,25 +286,25 @@ paths:
           description: component resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -411,7 +411,7 @@ paths:
           description: environment collection
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -443,13 +443,13 @@ paths:
           description: environment resource
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -488,25 +488,25 @@ paths:
           description: environment resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -544,25 +544,25 @@ paths:
           description: environment resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -600,25 +600,25 @@ paths:
           description: environment resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -650,13 +650,13 @@ paths:
           description: environment resource
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -694,25 +694,25 @@ paths:
           description: environment resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -750,25 +750,25 @@ paths:
           description: environment resource created
         "400":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -870,7 +870,7 @@ paths:
           description: event collection
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -902,13 +902,13 @@ paths:
           description: event resource
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -942,7 +942,7 @@ paths:
           description: organization collection
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -974,13 +974,13 @@ paths:
           description: organization resource
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -1025,7 +1025,7 @@ paths:
           description: project collection
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -1057,13 +1057,13 @@ paths:
           description: project resource
         "404":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Resource not found
         "4xx":
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
@@ -1080,9 +1080,6 @@ components:
     ArrayObject-kube-config.read:
       type: object
     Cluster-kube-config.read:
-      example:
-        server: server
-        certificate-authority-data: certificate-authority-data
       properties:
         certificate-authority-data:
           type: string
@@ -1093,11 +1090,6 @@ components:
       - server
       type: object
     ClusterWrapper-kube-config.read:
-      example:
-        cluster:
-          server: server
-          certificate-authority-data: certificate-authority-data
-        name: name
       properties:
         name:
           type: string
@@ -1107,10 +1099,6 @@ components:
       - name
       type: object
     Context-kube-config.read:
-      example:
-        cluster: cluster
-        namespace: namespace
-        user: user
       properties:
         cluster:
           type: string
@@ -1124,12 +1112,6 @@ components:
       - user
       type: object
     ContextWrapper-kube-config.read:
-      example:
-        name: name
-        context:
-          cluster: cluster
-          namespace: namespace
-          user: user
       properties:
         name:
           type: string
@@ -1139,8 +1121,6 @@ components:
       - name
       type: object
     User-kube-config.read:
-      example:
-        token: token
       properties:
         token:
           type: string
@@ -1148,10 +1128,6 @@ components:
       - token
       type: object
     UserWrapper-kube-config.read:
-      example:
-        name: name
-        user:
-          token: token
       properties:
         name:
           type: string
@@ -1163,13 +1139,6 @@ components:
     component-collection:
       description: A service component represents either an application or a group
         of applications as a single unit
-      example:
-        operationStatus: operationStatus
-        environment: environment
-        syncPath: syncPath
-        name: name
-        id: id
-        clusterStatus: clusterStatus
       properties:
         id:
           description: Service component identifier
@@ -1200,16 +1169,6 @@ components:
     component-item:
       description: A service component represents either an application or a group
         of applications as a single unit
-      example:
-        operationStatus: operationStatus
-        environment: environment
-        syncPath: syncPath
-        name: name
-        publicURLs:
-        - publicURLs
-        - publicURLs
-        id: id
-        clusterStatus: clusterStatus
       properties:
         id:
           description: Service component identifier
@@ -1254,12 +1213,6 @@ components:
       type: object
     environment-collection:
       description: An environment holds a collection of buildable and deployable components.
-      example:
-        operationStatus: operationStatus
-        name: name
-        project: project
-        id: id
-        type: type
       properties:
         id:
           description: Environment identifier.
@@ -1284,13 +1237,6 @@ components:
       type: object
     environment-item:
       description: An environment holds a collection of buildable and deployable components.
-      example:
-        operationStatus: operationStatus
-        name: name
-        project: project
-        id: id
-        type: type
-        totalComponents: 0
       properties:
         id:
           description: Environment identifier.
@@ -1328,38 +1274,6 @@ components:
       type: object
     environment.KubeConfig-kube-config.read:
       description: An environment holds a collection of buildable and deployable components.
-      example:
-        preferences: "{}"
-        apiVersion: v1
-        kind: Config
-        current-context: current-context
-        contexts:
-        - name: name
-          context:
-            cluster: cluster
-            namespace: namespace
-            user: user
-        - name: name
-          context:
-            cluster: cluster
-            namespace: namespace
-            user: user
-        clusters:
-        - cluster:
-            server: server
-            certificate-authority-data: certificate-authority-data
-          name: name
-        - cluster:
-            server: server
-            certificate-authority-data: certificate-authority-data
-          name: name
-        users:
-        - name: name
-          user:
-            token: token
-        - name: name
-          user:
-            token: token
       properties:
         apiVersion:
           default: v1
@@ -1389,12 +1303,6 @@ components:
     event-collection:
       description: "An event represents an operation on an environment, integration\
         \ or settings"
-      example:
-        environment: environment
-        organization: organization
-        id: id
-        type: type
-        status: status
       properties:
         id:
           description: Event identifier.
@@ -1421,14 +1329,6 @@ components:
     event-item:
       description: "An event represents an operation on an environment, integration\
         \ or settings"
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        environment: environment
-        organization: organization
-        id: id
-        type: type
-        status: status
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           description: Event identifier.
@@ -1465,10 +1365,6 @@ components:
     organization-collection:
       description: An organization holds multiple projects and all the integrations
         used by environments
-      example:
-        timezone: timezone
-        name: name
-        id: id
       properties:
         id:
           description: Organization identifier.
@@ -1486,15 +1382,6 @@ components:
     organization-item:
       description: An organization holds multiple projects and all the integrations
         used by environments
-      example:
-        totalProjects: 6
-        totalUsers: 0
-        availableRegistries: 1
-        timezone: timezone
-        availableClusters: 5
-        name: name
-        id: id
-        availableGitIntegration: 5
       properties:
         id:
           description: Organization identifier.
@@ -1531,30 +1418,6 @@ components:
       type: object
     paginated-component-collection:
       description: Paginated result
-      example:
-        totalItems: 0
-        _links:
-          item:
-          - href: href
-          - href: href
-          self:
-            href: href
-        _embedded:
-          item:
-          - operationStatus: operationStatus
-            environment: environment
-            syncPath: syncPath
-            name: name
-            id: id
-            clusterStatus: clusterStatus
-          - operationStatus: operationStatus
-            environment: environment
-            syncPath: syncPath
-            name: name
-            id: id
-            clusterStatus: clusterStatus
-        itemsPerPage: 1
-        page: 6
       properties:
         _links:
           $ref: '#/components/schemas/paginated_links'
@@ -1572,28 +1435,6 @@ components:
       type: object
     paginated-environment-collection:
       description: Paginated result
-      example:
-        totalItems: 0
-        _links:
-          item:
-          - href: href
-          - href: href
-          self:
-            href: href
-        _embedded:
-          item:
-          - operationStatus: operationStatus
-            name: name
-            project: project
-            id: id
-            type: type
-          - operationStatus: operationStatus
-            name: name
-            project: project
-            id: id
-            type: type
-        itemsPerPage: 1
-        page: 6
       properties:
         _links:
           $ref: '#/components/schemas/paginated_links'
@@ -1611,28 +1452,6 @@ components:
       type: object
     paginated-event-collection:
       description: Paginated result
-      example:
-        totalItems: 0
-        _links:
-          item:
-          - href: href
-          - href: href
-          self:
-            href: href
-        _embedded:
-          item:
-          - environment: environment
-            organization: organization
-            id: id
-            type: type
-            status: status
-          - environment: environment
-            organization: organization
-            id: id
-            type: type
-            status: status
-        itemsPerPage: 1
-        page: 6
       properties:
         _links:
           $ref: '#/components/schemas/paginated_links'
@@ -1650,24 +1469,6 @@ components:
       type: object
     paginated-organization-collection:
       description: Paginated result
-      example:
-        totalItems: 0
-        _links:
-          item:
-          - href: href
-          - href: href
-          self:
-            href: href
-        _embedded:
-          item:
-          - timezone: timezone
-            name: name
-            id: id
-          - timezone: timezone
-            name: name
-            id: id
-        itemsPerPage: 1
-        page: 6
       properties:
         _links:
           $ref: '#/components/schemas/paginated_links'
@@ -1685,26 +1486,6 @@ components:
       type: object
     paginated-project-collection:
       description: Paginated result
-      example:
-        totalItems: 0
-        _links:
-          item:
-          - href: href
-          - href: href
-          self:
-            href: href
-        _embedded:
-          item:
-          - totalEnvironments: 5
-            organization: organization
-            name: name
-            id: id
-          - totalEnvironments: 5
-            organization: organization
-            name: name
-            id: id
-        itemsPerPage: 1
-        page: 6
       properties:
         _links:
           $ref: '#/components/schemas/paginated_links'
@@ -1724,19 +1505,11 @@ components:
       format: int32
       type: integer
     paginated_link_self:
-      example:
-        href: href
       properties:
         href:
           type: string
       type: object
     paginated_links:
-      example:
-        item:
-        - href: href
-        - href: href
-        self:
-          href: href
       properties:
         self:
           $ref: '#/components/schemas/paginated_link_self'
@@ -1761,11 +1534,6 @@ components:
       type: object
     project-collection:
       description: A project holds multiple environments and shared secrets and settings.
-      example:
-        totalEnvironments: 5
-        organization: organization
-        name: name
-        id: id
       properties:
         id:
           description: Project identifier.
@@ -1786,11 +1554,6 @@ components:
       type: object
     project-item:
       description: A project holds multiple environments and shared secrets and settings.
-      example:
-        totalEnvironments: 0
-        organization: organization
-        name: name
-        id: id
       properties:
         id:
           description: Project identifier.
@@ -1810,20 +1573,6 @@ components:
           type: string
       type: object
     embedded_component_collection:
-      example:
-        item:
-        - operationStatus: operationStatus
-          environment: environment
-          syncPath: syncPath
-          name: name
-          id: id
-          clusterStatus: clusterStatus
-        - operationStatus: operationStatus
-          environment: environment
-          syncPath: syncPath
-          name: name
-          id: id
-          clusterStatus: clusterStatus
       properties:
         item:
           items:
@@ -1832,18 +1581,6 @@ components:
       title: embedded-component-collection
       type: object
     embedded_environment_collection:
-      example:
-        item:
-        - operationStatus: operationStatus
-          name: name
-          project: project
-          id: id
-          type: type
-        - operationStatus: operationStatus
-          name: name
-          project: project
-          id: id
-          type: type
       properties:
         item:
           items:
@@ -1852,18 +1589,6 @@ components:
       title: embedded-environment-collection
       type: object
     embedded_event_collection:
-      example:
-        item:
-        - environment: environment
-          organization: organization
-          id: id
-          type: type
-          status: status
-        - environment: environment
-          organization: organization
-          id: id
-          type: type
-          status: status
       properties:
         item:
           items:
@@ -1872,14 +1597,6 @@ components:
       title: embedded-event-collection
       type: object
     embedded_organization_collection:
-      example:
-        item:
-        - timezone: timezone
-          name: name
-          id: id
-        - timezone: timezone
-          name: name
-          id: id
       properties:
         item:
           items:
@@ -1888,16 +1605,6 @@ components:
       title: embedded-organization-collection
       type: object
     embedded_project_collection:
-      example:
-        item:
-        - totalEnvironments: 5
-          organization: organization
-          name: name
-          id: id
-        - totalEnvironments: 5
-          organization: organization
-          name: name
-          id: id
       properties:
         item:
           items:

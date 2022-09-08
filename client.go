@@ -38,8 +38,7 @@ import (
 )
 
 var (
-	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
-	jsonHalCheck = regexp.MustCompile(`(?i:(?:application|text)/hal\+json)`)
+	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:(?:hal|problem|vnd\.[^;]+)\+)?json)`)
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
@@ -411,20 +410,6 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		}
 		return nil
 	}
-	if jsonHalCheck.MatchString(contentType) {
-		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
-			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
-				if err = unmarshalObj.UnmarshalJSON(b); err != nil {
-					return err
-				}
-			} else {
-				return errors.New("Unknown type with GetActualInstance but no unmarshalObj.UnmarshalJSON defined")
-			}
-		} else if err = json.Unmarshal(b, v); err != nil { // simple model
-			return err
-		}
-		return nil
-	}
 
 	return errors.New("undefined response type")
 }
@@ -478,8 +463,6 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 	} else if s, ok := body.(*string); ok {
 		_, err = bodyBuf.WriteString(*s)
 	} else if jsonCheck.MatchString(contentType) {
-		err = json.NewEncoder(bodyBuf).Encode(body)
-	} else if jsonHalCheck.MatchString(contentType) {
 		err = json.NewEncoder(bodyBuf).Encode(body)
 	} else if xmlCheck.MatchString(contentType) {
 		err = xml.NewEncoder(bodyBuf).Encode(body)

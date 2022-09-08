@@ -93,7 +93,7 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -259,7 +259,7 @@ func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -425,7 +425,7 @@ func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -584,7 +584,7 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/x+yaml", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/x+yaml", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -767,7 +767,7 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -901,7 +901,7 @@ func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1067,7 +1067,7 @@ func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1226,7 +1226,7 @@ func (a *EnvironmentApiService) EnvironmentViewExecute(r ApiEnvironmentViewReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

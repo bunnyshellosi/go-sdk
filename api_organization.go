@@ -89,7 +89,7 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -216,7 +216,7 @@ func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
