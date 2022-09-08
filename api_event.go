@@ -129,7 +129,7 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -256,7 +256,7 @@ func (a *EventApiService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

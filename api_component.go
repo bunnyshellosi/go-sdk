@@ -139,7 +139,7 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -273,7 +273,7 @@ func (a *ComponentApiService) ComponentRemoteDevelopmentDownExecute(r ApiCompone
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -442,7 +442,7 @@ func (a *ComponentApiService) ComponentRemoteDevelopmentUpExecute(r ApiComponent
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -601,7 +601,7 @@ func (a *ComponentApiService) ComponentViewExecute(r ApiComponentViewRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
