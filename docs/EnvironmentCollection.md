@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Environment identifier. | [optional] [readonly] 
 **Type** | Pointer to **string** | Environment type: primary or ephemeral. | [optional] [readonly] 
 **Name** | Pointer to **string** | Environment name. | [optional] [readonly] 
+**Namespace** | Pointer to **string** | Environment k8s namespace. | [optional] [readonly] 
 **OperationStatus** | Pointer to **string** | Environment operation status. | [optional] [readonly] 
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
 
@@ -103,6 +104,31 @@ SetName sets Name field to given value.
 `func (o *EnvironmentCollection) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetNamespace
+
+`func (o *EnvironmentCollection) GetNamespace() string`
+
+GetNamespace returns the Namespace field if non-nil, zero value otherwise.
+
+### GetNamespaceOk
+
+`func (o *EnvironmentCollection) GetNamespaceOk() (*string, bool)`
+
+GetNamespaceOk returns a tuple with the Namespace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNamespace
+
+`func (o *EnvironmentCollection) SetNamespace(v string)`
+
+SetNamespace sets Namespace field to given value.
+
+### HasNamespace
+
+`func (o *EnvironmentCollection) HasNamespace() bool`
+
+HasNamespace returns a boolean if a field has been set.
 
 ### GetOperationStatus
 
