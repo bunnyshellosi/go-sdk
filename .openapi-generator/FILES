@@ -4,6 +4,7 @@ README.md
 api/openapi.yaml
 api_component.go
 api_environment.go
+api_environment_variable.go
 api_event.go
 api_organization.go
 api_project.go
@@ -19,6 +20,7 @@ docs/ContextKubeConfigRead.md
 docs/ContextWrapperKubeConfigRead.md
 docs/EmbeddedComponentCollection.md
 docs/EmbeddedEnvironmentCollection.md
+docs/EmbeddedEnvironmentVariableCollection.md
 docs/EmbeddedEventCollection.md
 docs/EmbeddedOrganizationCollection.md
 docs/EmbeddedProjectCollection.md
@@ -27,6 +29,10 @@ docs/EnvironmentCloneAction.md
 docs/EnvironmentCollection.md
 docs/EnvironmentItem.md
 docs/EnvironmentKubeConfigKubeConfigRead.md
+docs/EnvironmentVariableApi.md
+docs/EnvironmentVariableCollection.md
+docs/EnvironmentVariableEdit.md
+docs/EnvironmentVariableItem.md
 docs/EventApi.md
 docs/EventCollection.md
 docs/EventItem.md
@@ -35,6 +41,7 @@ docs/OrganizationCollection.md
 docs/OrganizationItem.md
 docs/PaginatedComponentCollection.md
 docs/PaginatedEnvironmentCollection.md
+docs/PaginatedEnvironmentVariableCollection.md
 docs/PaginatedEventCollection.md
 docs/PaginatedLinkSelf.md
 docs/PaginatedLinks.md
@@ -58,6 +65,7 @@ model_context_kube_config_read.go
 model_context_wrapper_kube_config_read.go
 model_embedded_component_collection.go
 model_embedded_environment_collection.go
+model_embedded_environment_variable_collection.go
 model_embedded_event_collection.go
 model_embedded_organization_collection.go
 model_embedded_project_collection.go
@@ -65,12 +73,16 @@ model_environment_clone_action.go
 model_environment_collection.go
 model_environment_item.go
 model_environment_kube_config_kube_config_read.go
+model_environment_variable_collection.go
+model_environment_variable_edit.go
+model_environment_variable_item.go
 model_event_collection.go
 model_event_item.go
 model_organization_collection.go
 model_organization_item.go
 model_paginated_component_collection.go
 model_paginated_environment_collection.go
+model_paginated_environment_variable_collection.go
 model_paginated_event_collection.go
 model_paginated_link_self.go
 model_paginated_links.go

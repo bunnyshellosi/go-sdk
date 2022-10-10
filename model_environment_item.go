@@ -23,6 +23,8 @@ type EnvironmentItem struct {
 	Type *string `json:"type,omitempty"`
 	// Environment name.
 	Name *string `json:"name,omitempty"`
+	// Environment k8s namespace.
+	Namespace *string `json:"namespace,omitempty"`
 	// Service component identifier
 	TotalComponents *int32 `json:"totalComponents,omitempty"`
 	// Environment operation status.
@@ -144,6 +146,38 @@ func (o *EnvironmentItem) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNamespace returns the Namespace field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetNamespace() string {
+	if o == nil || o.Namespace == nil {
+		var ret string
+		return ret
+	}
+	return *o.Namespace
+}
+
+// GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetNamespaceOk() (*string, bool) {
+	if o == nil || o.Namespace == nil {
+		return nil, false
+	}
+	return o.Namespace, true
+}
+
+// HasNamespace returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasNamespace() bool {
+	if o != nil && o.Namespace != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespace gets a reference to the given string and assigns it to the Namespace field.
+func (o *EnvironmentItem) SetNamespace(v string) {
+	o.Namespace = &v
+}
+
 // GetTotalComponents returns the TotalComponents field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetTotalComponents() int32 {
 	if o == nil || o.TotalComponents == nil {
@@ -250,6 +284,9 @@ func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
+	}
+	if o.Namespace != nil {
+		toSerialize["namespace"] = o.Namespace
 	}
 	if o.TotalComponents != nil {
 		toSerialize["totalComponents"] = o.TotalComponents

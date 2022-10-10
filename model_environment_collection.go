@@ -23,6 +23,8 @@ type EnvironmentCollection struct {
 	Type *string `json:"type,omitempty"`
 	// Environment name.
 	Name *string `json:"name,omitempty"`
+	// Environment k8s namespace.
+	Namespace *string `json:"namespace,omitempty"`
 	// Environment operation status.
 	OperationStatus *string `json:"operationStatus,omitempty"`
 	// Project identifier.
@@ -142,6 +144,38 @@ func (o *EnvironmentCollection) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNamespace returns the Namespace field value if set, zero value otherwise.
+func (o *EnvironmentCollection) GetNamespace() string {
+	if o == nil || o.Namespace == nil {
+		var ret string
+		return ret
+	}
+	return *o.Namespace
+}
+
+// GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCollection) GetNamespaceOk() (*string, bool) {
+	if o == nil || o.Namespace == nil {
+		return nil, false
+	}
+	return o.Namespace, true
+}
+
+// HasNamespace returns a boolean if a field has been set.
+func (o *EnvironmentCollection) HasNamespace() bool {
+	if o != nil && o.Namespace != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespace gets a reference to the given string and assigns it to the Namespace field.
+func (o *EnvironmentCollection) SetNamespace(v string) {
+	o.Namespace = &v
+}
+
 // GetOperationStatus returns the OperationStatus field value if set, zero value otherwise.
 func (o *EnvironmentCollection) GetOperationStatus() string {
 	if o == nil || o.OperationStatus == nil {
@@ -216,6 +250,9 @@ func (o EnvironmentCollection) MarshalJSON() ([]byte, error) {
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
+	}
+	if o.Namespace != nil {
+		toSerialize["namespace"] = o.Namespace
 	}
 	if o.OperationStatus != nil {
 		toSerialize["operationStatus"] = o.OperationStatus

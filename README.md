@@ -91,6 +91,9 @@ Class | Method | HTTP request | Description
 *EnvironmentApi* | [**EnvironmentStart**](docs/EnvironmentApi.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
 *EnvironmentApi* | [**EnvironmentStop**](docs/EnvironmentApi.md#environmentstop) | **Post** /v1/environments/{id}/stop | Creates a environment resource.
 *EnvironmentApi* | [**EnvironmentView**](docs/EnvironmentApi.md#environmentview) | **Get** /v1/environments/{id} | Retrieves a environment resource.
+*EnvironmentVariableApi* | [**EnvironmentVariableEdit**](docs/EnvironmentVariableApi.md#environmentvariableedit) | **Patch** /v1/environment_variables/{id} | Updates the environment_variable resource.
+*EnvironmentVariableApi* | [**EnvironmentVariableList**](docs/EnvironmentVariableApi.md#environmentvariablelist) | **Get** /v1/environment_variables | Retrieves the collection of environment_variable resources.
+*EnvironmentVariableApi* | [**EnvironmentVariableView**](docs/EnvironmentVariableApi.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | Retrieves a environment_variable resource.
 *EventApi* | [**EventList**](docs/EventApi.md#eventlist) | **Get** /v1/events | Retrieves the collection of event resources.
 *EventApi* | [**EventView**](docs/EventApi.md#eventview) | **Get** /v1/events/{id} | Retrieves a event resource.
 *OrganizationApi* | [**OrganizationList**](docs/OrganizationApi.md#organizationlist) | **Get** /v1/organizations | Retrieves the collection of organization resources.
@@ -110,6 +113,7 @@ Class | Method | HTTP request | Description
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
  - [EmbeddedEnvironmentCollection](docs/EmbeddedEnvironmentCollection.md)
+ - [EmbeddedEnvironmentVariableCollection](docs/EmbeddedEnvironmentVariableCollection.md)
  - [EmbeddedEventCollection](docs/EmbeddedEventCollection.md)
  - [EmbeddedOrganizationCollection](docs/EmbeddedOrganizationCollection.md)
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
@@ -117,12 +121,16 @@ Class | Method | HTTP request | Description
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
+ - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
+ - [EnvironmentVariableEdit](docs/EnvironmentVariableEdit.md)
+ - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)
  - [OrganizationCollection](docs/OrganizationCollection.md)
  - [OrganizationItem](docs/OrganizationItem.md)
  - [PaginatedComponentCollection](docs/PaginatedComponentCollection.md)
  - [PaginatedEnvironmentCollection](docs/PaginatedEnvironmentCollection.md)
+ - [PaginatedEnvironmentVariableCollection](docs/PaginatedEnvironmentVariableCollection.md)
  - [PaginatedEventCollection](docs/PaginatedEventCollection.md)
  - [PaginatedLinkSelf](docs/PaginatedLinkSelf.md)
  - [PaginatedLinks](docs/PaginatedLinks.md)
