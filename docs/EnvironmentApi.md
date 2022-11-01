@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentList
 
-> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).Type_(type_).OperationStatus(operationStatus).Project(project).Execute()
+> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
 
 Retrieves the collection of environment resources.
 
@@ -326,11 +326,12 @@ func main() {
     organization := "organization_example" // string | Filter by organization (optional)
     type_ := "primary" // string | Filter by type (optional)
     operationStatus := "ready" // string | Filter by operationStatus (optional)
+    clusterStatus := "running_ok" // string | Filter by clusterStatus (optional)
     project := "project_example" // string | Filter by project (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentApi.EnvironmentList(context.Background()).Page(page).Organization(organization).Type_(type_).OperationStatus(operationStatus).Project(project).Execute()
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentList(context.Background()).Page(page).Organization(organization).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -355,6 +356,7 @@ Name | Type | Description  | Notes
  **organization** | **string** | Filter by organization | 
  **type_** | **string** | Filter by type | 
  **operationStatus** | **string** | Filter by operationStatus | 
+ **clusterStatus** | **string** | Filter by clusterStatus | 
  **project** | **string** | Filter by project | 
 
 ### Return type
@@ -363,7 +365,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -435,7 +437,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -507,7 +509,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -577,7 +579,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 

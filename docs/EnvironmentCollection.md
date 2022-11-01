@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Environment name. | [optional] [readonly] 
 **Namespace** | Pointer to **string** | Environment k8s namespace. | [optional] [readonly] 
 **OperationStatus** | Pointer to **string** | Environment operation status. | [optional] [readonly] 
+**ClusterStatus** | Pointer to **string** | Environment cluster status. | [optional] [readonly] 
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
 
 ## Methods
@@ -154,6 +155,31 @@ SetOperationStatus sets OperationStatus field to given value.
 `func (o *EnvironmentCollection) HasOperationStatus() bool`
 
 HasOperationStatus returns a boolean if a field has been set.
+
+### GetClusterStatus
+
+`func (o *EnvironmentCollection) GetClusterStatus() string`
+
+GetClusterStatus returns the ClusterStatus field if non-nil, zero value otherwise.
+
+### GetClusterStatusOk
+
+`func (o *EnvironmentCollection) GetClusterStatusOk() (*string, bool)`
+
+GetClusterStatusOk returns a tuple with the ClusterStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterStatus
+
+`func (o *EnvironmentCollection) SetClusterStatus(v string)`
+
+SetClusterStatus sets ClusterStatus field to given value.
+
+### HasClusterStatus
+
+`func (o *EnvironmentCollection) HasClusterStatus() bool`
+
+HasClusterStatus returns a boolean if a field has been set.
 
 ### GetProject
 
