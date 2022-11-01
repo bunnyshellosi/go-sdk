@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 

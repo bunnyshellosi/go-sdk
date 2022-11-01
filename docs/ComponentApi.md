@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ## ComponentRemoteDevelopmentUp
 
-> ComponentItem ComponentRemoteDevelopmentUp(ctx, id).ComponentRemoteDevelopmentUp(componentRemoteDevelopmentUp).Execute()
+> ComponentItem ComponentRemoteDevelopmentUp(ctx, id).Body(body).Execute()
 
 Creates a component resource.
 
@@ -181,11 +181,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    componentRemoteDevelopmentUp := *openapiclient.NewComponentRemoteDevelopmentUp() // ComponentRemoteDevelopmentUp | The new component resource
+    body := interface{}(987) // interface{} | No Request Body (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentApi.ComponentRemoteDevelopmentUp(context.Background(), id).ComponentRemoteDevelopmentUp(componentRemoteDevelopmentUp).Execute()
+    resp, r, err := apiClient.ComponentApi.ComponentRemoteDevelopmentUp(context.Background(), id).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentApi.ComponentRemoteDevelopmentUp``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -211,7 +211,7 @@ Other parameters are passed through a pointer to a apiComponentRemoteDevelopment
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **componentRemoteDevelopmentUp** | [**ComponentRemoteDevelopmentUp**](ComponentRemoteDevelopmentUp.md) | The new component resource | 
+ **body** | **interface{}** | No Request Body | 
 
 ### Return type
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth), [oauth](../README.md#oauth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
 
 ### HTTP request headers
 

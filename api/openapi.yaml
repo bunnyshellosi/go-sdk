@@ -12,8 +12,8 @@ servers:
 - description: ""
   url: https://api.environments.bunnyshell.com
 security:
-- oauth: []
 - ApiKeyAuth: []
+- JWT: []
 tags:
 - description: Component Resource
   name: component
@@ -153,7 +153,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/paginated-component-collection'
           description: component collection
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -186,12 +186,8 @@ paths:
                 $ref: '#/components/schemas/component-item'
           description: component resource
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -230,24 +226,12 @@ paths:
                 $ref: '#/components/schemas/component-item'
           description: component resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -275,10 +259,9 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/component.RemoteDevelopmentUp'
-        description: The new component resource
-        required: true
+            schema: {}
+        description: No Request Body
+        required: false
       responses:
         "202":
           content:
@@ -287,24 +270,12 @@ paths:
                 $ref: '#/components/schemas/component-item'
           description: component resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -371,7 +342,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/paginated-environment_variable-collection'
           description: environment_variable collection
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -405,7 +376,7 @@ paths:
           description: environment_variable resource
         "404":
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -444,24 +415,12 @@ paths:
                 $ref: '#/components/schemas/environment_variable-item'
           description: environment_variable resource updated
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -553,6 +512,28 @@ paths:
       - allowEmptyValue: false
         allowReserved: false
         deprecated: false
+        description: Filter by clusterStatus
+        example: running_ok
+        explode: false
+        in: query
+        name: clusterStatus
+        required: false
+        schema:
+          enum:
+          - running_ok
+          - running_replica_issues
+          - running_issues
+          - completed
+          - ko
+          - not_available
+          - pending
+          - scheduling
+          - waiting
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
         description: Filter by project
         explode: false
         in: query
@@ -568,7 +549,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/paginated-environment-collection'
           description: environment collection
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -601,12 +582,8 @@ paths:
                 $ref: '#/components/schemas/environment-item'
           description: environment resource
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -646,24 +623,12 @@ paths:
                 $ref: '#/components/schemas/environment-item'
           description: environment resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -702,24 +667,12 @@ paths:
                 $ref: '#/components/schemas/event-item'
           description: environment resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -758,24 +711,12 @@ paths:
                 $ref: '#/components/schemas/event-item'
           description: environment resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -808,12 +749,8 @@ paths:
                 $ref: '#/components/schemas/environment.KubeConfig-kube-config.read'
           description: environment resource
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -852,24 +789,12 @@ paths:
                 $ref: '#/components/schemas/event-item'
           description: environment resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -908,24 +833,12 @@ paths:
                 $ref: '#/components/schemas/event-item'
           description: environment resource created
         "400":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Invalid input
         "422":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Unprocessable entity
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1027,7 +940,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/paginated-event-collection'
           description: event collection
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1060,12 +973,8 @@ paths:
                 $ref: '#/components/schemas/event-item'
           description: event resource
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1099,7 +1008,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/paginated-organization-collection'
           description: organization collection
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1132,12 +1041,8 @@ paths:
                 $ref: '#/components/schemas/organization-item'
           description: organization resource
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1182,7 +1087,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/paginated-project-collection'
           description: project collection
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1215,12 +1120,8 @@ paths:
                 $ref: '#/components/schemas/project-item'
           description: project resource
         "404":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
           description: Resource not found
-        "4xx":
+        "4XX":
           content:
             application/problem+json:
               schema:
@@ -1361,15 +1262,6 @@ components:
           readOnly: true
           type: string
       type: object
-    component.RemoteDevelopmentUp:
-      description: A service component represents either an application or a group
-        of applications as a single unit
-      properties:
-        container:
-          maxLength: 255
-          nullable: true
-          type: string
-      type: object
     environment-collection:
       description: An environment holds a collection of buildable and deployable components.
       properties:
@@ -1391,6 +1283,10 @@ components:
           type: string
         operationStatus:
           description: Environment operation status.
+          readOnly: true
+          type: string
+        clusterStatus:
+          description: Environment cluster status.
           readOnly: true
           type: string
         project:
@@ -1423,6 +1319,10 @@ components:
           type: integer
         operationStatus:
           description: Environment operation status.
+          readOnly: true
+          type: string
+        clusterStatus:
+          description: Environment cluster status.
           readOnly: true
           type: string
         project:
@@ -1866,16 +1766,13 @@ components:
       title: embedded-project-collection
       type: object
   securitySchemes:
-    oauth:
-      description: OAuth 2.0 password Grant
-      flows:
-        password:
-          refreshUrl: refresh
-          scopes: {}
-          tokenUrl: /token
-      type: oauth2
     ApiKeyAuth:
       description: Value for the X-Auth-Token header parameter.
       in: header
       name: X-Auth-Token
+      type: apiKey
+    JWT:
+      description: Value for the Authorization header parameter.
+      in: header
+      name: Authorization
       type: apiKey

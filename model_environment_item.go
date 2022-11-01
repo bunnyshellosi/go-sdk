@@ -29,6 +29,8 @@ type EnvironmentItem struct {
 	TotalComponents *int32 `json:"totalComponents,omitempty"`
 	// Environment operation status.
 	OperationStatus *string `json:"operationStatus,omitempty"`
+	// Environment cluster status.
+	ClusterStatus *string `json:"clusterStatus,omitempty"`
 	// Project identifier.
 	Project *string `json:"project,omitempty"`
 }
@@ -242,6 +244,38 @@ func (o *EnvironmentItem) SetOperationStatus(v string) {
 	o.OperationStatus = &v
 }
 
+// GetClusterStatus returns the ClusterStatus field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetClusterStatus() string {
+	if o == nil || o.ClusterStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterStatus
+}
+
+// GetClusterStatusOk returns a tuple with the ClusterStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetClusterStatusOk() (*string, bool) {
+	if o == nil || o.ClusterStatus == nil {
+		return nil, false
+	}
+	return o.ClusterStatus, true
+}
+
+// HasClusterStatus returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasClusterStatus() bool {
+	if o != nil && o.ClusterStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterStatus gets a reference to the given string and assigns it to the ClusterStatus field.
+func (o *EnvironmentItem) SetClusterStatus(v string) {
+	o.ClusterStatus = &v
+}
+
 // GetProject returns the Project field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetProject() string {
 	if o == nil || o.Project == nil {
@@ -293,6 +327,9 @@ func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	}
 	if o.OperationStatus != nil {
 		toSerialize["operationStatus"] = o.OperationStatus
+	}
+	if o.ClusterStatus != nil {
+		toSerialize["clusterStatus"] = o.ClusterStatus
 	}
 	if o.Project != nil {
 		toSerialize["project"] = o.Project
