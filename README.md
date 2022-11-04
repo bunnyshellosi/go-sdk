@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | Retrieves the collection of component resources.
 *ComponentApi* | [**ComponentRemoteDevelopmentDown**](docs/ComponentApi.md#componentremotedevelopmentdown) | **Post** /v1/components/{id}/remote-development/down | Creates a component resource.
 *ComponentApi* | [**ComponentRemoteDevelopmentUp**](docs/ComponentApi.md#componentremotedevelopmentup) | **Post** /v1/components/{id}/remote-development/up | Creates a component resource.
+*ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Retrieves a component resource.
 *ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | Retrieves a component resource.
 *EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Creates a environment resource.
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
@@ -108,6 +109,7 @@ Class | Method | HTTP request | Description
  - [ClusterWrapperKubeConfigRead](docs/ClusterWrapperKubeConfigRead.md)
  - [ComponentCollection](docs/ComponentCollection.md)
  - [ComponentItem](docs/ComponentItem.md)
+ - [ComponentResourceItem](docs/ComponentResourceItem.md)
  - [ContextKubeConfigRead](docs/ContextKubeConfigRead.md)
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
@@ -116,12 +118,10 @@ Class | Method | HTTP request | Description
  - [EmbeddedEventCollection](docs/EmbeddedEventCollection.md)
  - [EmbeddedOrganizationCollection](docs/EmbeddedOrganizationCollection.md)
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
- - [EnvironmentCloneAction](docs/EnvironmentCloneAction.md)
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
- - [EnvironmentVariableEdit](docs/EnvironmentVariableEdit.md)
  - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)

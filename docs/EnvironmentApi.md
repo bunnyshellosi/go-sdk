@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## EnvironmentClone
 
-> EnvironmentItem EnvironmentClone(ctx, id).EnvironmentCloneAction(environmentCloneAction).Execute()
+> EnvironmentItem EnvironmentClone(ctx, id).Body(body).Execute()
 
 Creates a environment resource.
 
@@ -37,11 +37,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    environmentCloneAction := *openapiclient.NewEnvironmentCloneAction("Name_example") // EnvironmentCloneAction | The new environment resource
+    body := map[string]interface{}{ ... } // map[string]interface{} | The new environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentApi.EnvironmentClone(context.Background(), id).EnvironmentCloneAction(environmentCloneAction).Execute()
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentClone(context.Background(), id).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentClone``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -67,7 +67,7 @@ Other parameters are passed through a pointer to a apiEnvironmentCloneRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **environmentCloneAction** | [**EnvironmentCloneAction**](EnvironmentCloneAction.md) | The new environment resource | 
+ **body** | **map[string]interface{}** | The new environment resource | 
 
 ### Return type
 

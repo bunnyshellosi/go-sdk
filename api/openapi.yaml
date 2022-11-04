@@ -284,6 +284,42 @@ paths:
       summary: Creates a component resource.
       tags:
       - component
+  /v1/components/{id}/resources:
+    get:
+      deprecated: false
+      description: Get kubernetes resources
+      operationId: ComponentResources
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/component.Resource-item'
+                type: array
+          description: component resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves a component resource.
+      tags:
+      - component
   /v1/environment_variables:
     get:
       deprecated: false
@@ -404,7 +440,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment_variable.Edit'
+              $ref: '#/components/schemas/environment_variable.Edit-item'
         description: The updated environment_variable resource
         required: true
       responses:
@@ -612,7 +648,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.CloneAction'
+              $ref: '#/components/schemas/environment.CloneAction-item'
         description: The new environment resource
         required: true
       responses:
@@ -1262,6 +1298,21 @@ components:
           readOnly: true
           type: string
       type: object
+    component.Resource-item:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      properties:
+        kind:
+          description: Kubernetes resource kind.
+          type: string
+        name:
+          description: Kubernetes resource name.
+          type: string
+        namespace:
+          description: Kubernetes resource namespace.
+          nullable: true
+          type: string
+      type: object
     environment-collection:
       description: An environment holds a collection of buildable and deployable components.
       properties:
@@ -1330,14 +1381,8 @@ components:
           readOnly: true
           type: string
       type: object
-    environment.CloneAction:
+    environment.CloneAction-item:
       description: An environment holds a collection of buildable and deployable components.
-      properties:
-        name:
-          maxLength: 255
-          type: string
-      required:
-      - name
       type: object
     environment.KubeConfig-kube-config.read:
       description: An environment holds a collection of buildable and deployable components.
@@ -1420,13 +1465,8 @@ components:
           readOnly: true
           type: string
       type: object
-    environment_variable.Edit:
+    environment_variable.Edit-item:
       description: An environment variable used during bunnyshell workflows.
-      properties:
-        value:
-          maxLength: 255
-          nullable: true
-          type: string
       type: object
     event-collection:
       description: "An event represents an operation on an environment, integration\

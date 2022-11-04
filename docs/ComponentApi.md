@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**ComponentList**](ComponentApi.md#ComponentList) | **Get** /v1/components | Retrieves the collection of component resources.
 [**ComponentRemoteDevelopmentDown**](ComponentApi.md#ComponentRemoteDevelopmentDown) | **Post** /v1/components/{id}/remote-development/down | Creates a component resource.
 [**ComponentRemoteDevelopmentUp**](ComponentApi.md#ComponentRemoteDevelopmentUp) | **Post** /v1/components/{id}/remote-development/up | Creates a component resource.
+[**ComponentResources**](ComponentApi.md#ComponentResources) | **Get** /v1/components/{id}/resources | Retrieves a component resource.
 [**ComponentView**](ComponentApi.md#ComponentView) | **Get** /v1/components/{id} | Retrieves a component resource.
 
 
@@ -224,6 +225,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ComponentResources
+
+> []ComponentResourceItem ComponentResources(ctx, id).Execute()
+
+Retrieves a component resource.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ComponentApi.ComponentResources(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ComponentApi.ComponentResources``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ComponentResources`: []ComponentResourceItem
+    fmt.Fprintf(os.Stdout, "Response from `ComponentApi.ComponentResources`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiComponentResourcesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]ComponentResourceItem**](ComponentResourceItem.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/hal+json, application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
