@@ -24,15 +24,15 @@ import (
 type EnvironmentApiService service
 
 type ApiEnvironmentCloneRequest struct {
-	ctx        context.Context
-	ApiService *EnvironmentApiService
-	id         string
-	body       *map[string]interface{}
+	ctx                    context.Context
+	ApiService             *EnvironmentApiService
+	id                     string
+	environmentCloneAction *EnvironmentCloneAction
 }
 
 // The new environment resource
-func (r ApiEnvironmentCloneRequest) Body(body map[string]interface{}) ApiEnvironmentCloneRequest {
-	r.body = &body
+func (r ApiEnvironmentCloneRequest) EnvironmentCloneAction(environmentCloneAction EnvironmentCloneAction) ApiEnvironmentCloneRequest {
+	r.environmentCloneAction = &environmentCloneAction
 	return r
 }
 
@@ -79,8 +79,8 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.body == nil {
-		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	if r.environmentCloneAction == nil {
+		return localVarReturnValue, nil, reportError("environmentCloneAction is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +101,7 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.environmentCloneAction
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

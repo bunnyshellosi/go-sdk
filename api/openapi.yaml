@@ -440,7 +440,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment_variable.Edit-item'
+              $ref: '#/components/schemas/environment_variable.Edit'
         description: The updated environment_variable resource
         required: true
       responses:
@@ -648,7 +648,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.CloneAction-item'
+              $ref: '#/components/schemas/environment.CloneAction'
         description: The new environment resource
         required: true
       responses:
@@ -1381,8 +1381,14 @@ components:
           readOnly: true
           type: string
       type: object
-    environment.CloneAction-item:
+    environment.CloneAction:
       description: An environment holds a collection of buildable and deployable components.
+      properties:
+        name:
+          maxLength: 255
+          type: string
+      required:
+      - name
       type: object
     environment.KubeConfig-kube-config.read:
       description: An environment holds a collection of buildable and deployable components.
@@ -1465,8 +1471,13 @@ components:
           readOnly: true
           type: string
       type: object
-    environment_variable.Edit-item:
+    environment_variable.Edit:
       description: An environment variable used during bunnyshell workflows.
+      properties:
+        value:
+          maxLength: 255
+          nullable: true
+          type: string
       type: object
     event-collection:
       description: "An event represents an operation on an environment, integration\
