@@ -24,15 +24,15 @@ import (
 type EnvironmentVariableApiService service
 
 type ApiEnvironmentVariableEditRequest struct {
-	ctx                     context.Context
-	ApiService              *EnvironmentVariableApiService
-	id                      string
-	environmentVariableEdit *EnvironmentVariableEdit
+	ctx        context.Context
+	ApiService *EnvironmentVariableApiService
+	id         string
+	body       *map[string]interface{}
 }
 
 // The updated environment_variable resource
-func (r ApiEnvironmentVariableEditRequest) EnvironmentVariableEdit(environmentVariableEdit EnvironmentVariableEdit) ApiEnvironmentVariableEditRequest {
-	r.environmentVariableEdit = &environmentVariableEdit
+func (r ApiEnvironmentVariableEditRequest) Body(body map[string]interface{}) ApiEnvironmentVariableEditRequest {
+	r.body = &body
 	return r
 }
 
@@ -79,8 +79,8 @@ func (a *EnvironmentVariableApiService) EnvironmentVariableEditExecute(r ApiEnvi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.environmentVariableEdit == nil {
-		return localVarReturnValue, nil, reportError("environmentVariableEdit is required and must be specified")
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +101,7 @@ func (a *EnvironmentVariableApiService) EnvironmentVariableEditExecute(r ApiEnvi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.environmentVariableEdit
+	localVarPostBody = r.body
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
