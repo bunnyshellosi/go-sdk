@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## EnvironmentVariableEdit
 
-> EnvironmentVariableItem EnvironmentVariableEdit(ctx, id).Body(body).Execute()
+> EnvironmentVariableItem EnvironmentVariableEdit(ctx, id).EnvironmentVariableEdit(environmentVariableEdit).Execute()
 
 Updates the environment_variable resource.
 
@@ -32,11 +32,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    body := map[string]interface{}{ ... } // map[string]interface{} | The updated environment_variable resource
+    environmentVariableEdit := *openapiclient.NewEnvironmentVariableEdit() // EnvironmentVariableEdit | The updated environment_variable resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentVariableApi.EnvironmentVariableEdit(context.Background(), id).Body(body).Execute()
+    resp, r, err := apiClient.EnvironmentVariableApi.EnvironmentVariableEdit(context.Background(), id).EnvironmentVariableEdit(environmentVariableEdit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentVariableApi.EnvironmentVariableEdit``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiEnvironmentVariableEditReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | **map[string]interface{}** | The updated environment_variable resource | 
+ **environmentVariableEdit** | [**EnvironmentVariableEdit**](EnvironmentVariableEdit.md) | The updated environment_variable resource | 
 
 ### Return type
 
