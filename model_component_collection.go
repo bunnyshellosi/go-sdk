@@ -27,8 +27,6 @@ type ComponentCollection struct {
 	OperationStatus *string `json:"operationStatus,omitempty"`
 	// Environment identifier.
 	Environment *string `json:"environment,omitempty"`
-	// Service component sync path for remote development
-	SyncPath NullableString `json:"syncPath,omitempty"`
 }
 
 // NewComponentCollection instantiates a new ComponentCollection object
@@ -208,49 +206,6 @@ func (o *ComponentCollection) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
-// GetSyncPath returns the SyncPath field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ComponentCollection) GetSyncPath() string {
-	if o == nil || o.SyncPath.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.SyncPath.Get()
-}
-
-// GetSyncPathOk returns a tuple with the SyncPath field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComponentCollection) GetSyncPathOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.SyncPath.Get(), o.SyncPath.IsSet()
-}
-
-// HasSyncPath returns a boolean if a field has been set.
-func (o *ComponentCollection) HasSyncPath() bool {
-	if o != nil && o.SyncPath.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSyncPath gets a reference to the given NullableString and assigns it to the SyncPath field.
-func (o *ComponentCollection) SetSyncPath(v string) {
-	o.SyncPath.Set(&v)
-}
-
-// SetSyncPathNil sets the value for SyncPath to be an explicit nil
-func (o *ComponentCollection) SetSyncPathNil() {
-	o.SyncPath.Set(nil)
-}
-
-// UnsetSyncPath ensures that no value is present for SyncPath, not even an explicit nil
-func (o *ComponentCollection) UnsetSyncPath() {
-	o.SyncPath.Unset()
-}
-
 func (o ComponentCollection) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -267,9 +222,6 @@ func (o ComponentCollection) MarshalJSON() ([]byte, error) {
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
-	}
-	if o.SyncPath.IsSet() {
-		toSerialize["syncPath"] = o.SyncPath.Get()
 	}
 	return json.Marshal(toSerialize)
 }

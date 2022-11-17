@@ -80,8 +80,6 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | Retrieves the collection of component resources.
-*ComponentApi* | [**ComponentRemoteDevelopmentDown**](docs/ComponentApi.md#componentremotedevelopmentdown) | **Post** /v1/components/{id}/remote-development/down | Creates a component resource.
-*ComponentApi* | [**ComponentRemoteDevelopmentUp**](docs/ComponentApi.md#componentremotedevelopmentup) | **Post** /v1/components/{id}/remote-development/up | Creates a component resource.
 *ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Retrieves a component resource.
 *ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | Retrieves a component resource.
 *EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Creates a environment resource.

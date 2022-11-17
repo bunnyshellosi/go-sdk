@@ -325,7 +325,7 @@ func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
     organization := "organization_example" // string | Filter by organization (optional)
     type_ := "primary" // string | Filter by type (optional)
-    operationStatus := "ready" // string | Filter by operationStatus (optional)
+    operationStatus := "draft" // string | Filter by operationStatus (optional)
     clusterStatus := "running_ok" // string | Filter by clusterStatus (optional)
     project := "project_example" // string | Filter by project (optional)
 

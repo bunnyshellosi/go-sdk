@@ -61,14 +61,14 @@ paths:
         allowReserved: false
         deprecated: false
         description: Filter by operationStatus
-        example: ready
+        example: draft
         explode: false
         in: query
         name: operationStatus
         required: false
         schema:
           enum:
-          - ready
+          - draft
           - queued
           - building
           - building_failed
@@ -196,94 +196,6 @@ paths:
       summary: Retrieves a component resource.
       tags:
       - component
-  /v1/components/{id}/remote-development/down:
-    post:
-      deprecated: false
-      description: Stop remote development on component
-      operationId: ComponentRemote_development_down
-      parameters:
-      - allowReserved: false
-        deprecated: false
-        description: Resource identifier
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema: {}
-        description: No Request Body
-        required: false
-      responses:
-        "202":
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/component-item'
-          description: component resource created
-        "400":
-          description: Invalid input
-        "422":
-          description: Unprocessable entity
-        "404":
-          description: Resource not found
-        "4XX":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
-          description: Request Error
-      summary: Creates a component resource.
-      tags:
-      - component
-  /v1/components/{id}/remote-development/up:
-    post:
-      deprecated: false
-      description: Prepare component for remote development
-      operationId: ComponentRemote_development_up
-      parameters:
-      - allowReserved: false
-        deprecated: false
-        description: Resource identifier
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema: {}
-        description: No Request Body
-        required: false
-      responses:
-        "202":
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/component-item'
-          description: component resource created
-        "400":
-          description: Invalid input
-        "422":
-          description: Unprocessable entity
-        "404":
-          description: Resource not found
-        "4XX":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
-          description: Request Error
-      summary: Creates a component resource.
-      tags:
-      - component
   /v1/components/{id}/resources:
     get:
       deprecated: false
@@ -303,7 +215,7 @@ paths:
       responses:
         "200":
           content:
-            application/hal+json:
+            application/json:
               schema:
                 items:
                   $ref: '#/components/schemas/component.Resource-item'
@@ -513,14 +425,14 @@ paths:
         allowReserved: false
         deprecated: false
         description: Filter by operationStatus
-        example: ready
+        example: draft
         explode: false
         in: query
         name: operationStatus
         required: false
         schema:
           enum:
-          - ready
+          - draft
           - queued
           - building
           - building_failed
@@ -1256,11 +1168,6 @@ components:
           description: Environment identifier.
           readOnly: true
           type: string
-        syncPath:
-          description: Service component sync path for remote development
-          nullable: true
-          readOnly: true
-          type: string
       type: object
     component-item:
       description: A service component represents either an application or a group
@@ -1292,15 +1199,14 @@ components:
           description: Environment identifier.
           readOnly: true
           type: string
-        syncPath:
-          description: Service component sync path for remote development
-          nullable: true
-          readOnly: true
-          type: string
       type: object
     component.Resource-item:
       description: A service component represents either an application or a group
         of applications as a single unit
+      example:
+        kind: kind
+        name: name
+        namespace: namespace
       properties:
         kind:
           description: Kubernetes resource kind.
