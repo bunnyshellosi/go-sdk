@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **ClusterStatus** | Pointer to **string** | Service component cluster status | [optional] [readonly] 
 **OperationStatus** | Pointer to **string** | Service component operation status | [optional] [readonly] 
 **Environment** | Pointer to **string** | Environment identifier. | [optional] [readonly] 
-**SyncPath** | Pointer to **NullableString** | Service component sync path for remote development | [optional] [readonly] 
 
 ## Methods
 
@@ -155,41 +154,6 @@ SetEnvironment sets Environment field to given value.
 
 HasEnvironment returns a boolean if a field has been set.
 
-### GetSyncPath
-
-`func (o *ComponentCollection) GetSyncPath() string`
-
-GetSyncPath returns the SyncPath field if non-nil, zero value otherwise.
-
-### GetSyncPathOk
-
-`func (o *ComponentCollection) GetSyncPathOk() (*string, bool)`
-
-GetSyncPathOk returns a tuple with the SyncPath field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSyncPath
-
-`func (o *ComponentCollection) SetSyncPath(v string)`
-
-SetSyncPath sets SyncPath field to given value.
-
-### HasSyncPath
-
-`func (o *ComponentCollection) HasSyncPath() bool`
-
-HasSyncPath returns a boolean if a field has been set.
-
-### SetSyncPathNil
-
-`func (o *ComponentCollection) SetSyncPathNil(b bool)`
-
- SetSyncPathNil sets the value for SyncPath to be an explicit nil
-
-### UnsetSyncPath
-`func (o *ComponentCollection) UnsetSyncPath()`
-
-UnsetSyncPath ensures that no value is present for SyncPath, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
