@@ -2220,6 +2220,7 @@ components:
           type: string
         environment:
           description: Environment identifier.
+          nullable: true
           readOnly: true
           type: string
         event:
@@ -2255,6 +2256,7 @@ components:
           type: array
         environment:
           description: Environment identifier.
+          nullable: true
           readOnly: true
           type: string
         event:

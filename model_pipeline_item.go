@@ -26,7 +26,7 @@ type PipelineItem struct {
 	// Stage identifier.
 	Stages []StageItem `json:"stages,omitempty"`
 	// Environment identifier.
-	Environment *string `json:"environment,omitempty"`
+	Environment NullableString `json:"environment,omitempty"`
 	// Event identifier.
 	Event *string `json:"event,omitempty"`
 	// Organization identifier.
@@ -178,36 +178,47 @@ func (o *PipelineItem) SetStages(v []StageItem) {
 	o.Stages = v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
+// GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PipelineItem) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+	if o == nil || o.Environment.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Environment
+	return *o.Environment.Get()
 }
 
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PipelineItem) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return o.Environment.Get(), o.Environment.IsSet()
 }
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *PipelineItem) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && o.Environment.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
+// SetEnvironment gets a reference to the given NullableString and assigns it to the Environment field.
 func (o *PipelineItem) SetEnvironment(v string) {
-	o.Environment = &v
+	o.Environment.Set(&v)
+}
+
+// SetEnvironmentNil sets the value for Environment to be an explicit nil
+func (o *PipelineItem) SetEnvironmentNil() {
+	o.Environment.Set(nil)
+}
+
+// UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
+func (o *PipelineItem) UnsetEnvironment() {
+	o.Environment.Unset()
 }
 
 // GetEvent returns the Event field value if set, zero value otherwise.
@@ -299,8 +310,8 @@ func (o PipelineItem) MarshalJSON() ([]byte, error) {
 	if o.Stages != nil {
 		toSerialize["stages"] = o.Stages
 	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	if o.Environment.IsSet() {
+		toSerialize["environment"] = o.Environment.Get()
 	}
 	if o.Event != nil {
 		toSerialize["event"] = o.Event
