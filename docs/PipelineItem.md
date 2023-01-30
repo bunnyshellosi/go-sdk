@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Pipeline description. | [optional] [readonly] 
 **Status** | Pointer to **string** | Pipeline status. | [optional] [readonly] 
 **Stages** | Pointer to [**[]StageItem**](StageItem.md) | Stage identifier. | [optional] [readonly] 
-**Environment** | Pointer to **string** | Environment identifier. | [optional] [readonly] 
+**Environment** | Pointer to **NullableString** | Environment identifier. | [optional] [readonly] 
 **Event** | Pointer to **string** | Event identifier. | [optional] [readonly] 
 **Organization** | Pointer to **NullableString** | Organization identifier. | [optional] [readonly] 
 
@@ -156,6 +156,16 @@ SetEnvironment sets Environment field to given value.
 
 HasEnvironment returns a boolean if a field has been set.
 
+### SetEnvironmentNil
+
+`func (o *PipelineItem) SetEnvironmentNil(b bool)`
+
+ SetEnvironmentNil sets the value for Environment to be an explicit nil
+
+### UnsetEnvironment
+`func (o *PipelineItem) UnsetEnvironment()`
+
+UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
 ### GetEvent
 
 `func (o *PipelineItem) GetEvent() string`
