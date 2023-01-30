@@ -17,14 +17,20 @@ security:
 tags:
 - description: Component Resource
   name: component
+- description: ComponentGit Resource
+  name: componentGit
 - description: Environment_variable Resource
   name: environment_variable
 - description: Environment Resource
   name: environment
 - description: Event Resource
   name: event
+- description: Kubernetes_integration Resource
+  name: kubernetes_integration
 - description: Organization Resource
   name: organization
+- description: Pipeline Resource
+  name: pipeline
 - description: Project Resource
   name: project
 paths:
@@ -162,6 +168,84 @@ paths:
       summary: Retrieves the collection of component resources.
       tags:
       - component
+  /v1/components/gitinfo:
+    get:
+      deprecated: false
+      description: List
+      operationId: ComponentGitList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by project
+        explode: false
+        in: query
+        name: project
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by name
+        explode: false
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-componentGit-collection'
+          description: componentGit collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves the collection of componentGit resources.
+      tags:
+      - componentGit
   /v1/components/{id}:
     get:
       deprecated: false
@@ -196,6 +280,40 @@ paths:
       summary: Retrieves a component resource.
       tags:
       - component
+  /v1/components/{id}/gitinfo:
+    get:
+      deprecated: false
+      description: View
+      operationId: ComponentGitView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/componentGit-item'
+          description: componentGit resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves a componentGit resource.
+      tags:
+      - componentGit
   /v1/components/{id}/resources:
     get:
       deprecated: false
@@ -402,6 +520,17 @@ paths:
         explode: false
         in: query
         name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by kubernetesIntegration
+        explode: false
+        in: query
+        name: kubernetesIntegration
         required: false
         schema:
           type: string
@@ -931,6 +1060,124 @@ paths:
       summary: Retrieves a event resource.
       tags:
       - event
+  /v1/kubernetes_integrations:
+    get:
+      deprecated: false
+      description: List Kubernetes integrations matching any selected filters.
+      operationId: Kubernetes_integrationList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by status
+        example: new
+        explode: false
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - new
+          - connected
+          - disconnected
+          - detached
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by cloudProvider
+        explode: false
+        in: query
+        name: cloudProvider
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-kubernetes_integration-collection'
+          description: kubernetes_integration collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves the collection of kubernetes_integration resources.
+      tags:
+      - kubernetes_integration
+  /v1/kubernetes_integrations/{id}:
+    get:
+      deprecated: false
+      description: View a specific Kubernetes integration.
+      operationId: Kubernetes_integrationView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/kubernetes_integration-item'
+          description: kubernetes_integration resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves a kubernetes_integration resource.
+      tags:
+      - kubernetes_integration
   /v1/organizations:
     get:
       deprecated: false
@@ -999,6 +1246,107 @@ paths:
       summary: Retrieves a organization resource.
       tags:
       - organization
+  /v1/pipelines:
+    get:
+      deprecated: false
+      description: List pipelines matching any selected filters.
+      operationId: PipelineList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by event
+        explode: false
+        in: query
+        name: event
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-pipeline-collection'
+          description: pipeline collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves the collection of pipeline resources.
+      tags:
+      - pipeline
+  /v1/pipelines/{id}:
+    get:
+      deprecated: false
+      description: View a specific Pipeline.
+      operationId: PipelineView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/pipeline-item'
+          description: pipeline resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Retrieves a pipeline resource.
+      tags:
+      - pipeline
   /v1/projects:
     get:
       deprecated: false
@@ -1128,6 +1476,38 @@ components:
       required:
       - name
       type: object
+    Stage-item:
+      properties:
+        id:
+          description: Stage identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Stage name.
+          readOnly: true
+          type: string
+        status:
+          description: Stage status.
+          readOnly: true
+          type: string
+        duration:
+          description: Stage duration.
+          nullable: true
+          readOnly: true
+          type: integer
+        jobsCount:
+          description: Stage total jobs.
+          readOnly: true
+          type: integer
+        completedJobsCount:
+          description: Stage completed jobs.
+          readOnly: true
+          type: integer
+        pipeline:
+          description: Event identifier.
+          readOnly: true
+          type: string
+      type: object
     User-kube-config.read:
       properties:
         token:
@@ -1219,6 +1599,74 @@ components:
           nullable: true
           type: string
       type: object
+    componentGit-collection:
+      description: Git info
+      properties:
+        id:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        name:
+          description: Service component name
+          readOnly: true
+          type: string
+        repository:
+          description: Git repository
+          readOnly: true
+          type: string
+        refName:
+          description: Git ref name
+          readOnly: true
+          type: string
+        refSha:
+          description: Git ref sha
+          nullable: true
+          readOnly: true
+          type: string
+        deployedSha:
+          description: Git deployed sha
+          nullable: true
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+      type: object
+    componentGit-item:
+      description: Git info
+      properties:
+        id:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        name:
+          description: Service component name
+          readOnly: true
+          type: string
+        repository:
+          description: Git repository
+          readOnly: true
+          type: string
+        refName:
+          description: Git ref name
+          readOnly: true
+          type: string
+        refSha:
+          description: Git ref sha
+          nullable: true
+          readOnly: true
+          type: string
+        deployedSha:
+          description: Git deployed sha
+          nullable: true
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+      type: object
     environment-collection:
       description: An environment holds a collection of buildable and deployable components.
       properties:
@@ -1248,6 +1696,11 @@ components:
           type: string
         project:
           description: Project identifier.
+          readOnly: true
+          type: string
+        kubernetesIntegration:
+          description: Kubernetes integration identifier.
+          nullable: true
           readOnly: true
           type: string
       type: object
@@ -1284,6 +1737,11 @@ components:
           type: string
         project:
           description: Project identifier.
+          readOnly: true
+          type: string
+        kubernetesIntegration:
+          description: Kubernetes integration identifier.
+          nullable: true
           readOnly: true
           type: string
       type: object
@@ -1447,6 +1905,66 @@ components:
           readOnly: true
           type: string
       type: object
+    kubernetes_integration-collection:
+      description: A Kubernetes integration stores connection information for a Kubernetes
+        cluster.
+      properties:
+        id:
+          description: Kubernetes integration identifier.
+          readOnly: true
+          type: string
+        clusterName:
+          description: Kubernetes integration cluster name.
+          readOnly: true
+          type: string
+        cloudName:
+          description: Kubernetes integration cloud name.
+          readOnly: true
+          type: string
+        cloudProvider:
+          description: Kubernetes integration cluster provider.
+          readOnly: true
+          type: string
+        status:
+          description: Kubernetes integration status.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    kubernetes_integration-item:
+      description: A Kubernetes integration stores connection information for a Kubernetes
+        cluster.
+      properties:
+        id:
+          description: Kubernetes integration identifier.
+          readOnly: true
+          type: string
+        clusterName:
+          description: Kubernetes integration cluster name.
+          readOnly: true
+          type: string
+        cloudName:
+          description: Kubernetes integration cloud name.
+          readOnly: true
+          type: string
+        cloudProvider:
+          description: Kubernetes integration cluster provider.
+          readOnly: true
+          type: string
+        status:
+          description: Kubernetes integration status.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
     organization-collection:
       description: An organization holds multiple projects and all the integrations
         used by environments
@@ -1518,6 +2036,23 @@ components:
         _embedded:
           $ref: '#/components/schemas/embedded_component_collection'
       type: object
+    paginated-componentGit-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_componentGit_collection'
+      type: object
     paginated-environment-collection:
       description: Paginated result
       properties:
@@ -1569,6 +2104,23 @@ components:
         _embedded:
           $ref: '#/components/schemas/embedded_event_collection'
       type: object
+    paginated-kubernetes_integration-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_kubernetes_integration_collection'
+      type: object
     paginated-organization-collection:
       description: Paginated result
       properties:
@@ -1585,6 +2137,23 @@ components:
           type: integer
         _embedded:
           $ref: '#/components/schemas/embedded_organization_collection'
+      type: object
+    paginated-pipeline-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_pipeline_collection'
       type: object
     paginated-project-collection:
       description: Paginated result
@@ -1606,7 +2175,7 @@ components:
     paginated_itemsPerPage:
       format: int32
       type: integer
-    paginated_link_self:
+    paginated_link:
       properties:
         href:
           type: string
@@ -1614,10 +2183,18 @@ components:
     paginated_links:
       properties:
         self:
-          $ref: '#/components/schemas/paginated_link_self'
+          $ref: '#/components/schemas/paginated_link'
+        first:
+          $ref: '#/components/schemas/paginated_links_first'
+        prev:
+          $ref: '#/components/schemas/paginated_links_first'
+        next:
+          $ref: '#/components/schemas/paginated_links_first'
+        last:
+          $ref: '#/components/schemas/paginated_links_first'
         item:
           items:
-            $ref: '#/components/schemas/paginated_link_self'
+            $ref: '#/components/schemas/paginated_link'
           type: array
       type: object
     paginated_page:
@@ -1626,6 +2203,70 @@ components:
     paginated_total:
       format: int32
       type: integer
+    pipeline-collection:
+      description: A pipeline.
+      properties:
+        id:
+          description: Pipeline identifier.
+          readOnly: true
+          type: string
+        description:
+          description: Pipeline description.
+          readOnly: true
+          type: string
+        status:
+          description: Pipeline status.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        event:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    pipeline-item:
+      description: A pipeline.
+      properties:
+        id:
+          description: Pipeline identifier.
+          readOnly: true
+          type: string
+        description:
+          description: Pipeline description.
+          readOnly: true
+          type: string
+        status:
+          description: Pipeline status.
+          readOnly: true
+          type: string
+        stages:
+          description: Stage identifier.
+          items:
+            $ref: '#/components/schemas/Stage-item'
+          readOnly: true
+          type: array
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        event:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
     problem.generic:
       description: Generic Error
       properties:
@@ -1682,6 +2323,14 @@ components:
           type: array
       title: embedded-component-collection
       type: object
+    embedded_componentGit_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/componentGit-collection'
+          type: array
+      title: embedded-componentGit-collection
+      type: object
     embedded_environment_collection:
       properties:
         item:
@@ -1706,6 +2355,14 @@ components:
           type: array
       title: embedded-event-collection
       type: object
+    embedded_kubernetes_integration_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/kubernetes_integration-collection'
+          type: array
+      title: embedded-kubernetes_integration-collection
+      type: object
     embedded_organization_collection:
       properties:
         item:
@@ -1713,6 +2370,14 @@ components:
             $ref: '#/components/schemas/organization-collection'
           type: array
       title: embedded-organization-collection
+      type: object
+    embedded_pipeline_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/pipeline-collection'
+          type: array
+      title: embedded-pipeline-collection
       type: object
     embedded_project_collection:
       properties:
@@ -1722,6 +2387,10 @@ components:
           type: array
       title: embedded-project-collection
       type: object
+    paginated_links_first:
+      allOf:
+      - $ref: '#/components/schemas/paginated_link'
+      nullable: true
   securitySchemes:
     ApiKeyAuth:
       description: Value for the X-Auth-Token header parameter.

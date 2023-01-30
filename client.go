@@ -53,13 +53,19 @@ type APIClient struct {
 
 	ComponentApi *ComponentApiService
 
+	ComponentGitApi *ComponentGitApiService
+
 	EnvironmentApi *EnvironmentApiService
 
 	EnvironmentVariableApi *EnvironmentVariableApiService
 
 	EventApi *EventApiService
 
+	KubernetesIntegrationApi *KubernetesIntegrationApiService
+
 	OrganizationApi *OrganizationApiService
+
+	PipelineApi *PipelineApiService
 
 	ProjectApi *ProjectApiService
 }
@@ -81,10 +87,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ComponentApi = (*ComponentApiService)(&c.common)
+	c.ComponentGitApi = (*ComponentGitApiService)(&c.common)
 	c.EnvironmentApi = (*EnvironmentApiService)(&c.common)
 	c.EnvironmentVariableApi = (*EnvironmentVariableApiService)(&c.common)
 	c.EventApi = (*EventApiService)(&c.common)
+	c.KubernetesIntegrationApi = (*KubernetesIntegrationApiService)(&c.common)
 	c.OrganizationApi = (*OrganizationApiService)(&c.common)
+	c.PipelineApi = (*PipelineApiService)(&c.common)
 	c.ProjectApi = (*ProjectApiService)(&c.common)
 
 	return c

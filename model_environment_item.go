@@ -33,6 +33,8 @@ type EnvironmentItem struct {
 	ClusterStatus *string `json:"clusterStatus,omitempty"`
 	// Project identifier.
 	Project *string `json:"project,omitempty"`
+	// Kubernetes integration identifier.
+	KubernetesIntegration NullableString `json:"kubernetesIntegration,omitempty"`
 }
 
 // NewEnvironmentItem instantiates a new EnvironmentItem object
@@ -308,6 +310,49 @@ func (o *EnvironmentItem) SetProject(v string) {
 	o.Project = &v
 }
 
+// GetKubernetesIntegration returns the KubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetKubernetesIntegration() string {
+	if o == nil || o.KubernetesIntegration.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.KubernetesIntegration.Get()
+}
+
+// GetKubernetesIntegrationOk returns a tuple with the KubernetesIntegration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetKubernetesIntegrationOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.KubernetesIntegration.Get(), o.KubernetesIntegration.IsSet()
+}
+
+// HasKubernetesIntegration returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasKubernetesIntegration() bool {
+	if o != nil && o.KubernetesIntegration.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetKubernetesIntegration gets a reference to the given NullableString and assigns it to the KubernetesIntegration field.
+func (o *EnvironmentItem) SetKubernetesIntegration(v string) {
+	o.KubernetesIntegration.Set(&v)
+}
+
+// SetKubernetesIntegrationNil sets the value for KubernetesIntegration to be an explicit nil
+func (o *EnvironmentItem) SetKubernetesIntegrationNil() {
+	o.KubernetesIntegration.Set(nil)
+}
+
+// UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+func (o *EnvironmentItem) UnsetKubernetesIntegration() {
+	o.KubernetesIntegration.Unset()
+}
+
 func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -333,6 +378,9 @@ func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	}
 	if o.Project != nil {
 		toSerialize["project"] = o.Project
+	}
+	if o.KubernetesIntegration.IsSet() {
+		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
 	}
 	return json.Marshal(toSerialize)
 }

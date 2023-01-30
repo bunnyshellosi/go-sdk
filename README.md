@@ -82,6 +82,8 @@ Class | Method | HTTP request | Description
 *ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | Retrieves the collection of component resources.
 *ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Retrieves a component resource.
 *ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | Retrieves a component resource.
+*ComponentGitApi* | [**ComponentGitList**](docs/ComponentGitApi.md#componentgitlist) | **Get** /v1/components/gitinfo | Retrieves the collection of componentGit resources.
+*ComponentGitApi* | [**ComponentGitView**](docs/ComponentGitApi.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | Retrieves a componentGit resource.
 *EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Creates a environment resource.
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 *EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Creates a environment resource.
@@ -95,8 +97,12 @@ Class | Method | HTTP request | Description
 *EnvironmentVariableApi* | [**EnvironmentVariableView**](docs/EnvironmentVariableApi.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | Retrieves a environment_variable resource.
 *EventApi* | [**EventList**](docs/EventApi.md#eventlist) | **Get** /v1/events | Retrieves the collection of event resources.
 *EventApi* | [**EventView**](docs/EventApi.md#eventview) | **Get** /v1/events/{id} | Retrieves a event resource.
+*KubernetesIntegrationApi* | [**KubernetesIntegrationList**](docs/KubernetesIntegrationApi.md#kubernetesintegrationlist) | **Get** /v1/kubernetes_integrations | Retrieves the collection of kubernetes_integration resources.
+*KubernetesIntegrationApi* | [**KubernetesIntegrationView**](docs/KubernetesIntegrationApi.md#kubernetesintegrationview) | **Get** /v1/kubernetes_integrations/{id} | Retrieves a kubernetes_integration resource.
 *OrganizationApi* | [**OrganizationList**](docs/OrganizationApi.md#organizationlist) | **Get** /v1/organizations | Retrieves the collection of organization resources.
 *OrganizationApi* | [**OrganizationView**](docs/OrganizationApi.md#organizationview) | **Get** /v1/organizations/{id} | Retrieves a organization resource.
+*PipelineApi* | [**PipelineList**](docs/PipelineApi.md#pipelinelist) | **Get** /v1/pipelines | Retrieves the collection of pipeline resources.
+*PipelineApi* | [**PipelineView**](docs/PipelineApi.md#pipelineview) | **Get** /v1/pipelines/{id} | Retrieves a pipeline resource.
 *ProjectApi* | [**ProjectList**](docs/ProjectApi.md#projectlist) | **Get** /v1/projects | Retrieves the collection of project resources.
 *ProjectApi* | [**ProjectView**](docs/ProjectApi.md#projectview) | **Get** /v1/projects/{id} | Retrieves a project resource.
 
@@ -106,15 +112,20 @@ Class | Method | HTTP request | Description
  - [ClusterKubeConfigRead](docs/ClusterKubeConfigRead.md)
  - [ClusterWrapperKubeConfigRead](docs/ClusterWrapperKubeConfigRead.md)
  - [ComponentCollection](docs/ComponentCollection.md)
+ - [ComponentGitCollection](docs/ComponentGitCollection.md)
+ - [ComponentGitItem](docs/ComponentGitItem.md)
  - [ComponentItem](docs/ComponentItem.md)
  - [ComponentResourceItem](docs/ComponentResourceItem.md)
  - [ContextKubeConfigRead](docs/ContextKubeConfigRead.md)
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
+ - [EmbeddedComponentGitCollection](docs/EmbeddedComponentGitCollection.md)
  - [EmbeddedEnvironmentCollection](docs/EmbeddedEnvironmentCollection.md)
  - [EmbeddedEnvironmentVariableCollection](docs/EmbeddedEnvironmentVariableCollection.md)
  - [EmbeddedEventCollection](docs/EmbeddedEventCollection.md)
+ - [EmbeddedKubernetesIntegrationCollection](docs/EmbeddedKubernetesIntegrationCollection.md)
  - [EmbeddedOrganizationCollection](docs/EmbeddedOrganizationCollection.md)
+ - [EmbeddedPipelineCollection](docs/EmbeddedPipelineCollection.md)
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
  - [EnvironmentCloneAction](docs/EnvironmentCloneAction.md)
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
@@ -125,19 +136,28 @@ Class | Method | HTTP request | Description
  - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)
+ - [KubernetesIntegrationCollection](docs/KubernetesIntegrationCollection.md)
+ - [KubernetesIntegrationItem](docs/KubernetesIntegrationItem.md)
  - [OrganizationCollection](docs/OrganizationCollection.md)
  - [OrganizationItem](docs/OrganizationItem.md)
  - [PaginatedComponentCollection](docs/PaginatedComponentCollection.md)
+ - [PaginatedComponentGitCollection](docs/PaginatedComponentGitCollection.md)
  - [PaginatedEnvironmentCollection](docs/PaginatedEnvironmentCollection.md)
  - [PaginatedEnvironmentVariableCollection](docs/PaginatedEnvironmentVariableCollection.md)
  - [PaginatedEventCollection](docs/PaginatedEventCollection.md)
- - [PaginatedLinkSelf](docs/PaginatedLinkSelf.md)
+ - [PaginatedKubernetesIntegrationCollection](docs/PaginatedKubernetesIntegrationCollection.md)
+ - [PaginatedLink](docs/PaginatedLink.md)
  - [PaginatedLinks](docs/PaginatedLinks.md)
+ - [PaginatedLinksFirst](docs/PaginatedLinksFirst.md)
  - [PaginatedOrganizationCollection](docs/PaginatedOrganizationCollection.md)
+ - [PaginatedPipelineCollection](docs/PaginatedPipelineCollection.md)
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
+ - [PipelineCollection](docs/PipelineCollection.md)
+ - [PipelineItem](docs/PipelineItem.md)
  - [ProblemGeneric](docs/ProblemGeneric.md)
  - [ProjectCollection](docs/ProjectCollection.md)
  - [ProjectItem](docs/ProjectItem.md)
+ - [StageItem](docs/StageItem.md)
  - [UserKubeConfigRead](docs/UserKubeConfigRead.md)
  - [UserWrapperKubeConfigRead](docs/UserWrapperKubeConfigRead.md)
 

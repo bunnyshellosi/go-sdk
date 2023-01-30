@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentList
 
-> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
+> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
 
 Retrieves the collection of environment resources.
 
@@ -324,6 +324,7 @@ import (
 func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
     organization := "organization_example" // string | Filter by organization (optional)
+    kubernetesIntegration := "kubernetesIntegration_example" // string | Filter by kubernetesIntegration (optional)
     type_ := "primary" // string | Filter by type (optional)
     operationStatus := "draft" // string | Filter by operationStatus (optional)
     clusterStatus := "running_ok" // string | Filter by clusterStatus (optional)
@@ -331,7 +332,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentApi.EnvironmentList(context.Background()).Page(page).Organization(organization).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentList(context.Background()).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -354,6 +355,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | The collection page number | [default to 1]
  **organization** | **string** | Filter by organization | 
+ **kubernetesIntegration** | **string** | Filter by kubernetesIntegration | 
  **type_** | **string** | Filter by type | 
  **operationStatus** | **string** | Filter by operationStatus | 
  **clusterStatus** | **string** | Filter by clusterStatus | 
