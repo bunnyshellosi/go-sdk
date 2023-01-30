@@ -618,14 +618,15 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 }
 
 type ApiEnvironmentListRequest struct {
-	ctx             context.Context
-	ApiService      *EnvironmentApiService
-	page            *int32
-	organization    *string
-	type_           *string
-	operationStatus *string
-	clusterStatus   *string
-	project         *string
+	ctx                   context.Context
+	ApiService            *EnvironmentApiService
+	page                  *int32
+	organization          *string
+	kubernetesIntegration *string
+	type_                 *string
+	operationStatus       *string
+	clusterStatus         *string
+	project               *string
 }
 
 // The collection page number
@@ -637,6 +638,12 @@ func (r ApiEnvironmentListRequest) Page(page int32) ApiEnvironmentListRequest {
 // Filter by organization
 func (r ApiEnvironmentListRequest) Organization(organization string) ApiEnvironmentListRequest {
 	r.organization = &organization
+	return r
+}
+
+// Filter by kubernetesIntegration
+func (r ApiEnvironmentListRequest) KubernetesIntegration(kubernetesIntegration string) ApiEnvironmentListRequest {
+	r.kubernetesIntegration = &kubernetesIntegration
 	return r
 }
 
@@ -710,6 +717,9 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 	}
 	if r.organization != nil {
 		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+	}
+	if r.kubernetesIntegration != nil {
+		localVarQueryParams.Add("kubernetesIntegration", parameterToString(*r.kubernetesIntegration, ""))
 	}
 	if r.type_ != nil {
 		localVarQueryParams.Add("type", parameterToString(*r.type_, ""))

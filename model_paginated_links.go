@@ -17,8 +17,12 @@ import (
 
 // PaginatedLinks struct for PaginatedLinks
 type PaginatedLinks struct {
-	Self *PaginatedLinkSelf  `json:"self,omitempty"`
-	Item []PaginatedLinkSelf `json:"item,omitempty"`
+	Self  *PaginatedLink              `json:"self,omitempty"`
+	First NullablePaginatedLinksFirst `json:"first,omitempty"`
+	Prev  NullablePaginatedLinksFirst `json:"prev,omitempty"`
+	Next  NullablePaginatedLinksFirst `json:"next,omitempty"`
+	Last  NullablePaginatedLinksFirst `json:"last,omitempty"`
+	Item  []PaginatedLink             `json:"item,omitempty"`
 }
 
 // NewPaginatedLinks instantiates a new PaginatedLinks object
@@ -39,9 +43,9 @@ func NewPaginatedLinksWithDefaults() *PaginatedLinks {
 }
 
 // GetSelf returns the Self field value if set, zero value otherwise.
-func (o *PaginatedLinks) GetSelf() PaginatedLinkSelf {
+func (o *PaginatedLinks) GetSelf() PaginatedLink {
 	if o == nil || o.Self == nil {
-		var ret PaginatedLinkSelf
+		var ret PaginatedLink
 		return ret
 	}
 	return *o.Self
@@ -49,7 +53,7 @@ func (o *PaginatedLinks) GetSelf() PaginatedLinkSelf {
 
 // GetSelfOk returns a tuple with the Self field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaginatedLinks) GetSelfOk() (*PaginatedLinkSelf, bool) {
+func (o *PaginatedLinks) GetSelfOk() (*PaginatedLink, bool) {
 	if o == nil || o.Self == nil {
 		return nil, false
 	}
@@ -65,15 +69,187 @@ func (o *PaginatedLinks) HasSelf() bool {
 	return false
 }
 
-// SetSelf gets a reference to the given PaginatedLinkSelf and assigns it to the Self field.
-func (o *PaginatedLinks) SetSelf(v PaginatedLinkSelf) {
+// SetSelf gets a reference to the given PaginatedLink and assigns it to the Self field.
+func (o *PaginatedLinks) SetSelf(v PaginatedLink) {
 	o.Self = &v
 }
 
+// GetFirst returns the First field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaginatedLinks) GetFirst() PaginatedLinksFirst {
+	if o == nil || o.First.Get() == nil {
+		var ret PaginatedLinksFirst
+		return ret
+	}
+	return *o.First.Get()
+}
+
+// GetFirstOk returns a tuple with the First field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaginatedLinks) GetFirstOk() (*PaginatedLinksFirst, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.First.Get(), o.First.IsSet()
+}
+
+// HasFirst returns a boolean if a field has been set.
+func (o *PaginatedLinks) HasFirst() bool {
+	if o != nil && o.First.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFirst gets a reference to the given NullablePaginatedLinksFirst and assigns it to the First field.
+func (o *PaginatedLinks) SetFirst(v PaginatedLinksFirst) {
+	o.First.Set(&v)
+}
+
+// SetFirstNil sets the value for First to be an explicit nil
+func (o *PaginatedLinks) SetFirstNil() {
+	o.First.Set(nil)
+}
+
+// UnsetFirst ensures that no value is present for First, not even an explicit nil
+func (o *PaginatedLinks) UnsetFirst() {
+	o.First.Unset()
+}
+
+// GetPrev returns the Prev field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaginatedLinks) GetPrev() PaginatedLinksFirst {
+	if o == nil || o.Prev.Get() == nil {
+		var ret PaginatedLinksFirst
+		return ret
+	}
+	return *o.Prev.Get()
+}
+
+// GetPrevOk returns a tuple with the Prev field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaginatedLinks) GetPrevOk() (*PaginatedLinksFirst, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Prev.Get(), o.Prev.IsSet()
+}
+
+// HasPrev returns a boolean if a field has been set.
+func (o *PaginatedLinks) HasPrev() bool {
+	if o != nil && o.Prev.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPrev gets a reference to the given NullablePaginatedLinksFirst and assigns it to the Prev field.
+func (o *PaginatedLinks) SetPrev(v PaginatedLinksFirst) {
+	o.Prev.Set(&v)
+}
+
+// SetPrevNil sets the value for Prev to be an explicit nil
+func (o *PaginatedLinks) SetPrevNil() {
+	o.Prev.Set(nil)
+}
+
+// UnsetPrev ensures that no value is present for Prev, not even an explicit nil
+func (o *PaginatedLinks) UnsetPrev() {
+	o.Prev.Unset()
+}
+
+// GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaginatedLinks) GetNext() PaginatedLinksFirst {
+	if o == nil || o.Next.Get() == nil {
+		var ret PaginatedLinksFirst
+		return ret
+	}
+	return *o.Next.Get()
+}
+
+// GetNextOk returns a tuple with the Next field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaginatedLinks) GetNextOk() (*PaginatedLinksFirst, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Next.Get(), o.Next.IsSet()
+}
+
+// HasNext returns a boolean if a field has been set.
+func (o *PaginatedLinks) HasNext() bool {
+	if o != nil && o.Next.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNext gets a reference to the given NullablePaginatedLinksFirst and assigns it to the Next field.
+func (o *PaginatedLinks) SetNext(v PaginatedLinksFirst) {
+	o.Next.Set(&v)
+}
+
+// SetNextNil sets the value for Next to be an explicit nil
+func (o *PaginatedLinks) SetNextNil() {
+	o.Next.Set(nil)
+}
+
+// UnsetNext ensures that no value is present for Next, not even an explicit nil
+func (o *PaginatedLinks) UnsetNext() {
+	o.Next.Unset()
+}
+
+// GetLast returns the Last field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaginatedLinks) GetLast() PaginatedLinksFirst {
+	if o == nil || o.Last.Get() == nil {
+		var ret PaginatedLinksFirst
+		return ret
+	}
+	return *o.Last.Get()
+}
+
+// GetLastOk returns a tuple with the Last field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaginatedLinks) GetLastOk() (*PaginatedLinksFirst, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Last.Get(), o.Last.IsSet()
+}
+
+// HasLast returns a boolean if a field has been set.
+func (o *PaginatedLinks) HasLast() bool {
+	if o != nil && o.Last.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLast gets a reference to the given NullablePaginatedLinksFirst and assigns it to the Last field.
+func (o *PaginatedLinks) SetLast(v PaginatedLinksFirst) {
+	o.Last.Set(&v)
+}
+
+// SetLastNil sets the value for Last to be an explicit nil
+func (o *PaginatedLinks) SetLastNil() {
+	o.Last.Set(nil)
+}
+
+// UnsetLast ensures that no value is present for Last, not even an explicit nil
+func (o *PaginatedLinks) UnsetLast() {
+	o.Last.Unset()
+}
+
 // GetItem returns the Item field value if set, zero value otherwise.
-func (o *PaginatedLinks) GetItem() []PaginatedLinkSelf {
+func (o *PaginatedLinks) GetItem() []PaginatedLink {
 	if o == nil || o.Item == nil {
-		var ret []PaginatedLinkSelf
+		var ret []PaginatedLink
 		return ret
 	}
 	return o.Item
@@ -81,7 +257,7 @@ func (o *PaginatedLinks) GetItem() []PaginatedLinkSelf {
 
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaginatedLinks) GetItemOk() ([]PaginatedLinkSelf, bool) {
+func (o *PaginatedLinks) GetItemOk() ([]PaginatedLink, bool) {
 	if o == nil || o.Item == nil {
 		return nil, false
 	}
@@ -97,8 +273,8 @@ func (o *PaginatedLinks) HasItem() bool {
 	return false
 }
 
-// SetItem gets a reference to the given []PaginatedLinkSelf and assigns it to the Item field.
-func (o *PaginatedLinks) SetItem(v []PaginatedLinkSelf) {
+// SetItem gets a reference to the given []PaginatedLink and assigns it to the Item field.
+func (o *PaginatedLinks) SetItem(v []PaginatedLink) {
 	o.Item = v
 }
 
@@ -106,6 +282,18 @@ func (o PaginatedLinks) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Self != nil {
 		toSerialize["self"] = o.Self
+	}
+	if o.First.IsSet() {
+		toSerialize["first"] = o.First.Get()
+	}
+	if o.Prev.IsSet() {
+		toSerialize["prev"] = o.Prev.Get()
+	}
+	if o.Next.IsSet() {
+		toSerialize["next"] = o.Next.Get()
+	}
+	if o.Last.IsSet() {
+		toSerialize["last"] = o.Last.Get()
 	}
 	if o.Item != nil {
 		toSerialize["item"] = o.Item

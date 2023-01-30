@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **OperationStatus** | Pointer to **string** | Environment operation status. | [optional] [readonly] 
 **ClusterStatus** | Pointer to **string** | Environment cluster status. | [optional] [readonly] 
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
+**KubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier. | [optional] [readonly] 
 
 ## Methods
 
@@ -206,6 +207,41 @@ SetProject sets Project field to given value.
 
 HasProject returns a boolean if a field has been set.
 
+### GetKubernetesIntegration
+
+`func (o *EnvironmentCollection) GetKubernetesIntegration() string`
+
+GetKubernetesIntegration returns the KubernetesIntegration field if non-nil, zero value otherwise.
+
+### GetKubernetesIntegrationOk
+
+`func (o *EnvironmentCollection) GetKubernetesIntegrationOk() (*string, bool)`
+
+GetKubernetesIntegrationOk returns a tuple with the KubernetesIntegration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesIntegration
+
+`func (o *EnvironmentCollection) SetKubernetesIntegration(v string)`
+
+SetKubernetesIntegration sets KubernetesIntegration field to given value.
+
+### HasKubernetesIntegration
+
+`func (o *EnvironmentCollection) HasKubernetesIntegration() bool`
+
+HasKubernetesIntegration returns a boolean if a field has been set.
+
+### SetKubernetesIntegrationNil
+
+`func (o *EnvironmentCollection) SetKubernetesIntegrationNil(b bool)`
+
+ SetKubernetesIntegrationNil sets the value for KubernetesIntegration to be an explicit nil
+
+### UnsetKubernetesIntegration
+`func (o *EnvironmentCollection) UnsetKubernetesIntegration()`
+
+UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
