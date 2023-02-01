@@ -30,6 +30,7 @@ type ApiPipelineListRequest struct {
 	environment  *string
 	event        *string
 	organization *string
+	status       *string
 }
 
 // The collection page number
@@ -53,6 +54,12 @@ func (r ApiPipelineListRequest) Event(event string) ApiPipelineListRequest {
 // Filter by organization
 func (r ApiPipelineListRequest) Organization(organization string) ApiPipelineListRequest {
 	r.organization = &organization
+	return r
+}
+
+// Filter by status
+func (r ApiPipelineListRequest) Status(status string) ApiPipelineListRequest {
+	r.status = &status
 	return r
 }
 
@@ -108,6 +115,9 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 	}
 	if r.organization != nil {
 		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+	}
+	if r.status != nil {
+		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
