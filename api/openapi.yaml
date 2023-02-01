@@ -1297,6 +1297,23 @@ paths:
         schema:
           type: string
         style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by status
+        example: success
+        explode: false
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - success
+          - failed
+          - in_progress
+          - pending
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -2229,7 +2246,6 @@ components:
           type: string
         organization:
           description: Organization identifier.
-          nullable: true
           readOnly: true
           type: string
       type: object
@@ -2265,7 +2281,6 @@ components:
           type: string
         organization:
           description: Organization identifier.
-          nullable: true
           readOnly: true
           type: string
       type: object

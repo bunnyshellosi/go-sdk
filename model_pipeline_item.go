@@ -30,7 +30,7 @@ type PipelineItem struct {
 	// Event identifier.
 	Event *string `json:"event,omitempty"`
 	// Organization identifier.
-	Organization NullableString `json:"organization,omitempty"`
+	Organization *string `json:"organization,omitempty"`
 }
 
 // NewPipelineItem instantiates a new PipelineItem object
@@ -253,47 +253,36 @@ func (o *PipelineItem) SetEvent(v string) {
 	o.Event = &v
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *PipelineItem) GetOrganization() string {
-	if o == nil || o.Organization.Get() == nil {
+	if o == nil || o.Organization == nil {
 		var ret string
 		return ret
 	}
-	return *o.Organization.Get()
+	return *o.Organization
 }
 
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PipelineItem) GetOrganizationOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.Organization == nil {
 		return nil, false
 	}
-	return o.Organization.Get(), o.Organization.IsSet()
+	return o.Organization, true
 }
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *PipelineItem) HasOrganization() bool {
-	if o != nil && o.Organization.IsSet() {
+	if o != nil && o.Organization != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetOrganization gets a reference to the given NullableString and assigns it to the Organization field.
+// SetOrganization gets a reference to the given string and assigns it to the Organization field.
 func (o *PipelineItem) SetOrganization(v string) {
-	o.Organization.Set(&v)
-}
-
-// SetOrganizationNil sets the value for Organization to be an explicit nil
-func (o *PipelineItem) SetOrganizationNil() {
-	o.Organization.Set(nil)
-}
-
-// UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
-func (o *PipelineItem) UnsetOrganization() {
-	o.Organization.Unset()
+	o.Organization = &v
 }
 
 func (o PipelineItem) MarshalJSON() ([]byte, error) {
@@ -316,8 +305,8 @@ func (o PipelineItem) MarshalJSON() ([]byte, error) {
 	if o.Event != nil {
 		toSerialize["event"] = o.Event
 	}
-	if o.Organization.IsSet() {
-		toSerialize["organization"] = o.Organization.Get()
+	if o.Organization != nil {
+		toSerialize["organization"] = o.Organization
 	}
 	return json.Marshal(toSerialize)
 }

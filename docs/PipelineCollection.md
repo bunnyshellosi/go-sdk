@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Pipeline status. | [optional] [readonly] 
 **Environment** | Pointer to **NullableString** | Environment identifier. | [optional] [readonly] 
 **Event** | Pointer to **string** | Event identifier. | [optional] [readonly] 
-**Organization** | Pointer to **NullableString** | Organization identifier. | [optional] [readonly] 
+**Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
 
 ## Methods
 
@@ -190,16 +190,6 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
-### SetOrganizationNil
-
-`func (o *PipelineCollection) SetOrganizationNil(b bool)`
-
- SetOrganizationNil sets the value for Organization to be an explicit nil
-
-### UnsetOrganization
-`func (o *PipelineCollection) UnsetOrganization()`
-
-UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

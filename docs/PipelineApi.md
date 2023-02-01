@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## PipelineList
 
-> PaginatedPipelineCollection PipelineList(ctx).Page(page).Environment(environment).Event(event).Organization(organization).Execute()
+> PaginatedPipelineCollection PipelineList(ctx).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
 
 Retrieves the collection of pipeline resources.
 
@@ -34,10 +34,11 @@ func main() {
     environment := "environment_example" // string | Filter by environment (optional)
     event := "event_example" // string | Filter by event (optional)
     organization := "organization_example" // string | Filter by organization (optional)
+    status := "success" // string | Filter by status (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PipelineApi.PipelineList(context.Background()).Page(page).Environment(environment).Event(event).Organization(organization).Execute()
+    resp, r, err := apiClient.PipelineApi.PipelineList(context.Background()).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PipelineApi.PipelineList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,6 +63,7 @@ Name | Type | Description  | Notes
  **environment** | **string** | Filter by environment | 
  **event** | **string** | Filter by event | 
  **organization** | **string** | Filter by organization | 
+ **status** | **string** | Filter by status | 
 
 ### Return type
 
