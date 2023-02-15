@@ -4,8 +4,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**KubernetesIntegrationList**](KubernetesIntegrationApi.md#KubernetesIntegrationList) | **Get** /v1/kubernetes_integrations | Retrieves the collection of kubernetes_integration resources.
-[**KubernetesIntegrationView**](KubernetesIntegrationApi.md#KubernetesIntegrationView) | **Get** /v1/kubernetes_integrations/{id} | Retrieves a kubernetes_integration resource.
+[**KubernetesIntegrationList**](KubernetesIntegrationApi.md#KubernetesIntegrationList) | **Get** /v1/kubernetes_integrations | List Kubernetes integrations matching any selected filters.
+[**KubernetesIntegrationView**](KubernetesIntegrationApi.md#KubernetesIntegrationView) | **Get** /v1/kubernetes_integrations/{id} | View a specific Kubernetes integration.
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PaginatedKubernetesIntegrationCollection KubernetesIntegrationList(ctx).Page(page).Organization(organization).Environment(environment).Status(status).CloudProvider(cloudProvider).Execute()
 
-Retrieves the collection of kubernetes_integration resources.
+List Kubernetes integrations matching any selected filters.
 
 
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > KubernetesIntegrationItem KubernetesIntegrationView(ctx, id).Execute()
 
-Retrieves a kubernetes_integration resource.
+View a specific Kubernetes integration.
 
 
 

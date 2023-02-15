@@ -4,14 +4,15 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EnvironmentClone**](EnvironmentApi.md#EnvironmentClone) | **Post** /v1/environments/{id}/clone | Creates a environment resource.
+[**EnvironmentClone**](EnvironmentApi.md#EnvironmentClone) | **Post** /v1/environments/{id}/clone | Clone an environment.
+[**EnvironmentDefinition**](EnvironmentApi.md#EnvironmentDefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 [**EnvironmentDelete**](EnvironmentApi.md#EnvironmentDelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
-[**EnvironmentDeploy**](EnvironmentApi.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Creates a environment resource.
-[**EnvironmentKubeConfig**](EnvironmentApi.md#EnvironmentKubeConfig) | **Get** /v1/environments/{id}/kube-config | Retrieves a environment resource.
-[**EnvironmentList**](EnvironmentApi.md#EnvironmentList) | **Get** /v1/environments | Retrieves the collection of environment resources.
+[**EnvironmentDeploy**](EnvironmentApi.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+[**EnvironmentKubeConfig**](EnvironmentApi.md#EnvironmentKubeConfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
+[**EnvironmentList**](EnvironmentApi.md#EnvironmentList) | **Get** /v1/environments | List environments matching any selected filters.
 [**EnvironmentStart**](EnvironmentApi.md#EnvironmentStart) | **Post** /v1/environments/{id}/start | Start an environment.
-[**EnvironmentStop**](EnvironmentApi.md#EnvironmentStop) | **Post** /v1/environments/{id}/stop | Creates a environment resource.
-[**EnvironmentView**](EnvironmentApi.md#EnvironmentView) | **Get** /v1/environments/{id} | Retrieves a environment resource.
+[**EnvironmentStop**](EnvironmentApi.md#EnvironmentStop) | **Post** /v1/environments/{id}/stop | Stop an environment.
+[**EnvironmentView**](EnvironmentApi.md#EnvironmentView) | **Get** /v1/environments/{id} | View a specific environment.
 
 
 
@@ -19,7 +20,7 @@ Method | HTTP request | Description
 
 > EnvironmentItem EnvironmentClone(ctx, id).EnvironmentCloneAction(environmentCloneAction).Execute()
 
-Creates a environment resource.
+Clone an environment.
 
 
 
@@ -81,6 +82,76 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EnvironmentDefinition
+
+> map[string]interface{} EnvironmentDefinition(ctx, id).Execute()
+
+View the bunnyshell manifest for the environment
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentDefinition(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentDefinition`: map[string]interface{}
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentApi.EnvironmentDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/x+yaml, application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -163,7 +234,7 @@ Name | Type | Description  | Notes
 
 > EventItem EnvironmentDeploy(ctx, id).Body(body).Execute()
 
-Creates a environment resource.
+Deploy an environment.
 
 
 
@@ -235,7 +306,7 @@ Name | Type | Description  | Notes
 
 > EnvironmentKubeConfigKubeConfigRead EnvironmentKubeConfig(ctx, id).Execute()
 
-Retrieves a environment resource.
+Download Kubernetes Config File
 
 
 
@@ -305,7 +376,7 @@ Name | Type | Description  | Notes
 
 > PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
 
-Retrieves the collection of environment resources.
+List environments matching any selected filters.
 
 
 
@@ -455,7 +526,7 @@ Name | Type | Description  | Notes
 
 > EventItem EnvironmentStop(ctx, id).Body(body).Execute()
 
-Creates a environment resource.
+Stop an environment.
 
 
 
@@ -527,7 +598,7 @@ Name | Type | Description  | Notes
 
 > EnvironmentItem EnvironmentView(ctx, id).Execute()
 
-Retrieves a environment resource.
+View a specific environment.
 
 
 

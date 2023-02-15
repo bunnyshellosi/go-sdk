@@ -4,8 +4,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ProjectList**](ProjectApi.md#ProjectList) | **Get** /v1/projects | Retrieves the collection of project resources.
-[**ProjectView**](ProjectApi.md#ProjectView) | **Get** /v1/projects/{id} | Retrieves a project resource.
+[**ProjectList**](ProjectApi.md#ProjectList) | **Get** /v1/projects | List projects matching any selected filters.
+[**ProjectView**](ProjectApi.md#ProjectView) | **Get** /v1/projects/{id} | View a specific project.
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PaginatedProjectCollection ProjectList(ctx).Page(page).Organization(organization).Execute()
 
-Retrieves the collection of project resources.
+List projects matching any selected filters.
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > ProjectItem ProjectView(ctx, id).Execute()
 
-Retrieves a project resource.
+View a specific project.
 
 
 

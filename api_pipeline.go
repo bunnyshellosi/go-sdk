@@ -68,7 +68,7 @@ func (r ApiPipelineListRequest) Execute() (*PaginatedPipelineCollection, *http.R
 }
 
 /*
-PipelineList Retrieves the collection of pipeline resources.
+PipelineList List pipelines matching any selected filters.
 
 List pipelines matching any selected filters.
 
@@ -221,7 +221,7 @@ func (r ApiPipelineViewRequest) Execute() (*PipelineItem, *http.Response, error)
 }
 
 /*
-PipelineView Retrieves a pipeline resource.
+PipelineView View a specific Pipeline.
 
 View a specific Pipeline.
 

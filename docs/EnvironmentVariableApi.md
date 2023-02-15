@@ -4,9 +4,9 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EnvironmentVariableEdit**](EnvironmentVariableApi.md#EnvironmentVariableEdit) | **Patch** /v1/environment_variables/{id} | Updates the environment_variable resource.
-[**EnvironmentVariableList**](EnvironmentVariableApi.md#EnvironmentVariableList) | **Get** /v1/environment_variables | Retrieves the collection of environment_variable resources.
-[**EnvironmentVariableView**](EnvironmentVariableApi.md#EnvironmentVariableView) | **Get** /v1/environment_variables/{id} | Retrieves a environment_variable resource.
+[**EnvironmentVariableEdit**](EnvironmentVariableApi.md#EnvironmentVariableEdit) | **Patch** /v1/environment_variables/{id} | Edit a specific environment variable.
+[**EnvironmentVariableList**](EnvironmentVariableApi.md#EnvironmentVariableList) | **Get** /v1/environment_variables | List environment variables matching any selected filters.
+[**EnvironmentVariableView**](EnvironmentVariableApi.md#EnvironmentVariableView) | **Get** /v1/environment_variables/{id} | View a specific environment variable.
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > EnvironmentVariableItem EnvironmentVariableEdit(ctx, id).EnvironmentVariableEdit(environmentVariableEdit).Execute()
 
-Updates the environment_variable resource.
+Edit a specific environment variable.
 
 
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 > PaginatedEnvironmentVariableCollection EnvironmentVariableList(ctx).Page(page).Name(name).Environment(environment).Organization(organization).Execute()
 
-Retrieves the collection of environment_variable resources.
+List environment variables matching any selected filters.
 
 
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 > EnvironmentVariableItem EnvironmentVariableView(ctx, id).Execute()
 
-Retrieves a environment_variable resource.
+View a specific environment variable.
 
 
 

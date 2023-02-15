@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | Event creation time. | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** | Event last update time. | [optional] [readonly] 
+**Delegated** | Pointer to **NullableString** | Event identifier. | [optional] [readonly] 
 
 ## Methods
 
@@ -216,6 +217,41 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetDelegated
+
+`func (o *EventItem) GetDelegated() string`
+
+GetDelegated returns the Delegated field if non-nil, zero value otherwise.
+
+### GetDelegatedOk
+
+`func (o *EventItem) GetDelegatedOk() (*string, bool)`
+
+GetDelegatedOk returns a tuple with the Delegated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDelegated
+
+`func (o *EventItem) SetDelegated(v string)`
+
+SetDelegated sets Delegated field to given value.
+
+### HasDelegated
+
+`func (o *EventItem) HasDelegated() bool`
+
+HasDelegated returns a boolean if a field has been set.
+
+### SetDelegatedNil
+
+`func (o *EventItem) SetDelegatedNil(b bool)`
+
+ SetDelegatedNil sets the value for Delegated to be an explicit nil
+
+### UnsetDelegated
+`func (o *EventItem) UnsetDelegated()`
+
+UnsetDelegated ensures that no value is present for Delegated, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

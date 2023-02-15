@@ -68,7 +68,7 @@ func (r ApiKubernetesIntegrationListRequest) Execute() (*PaginatedKubernetesInte
 }
 
 /*
-KubernetesIntegrationList Retrieves the collection of kubernetes_integration resources.
+KubernetesIntegrationList List Kubernetes integrations matching any selected filters.
 
 List Kubernetes integrations matching any selected filters.
 
@@ -221,7 +221,7 @@ func (r ApiKubernetesIntegrationViewRequest) Execute() (*KubernetesIntegrationIt
 }
 
 /*
-KubernetesIntegrationView Retrieves a kubernetes_integration resource.
+KubernetesIntegrationView View a specific Kubernetes integration.
 
 View a specific Kubernetes integration.
 

@@ -75,7 +75,7 @@ func (r ApiComponentListRequest) Execute() (*PaginatedComponentCollection, *http
 }
 
 /*
-ComponentList Retrieves the collection of component resources.
+ComponentList List service components matching any selected filters
 
 List service components matching any selected filters
 
@@ -231,7 +231,7 @@ func (r ApiComponentResourcesRequest) Execute() ([]ComponentResourceItem, *http.
 }
 
 /*
-ComponentResources Retrieves a component resource.
+ComponentResources Get kubernetes resources
 
 Get kubernetes resources
 
@@ -372,7 +372,7 @@ func (r ApiComponentViewRequest) Execute() (*ComponentItem, *http.Response, erro
 }
 
 /*
-ComponentView Retrieves a component resource.
+ComponentView View a specific service component
 
 View a specific service component
 

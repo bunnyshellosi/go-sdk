@@ -68,9 +68,9 @@ func (r ApiComponentGitListRequest) Execute() (*PaginatedComponentGitCollection,
 }
 
 /*
-ComponentGitList Retrieves the collection of componentGit resources.
+ComponentGitList List git info for service components matching any selected filters
 
-List
+List git info for service components matching any selected filters
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiComponentGitListRequest
@@ -221,9 +221,9 @@ func (r ApiComponentGitViewRequest) Execute() (*ComponentGitItem, *http.Response
 }
 
 /*
-ComponentGitView Retrieves a componentGit resource.
+ComponentGitView View git info for a specific service component
 
-View
+View git info for a specific service component
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Resource identifier

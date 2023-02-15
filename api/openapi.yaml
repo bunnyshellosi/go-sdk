@@ -17,6 +17,8 @@ security:
 tags:
 - description: Component Resource
   name: component
+- description: ComponentEndpoint Resource
+  name: componentEndpoint
 - description: ComponentGit Resource
   name: componentGit
 - description: Environment_variable Resource
@@ -165,13 +167,91 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of component resources.
+      summary: List service components matching any selected filters
       tags:
       - component
+  /v1/components/endpoint:
+    get:
+      deprecated: false
+      description: List endpoints for service components matching any selected filters
+      operationId: ComponentEndpointList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by project
+        explode: false
+        in: query
+        name: project
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by name
+        explode: false
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-componentEndpoint-collection'
+          description: componentEndpoint collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List endpoints for service components matching any selected filters
+      tags:
+      - componentEndpoint
   /v1/components/gitinfo:
     get:
       deprecated: false
-      description: List
+      description: List git info for service components matching any selected filters
       operationId: ComponentGitList
       parameters:
       - allowEmptyValue: true
@@ -243,7 +323,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of componentGit resources.
+      summary: List git info for service components matching any selected filters
       tags:
       - componentGit
   /v1/components/{id}:
@@ -277,13 +357,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a component resource.
+      summary: View a specific service component
       tags:
       - component
+  /v1/components/{id}/endpoint:
+    get:
+      deprecated: false
+      description: View endpoints for a specific service component
+      operationId: ComponentEndpointView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/componentEndpoint-item'
+          description: componentEndpoint resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View endpoints for a specific service component
+      tags:
+      - componentEndpoint
   /v1/components/{id}/gitinfo:
     get:
       deprecated: false
-      description: View
+      description: View git info for a specific service component
       operationId: ComponentGitView
       parameters:
       - allowReserved: false
@@ -311,7 +425,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a componentGit resource.
+      summary: View git info for a specific service component
       tags:
       - componentGit
   /v1/components/{id}/resources:
@@ -347,7 +461,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a component resource.
+      summary: Get kubernetes resources
       tags:
       - component
   /v1/environment_variables:
@@ -414,7 +528,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of environment_variable resources.
+      summary: List environment variables matching any selected filters.
       tags:
       - environment_variable
   /v1/environment_variables/{id}:
@@ -448,7 +562,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a environment_variable resource.
+      summary: View a specific environment variable.
       tags:
       - environment_variable
     patch:
@@ -492,7 +606,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Updates the environment_variable resource.
+      summary: Edit a specific environment variable.
       tags:
       - environment_variable
   /v1/environments:
@@ -632,7 +746,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of environment resources.
+      summary: List environments matching any selected filters.
       tags:
       - environment
   /v1/environments/{id}:
@@ -666,7 +780,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a environment resource.
+      summary: View a specific environment.
       tags:
       - environment
   /v1/environments/{id}/clone:
@@ -711,7 +825,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Creates a environment resource.
+      summary: Clone an environment.
+      tags:
+      - environment
+  /v1/environments/{id}/definition:
+    get:
+      deprecated: false
+      description: View the bunnyshell manifest for the environment
+      operationId: EnvironmentDefinition
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/x+yaml:
+              schema:
+                $ref: '#/components/schemas/environment.GenericObject'
+          description: environment resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View the bunnyshell manifest for the environment
       tags:
       - environment
   /v1/environments/{id}/delete:
@@ -799,7 +947,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Creates a environment resource.
+      summary: Deploy an environment.
       tags:
       - environment
   /v1/environments/{id}/kube-config:
@@ -833,7 +981,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a environment resource.
+      summary: Download Kubernetes Config File
       tags:
       - environment
   /v1/environments/{id}/start:
@@ -921,7 +1069,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Creates a environment resource.
+      summary: Stop an environment.
       tags:
       - environment
   /v1/events:
@@ -1023,7 +1171,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of event resources.
+      summary: List events matching any selected filters.
       tags:
       - event
   /v1/events/{id}:
@@ -1057,7 +1205,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a event resource.
+      summary: View a specific event.
       tags:
       - event
   /v1/kubernetes_integrations:
@@ -1141,7 +1289,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of kubernetes_integration resources.
+      summary: List Kubernetes integrations matching any selected filters.
       tags:
       - kubernetes_integration
   /v1/kubernetes_integrations/{id}:
@@ -1175,7 +1323,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a kubernetes_integration resource.
+      summary: View a specific Kubernetes integration.
       tags:
       - kubernetes_integration
   /v1/organizations:
@@ -1209,7 +1357,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of organization resources.
+      summary: List organization matching any selected filters.
       tags:
       - organization
   /v1/organizations/{id}:
@@ -1243,7 +1391,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a organization resource.
+      summary: View a specific organization.
       tags:
       - organization
   /v1/pipelines:
@@ -1327,7 +1475,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of pipeline resources.
+      summary: List pipelines matching any selected filters.
       tags:
       - pipeline
   /v1/pipelines/{id}:
@@ -1361,7 +1509,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a pipeline resource.
+      summary: View a specific Pipeline.
       tags:
       - pipeline
   /v1/projects:
@@ -1406,7 +1554,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves the collection of project resources.
+      summary: List projects matching any selected filters.
       tags:
       - project
   /v1/projects/{id}:
@@ -1440,7 +1588,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
-      summary: Retrieves a project resource.
+      summary: View a specific project.
       tags:
       - project
 components:
@@ -1616,6 +1764,50 @@ components:
           nullable: true
           type: string
       type: object
+    componentEndpoint-collection:
+      description: Endpoint
+      properties:
+        id:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        name:
+          description: Service component name
+          readOnly: true
+          type: string
+        endpoints:
+          description: Service component URLs
+          items:
+            type: string
+          readOnly: true
+          type: array
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+      type: object
+    componentEndpoint-item:
+      description: Endpoint
+      properties:
+        id:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        name:
+          description: Service component name
+          readOnly: true
+          type: string
+        endpoints:
+          description: Service component URLs
+          items:
+            type: string
+          readOnly: true
+          type: array
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+      type: object
     componentGit-collection:
       description: Git info
       properties:
@@ -1771,6 +1963,9 @@ components:
       required:
       - name
       type: object
+    environment.GenericObject:
+      description: An environment holds a collection of buildable and deployable components.
+      type: object
     environment.KubeConfig-kube-config.read:
       description: An environment holds a collection of buildable and deployable components.
       properties:
@@ -1921,6 +2116,11 @@ components:
           format: date-time
           readOnly: true
           type: string
+        delegated:
+          description: Event identifier.
+          nullable: true
+          readOnly: true
+          type: string
       type: object
     kubernetes_integration-collection:
       description: A Kubernetes integration stores connection information for a Kubernetes
@@ -2052,6 +2252,23 @@ components:
           type: integer
         _embedded:
           $ref: '#/components/schemas/embedded_component_collection'
+      type: object
+    paginated-componentEndpoint-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_componentEndpoint_collection'
       type: object
     paginated-componentGit-collection:
       description: Paginated result
@@ -2339,6 +2556,14 @@ components:
             $ref: '#/components/schemas/component-collection'
           type: array
       title: embedded-component-collection
+      type: object
+    embedded_componentEndpoint_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/componentEndpoint-collection'
+          type: array
+      title: embedded-componentEndpoint-collection
       type: object
     embedded_componentGit_collection:
       properties:

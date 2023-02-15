@@ -3,6 +3,7 @@
 README.md
 api/openapi.yaml
 api_component.go
+api_component_endpoint.go
 api_component_git.go
 api_environment.go
 api_environment_variable.go
@@ -17,6 +18,9 @@ docs/ClusterKubeConfigRead.md
 docs/ClusterWrapperKubeConfigRead.md
 docs/ComponentApi.md
 docs/ComponentCollection.md
+docs/ComponentEndpointApi.md
+docs/ComponentEndpointCollection.md
+docs/ComponentEndpointItem.md
 docs/ComponentGitApi.md
 docs/ComponentGitCollection.md
 docs/ComponentGitItem.md
@@ -25,6 +29,7 @@ docs/ComponentResourceItem.md
 docs/ContextKubeConfigRead.md
 docs/ContextWrapperKubeConfigRead.md
 docs/EmbeddedComponentCollection.md
+docs/EmbeddedComponentEndpointCollection.md
 docs/EmbeddedComponentGitCollection.md
 docs/EmbeddedEnvironmentCollection.md
 docs/EmbeddedEnvironmentVariableCollection.md
@@ -52,6 +57,7 @@ docs/OrganizationApi.md
 docs/OrganizationCollection.md
 docs/OrganizationItem.md
 docs/PaginatedComponentCollection.md
+docs/PaginatedComponentEndpointCollection.md
 docs/PaginatedComponentGitCollection.md
 docs/PaginatedEnvironmentCollection.md
 docs/PaginatedEnvironmentVariableCollection.md
@@ -79,6 +85,8 @@ go.sum
 model_cluster_kube_config_read.go
 model_cluster_wrapper_kube_config_read.go
 model_component_collection.go
+model_component_endpoint_collection.go
+model_component_endpoint_item.go
 model_component_git_collection.go
 model_component_git_item.go
 model_component_item.go
@@ -86,6 +94,7 @@ model_component_resource_item.go
 model_context_kube_config_read.go
 model_context_wrapper_kube_config_read.go
 model_embedded_component_collection.go
+model_embedded_component_endpoint_collection.go
 model_embedded_component_git_collection.go
 model_embedded_environment_collection.go
 model_embedded_environment_variable_collection.go
@@ -108,6 +117,7 @@ model_kubernetes_integration_item.go
 model_organization_collection.go
 model_organization_item.go
 model_paginated_component_collection.go
+model_paginated_component_endpoint_collection.go
 model_paginated_component_git_collection.go
 model_paginated_environment_collection.go
 model_paginated_environment_variable_collection.go

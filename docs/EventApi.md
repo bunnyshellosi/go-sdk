@@ -4,8 +4,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**EventList**](EventApi.md#EventList) | **Get** /v1/events | Retrieves the collection of event resources.
-[**EventView**](EventApi.md#EventView) | **Get** /v1/events/{id} | Retrieves a event resource.
+[**EventList**](EventApi.md#EventList) | **Get** /v1/events | List events matching any selected filters.
+[**EventView**](EventApi.md#EventView) | **Get** /v1/events/{id} | View a specific event.
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PaginatedEventCollection EventList(ctx).Page(page).Type_(type_).Status(status).Environment(environment).Organization(organization).Execute()
 
-Retrieves the collection of event resources.
+List events matching any selected filters.
 
 
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > EventItem EventView(ctx, id).Execute()
 
-Retrieves a event resource.
+View a specific event.
 
 
 
