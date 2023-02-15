@@ -53,6 +53,8 @@ type APIClient struct {
 
 	ComponentApi *ComponentApiService
 
+	ComponentEndpointApi *ComponentEndpointApiService
+
 	ComponentGitApi *ComponentGitApiService
 
 	EnvironmentApi *EnvironmentApiService
@@ -87,6 +89,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ComponentApi = (*ComponentApiService)(&c.common)
+	c.ComponentEndpointApi = (*ComponentEndpointApiService)(&c.common)
 	c.ComponentGitApi = (*ComponentGitApiService)(&c.common)
 	c.EnvironmentApi = (*EnvironmentApiService)(&c.common)
 	c.EnvironmentVariableApi = (*EnvironmentVariableApiService)(&c.common)

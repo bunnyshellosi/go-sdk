@@ -41,7 +41,7 @@ func (r ApiEnvironmentVariableEditRequest) Execute() (*EnvironmentVariableItem, 
 }
 
 /*
-EnvironmentVariableEdit Updates the environment_variable resource.
+EnvironmentVariableEdit Edit a specific environment variable.
 
 Edit a specific environment variable.
 
@@ -214,7 +214,7 @@ func (r ApiEnvironmentVariableListRequest) Execute() (*PaginatedEnvironmentVaria
 }
 
 /*
-EnvironmentVariableList Retrieves the collection of environment_variable resources.
+EnvironmentVariableList List environment variables matching any selected filters.
 
 List environment variables matching any selected filters.
 
@@ -364,7 +364,7 @@ func (r ApiEnvironmentVariableViewRequest) Execute() (*EnvironmentVariableItem, 
 }
 
 /*
-EnvironmentVariableView Retrieves a environment_variable resource.
+EnvironmentVariableView View a specific environment variable.
 
 View a specific environment variable.
 

@@ -4,9 +4,9 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ComponentList**](ComponentApi.md#ComponentList) | **Get** /v1/components | Retrieves the collection of component resources.
-[**ComponentResources**](ComponentApi.md#ComponentResources) | **Get** /v1/components/{id}/resources | Retrieves a component resource.
-[**ComponentView**](ComponentApi.md#ComponentView) | **Get** /v1/components/{id} | Retrieves a component resource.
+[**ComponentList**](ComponentApi.md#ComponentList) | **Get** /v1/components | List service components matching any selected filters
+[**ComponentResources**](ComponentApi.md#ComponentResources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
+[**ComponentView**](ComponentApi.md#ComponentView) | **Get** /v1/components/{id} | View a specific service component
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > PaginatedComponentCollection ComponentList(ctx).Page(page).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
 
-Retrieves the collection of component resources.
+List service components matching any selected filters
 
 
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > []ComponentResourceItem ComponentResources(ctx, id).Execute()
 
-Retrieves a component resource.
+Get kubernetes resources
 
 
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 > ComponentItem ComponentView(ctx, id).Execute()
 
-Retrieves a component resource.
+View a specific service component
 
 
 

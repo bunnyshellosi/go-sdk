@@ -68,7 +68,7 @@ func (r ApiEventListRequest) Execute() (*PaginatedEventCollection, *http.Respons
 }
 
 /*
-EventList Retrieves the collection of event resources.
+EventList List events matching any selected filters.
 
 List events matching any selected filters.
 
@@ -221,7 +221,7 @@ func (r ApiEventViewRequest) Execute() (*EventItem, *http.Response, error) {
 }
 
 /*
-EventView Retrieves a event resource.
+EventView View a specific event.
 
 View a specific event.
 

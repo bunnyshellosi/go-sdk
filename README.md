@@ -79,32 +79,35 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | Retrieves the collection of component resources.
-*ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Retrieves a component resource.
-*ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | Retrieves a component resource.
-*ComponentGitApi* | [**ComponentGitList**](docs/ComponentGitApi.md#componentgitlist) | **Get** /v1/components/gitinfo | Retrieves the collection of componentGit resources.
-*ComponentGitApi* | [**ComponentGitView**](docs/ComponentGitApi.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | Retrieves a componentGit resource.
-*EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Creates a environment resource.
+*ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | List service components matching any selected filters
+*ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
+*ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | View a specific service component
+*ComponentEndpointApi* | [**ComponentEndpointList**](docs/ComponentEndpointApi.md#componentendpointlist) | **Get** /v1/components/endpoint | List endpoints for service components matching any selected filters
+*ComponentEndpointApi* | [**ComponentEndpointView**](docs/ComponentEndpointApi.md#componentendpointview) | **Get** /v1/components/{id}/endpoint | View endpoints for a specific service component
+*ComponentGitApi* | [**ComponentGitList**](docs/ComponentGitApi.md#componentgitlist) | **Get** /v1/components/gitinfo | List git info for service components matching any selected filters
+*ComponentGitApi* | [**ComponentGitView**](docs/ComponentGitApi.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | View git info for a specific service component
+*EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Clone an environment.
+*EnvironmentApi* | [**EnvironmentDefinition**](docs/EnvironmentApi.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
-*EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Creates a environment resource.
-*EnvironmentApi* | [**EnvironmentKubeConfig**](docs/EnvironmentApi.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Retrieves a environment resource.
-*EnvironmentApi* | [**EnvironmentList**](docs/EnvironmentApi.md#environmentlist) | **Get** /v1/environments | Retrieves the collection of environment resources.
+*EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+*EnvironmentApi* | [**EnvironmentKubeConfig**](docs/EnvironmentApi.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
+*EnvironmentApi* | [**EnvironmentList**](docs/EnvironmentApi.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
 *EnvironmentApi* | [**EnvironmentStart**](docs/EnvironmentApi.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
-*EnvironmentApi* | [**EnvironmentStop**](docs/EnvironmentApi.md#environmentstop) | **Post** /v1/environments/{id}/stop | Creates a environment resource.
-*EnvironmentApi* | [**EnvironmentView**](docs/EnvironmentApi.md#environmentview) | **Get** /v1/environments/{id} | Retrieves a environment resource.
-*EnvironmentVariableApi* | [**EnvironmentVariableEdit**](docs/EnvironmentVariableApi.md#environmentvariableedit) | **Patch** /v1/environment_variables/{id} | Updates the environment_variable resource.
-*EnvironmentVariableApi* | [**EnvironmentVariableList**](docs/EnvironmentVariableApi.md#environmentvariablelist) | **Get** /v1/environment_variables | Retrieves the collection of environment_variable resources.
-*EnvironmentVariableApi* | [**EnvironmentVariableView**](docs/EnvironmentVariableApi.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | Retrieves a environment_variable resource.
-*EventApi* | [**EventList**](docs/EventApi.md#eventlist) | **Get** /v1/events | Retrieves the collection of event resources.
-*EventApi* | [**EventView**](docs/EventApi.md#eventview) | **Get** /v1/events/{id} | Retrieves a event resource.
-*KubernetesIntegrationApi* | [**KubernetesIntegrationList**](docs/KubernetesIntegrationApi.md#kubernetesintegrationlist) | **Get** /v1/kubernetes_integrations | Retrieves the collection of kubernetes_integration resources.
-*KubernetesIntegrationApi* | [**KubernetesIntegrationView**](docs/KubernetesIntegrationApi.md#kubernetesintegrationview) | **Get** /v1/kubernetes_integrations/{id} | Retrieves a kubernetes_integration resource.
-*OrganizationApi* | [**OrganizationList**](docs/OrganizationApi.md#organizationlist) | **Get** /v1/organizations | Retrieves the collection of organization resources.
-*OrganizationApi* | [**OrganizationView**](docs/OrganizationApi.md#organizationview) | **Get** /v1/organizations/{id} | Retrieves a organization resource.
-*PipelineApi* | [**PipelineList**](docs/PipelineApi.md#pipelinelist) | **Get** /v1/pipelines | Retrieves the collection of pipeline resources.
-*PipelineApi* | [**PipelineView**](docs/PipelineApi.md#pipelineview) | **Get** /v1/pipelines/{id} | Retrieves a pipeline resource.
-*ProjectApi* | [**ProjectList**](docs/ProjectApi.md#projectlist) | **Get** /v1/projects | Retrieves the collection of project resources.
-*ProjectApi* | [**ProjectView**](docs/ProjectApi.md#projectview) | **Get** /v1/projects/{id} | Retrieves a project resource.
+*EnvironmentApi* | [**EnvironmentStop**](docs/EnvironmentApi.md#environmentstop) | **Post** /v1/environments/{id}/stop | Stop an environment.
+*EnvironmentApi* | [**EnvironmentView**](docs/EnvironmentApi.md#environmentview) | **Get** /v1/environments/{id} | View a specific environment.
+*EnvironmentVariableApi* | [**EnvironmentVariableEdit**](docs/EnvironmentVariableApi.md#environmentvariableedit) | **Patch** /v1/environment_variables/{id} | Edit a specific environment variable.
+*EnvironmentVariableApi* | [**EnvironmentVariableList**](docs/EnvironmentVariableApi.md#environmentvariablelist) | **Get** /v1/environment_variables | List environment variables matching any selected filters.
+*EnvironmentVariableApi* | [**EnvironmentVariableView**](docs/EnvironmentVariableApi.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | View a specific environment variable.
+*EventApi* | [**EventList**](docs/EventApi.md#eventlist) | **Get** /v1/events | List events matching any selected filters.
+*EventApi* | [**EventView**](docs/EventApi.md#eventview) | **Get** /v1/events/{id} | View a specific event.
+*KubernetesIntegrationApi* | [**KubernetesIntegrationList**](docs/KubernetesIntegrationApi.md#kubernetesintegrationlist) | **Get** /v1/kubernetes_integrations | List Kubernetes integrations matching any selected filters.
+*KubernetesIntegrationApi* | [**KubernetesIntegrationView**](docs/KubernetesIntegrationApi.md#kubernetesintegrationview) | **Get** /v1/kubernetes_integrations/{id} | View a specific Kubernetes integration.
+*OrganizationApi* | [**OrganizationList**](docs/OrganizationApi.md#organizationlist) | **Get** /v1/organizations | List organization matching any selected filters.
+*OrganizationApi* | [**OrganizationView**](docs/OrganizationApi.md#organizationview) | **Get** /v1/organizations/{id} | View a specific organization.
+*PipelineApi* | [**PipelineList**](docs/PipelineApi.md#pipelinelist) | **Get** /v1/pipelines | List pipelines matching any selected filters.
+*PipelineApi* | [**PipelineView**](docs/PipelineApi.md#pipelineview) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
+*ProjectApi* | [**ProjectList**](docs/ProjectApi.md#projectlist) | **Get** /v1/projects | List projects matching any selected filters.
+*ProjectApi* | [**ProjectView**](docs/ProjectApi.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
 
 
 ## Documentation For Models
@@ -112,6 +115,8 @@ Class | Method | HTTP request | Description
  - [ClusterKubeConfigRead](docs/ClusterKubeConfigRead.md)
  - [ClusterWrapperKubeConfigRead](docs/ClusterWrapperKubeConfigRead.md)
  - [ComponentCollection](docs/ComponentCollection.md)
+ - [ComponentEndpointCollection](docs/ComponentEndpointCollection.md)
+ - [ComponentEndpointItem](docs/ComponentEndpointItem.md)
  - [ComponentGitCollection](docs/ComponentGitCollection.md)
  - [ComponentGitItem](docs/ComponentGitItem.md)
  - [ComponentItem](docs/ComponentItem.md)
@@ -119,6 +124,7 @@ Class | Method | HTTP request | Description
  - [ContextKubeConfigRead](docs/ContextKubeConfigRead.md)
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
+ - [EmbeddedComponentEndpointCollection](docs/EmbeddedComponentEndpointCollection.md)
  - [EmbeddedComponentGitCollection](docs/EmbeddedComponentGitCollection.md)
  - [EmbeddedEnvironmentCollection](docs/EmbeddedEnvironmentCollection.md)
  - [EmbeddedEnvironmentVariableCollection](docs/EmbeddedEnvironmentVariableCollection.md)
@@ -141,6 +147,7 @@ Class | Method | HTTP request | Description
  - [OrganizationCollection](docs/OrganizationCollection.md)
  - [OrganizationItem](docs/OrganizationItem.md)
  - [PaginatedComponentCollection](docs/PaginatedComponentCollection.md)
+ - [PaginatedComponentEndpointCollection](docs/PaginatedComponentEndpointCollection.md)
  - [PaginatedComponentGitCollection](docs/PaginatedComponentGitCollection.md)
  - [PaginatedEnvironmentCollection](docs/PaginatedEnvironmentCollection.md)
  - [PaginatedEnvironmentVariableCollection](docs/PaginatedEnvironmentVariableCollection.md)

@@ -47,7 +47,7 @@ func (r ApiProjectListRequest) Execute() (*PaginatedProjectCollection, *http.Res
 }
 
 /*
-ProjectList Retrieves the collection of project resources.
+ProjectList List projects matching any selected filters.
 
 List projects matching any selected filters.
 
@@ -191,7 +191,7 @@ func (r ApiProjectViewRequest) Execute() (*ProjectItem, *http.Response, error) {
 }
 
 /*
-ProjectView Retrieves a project resource.
+ProjectView View a specific project.
 
 View a specific project.
 

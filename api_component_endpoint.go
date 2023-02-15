@@ -20,35 +20,63 @@ import (
 	"strings"
 )
 
-// OrganizationApiService OrganizationApi service
-type OrganizationApiService service
+// ComponentEndpointApiService ComponentEndpointApi service
+type ComponentEndpointApiService service
 
-type ApiOrganizationListRequest struct {
-	ctx        context.Context
-	ApiService *OrganizationApiService
-	page       *int32
+type ApiComponentEndpointListRequest struct {
+	ctx          context.Context
+	ApiService   *ComponentEndpointApiService
+	page         *int32
+	organization *string
+	project      *string
+	environment  *string
+	name         *string
 }
 
 // The collection page number
-func (r ApiOrganizationListRequest) Page(page int32) ApiOrganizationListRequest {
+func (r ApiComponentEndpointListRequest) Page(page int32) ApiComponentEndpointListRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiOrganizationListRequest) Execute() (*PaginatedOrganizationCollection, *http.Response, error) {
-	return r.ApiService.OrganizationListExecute(r)
+// Filter by organization
+func (r ApiComponentEndpointListRequest) Organization(organization string) ApiComponentEndpointListRequest {
+	r.organization = &organization
+	return r
+}
+
+// Filter by project
+func (r ApiComponentEndpointListRequest) Project(project string) ApiComponentEndpointListRequest {
+	r.project = &project
+	return r
+}
+
+// Filter by environment
+func (r ApiComponentEndpointListRequest) Environment(environment string) ApiComponentEndpointListRequest {
+	r.environment = &environment
+	return r
+}
+
+// Filter by name
+func (r ApiComponentEndpointListRequest) Name(name string) ApiComponentEndpointListRequest {
+	r.name = &name
+	return r
+}
+
+func (r ApiComponentEndpointListRequest) Execute() (*PaginatedComponentEndpointCollection, *http.Response, error) {
+	return r.ApiService.ComponentEndpointListExecute(r)
 }
 
 /*
-OrganizationList List organization matching any selected filters.
+ComponentEndpointList List endpoints for service components matching any selected filters
 
-List organization matching any selected filters.
+List endpoints for service components matching any selected filters
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiOrganizationListRequest
+	@return ApiComponentEndpointListRequest
 */
-func (a *OrganizationApiService) OrganizationList(ctx context.Context) ApiOrganizationListRequest {
-	return ApiOrganizationListRequest{
+func (a *ComponentEndpointApiService) ComponentEndpointList(ctx context.Context) ApiComponentEndpointListRequest {
+	return ApiComponentEndpointListRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -56,21 +84,21 @@ func (a *OrganizationApiService) OrganizationList(ctx context.Context) ApiOrgani
 
 // Execute executes the request
 //
-//	@return PaginatedOrganizationCollection
-func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRequest) (*PaginatedOrganizationCollection, *http.Response, error) {
+//	@return PaginatedComponentEndpointCollection
+func (a *ComponentEndpointApiService) ComponentEndpointListExecute(r ApiComponentEndpointListRequest) (*PaginatedComponentEndpointCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PaginatedOrganizationCollection
+		localVarReturnValue *PaginatedComponentEndpointCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationApiService.OrganizationList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentEndpointApiService.ComponentEndpointList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations"
+	localVarPath := localBasePath + "/v1/components/endpoint"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -78,6 +106,18 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 
 	if r.page != nil {
 		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.organization != nil {
+		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+	}
+	if r.project != nil {
+		localVarQueryParams.Add("project", parameterToString(*r.project, ""))
+	}
+	if r.environment != nil {
+		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	}
+	if r.name != nil {
+		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -170,27 +210,27 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiOrganizationViewRequest struct {
+type ApiComponentEndpointViewRequest struct {
 	ctx        context.Context
-	ApiService *OrganizationApiService
+	ApiService *ComponentEndpointApiService
 	id         string
 }
 
-func (r ApiOrganizationViewRequest) Execute() (*OrganizationItem, *http.Response, error) {
-	return r.ApiService.OrganizationViewExecute(r)
+func (r ApiComponentEndpointViewRequest) Execute() (*ComponentEndpointItem, *http.Response, error) {
+	return r.ApiService.ComponentEndpointViewExecute(r)
 }
 
 /*
-OrganizationView View a specific organization.
+ComponentEndpointView View endpoints for a specific service component
 
-View a specific organization.
+View endpoints for a specific service component
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Resource identifier
-	@return ApiOrganizationViewRequest
+	@return ApiComponentEndpointViewRequest
 */
-func (a *OrganizationApiService) OrganizationView(ctx context.Context, id string) ApiOrganizationViewRequest {
-	return ApiOrganizationViewRequest{
+func (a *ComponentEndpointApiService) ComponentEndpointView(ctx context.Context, id string) ApiComponentEndpointViewRequest {
+	return ApiComponentEndpointViewRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -199,21 +239,21 @@ func (a *OrganizationApiService) OrganizationView(ctx context.Context, id string
 
 // Execute executes the request
 //
-//	@return OrganizationItem
-func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRequest) (*OrganizationItem, *http.Response, error) {
+//	@return ComponentEndpointItem
+func (a *ComponentEndpointApiService) ComponentEndpointViewExecute(r ApiComponentEndpointViewRequest) (*ComponentEndpointItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationItem
+		localVarReturnValue *ComponentEndpointItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationApiService.OrganizationView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentEndpointApiService.ComponentEndpointView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/organizations/{id}"
+	localVarPath := localBasePath + "/v1/components/{id}/endpoint"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

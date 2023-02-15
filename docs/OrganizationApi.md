@@ -4,8 +4,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**OrganizationList**](OrganizationApi.md#OrganizationList) | **Get** /v1/organizations | Retrieves the collection of organization resources.
-[**OrganizationView**](OrganizationApi.md#OrganizationView) | **Get** /v1/organizations/{id} | Retrieves a organization resource.
+[**OrganizationList**](OrganizationApi.md#OrganizationList) | **Get** /v1/organizations | List organization matching any selected filters.
+[**OrganizationView**](OrganizationApi.md#OrganizationView) | **Get** /v1/organizations/{id} | View a specific organization.
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PaginatedOrganizationCollection OrganizationList(ctx).Page(page).Execute()
 
-Retrieves the collection of organization resources.
+List organization matching any selected filters.
 
 
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 > OrganizationItem OrganizationView(ctx, id).Execute()
 
-Retrieves a organization resource.
+View a specific organization.
 
 
 

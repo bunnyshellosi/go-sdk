@@ -1,19 +1,19 @@
-# \ComponentGitApi
+# \ComponentEndpointApi
 
 All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ComponentGitList**](ComponentGitApi.md#ComponentGitList) | **Get** /v1/components/gitinfo | List git info for service components matching any selected filters
-[**ComponentGitView**](ComponentGitApi.md#ComponentGitView) | **Get** /v1/components/{id}/gitinfo | View git info for a specific service component
+[**ComponentEndpointList**](ComponentEndpointApi.md#ComponentEndpointList) | **Get** /v1/components/endpoint | List endpoints for service components matching any selected filters
+[**ComponentEndpointView**](ComponentEndpointApi.md#ComponentEndpointView) | **Get** /v1/components/{id}/endpoint | View endpoints for a specific service component
 
 
 
-## ComponentGitList
+## ComponentEndpointList
 
-> PaginatedComponentGitCollection ComponentGitList(ctx).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Execute()
+> PaginatedComponentEndpointCollection ComponentEndpointList(ctx).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Execute()
 
-List git info for service components matching any selected filters
+List endpoints for service components matching any selected filters
 
 
 
@@ -38,13 +38,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentGitApi.ComponentGitList(context.Background()).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Execute()
+    resp, r, err := apiClient.ComponentEndpointApi.ComponentEndpointList(context.Background()).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentGitApi.ComponentGitList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComponentEndpointApi.ComponentEndpointList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ComponentGitList`: PaginatedComponentGitCollection
-    fmt.Fprintf(os.Stdout, "Response from `ComponentGitApi.ComponentGitList`: %v\n", resp)
+    // response from `ComponentEndpointList`: PaginatedComponentEndpointCollection
+    fmt.Fprintf(os.Stdout, "Response from `ComponentEndpointApi.ComponentEndpointList`: %v\n", resp)
 }
 ```
 
@@ -54,7 +54,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiComponentGitListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiComponentEndpointListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedComponentGitCollection**](PaginatedComponentGitCollection.md)
+[**PaginatedComponentEndpointCollection**](PaginatedComponentEndpointCollection.md)
 
 ### Authorization
 
@@ -83,11 +83,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ComponentGitView
+## ComponentEndpointView
 
-> ComponentGitItem ComponentGitView(ctx, id).Execute()
+> ComponentEndpointItem ComponentEndpointView(ctx, id).Execute()
 
-View git info for a specific service component
+View endpoints for a specific service component
 
 
 
@@ -108,13 +108,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentGitApi.ComponentGitView(context.Background(), id).Execute()
+    resp, r, err := apiClient.ComponentEndpointApi.ComponentEndpointView(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ComponentGitApi.ComponentGitView``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ComponentEndpointApi.ComponentEndpointView``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ComponentGitView`: ComponentGitItem
-    fmt.Fprintf(os.Stdout, "Response from `ComponentGitApi.ComponentGitView`: %v\n", resp)
+    // response from `ComponentEndpointView`: ComponentEndpointItem
+    fmt.Fprintf(os.Stdout, "Response from `ComponentEndpointApi.ComponentEndpointView`: %v\n", resp)
 }
 ```
 
@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiComponentGitViewRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiComponentEndpointViewRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComponentGitItem**](ComponentGitItem.md)
+[**ComponentEndpointItem**](ComponentEndpointItem.md)
 
 ### Authorization
 

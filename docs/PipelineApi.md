@@ -4,8 +4,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PipelineList**](PipelineApi.md#PipelineList) | **Get** /v1/pipelines | Retrieves the collection of pipeline resources.
-[**PipelineView**](PipelineApi.md#PipelineView) | **Get** /v1/pipelines/{id} | Retrieves a pipeline resource.
+[**PipelineList**](PipelineApi.md#PipelineList) | **Get** /v1/pipelines | List pipelines matching any selected filters.
+[**PipelineView**](PipelineApi.md#PipelineView) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PaginatedPipelineCollection PipelineList(ctx).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
 
-Retrieves the collection of pipeline resources.
+List pipelines matching any selected filters.
 
 
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > PipelineItem PipelineView(ctx, id).Execute()
 
-Retrieves a pipeline resource.
+View a specific Pipeline.
 
 
 

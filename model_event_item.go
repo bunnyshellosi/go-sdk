@@ -32,6 +32,8 @@ type EventItem struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Event last update time.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// Event identifier.
+	Delegated NullableString `json:"delegated,omitempty"`
 }
 
 // NewEventItem instantiates a new EventItem object
@@ -286,6 +288,49 @@ func (o *EventItem) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetDelegated returns the Delegated field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EventItem) GetDelegated() string {
+	if o == nil || o.Delegated.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Delegated.Get()
+}
+
+// GetDelegatedOk returns a tuple with the Delegated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EventItem) GetDelegatedOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Delegated.Get(), o.Delegated.IsSet()
+}
+
+// HasDelegated returns a boolean if a field has been set.
+func (o *EventItem) HasDelegated() bool {
+	if o != nil && o.Delegated.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDelegated gets a reference to the given NullableString and assigns it to the Delegated field.
+func (o *EventItem) SetDelegated(v string) {
+	o.Delegated.Set(&v)
+}
+
+// SetDelegatedNil sets the value for Delegated to be an explicit nil
+func (o *EventItem) SetDelegatedNil() {
+	o.Delegated.Set(nil)
+}
+
+// UnsetDelegated ensures that no value is present for Delegated, not even an explicit nil
+func (o *EventItem) UnsetDelegated() {
+	o.Delegated.Unset()
+}
+
 func (o EventItem) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -308,6 +353,9 @@ func (o EventItem) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	if o.Delegated.IsSet() {
+		toSerialize["delegated"] = o.Delegated.Get()
 	}
 	return json.Marshal(toSerialize)
 }
