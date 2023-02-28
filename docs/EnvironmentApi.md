@@ -5,6 +5,7 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**EnvironmentClone**](EnvironmentApi.md#EnvironmentClone) | **Post** /v1/environments/{id}/clone | Clone an environment.
+[**EnvironmentCreate**](EnvironmentApi.md#EnvironmentCreate) | **Post** /v1/environments | Creates a new environment.
 [**EnvironmentDefinition**](EnvironmentApi.md#EnvironmentDefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 [**EnvironmentDelete**](EnvironmentApi.md#EnvironmentDelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 [**EnvironmentDeploy**](EnvironmentApi.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
@@ -69,6 +70,72 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **environmentCloneAction** | [**EnvironmentCloneAction**](EnvironmentCloneAction.md) | The new environment resource | 
+
+### Return type
+
+[**EnvironmentItem**](EnvironmentItem.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EnvironmentCreate
+
+> EnvironmentItem EnvironmentCreate(ctx).EnvironmentCreateAction(environmentCreateAction).Execute()
+
+Creates a new environment.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    environmentCreateAction := *openapiclient.NewEnvironmentCreateAction("Name_example", "Project_example") // EnvironmentCreateAction | The new environment resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentCreate(context.Background()).EnvironmentCreateAction(environmentCreateAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentCreate`: EnvironmentItem
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentApi.EnvironmentCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **environmentCreateAction** | [**EnvironmentCreateAction**](EnvironmentCreateAction.md) | The new environment resource | 
 
 ### Return type
 
