@@ -25,6 +25,8 @@ type ComponentGitItem struct {
 	Repository *string `json:"repository,omitempty"`
 	// Git ref name
 	RefName *string `json:"refName,omitempty"`
+	// Git application path
+	Path NullableString `json:"path,omitempty"`
 	// Git ref sha
 	RefSha NullableString `json:"refSha,omitempty"`
 	// Git deployed sha
@@ -178,6 +180,49 @@ func (o *ComponentGitItem) SetRefName(v string) {
 	o.RefName = &v
 }
 
+// GetPath returns the Path field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComponentGitItem) GetPath() string {
+	if o == nil || o.Path.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Path.Get()
+}
+
+// GetPathOk returns a tuple with the Path field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComponentGitItem) GetPathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Path.Get(), o.Path.IsSet()
+}
+
+// HasPath returns a boolean if a field has been set.
+func (o *ComponentGitItem) HasPath() bool {
+	if o != nil && o.Path.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPath gets a reference to the given NullableString and assigns it to the Path field.
+func (o *ComponentGitItem) SetPath(v string) {
+	o.Path.Set(&v)
+}
+
+// SetPathNil sets the value for Path to be an explicit nil
+func (o *ComponentGitItem) SetPathNil() {
+	o.Path.Set(nil)
+}
+
+// UnsetPath ensures that no value is present for Path, not even an explicit nil
+func (o *ComponentGitItem) UnsetPath() {
+	o.Path.Unset()
+}
+
 // GetRefSha returns the RefSha field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComponentGitItem) GetRefSha() string {
 	if o == nil || o.RefSha.Get() == nil {
@@ -309,6 +354,9 @@ func (o ComponentGitItem) MarshalJSON() ([]byte, error) {
 	}
 	if o.RefName != nil {
 		toSerialize["refName"] = o.RefName
+	}
+	if o.Path.IsSet() {
+		toSerialize["path"] = o.Path.Get()
 	}
 	if o.RefSha.IsSet() {
 		toSerialize["refSha"] = o.RefSha.Get()

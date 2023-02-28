@@ -35,6 +35,10 @@ tags:
   name: pipeline
 - description: Project Resource
   name: project
+- description: Template Resource
+  name: template
+- description: Templates_repository Resource
+  name: templates_repository
 paths:
   /v1/components:
     get:
@@ -747,6 +751,38 @@ paths:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
       summary: List environments matching any selected filters.
+      tags:
+      - environment
+    post:
+      deprecated: false
+      description: Creates a new environment.
+      operationId: EnvironmentCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environment.CreateAction'
+        description: The new environment resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment-item'
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Creates a new environment.
       tags:
       - environment
   /v1/environments/{id}:
@@ -1591,6 +1627,240 @@ paths:
       summary: View a specific project.
       tags:
       - project
+  /v1/templates:
+    get:
+      deprecated: false
+      description: List templates matching any selected filters.
+      operationId: TemplateList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by templatesRepository
+        explode: false
+        in: query
+        name: templatesRepository
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: |-
+          Filter used to fetch templates by source.
+           * `public` - contains Bunnyshell curated templates
+           * `private` - contains your organizations templates
+           * `all` - contains templates for every source
+        example: all
+        explode: false
+        in: query
+        name: source
+        required: false
+        schema:
+          enum:
+          - all
+          - public
+          - private
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by search
+        explode: false
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-template-collection'
+          description: template collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List templates matching any selected filters.
+      tags:
+      - template
+  /v1/templates/{id}:
+    get:
+      deprecated: false
+      description: View a specific template.
+      operationId: TemplateView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/template-item'
+          description: template resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific template.
+      tags:
+      - template
+  /v1/templates/{id}/definition:
+    get:
+      deprecated: false
+      description: View the environment definition.
+      operationId: TemplateDefinition
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/x+yaml:
+              schema:
+                $ref: '#/components/schemas/template.GenericObject'
+          description: template resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View the environment definition.
+      tags:
+      - template
+  /v1/templates_repositories:
+    get:
+      deprecated: false
+      description: List templates repositories matching any selected filters.
+      operationId: Templates_repositoryList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-templates_repository-collection'
+          description: templates_repository collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List templates repositories matching any selected filters.
+      tags:
+      - templates_repository
+  /v1/templates_repositories/{id}:
+    get:
+      deprecated: false
+      description: View a specific templates repository.
+      operationId: Templates_repositoryView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/templates_repository-item'
+          description: templates_repository resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific templates repository.
+      tags:
+      - templates_repository
 components:
   examples: {}
   headers: {}
@@ -1640,6 +1910,46 @@ components:
           $ref: '#/components/schemas/Context-kube-config.read'
       required:
       - name
+      type: object
+    FromGit:
+      properties:
+        type:
+          default: git
+          example: git
+          type: string
+        url:
+          type: string
+        branch:
+          type: string
+        yamlPath:
+          type: string
+      type: object
+    FromGitSpec:
+      properties:
+        type:
+          default: git-spec
+          example: git-spec
+          type: string
+        spec:
+          type: string
+      type: object
+    FromString:
+      properties:
+        type:
+          default: string
+          example: string
+          type: string
+        yaml:
+          type: string
+      type: object
+    FromTemplate:
+      properties:
+        type:
+          default: template
+          example: template
+          type: string
+        template:
+          type: string
       type: object
     Stage-item:
       properties:
@@ -1827,6 +2137,11 @@ components:
           description: Git ref name
           readOnly: true
           type: string
+        path:
+          description: Git application path
+          nullable: true
+          readOnly: true
+          type: string
         refSha:
           description: Git ref sha
           nullable: true
@@ -1859,6 +2174,11 @@ components:
           type: string
         refName:
           description: Git ref name
+          readOnly: true
+          type: string
+        path:
+          description: Git application path
+          nullable: true
           readOnly: true
           type: string
         refSha:
@@ -1962,6 +2282,36 @@ components:
           type: string
       required:
       - name
+      type: object
+    environment.CreateAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        project:
+          type: string
+        genesis:
+          $ref: '#/components/schemas/environment_CreateAction_genesis'
+        type:
+          type: string
+        remoteDevelopmentAllowed:
+          type: boolean
+        autoUpdate:
+          type: boolean
+        createEphemeralOnPrCreate:
+          type: boolean
+        destroyEphemeralOnPrClose:
+          type: boolean
+        kubernetesIntegration:
+          nullable: true
+          type: string
+        ephemeralKubernetesIntegration:
+          nullable: true
+          type: string
+      required:
+      - name
+      - project
       type: object
     environment.GenericObject:
       description: An environment holds a collection of buildable and deployable components.
@@ -2406,6 +2756,40 @@ components:
         _embedded:
           $ref: '#/components/schemas/embedded_project_collection'
       type: object
+    paginated-template-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_template_collection'
+      type: object
+    paginated-templates_repository-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_templates_repository_collection'
+      type: object
     paginated_itemsPerPage:
       format: int32
       type: integer
@@ -2508,6 +2892,19 @@ components:
           type: string
         detail:
           type: string
+        violations:
+          items:
+            $ref: '#/components/schemas/problem.violation'
+          nullable: true
+          type: array
+      type: object
+    problem.violation:
+      description: A validation error
+      properties:
+        propertyPath:
+          type: string
+        message:
+          type: string
       type: object
     project-collection:
       description: A project holds multiple environments and shared secrets and settings.
@@ -2549,6 +2946,158 @@ components:
           readOnly: true
           type: string
       type: object
+    template-collection:
+      description: A template holds information for generating an environment.
+      properties:
+        id:
+          description: Template identifier.
+          readOnly: true
+          type: string
+        key:
+          description: Template key.
+          readOnly: true
+          type: string
+        name:
+          description: Template name.
+          readOnly: true
+          type: string
+        gitSha:
+          description: Template git repository SHA.
+          readOnly: true
+          type: string
+        shortDescription:
+          description: Template short description.
+          nullable: true
+          readOnly: true
+          type: string
+        tags:
+          description: Template tags.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        templatesRepository:
+          description: Templates repository identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    template-item:
+      description: A template holds information for generating an environment.
+      properties:
+        id:
+          description: Template identifier.
+          readOnly: true
+          type: string
+        key:
+          description: Template key.
+          readOnly: true
+          type: string
+        name:
+          description: Template name.
+          readOnly: true
+          type: string
+        gitSha:
+          description: Template git repository SHA.
+          readOnly: true
+          type: string
+        shortDescription:
+          description: Template short description.
+          nullable: true
+          readOnly: true
+          type: string
+        tags:
+          description: Template tags.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        templatesRepository:
+          description: Templates repository identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    template.GenericObject:
+      description: A template holds information for generating an environment.
+      type: object
+    templates_repository-collection:
+      description: A templates repository holds multiple templates.
+      properties:
+        id:
+          description: Templates repository identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Templates repository name.
+          readOnly: true
+          type: string
+        gitRepositoryUrl:
+          description: Templates repository git repository URL.
+          readOnly: true
+          type: string
+        gitRef:
+          description: Templates repository git repository reference.
+          readOnly: true
+          type: string
+        lastSyncSha:
+          description: Templates repository last synced git repository SHA.
+          nullable: true
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    templates_repository-item:
+      description: A templates repository holds multiple templates.
+      properties:
+        id:
+          description: Templates repository identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Templates repository name.
+          readOnly: true
+          type: string
+        gitRepositoryUrl:
+          description: Templates repository git repository URL.
+          readOnly: true
+          type: string
+        gitRef:
+          description: Templates repository git repository reference.
+          readOnly: true
+          type: string
+        lastSyncSha:
+          description: Templates repository last synced git repository SHA.
+          nullable: true
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    environment_CreateAction_genesis:
+      description: The environment creation method
+      oneOf:
+      - $ref: '#/components/schemas/FromGit'
+      - $ref: '#/components/schemas/FromGitSpec'
+      - $ref: '#/components/schemas/FromString'
+      - $ref: '#/components/schemas/FromTemplate'
     embedded_component_collection:
       properties:
         item:
@@ -2628,6 +3177,22 @@ components:
             $ref: '#/components/schemas/project-collection'
           type: array
       title: embedded-project-collection
+      type: object
+    embedded_template_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/template-collection'
+          type: array
+      title: embedded-template-collection
+      type: object
+    embedded_templates_repository_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/templates_repository-collection'
+          type: array
+      title: embedded-templates_repository-collection
       type: object
     paginated_links_first:
       allOf:

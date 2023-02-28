@@ -87,6 +87,7 @@ Class | Method | HTTP request | Description
 *ComponentGitApi* | [**ComponentGitList**](docs/ComponentGitApi.md#componentgitlist) | **Get** /v1/components/gitinfo | List git info for service components matching any selected filters
 *ComponentGitApi* | [**ComponentGitView**](docs/ComponentGitApi.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | View git info for a specific service component
 *EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Clone an environment.
+*EnvironmentApi* | [**EnvironmentCreate**](docs/EnvironmentApi.md#environmentcreate) | **Post** /v1/environments | Creates a new environment.
 *EnvironmentApi* | [**EnvironmentDefinition**](docs/EnvironmentApi.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 *EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
@@ -108,6 +109,11 @@ Class | Method | HTTP request | Description
 *PipelineApi* | [**PipelineView**](docs/PipelineApi.md#pipelineview) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
 *ProjectApi* | [**ProjectList**](docs/ProjectApi.md#projectlist) | **Get** /v1/projects | List projects matching any selected filters.
 *ProjectApi* | [**ProjectView**](docs/ProjectApi.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
+*TemplateApi* | [**TemplateDefinition**](docs/TemplateApi.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
+*TemplateApi* | [**TemplateList**](docs/TemplateApi.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
+*TemplateApi* | [**TemplateView**](docs/TemplateApi.md#templateview) | **Get** /v1/templates/{id} | View a specific template.
+*TemplatesRepositoryApi* | [**TemplatesRepositoryList**](docs/TemplatesRepositoryApi.md#templatesrepositorylist) | **Get** /v1/templates_repositories | List templates repositories matching any selected filters.
+*TemplatesRepositoryApi* | [**TemplatesRepositoryView**](docs/TemplatesRepositoryApi.md#templatesrepositoryview) | **Get** /v1/templates_repositories/{id} | View a specific templates repository.
 
 
 ## Documentation For Models
@@ -133,8 +139,12 @@ Class | Method | HTTP request | Description
  - [EmbeddedOrganizationCollection](docs/EmbeddedOrganizationCollection.md)
  - [EmbeddedPipelineCollection](docs/EmbeddedPipelineCollection.md)
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
+ - [EmbeddedTemplateCollection](docs/EmbeddedTemplateCollection.md)
+ - [EmbeddedTemplatesRepositoryCollection](docs/EmbeddedTemplatesRepositoryCollection.md)
  - [EnvironmentCloneAction](docs/EnvironmentCloneAction.md)
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
+ - [EnvironmentCreateAction](docs/EnvironmentCreateAction.md)
+ - [EnvironmentCreateActionGenesis](docs/EnvironmentCreateActionGenesis.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
@@ -142,6 +152,10 @@ Class | Method | HTTP request | Description
  - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)
+ - [FromGit](docs/FromGit.md)
+ - [FromGitSpec](docs/FromGitSpec.md)
+ - [FromString](docs/FromString.md)
+ - [FromTemplate](docs/FromTemplate.md)
  - [KubernetesIntegrationCollection](docs/KubernetesIntegrationCollection.md)
  - [KubernetesIntegrationItem](docs/KubernetesIntegrationItem.md)
  - [OrganizationCollection](docs/OrganizationCollection.md)
@@ -159,12 +173,19 @@ Class | Method | HTTP request | Description
  - [PaginatedOrganizationCollection](docs/PaginatedOrganizationCollection.md)
  - [PaginatedPipelineCollection](docs/PaginatedPipelineCollection.md)
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
+ - [PaginatedTemplateCollection](docs/PaginatedTemplateCollection.md)
+ - [PaginatedTemplatesRepositoryCollection](docs/PaginatedTemplatesRepositoryCollection.md)
  - [PipelineCollection](docs/PipelineCollection.md)
  - [PipelineItem](docs/PipelineItem.md)
  - [ProblemGeneric](docs/ProblemGeneric.md)
+ - [ProblemViolation](docs/ProblemViolation.md)
  - [ProjectCollection](docs/ProjectCollection.md)
  - [ProjectItem](docs/ProjectItem.md)
  - [StageItem](docs/StageItem.md)
+ - [TemplateCollection](docs/TemplateCollection.md)
+ - [TemplateItem](docs/TemplateItem.md)
+ - [TemplatesRepositoryCollection](docs/TemplatesRepositoryCollection.md)
+ - [TemplatesRepositoryItem](docs/TemplatesRepositoryItem.md)
  - [UserKubeConfigRead](docs/UserKubeConfigRead.md)
  - [UserWrapperKubeConfigRead](docs/UserWrapperKubeConfigRead.md)
 

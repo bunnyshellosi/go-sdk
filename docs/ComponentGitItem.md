@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Service component name | [optional] [readonly] 
 **Repository** | Pointer to **string** | Git repository | [optional] [readonly] 
 **RefName** | Pointer to **string** | Git ref name | [optional] [readonly] 
+**Path** | Pointer to **NullableString** | Git application path | [optional] [readonly] 
 **RefSha** | Pointer to **NullableString** | Git ref sha | [optional] [readonly] 
 **DeployedSha** | Pointer to **NullableString** | Git deployed sha | [optional] [readonly] 
 **Environment** | Pointer to **string** | Environment identifier. | [optional] [readonly] 
@@ -131,6 +132,41 @@ SetRefName sets RefName field to given value.
 
 HasRefName returns a boolean if a field has been set.
 
+### GetPath
+
+`func (o *ComponentGitItem) GetPath() string`
+
+GetPath returns the Path field if non-nil, zero value otherwise.
+
+### GetPathOk
+
+`func (o *ComponentGitItem) GetPathOk() (*string, bool)`
+
+GetPathOk returns a tuple with the Path field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPath
+
+`func (o *ComponentGitItem) SetPath(v string)`
+
+SetPath sets Path field to given value.
+
+### HasPath
+
+`func (o *ComponentGitItem) HasPath() bool`
+
+HasPath returns a boolean if a field has been set.
+
+### SetPathNil
+
+`func (o *ComponentGitItem) SetPathNil(b bool)`
+
+ SetPathNil sets the value for Path to be an explicit nil
+
+### UnsetPath
+`func (o *ComponentGitItem) UnsetPath()`
+
+UnsetPath ensures that no value is present for Path, not even an explicit nil
 ### GetRefSha
 
 `func (o *ComponentGitItem) GetRefSha() string`

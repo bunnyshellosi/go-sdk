@@ -17,8 +17,9 @@ import (
 
 // ProblemGeneric Generic Error
 type ProblemGeneric struct {
-	Title  *string `json:"title,omitempty"`
-	Detail *string `json:"detail,omitempty"`
+	Title      *string            `json:"title,omitempty"`
+	Detail     *string            `json:"detail,omitempty"`
+	Violations []ProblemViolation `json:"violations,omitempty"`
 }
 
 // NewProblemGeneric instantiates a new ProblemGeneric object
@@ -102,6 +103,39 @@ func (o *ProblemGeneric) SetDetail(v string) {
 	o.Detail = &v
 }
 
+// GetViolations returns the Violations field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProblemGeneric) GetViolations() []ProblemViolation {
+	if o == nil {
+		var ret []ProblemViolation
+		return ret
+	}
+	return o.Violations
+}
+
+// GetViolationsOk returns a tuple with the Violations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProblemGeneric) GetViolationsOk() ([]ProblemViolation, bool) {
+	if o == nil || o.Violations == nil {
+		return nil, false
+	}
+	return o.Violations, true
+}
+
+// HasViolations returns a boolean if a field has been set.
+func (o *ProblemGeneric) HasViolations() bool {
+	if o != nil && o.Violations != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetViolations gets a reference to the given []ProblemViolation and assigns it to the Violations field.
+func (o *ProblemGeneric) SetViolations(v []ProblemViolation) {
+	o.Violations = v
+}
+
 func (o ProblemGeneric) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Title != nil {
@@ -109,6 +143,9 @@ func (o ProblemGeneric) MarshalJSON() ([]byte, error) {
 	}
 	if o.Detail != nil {
 		toSerialize["detail"] = o.Detail
+	}
+	if o.Violations != nil {
+		toSerialize["violations"] = o.Violations
 	}
 	return json.Marshal(toSerialize)
 }
