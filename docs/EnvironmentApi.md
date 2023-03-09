@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**EnvironmentDefinition**](EnvironmentApi.md#EnvironmentDefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 [**EnvironmentDelete**](EnvironmentApi.md#EnvironmentDelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 [**EnvironmentDeploy**](EnvironmentApi.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+[**EnvironmentEdit**](EnvironmentApi.md#EnvironmentEdit) | **Put** /v1/environments/{id} | Edit an environment.
 [**EnvironmentKubeConfig**](EnvironmentApi.md#EnvironmentKubeConfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 [**EnvironmentList**](EnvironmentApi.md#EnvironmentList) | **Get** /v1/environments | List environments matching any selected filters.
 [**EnvironmentStart**](EnvironmentApi.md#EnvironmentStart) | **Post** /v1/environments/{id}/start | Start an environment.
@@ -354,6 +355,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EventItem**](EventItem.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EnvironmentEdit
+
+> EnvironmentItem EnvironmentEdit(ctx, id).EnvironmentEditAction(environmentEditAction).Execute()
+
+Edit an environment.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    environmentEditAction := *openapiclient.NewEnvironmentEditAction() // EnvironmentEditAction | The updated environment resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentEdit(context.Background(), id).EnvironmentEditAction(environmentEditAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentEdit``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentEdit`: EnvironmentItem
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentApi.EnvironmentEdit`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentEditRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **environmentEditAction** | [**EnvironmentEditAction**](EnvironmentEditAction.md) | The updated environment resource | 
+
+### Return type
+
+[**EnvironmentItem**](EnvironmentItem.md)
 
 ### Authorization
 

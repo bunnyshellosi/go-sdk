@@ -91,6 +91,7 @@ Class | Method | HTTP request | Description
 *EnvironmentApi* | [**EnvironmentDefinition**](docs/EnvironmentApi.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 *EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+*EnvironmentApi* | [**EnvironmentEdit**](docs/EnvironmentApi.md#environmentedit) | **Put** /v1/environments/{id} | Edit an environment.
 *EnvironmentApi* | [**EnvironmentKubeConfig**](docs/EnvironmentApi.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 *EnvironmentApi* | [**EnvironmentList**](docs/EnvironmentApi.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
 *EnvironmentApi* | [**EnvironmentStart**](docs/EnvironmentApi.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
@@ -111,6 +112,7 @@ Class | Method | HTTP request | Description
 *ProjectApi* | [**ProjectView**](docs/ProjectApi.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
 *TemplateApi* | [**TemplateDefinition**](docs/TemplateApi.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
 *TemplateApi* | [**TemplateList**](docs/TemplateApi.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
+*TemplateApi* | [**TemplateValidate**](docs/TemplateApi.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
 *TemplateApi* | [**TemplateView**](docs/TemplateApi.md#templateview) | **Get** /v1/templates/{id} | View a specific template.
 *TemplatesRepositoryApi* | [**TemplatesRepositoryList**](docs/TemplatesRepositoryApi.md#templatesrepositorylist) | **Get** /v1/templates_repositories | List templates repositories matching any selected filters.
 *TemplatesRepositoryApi* | [**TemplatesRepositoryView**](docs/TemplatesRepositoryApi.md#templatesrepositoryview) | **Get** /v1/templates_repositories/{id} | View a specific templates repository.
@@ -145,11 +147,15 @@ Class | Method | HTTP request | Description
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentCreateAction](docs/EnvironmentCreateAction.md)
  - [EnvironmentCreateActionGenesis](docs/EnvironmentCreateActionGenesis.md)
+ - [EnvironmentEditAction](docs/EnvironmentEditAction.md)
+ - [EnvironmentEditActionEdit](docs/EnvironmentEditActionEdit.md)
+ - [EnvironmentEditActionGenesis](docs/EnvironmentEditActionGenesis.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
  - [EnvironmentVariableEdit](docs/EnvironmentVariableEdit.md)
  - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
+ - [Ephemeral](docs/Ephemeral.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)
  - [FromGit](docs/FromGit.md)
@@ -177,6 +183,7 @@ Class | Method | HTTP request | Description
  - [PaginatedTemplatesRepositoryCollection](docs/PaginatedTemplatesRepositoryCollection.md)
  - [PipelineCollection](docs/PipelineCollection.md)
  - [PipelineItem](docs/PipelineItem.md)
+ - [Primary](docs/Primary.md)
  - [ProblemGeneric](docs/ProblemGeneric.md)
  - [ProblemViolation](docs/ProblemViolation.md)
  - [ProjectCollection](docs/ProjectCollection.md)
@@ -184,10 +191,14 @@ Class | Method | HTTP request | Description
  - [StageItem](docs/StageItem.md)
  - [TemplateCollection](docs/TemplateCollection.md)
  - [TemplateItem](docs/TemplateItem.md)
+ - [TemplateValidateAction](docs/TemplateValidateAction.md)
+ - [TemplateValidateActionSource](docs/TemplateValidateActionSource.md)
  - [TemplatesRepositoryCollection](docs/TemplatesRepositoryCollection.md)
  - [TemplatesRepositoryItem](docs/TemplatesRepositoryItem.md)
  - [UserKubeConfigRead](docs/UserKubeConfigRead.md)
  - [UserWrapperKubeConfigRead](docs/UserWrapperKubeConfigRead.md)
+ - [ValidateSourceGit](docs/ValidateSourceGit.md)
+ - [ValidateSourceString](docs/ValidateSourceString.md)
 
 
 ## Documentation For Authorization

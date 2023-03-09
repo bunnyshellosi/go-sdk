@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ComponentGitList
 
-> PaginatedComponentGitCollection ComponentGitList(ctx).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Execute()
+> PaginatedComponentGitCollection ComponentGitList(ctx).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Repository(repository).Branch(branch).Execute()
 
 List git info for service components matching any selected filters
 
@@ -35,10 +35,12 @@ func main() {
     project := "project_example" // string | Filter by project (optional)
     environment := "environment_example" // string | Filter by environment (optional)
     name := "name_example" // string | Filter by name (optional)
+    repository := "repository_example" // string | Filter by repository (optional)
+    branch := "branch_example" // string | Filter by branch (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentGitApi.ComponentGitList(context.Background()).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Execute()
+    resp, r, err := apiClient.ComponentGitApi.ComponentGitList(context.Background()).Page(page).Organization(organization).Project(project).Environment(environment).Name(name).Repository(repository).Branch(branch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentGitApi.ComponentGitList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +66,8 @@ Name | Type | Description  | Notes
  **project** | **string** | Filter by project | 
  **environment** | **string** | Filter by environment | 
  **name** | **string** | Filter by name | 
+ **repository** | **string** | Filter by repository | 
+ **branch** | **string** | Filter by branch | 
 
 ### Return type
 

@@ -1,0 +1,164 @@
+# Primary
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Type** | Pointer to **string** |  | [optional] [default to "primary"]
+**CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
+**DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
+**EphemeralKubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
+
+## Methods
+
+### NewPrimary
+
+`func NewPrimary() *Primary`
+
+NewPrimary instantiates a new Primary object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewPrimaryWithDefaults
+
+`func NewPrimaryWithDefaults() *Primary`
+
+NewPrimaryWithDefaults instantiates a new Primary object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetType
+
+`func (o *Primary) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Primary) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Primary) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *Primary) HasType() bool`
+
+HasType returns a boolean if a field has been set.
+
+### GetCreateEphemeralOnPrCreate
+
+`func (o *Primary) GetCreateEphemeralOnPrCreate() bool`
+
+GetCreateEphemeralOnPrCreate returns the CreateEphemeralOnPrCreate field if non-nil, zero value otherwise.
+
+### GetCreateEphemeralOnPrCreateOk
+
+`func (o *Primary) GetCreateEphemeralOnPrCreateOk() (*bool, bool)`
+
+GetCreateEphemeralOnPrCreateOk returns a tuple with the CreateEphemeralOnPrCreate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreateEphemeralOnPrCreate
+
+`func (o *Primary) SetCreateEphemeralOnPrCreate(v bool)`
+
+SetCreateEphemeralOnPrCreate sets CreateEphemeralOnPrCreate field to given value.
+
+### HasCreateEphemeralOnPrCreate
+
+`func (o *Primary) HasCreateEphemeralOnPrCreate() bool`
+
+HasCreateEphemeralOnPrCreate returns a boolean if a field has been set.
+
+### SetCreateEphemeralOnPrCreateNil
+
+`func (o *Primary) SetCreateEphemeralOnPrCreateNil(b bool)`
+
+ SetCreateEphemeralOnPrCreateNil sets the value for CreateEphemeralOnPrCreate to be an explicit nil
+
+### UnsetCreateEphemeralOnPrCreate
+`func (o *Primary) UnsetCreateEphemeralOnPrCreate()`
+
+UnsetCreateEphemeralOnPrCreate ensures that no value is present for CreateEphemeralOnPrCreate, not even an explicit nil
+### GetDestroyEphemeralOnPrClose
+
+`func (o *Primary) GetDestroyEphemeralOnPrClose() bool`
+
+GetDestroyEphemeralOnPrClose returns the DestroyEphemeralOnPrClose field if non-nil, zero value otherwise.
+
+### GetDestroyEphemeralOnPrCloseOk
+
+`func (o *Primary) GetDestroyEphemeralOnPrCloseOk() (*bool, bool)`
+
+GetDestroyEphemeralOnPrCloseOk returns a tuple with the DestroyEphemeralOnPrClose field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDestroyEphemeralOnPrClose
+
+`func (o *Primary) SetDestroyEphemeralOnPrClose(v bool)`
+
+SetDestroyEphemeralOnPrClose sets DestroyEphemeralOnPrClose field to given value.
+
+### HasDestroyEphemeralOnPrClose
+
+`func (o *Primary) HasDestroyEphemeralOnPrClose() bool`
+
+HasDestroyEphemeralOnPrClose returns a boolean if a field has been set.
+
+### SetDestroyEphemeralOnPrCloseNil
+
+`func (o *Primary) SetDestroyEphemeralOnPrCloseNil(b bool)`
+
+ SetDestroyEphemeralOnPrCloseNil sets the value for DestroyEphemeralOnPrClose to be an explicit nil
+
+### UnsetDestroyEphemeralOnPrClose
+`func (o *Primary) UnsetDestroyEphemeralOnPrClose()`
+
+UnsetDestroyEphemeralOnPrClose ensures that no value is present for DestroyEphemeralOnPrClose, not even an explicit nil
+### GetEphemeralKubernetesIntegration
+
+`func (o *Primary) GetEphemeralKubernetesIntegration() string`
+
+GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field if non-nil, zero value otherwise.
+
+### GetEphemeralKubernetesIntegrationOk
+
+`func (o *Primary) GetEphemeralKubernetesIntegrationOk() (*string, bool)`
+
+GetEphemeralKubernetesIntegrationOk returns a tuple with the EphemeralKubernetesIntegration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralKubernetesIntegration
+
+`func (o *Primary) SetEphemeralKubernetesIntegration(v string)`
+
+SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to given value.
+
+### HasEphemeralKubernetesIntegration
+
+`func (o *Primary) HasEphemeralKubernetesIntegration() bool`
+
+HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
+
+### SetEphemeralKubernetesIntegrationNil
+
+`func (o *Primary) SetEphemeralKubernetesIntegrationNil(b bool)`
+
+ SetEphemeralKubernetesIntegrationNil sets the value for EphemeralKubernetesIntegration to be an explicit nil
+
+### UnsetEphemeralKubernetesIntegration
+`func (o *Primary) UnsetEphemeralKubernetesIntegration()`
+
+UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
