@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**TemplateDefinition**](TemplateApi.md#TemplateDefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
 [**TemplateList**](TemplateApi.md#TemplateList) | **Get** /v1/templates | List templates matching any selected filters.
+[**TemplateValidate**](TemplateApi.md#TemplateValidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
 [**TemplateView**](TemplateApi.md#TemplateView) | **Get** /v1/templates/{id} | View a specific template.
 
 
@@ -147,6 +148,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TemplateValidate
+
+> TemplateCollection TemplateValidate(ctx).TemplateValidateAction(templateValidateAction).Execute()
+
+Validates a given template from an external source.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    templateValidateAction := *openapiclient.NewTemplateValidateAction() // TemplateValidateAction | The new template resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.TemplateApi.TemplateValidate(context.Background()).TemplateValidateAction(templateValidateAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TemplateApi.TemplateValidate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `TemplateValidate`: TemplateCollection
+    fmt.Fprintf(os.Stdout, "Response from `TemplateApi.TemplateValidate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTemplateValidateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **templateValidateAction** | [**TemplateValidateAction**](TemplateValidateAction.md) | The new template resource | 
+
+### Return type
+
+[**TemplateCollection**](TemplateCollection.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/hal+json, application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

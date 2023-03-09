@@ -31,6 +31,8 @@ type ApiComponentGitListRequest struct {
 	project      *string
 	environment  *string
 	name         *string
+	repository   *string
+	branch       *string
 }
 
 // The collection page number
@@ -60,6 +62,18 @@ func (r ApiComponentGitListRequest) Environment(environment string) ApiComponent
 // Filter by name
 func (r ApiComponentGitListRequest) Name(name string) ApiComponentGitListRequest {
 	r.name = &name
+	return r
+}
+
+// Filter by repository
+func (r ApiComponentGitListRequest) Repository(repository string) ApiComponentGitListRequest {
+	r.repository = &repository
+	return r
+}
+
+// Filter by branch
+func (r ApiComponentGitListRequest) Branch(branch string) ApiComponentGitListRequest {
+	r.branch = &branch
 	return r
 }
 
@@ -118,6 +132,12 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 	}
 	if r.name != nil {
 		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
+	}
+	if r.repository != nil {
+		localVarQueryParams.Add("repository", parameterToString(*r.repository, ""))
+	}
+	if r.branch != nil {
+		localVarQueryParams.Add("branch", parameterToString(*r.branch, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
