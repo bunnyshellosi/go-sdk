@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**EnvironmentDelete**](EnvironmentApi.md#EnvironmentDelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 [**EnvironmentDeploy**](EnvironmentApi.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
 [**EnvironmentEdit**](EnvironmentApi.md#EnvironmentEdit) | **Put** /v1/environments/{id} | Edit an environment.
+[**EnvironmentEditComponents**](EnvironmentApi.md#EnvironmentEditComponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
 [**EnvironmentKubeConfig**](EnvironmentApi.md#EnvironmentKubeConfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 [**EnvironmentList**](EnvironmentApi.md#EnvironmentList) | **Get** /v1/environments | List environments matching any selected filters.
 [**EnvironmentStart**](EnvironmentApi.md#EnvironmentStart) | **Post** /v1/environments/{id}/start | Start an environment.
@@ -423,6 +424,78 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **environmentEditAction** | [**EnvironmentEditAction**](EnvironmentEditAction.md) | The updated environment resource | 
+
+### Return type
+
+[**EnvironmentItem**](EnvironmentItem.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EnvironmentEditComponents
+
+> EnvironmentItem EnvironmentEditComponents(ctx, id).EnvironmentEditComponentsAction(environmentEditComponentsAction).Execute()
+
+Edit the components of an environment.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    environmentEditComponentsAction := *openapiclient.NewEnvironmentEditComponentsAction(openapiclient.environment_EditComponentsAction_filter{FilterGit: openapiclient.NewFilterGit()}, *openapiclient.NewGitInfo()) // EnvironmentEditComponentsAction | The updated environment resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentEditComponents(context.Background(), id).EnvironmentEditComponentsAction(environmentEditComponentsAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentEditComponents``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentEditComponents`: EnvironmentItem
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentApi.EnvironmentEditComponents`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentEditComponentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **environmentEditComponentsAction** | [**EnvironmentEditComponentsAction**](EnvironmentEditComponentsAction.md) | The updated environment resource | 
 
 ### Return type
 

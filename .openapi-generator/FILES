@@ -50,6 +50,8 @@ docs/EnvironmentCreateActionGenesis.md
 docs/EnvironmentEditAction.md
 docs/EnvironmentEditActionEdit.md
 docs/EnvironmentEditActionGenesis.md
+docs/EnvironmentEditComponentsAction.md
+docs/EnvironmentEditComponentsActionFilter.md
 docs/EnvironmentItem.md
 docs/EnvironmentKubeConfigKubeConfigRead.md
 docs/EnvironmentVariableApi.md
@@ -60,10 +62,13 @@ docs/Ephemeral.md
 docs/EventApi.md
 docs/EventCollection.md
 docs/EventItem.md
+docs/FilterGit.md
+docs/FilterName.md
 docs/FromGit.md
 docs/FromGitSpec.md
 docs/FromString.md
 docs/FromTemplate.md
+docs/GitInfo.md
 docs/KubernetesIntegrationApi.md
 docs/KubernetesIntegrationCollection.md
 docs/KubernetesIntegrationItem.md
@@ -140,6 +145,8 @@ model_environment_create_action_genesis.go
 model_environment_edit_action.go
 model_environment_edit_action_edit.go
 model_environment_edit_action_genesis.go
+model_environment_edit_components_action.go
+model_environment_edit_components_action_filter.go
 model_environment_item.go
 model_environment_kube_config_kube_config_read.go
 model_environment_variable_collection.go
@@ -148,10 +155,13 @@ model_environment_variable_item.go
 model_ephemeral.go
 model_event_collection.go
 model_event_item.go
+model_filter_git.go
+model_filter_name.go
 model_from_git.go
 model_from_git_spec.go
 model_from_string.go
 model_from_template.go
+model_git_info.go
 model_kubernetes_integration_collection.go
 model_kubernetes_integration_item.go
 model_organization_collection.go
