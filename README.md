@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 *EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
 *EnvironmentApi* | [**EnvironmentEdit**](docs/EnvironmentApi.md#environmentedit) | **Put** /v1/environments/{id} | Edit an environment.
+*EnvironmentApi* | [**EnvironmentEditComponents**](docs/EnvironmentApi.md#environmenteditcomponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
 *EnvironmentApi* | [**EnvironmentKubeConfig**](docs/EnvironmentApi.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 *EnvironmentApi* | [**EnvironmentList**](docs/EnvironmentApi.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
 *EnvironmentApi* | [**EnvironmentStart**](docs/EnvironmentApi.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
@@ -150,6 +151,8 @@ Class | Method | HTTP request | Description
  - [EnvironmentEditAction](docs/EnvironmentEditAction.md)
  - [EnvironmentEditActionEdit](docs/EnvironmentEditActionEdit.md)
  - [EnvironmentEditActionGenesis](docs/EnvironmentEditActionGenesis.md)
+ - [EnvironmentEditComponentsAction](docs/EnvironmentEditComponentsAction.md)
+ - [EnvironmentEditComponentsActionFilter](docs/EnvironmentEditComponentsActionFilter.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
@@ -158,10 +161,13 @@ Class | Method | HTTP request | Description
  - [Ephemeral](docs/Ephemeral.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)
+ - [FilterGit](docs/FilterGit.md)
+ - [FilterName](docs/FilterName.md)
  - [FromGit](docs/FromGit.md)
  - [FromGitSpec](docs/FromGitSpec.md)
  - [FromString](docs/FromString.md)
  - [FromTemplate](docs/FromTemplate.md)
+ - [GitInfo](docs/GitInfo.md)
  - [KubernetesIntegrationCollection](docs/KubernetesIntegrationCollection.md)
  - [KubernetesIntegrationItem](docs/KubernetesIntegrationItem.md)
  - [OrganizationCollection](docs/OrganizationCollection.md)
