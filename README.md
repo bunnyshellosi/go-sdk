@@ -80,6 +80,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | List service components matching any selected filters
+*ComponentApi* | [**ComponentRemoteDevConfig**](docs/ComponentApi.md#componentremotedevconfig) | **Get** /v1/components/{id}/remotedev/config | Get remote dev config
+*ComponentApi* | [**ComponentRemoteDevProfile**](docs/ComponentApi.md#componentremotedevprofile) | **Post** /v1/components/{id}/remotedev/profile | Parse, validate and interpolate the provided remoteDevProfile
 *ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
 *ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | View a specific service component
 *ComponentEndpointApi* | [**ComponentEndpointList**](docs/ComponentEndpointApi.md#componentendpointlist) | **Get** /v1/components/endpoint | List endpoints for service components matching any selected filters
@@ -124,12 +126,17 @@ Class | Method | HTTP request | Description
  - [ClusterKubeConfigRead](docs/ClusterKubeConfigRead.md)
  - [ClusterWrapperKubeConfigRead](docs/ClusterWrapperKubeConfigRead.md)
  - [ComponentCollection](docs/ComponentCollection.md)
+ - [ComponentConfigItem](docs/ComponentConfigItem.md)
+ - [ComponentConfigItemConfig](docs/ComponentConfigItemConfig.md)
  - [ComponentEndpointCollection](docs/ComponentEndpointCollection.md)
  - [ComponentEndpointItem](docs/ComponentEndpointItem.md)
  - [ComponentGitCollection](docs/ComponentGitCollection.md)
  - [ComponentGitItem](docs/ComponentGitItem.md)
  - [ComponentItem](docs/ComponentItem.md)
+ - [ComponentProfileItem](docs/ComponentProfileItem.md)
  - [ComponentResourceItem](docs/ComponentResourceItem.md)
+ - [ContainerConfigItem](docs/ContainerConfigItem.md)
+ - [ContainerConfigItemProfile](docs/ContainerConfigItemProfile.md)
  - [ContextKubeConfigRead](docs/ContextKubeConfigRead.md)
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
@@ -161,6 +168,7 @@ Class | Method | HTTP request | Description
  - [Ephemeral](docs/Ephemeral.md)
  - [EventCollection](docs/EventCollection.md)
  - [EventItem](docs/EventItem.md)
+ - [ExtendedResourceConfigItem](docs/ExtendedResourceConfigItem.md)
  - [FilterGit](docs/FilterGit.md)
  - [FilterName](docs/FilterName.md)
  - [FromGit](docs/FromGit.md)
@@ -192,9 +200,17 @@ Class | Method | HTTP request | Description
  - [Primary](docs/Primary.md)
  - [ProblemGeneric](docs/ProblemGeneric.md)
  - [ProblemViolation](docs/ProblemViolation.md)
+ - [ProfileItem](docs/ProfileItem.md)
+ - [ProfileItemRequirements](docs/ProfileItemRequirements.md)
  - [ProjectCollection](docs/ProjectCollection.md)
  - [ProjectItem](docs/ProjectItem.md)
+ - [ResourceListItem](docs/ResourceListItem.md)
+ - [ResourceRequirementItem](docs/ResourceRequirementItem.md)
+ - [ResourceRequirementItemLimits](docs/ResourceRequirementItemLimits.md)
+ - [ResourceRequirementItemRequests](docs/ResourceRequirementItemRequests.md)
+ - [SimpleResourceConfigItem](docs/SimpleResourceConfigItem.md)
  - [StageItem](docs/StageItem.md)
+ - [SyncPathItem](docs/SyncPathItem.md)
  - [TemplateCollection](docs/TemplateCollection.md)
  - [TemplateItem](docs/TemplateItem.md)
  - [TemplateValidateAction](docs/TemplateValidateAction.md)
