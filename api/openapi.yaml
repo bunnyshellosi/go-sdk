@@ -454,6 +454,84 @@ paths:
       summary: View git info for a specific service component
       tags:
       - componentGit
+  /v1/components/{id}/remotedev/config:
+    get:
+      deprecated: false
+      description: Get remote dev config
+      operationId: ComponentRemote_dev_config
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/component.Config-item'
+          description: component resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Get remote dev config
+      tags:
+      - component
+  /v1/components/{id}/remotedev/profile:
+    post:
+      deprecated: false
+      description: "Parse, validate and interpolate the provided remoteDevProfile"
+      operationId: ComponentRemote_dev_profile
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/x+yaml:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/component.Profile-item'
+          description: component resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: "Parse, validate and interpolate the provided remoteDevProfile"
+      tags:
+      - component
   /v1/components/{id}/resources:
     get:
       deprecated: false
@@ -2033,6 +2111,11 @@ components:
       required:
       - name
       type: object
+    ContainerConfig-item:
+      properties:
+        profile:
+          $ref: '#/components/schemas/ContainerConfig_item_profile'
+      type: object
     Context-kube-config.read:
       properties:
         cluster:
@@ -2061,6 +2144,30 @@ components:
           default: ephemeral
           example: ephemeral
           type: string
+      type: object
+    ExtendedResourceConfig-item:
+      properties:
+        extended:
+          readOnly: true
+          type: boolean
+        namespace:
+          description: The resource namespace.
+          readOnly: true
+          type: string
+        kind:
+          description: The resource kind.
+          readOnly: true
+          type: string
+        name:
+          description: The resource name.
+          readOnly: true
+          type: string
+        containers:
+          additionalProperties:
+            $ref: '#/components/schemas/ContainerConfig-item'
+          description: A list of container configs.
+          readOnly: true
+          type: object
       type: object
     FilterGit:
       properties:
@@ -2150,6 +2257,67 @@ components:
           nullable: true
           type: string
       type: object
+    Profile-item:
+      properties:
+        command:
+          description: The command to be run when starting the container.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        portMapping:
+          description: The port mapping for the container.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        environ:
+          additionalProperties:
+            type: string
+          description: The environ for the container.
+          readOnly: true
+          type: object
+        syncPaths:
+          description: The sync paths for the container.
+          items:
+            $ref: '#/components/schemas/SyncPath-item'
+          readOnly: true
+          type: array
+        requirements:
+          $ref: '#/components/schemas/Profile_item_requirements'
+      type: object
+    ResourceList-item:
+      properties:
+        cpu:
+          description: The CPU resources for the container.
+          nullable: true
+          readOnly: true
+          type: string
+        memory:
+          description: The Memory resources for the container.
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    ResourceRequirement-item:
+      properties:
+        requests:
+          $ref: '#/components/schemas/ResourceRequirement_item_requests'
+        limits:
+          $ref: '#/components/schemas/ResourceRequirement_item_limits'
+      type: object
+    SimpleResourceConfig-item:
+      properties:
+        simple:
+          readOnly: true
+          type: boolean
+        containers:
+          additionalProperties:
+            $ref: '#/components/schemas/ContainerConfig-item'
+          description: A list of container configs.
+          readOnly: true
+          type: object
+      type: object
     Stage-item:
       properties:
         id:
@@ -2179,6 +2347,21 @@ components:
           type: integer
         pipeline:
           description: Event identifier.
+          readOnly: true
+          type: string
+      type: object
+    SyncPath-item:
+      example:
+        remotePath: remotePath
+        localPath: localPath
+      properties:
+        localPath:
+          description: The local path on the host os to sync from.
+          nullable: true
+          readOnly: true
+          type: string
+        remotePath:
+          description: The remote path on the container to sync to.
           readOnly: true
           type: string
       type: object
@@ -2299,6 +2482,61 @@ components:
           description: Environment identifier.
           readOnly: true
           type: string
+      type: object
+    component.Config-item:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      example:
+        config: null
+      properties:
+        config:
+          $ref: '#/components/schemas/component_Config_item_config'
+      type: object
+    component.Profile-item:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      example:
+        portMapping:
+        - portMapping
+        - portMapping
+        requirements: null
+        syncPaths:
+        - remotePath: remotePath
+          localPath: localPath
+        - remotePath: remotePath
+          localPath: localPath
+        command:
+        - command
+        - command
+        environ:
+          key: environ
+      properties:
+        command:
+          description: The command to be run when starting the container.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        portMapping:
+          description: The port mapping for the container.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        environ:
+          additionalProperties:
+            type: string
+          description: The environ for the container.
+          readOnly: true
+          type: object
+        syncPaths:
+          description: The sync paths for the container.
+          items:
+            $ref: '#/components/schemas/SyncPath-item'
+          readOnly: true
+          type: array
+        requirements:
+          $ref: '#/components/schemas/Profile_item_requirements'
       type: object
     component.Resource-item:
       description: A service component represents either an application or a group
@@ -3374,6 +3612,40 @@ components:
           readOnly: true
           type: string
       type: object
+    ContainerConfig_item_profile:
+      description: A profile config or a profile name for local usage with rdev.yaml
+      oneOf:
+      - $ref: '#/components/schemas/Profile-item'
+      - type: string
+      readOnly: true
+    Profile_item_requirements:
+      anyOf:
+      - $ref: '#/components/schemas/ResourceRequirement-item'
+      description: The resource requirements for the container.
+      nullable: true
+      readOnly: true
+    ResourceRequirement_item_requests:
+      anyOf:
+      - $ref: '#/components/schemas/ResourceList-item'
+      description: The minimum resources for the container.
+      nullable: true
+      readOnly: true
+    ResourceRequirement_item_limits:
+      anyOf:
+      - $ref: '#/components/schemas/ResourceList-item'
+      description: The maximum resources for the container.
+      nullable: true
+      readOnly: true
+    component_Config_item_config:
+      description: A list of container configs.
+      oneOf:
+      - items:
+          $ref: '#/components/schemas/SimpleResourceConfig-item'
+        type: array
+      - items:
+          $ref: '#/components/schemas/ExtendedResourceConfig-item'
+        type: array
+      readOnly: true
     environment_CreateAction_genesis:
       description: The environment creation method
       oneOf:

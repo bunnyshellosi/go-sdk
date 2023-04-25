@@ -5,6 +5,8 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ComponentList**](ComponentApi.md#ComponentList) | **Get** /v1/components | List service components matching any selected filters
+[**ComponentRemoteDevConfig**](ComponentApi.md#ComponentRemoteDevConfig) | **Get** /v1/components/{id}/remotedev/config | Get remote dev config
+[**ComponentRemoteDevProfile**](ComponentApi.md#ComponentRemoteDevProfile) | **Post** /v1/components/{id}/remotedev/profile | Parse, validate and interpolate the provided remoteDevProfile
 [**ComponentResources**](ComponentApi.md#ComponentResources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
 [**ComponentView**](ComponentApi.md#ComponentView) | **Get** /v1/components/{id} | View a specific service component
 
@@ -80,6 +82,148 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ComponentRemoteDevConfig
+
+> ComponentConfigItem ComponentRemoteDevConfig(ctx, id).Execute()
+
+Get remote dev config
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ComponentApi.ComponentRemoteDevConfig(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ComponentApi.ComponentRemoteDevConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ComponentRemoteDevConfig`: ComponentConfigItem
+    fmt.Fprintf(os.Stdout, "Response from `ComponentApi.ComponentRemoteDevConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiComponentRemoteDevConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ComponentConfigItem**](ComponentConfigItem.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ComponentRemoteDevProfile
+
+> ComponentProfileItem ComponentRemoteDevProfile(ctx, id).Body(body).Execute()
+
+Parse, validate and interpolate the provided remoteDevProfile
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    body := interface{}(987) // interface{} | No Request Body (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ComponentApi.ComponentRemoteDevProfile(context.Background(), id).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ComponentApi.ComponentRemoteDevProfile``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ComponentRemoteDevProfile`: ComponentProfileItem
+    fmt.Fprintf(os.Stdout, "Response from `ComponentApi.ComponentRemoteDevProfile`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiComponentRemoteDevProfileRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **body** | **interface{}** | No Request Body | 
+
+### Return type
+
+[**ComponentProfileItem**](ComponentProfileItem.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [JWT](../README.md#JWT)
+
+### HTTP request headers
+
+- **Content-Type**: application/x+yaml
+- **Accept**: application/json, application/problem+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
