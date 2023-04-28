@@ -1342,6 +1342,7 @@ paths:
           - tf_apply_module_use
           - tf_sync_module_use
           - build_settings_validated
+          - kubernetes_apply_configuration
           type: string
         style: form
       - allowEmptyValue: false
@@ -3641,9 +3642,11 @@ components:
       oneOf:
       - items:
           $ref: '#/components/schemas/SimpleResourceConfig-item'
+        nullable: true
         type: array
       - items:
           $ref: '#/components/schemas/ExtendedResourceConfig-item'
+        nullable: true
         type: array
       readOnly: true
     environment_CreateAction_genesis:
