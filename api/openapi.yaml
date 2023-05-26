@@ -919,50 +919,6 @@ paths:
       summary: View a specific environment.
       tags:
       - environment
-    put:
-      deprecated: false
-      description: Edit an environment.
-      operationId: EnvironmentEdit
-      parameters:
-      - allowReserved: false
-        deprecated: false
-        description: Resource identifier
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/environment.EditAction'
-        description: The updated environment resource
-        required: true
-      responses:
-        "200":
-          content:
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/environment-item'
-          description: environment resource updated
-        "400":
-          description: Invalid input
-        "422":
-          description: Unprocessable entity
-        "404":
-          description: Resource not found
-        "4XX":
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/problem.generic'
-          description: Request Error
-      summary: Edit an environment.
-      tags:
-      - environment
   /v1/environments/{id}/clone:
     post:
       deprecated: false
@@ -1051,6 +1007,51 @@ paths:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
       summary: Edit the components of an environment.
+      tags:
+      - environment
+  /v1/environments/{id}/configuration:
+    put:
+      deprecated: false
+      description: Edit an environment.
+      operationId: EnvironmentEdit_configuration
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environment.EditConfiguration'
+        description: The updated environment resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment-item'
+          description: environment resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit an environment.
       tags:
       - environment
   /v1/environments/{id}/definition:
@@ -1207,6 +1208,51 @@ paths:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
       summary: Download Kubernetes Config File
+      tags:
+      - environment
+  /v1/environments/{id}/settings:
+    put:
+      deprecated: false
+      description: Edit an environment.
+      operationId: EnvironmentEdit_settings
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environment.EditSettings'
+        description: The updated environment resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment-item'
+          description: environment resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit an environment.
       tags:
       - environment
   /v1/environments/{id}/start:
@@ -2797,7 +2843,24 @@ components:
       - name
       - project
       type: object
-    environment.EditAction:
+    environment.EditComponentsAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        filter:
+          $ref: '#/components/schemas/environment_EditComponentsAction_filter'
+        target:
+          $ref: '#/components/schemas/GitInfo'
+      required:
+      - filter
+      - target
+      type: object
+    environment.EditConfiguration:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        configuration:
+          $ref: '#/components/schemas/environment_EditConfiguration_configuration'
+      type: object
+    environment.EditSettings:
       description: An environment holds a collection of buildable and deployable components.
       properties:
         name:
@@ -2814,20 +2877,7 @@ components:
           nullable: true
           type: string
         edit:
-          $ref: '#/components/schemas/environment_EditAction_edit'
-        genesis:
-          $ref: '#/components/schemas/environment_EditAction_genesis'
-      type: object
-    environment.EditComponentsAction:
-      description: An environment holds a collection of buildable and deployable components.
-      properties:
-        filter:
-          $ref: '#/components/schemas/environment_EditComponentsAction_filter'
-        target:
-          $ref: '#/components/schemas/GitInfo'
-      required:
-      - filter
-      - target
+          $ref: '#/components/schemas/environment_EditSettings_edit'
       type: object
     environment.GenericObject:
       description: An environment holds a collection of buildable and deployable components.
@@ -3656,22 +3706,22 @@ components:
       - $ref: '#/components/schemas/FromGitSpec'
       - $ref: '#/components/schemas/FromString'
       - $ref: '#/components/schemas/FromTemplate'
-    environment_EditAction_edit:
-      description: Environment edit by type
+    environment_EditComponentsAction_filter:
       oneOf:
-      - $ref: '#/components/schemas/Primary'
-      - $ref: '#/components/schemas/Ephemeral'
-    environment_EditAction_genesis:
+      - $ref: '#/components/schemas/FilterGit'
+      - $ref: '#/components/schemas/FilterName'
+    environment_EditConfiguration_configuration:
       description: The environment update source
       oneOf:
       - $ref: '#/components/schemas/FromGit'
       - $ref: '#/components/schemas/FromGitSpec'
       - $ref: '#/components/schemas/FromString'
       - $ref: '#/components/schemas/FromTemplate'
-    environment_EditComponentsAction_filter:
+    environment_EditSettings_edit:
+      description: Environment edit by type
       oneOf:
-      - $ref: '#/components/schemas/FilterGit'
-      - $ref: '#/components/schemas/FilterName'
+      - $ref: '#/components/schemas/Primary'
+      - $ref: '#/components/schemas/Ephemeral'
     embedded_component_collection:
       properties:
         item:

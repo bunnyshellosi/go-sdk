@@ -93,8 +93,9 @@ Class | Method | HTTP request | Description
 *EnvironmentApi* | [**EnvironmentDefinition**](docs/EnvironmentApi.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 *EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 *EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
-*EnvironmentApi* | [**EnvironmentEdit**](docs/EnvironmentApi.md#environmentedit) | **Put** /v1/environments/{id} | Edit an environment.
 *EnvironmentApi* | [**EnvironmentEditComponents**](docs/EnvironmentApi.md#environmenteditcomponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
+*EnvironmentApi* | [**EnvironmentEditConfiguration**](docs/EnvironmentApi.md#environmenteditconfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
+*EnvironmentApi* | [**EnvironmentEditSettings**](docs/EnvironmentApi.md#environmenteditsettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
 *EnvironmentApi* | [**EnvironmentKubeConfig**](docs/EnvironmentApi.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 *EnvironmentApi* | [**EnvironmentList**](docs/EnvironmentApi.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
 *EnvironmentApi* | [**EnvironmentStart**](docs/EnvironmentApi.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
@@ -155,11 +156,12 @@ Class | Method | HTTP request | Description
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentCreateAction](docs/EnvironmentCreateAction.md)
  - [EnvironmentCreateActionGenesis](docs/EnvironmentCreateActionGenesis.md)
- - [EnvironmentEditAction](docs/EnvironmentEditAction.md)
- - [EnvironmentEditActionEdit](docs/EnvironmentEditActionEdit.md)
- - [EnvironmentEditActionGenesis](docs/EnvironmentEditActionGenesis.md)
  - [EnvironmentEditComponentsAction](docs/EnvironmentEditComponentsAction.md)
  - [EnvironmentEditComponentsActionFilter](docs/EnvironmentEditComponentsActionFilter.md)
+ - [EnvironmentEditConfiguration](docs/EnvironmentEditConfiguration.md)
+ - [EnvironmentEditConfigurationConfiguration](docs/EnvironmentEditConfigurationConfiguration.md)
+ - [EnvironmentEditSettings](docs/EnvironmentEditSettings.md)
+ - [EnvironmentEditSettingsEdit](docs/EnvironmentEditSettingsEdit.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
