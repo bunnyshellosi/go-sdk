@@ -829,6 +829,17 @@ paths:
       - allowEmptyValue: false
         allowReserved: false
         deprecated: false
+        description: Filter by search
+        explode: false
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
         description: Filter by project
         explode: false
         in: query
@@ -1616,6 +1627,17 @@ paths:
           default: 1
           type: integer
         style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by search
+        explode: false
+        in: query
+        name: search
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1809,6 +1831,17 @@ paths:
         explode: false
         in: query
         name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by search
+        explode: false
+        in: query
+        name: search
         required: false
         schema:
           type: string

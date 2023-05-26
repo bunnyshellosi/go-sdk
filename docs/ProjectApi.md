@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ProjectList
 
-> PaginatedProjectCollection ProjectList(ctx).Page(page).Organization(organization).Execute()
+> PaginatedProjectCollection ProjectList(ctx).Page(page).Organization(organization).Search(search).Execute()
 
 List projects matching any selected filters.
 
@@ -32,10 +32,11 @@ import (
 func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
     organization := "organization_example" // string | Filter by organization (optional)
+    search := "search_example" // string | Filter by search (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ProjectApi.ProjectList(context.Background()).Page(page).Organization(organization).Execute()
+    resp, r, err := apiClient.ProjectApi.ProjectList(context.Background()).Page(page).Organization(organization).Search(search).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProjectApi.ProjectList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -58,6 +59,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | The collection page number | [default to 1]
  **organization** | **string** | Filter by organization | 
+ **search** | **string** | Filter by search | 
 
 ### Return type
 

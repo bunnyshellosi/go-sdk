@@ -27,11 +27,18 @@ type ApiOrganizationListRequest struct {
 	ctx        context.Context
 	ApiService *OrganizationApiService
 	page       *int32
+	search     *string
 }
 
 // The collection page number
 func (r ApiOrganizationListRequest) Page(page int32) ApiOrganizationListRequest {
 	r.page = &page
+	return r
+}
+
+// Filter by search
+func (r ApiOrganizationListRequest) Search(search string) ApiOrganizationListRequest {
+	r.search = &search
 	return r
 }
 
@@ -78,6 +85,9 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 
 	if r.page != nil {
 		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.search != nil {
+		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
