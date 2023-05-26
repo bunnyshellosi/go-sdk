@@ -660,7 +660,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentList
 
-> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
+> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Search(search).Project(project).Execute()
 
 List environments matching any selected filters.
 
@@ -685,11 +685,12 @@ func main() {
     type_ := "primary" // string | Filter by type (optional)
     operationStatus := "draft" // string | Filter by operationStatus (optional)
     clusterStatus := "running_ok" // string | Filter by clusterStatus (optional)
+    search := "search_example" // string | Filter by search (optional)
     project := "project_example" // string | Filter by project (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentApi.EnvironmentList(context.Background()).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Project(project).Execute()
+    resp, r, err := apiClient.EnvironmentApi.EnvironmentList(context.Background()).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Search(search).Project(project).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentApi.EnvironmentList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -716,6 +717,7 @@ Name | Type | Description  | Notes
  **type_** | **string** | Filter by type | 
  **operationStatus** | **string** | Filter by operationStatus | 
  **clusterStatus** | **string** | Filter by clusterStatus | 
+ **search** | **string** | Filter by search | 
  **project** | **string** | Filter by project | 
 
 ### Return type

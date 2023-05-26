@@ -1375,6 +1375,7 @@ type ApiEnvironmentListRequest struct {
 	type_                 *string
 	operationStatus       *string
 	clusterStatus         *string
+	search                *string
 	project               *string
 }
 
@@ -1411,6 +1412,12 @@ func (r ApiEnvironmentListRequest) OperationStatus(operationStatus string) ApiEn
 // Filter by clusterStatus
 func (r ApiEnvironmentListRequest) ClusterStatus(clusterStatus string) ApiEnvironmentListRequest {
 	r.clusterStatus = &clusterStatus
+	return r
+}
+
+// Filter by search
+func (r ApiEnvironmentListRequest) Search(search string) ApiEnvironmentListRequest {
+	r.search = &search
 	return r
 }
 
@@ -1478,6 +1485,9 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 	}
 	if r.clusterStatus != nil {
 		localVarQueryParams.Add("clusterStatus", parameterToString(*r.clusterStatus, ""))
+	}
+	if r.search != nil {
+		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
 	}
 	if r.project != nil {
 		localVarQueryParams.Add("project", parameterToString(*r.project, ""))

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## OrganizationList
 
-> PaginatedOrganizationCollection OrganizationList(ctx).Page(page).Execute()
+> PaginatedOrganizationCollection OrganizationList(ctx).Page(page).Search(search).Execute()
 
 List organization matching any selected filters.
 
@@ -31,10 +31,11 @@ import (
 
 func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
+    search := "search_example" // string | Filter by search (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrganizationApi.OrganizationList(context.Background()).Page(page).Execute()
+    resp, r, err := apiClient.OrganizationApi.OrganizationList(context.Background()).Page(page).Search(search).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrganizationApi.OrganizationList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -56,6 +57,7 @@ Other parameters are passed through a pointer to a apiOrganizationListRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | The collection page number | [default to 1]
+ **search** | **string** | Filter by search | 
 
 ### Return type
 

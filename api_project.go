@@ -28,6 +28,7 @@ type ApiProjectListRequest struct {
 	ApiService   *ProjectApiService
 	page         *int32
 	organization *string
+	search       *string
 }
 
 // The collection page number
@@ -39,6 +40,12 @@ func (r ApiProjectListRequest) Page(page int32) ApiProjectListRequest {
 // Filter by organization
 func (r ApiProjectListRequest) Organization(organization string) ApiProjectListRequest {
 	r.organization = &organization
+	return r
+}
+
+// Filter by search
+func (r ApiProjectListRequest) Search(search string) ApiProjectListRequest {
+	r.search = &search
 	return r
 }
 
@@ -88,6 +95,9 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 	}
 	if r.organization != nil {
 		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+	}
+	if r.search != nil {
+		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
