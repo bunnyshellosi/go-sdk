@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentCloneAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentCloneAction{}
+
 // EnvironmentCloneAction An environment holds a collection of buildable and deployable components.
 type EnvironmentCloneAction struct {
 	Name string `json:"name"`
@@ -63,11 +66,17 @@ func (o *EnvironmentCloneAction) SetName(v string) {
 }
 
 func (o EnvironmentCloneAction) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentCloneAction) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	return toSerialize, nil
 }
 
 type NullableEnvironmentCloneAction struct {

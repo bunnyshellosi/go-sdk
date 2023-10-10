@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentEditConfiguration type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentEditConfiguration{}
+
 // EnvironmentEditConfiguration An environment holds a collection of buildable and deployable components.
 type EnvironmentEditConfiguration struct {
 	Configuration *EnvironmentEditConfigurationConfiguration `json:"configuration,omitempty"`
@@ -39,7 +42,7 @@ func NewEnvironmentEditConfigurationWithDefaults() *EnvironmentEditConfiguration
 
 // GetConfiguration returns the Configuration field value if set, zero value otherwise.
 func (o *EnvironmentEditConfiguration) GetConfiguration() EnvironmentEditConfigurationConfiguration {
-	if o == nil || o.Configuration == nil {
+	if o == nil || IsNil(o.Configuration) {
 		var ret EnvironmentEditConfigurationConfiguration
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EnvironmentEditConfiguration) GetConfiguration() EnvironmentEditConfigu
 // GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentEditConfiguration) GetConfigurationOk() (*EnvironmentEditConfigurationConfiguration, bool) {
-	if o == nil || o.Configuration == nil {
+	if o == nil || IsNil(o.Configuration) {
 		return nil, false
 	}
 	return o.Configuration, true
@@ -57,7 +60,7 @@ func (o *EnvironmentEditConfiguration) GetConfigurationOk() (*EnvironmentEditCon
 
 // HasConfiguration returns a boolean if a field has been set.
 func (o *EnvironmentEditConfiguration) HasConfiguration() bool {
-	if o != nil && o.Configuration != nil {
+	if o != nil && !IsNil(o.Configuration) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EnvironmentEditConfiguration) SetConfiguration(v EnvironmentEditConfigu
 }
 
 func (o EnvironmentEditConfiguration) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Configuration != nil {
-		toSerialize["configuration"] = o.Configuration
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentEditConfiguration) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Configuration) {
+		toSerialize["configuration"] = o.Configuration
+	}
+	return toSerialize, nil
 }
 
 type NullableEnvironmentEditConfiguration struct {

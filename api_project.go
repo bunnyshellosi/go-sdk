@@ -20,15 +20,16 @@ import (
 	"strings"
 )
 
-// ProjectApiService ProjectApi service
-type ProjectApiService service
+// ProjectAPIService ProjectAPI service
+type ProjectAPIService service
 
 type ApiProjectListRequest struct {
 	ctx          context.Context
-	ApiService   *ProjectApiService
+	ApiService   *ProjectAPIService
 	page         *int32
 	organization *string
 	search       *string
+	labels       *map[string]string
 }
 
 // The collection page number
@@ -49,6 +50,12 @@ func (r ApiProjectListRequest) Search(search string) ApiProjectListRequest {
 	return r
 }
 
+// Filter by label key-value pair.
+func (r ApiProjectListRequest) Labels(labels map[string]string) ApiProjectListRequest {
+	r.labels = &labels
+	return r
+}
+
 func (r ApiProjectListRequest) Execute() (*PaginatedProjectCollection, *http.Response, error) {
 	return r.ApiService.ProjectListExecute(r)
 }
@@ -61,7 +68,7 @@ List projects matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiProjectListRequest
 */
-func (a *ProjectApiService) ProjectList(ctx context.Context) ApiProjectListRequest {
+func (a *ProjectAPIService) ProjectList(ctx context.Context) ApiProjectListRequest {
 	return ApiProjectListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -71,7 +78,7 @@ func (a *ProjectApiService) ProjectList(ctx context.Context) ApiProjectListReque
 // Execute executes the request
 //
 //	@return PaginatedProjectCollection
-func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*PaginatedProjectCollection, *http.Response, error) {
+func (a *ProjectAPIService) ProjectListExecute(r ApiProjectListRequest) (*PaginatedProjectCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -79,7 +86,7 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 		localVarReturnValue *PaginatedProjectCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.ProjectList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectAPIService.ProjectList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -91,13 +98,19 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.search != nil {
-		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	}
+	if r.labels != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "labels", r.labels, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -119,20 +132,6 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -141,6 +140,20 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -173,6 +186,7 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -192,7 +206,7 @@ func (a *ProjectApiService) ProjectListExecute(r ApiProjectListRequest) (*Pagina
 
 type ApiProjectViewRequest struct {
 	ctx        context.Context
-	ApiService *ProjectApiService
+	ApiService *ProjectAPIService
 	id         string
 }
 
@@ -209,7 +223,7 @@ View a specific project.
 	@param id Resource identifier
 	@return ApiProjectViewRequest
 */
-func (a *ProjectApiService) ProjectView(ctx context.Context, id string) ApiProjectViewRequest {
+func (a *ProjectAPIService) ProjectView(ctx context.Context, id string) ApiProjectViewRequest {
 	return ApiProjectViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -220,7 +234,7 @@ func (a *ProjectApiService) ProjectView(ctx context.Context, id string) ApiProje
 // Execute executes the request
 //
 //	@return ProjectItem
-func (a *ProjectApiService) ProjectViewExecute(r ApiProjectViewRequest) (*ProjectItem, *http.Response, error) {
+func (a *ProjectAPIService) ProjectViewExecute(r ApiProjectViewRequest) (*ProjectItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -228,13 +242,13 @@ func (a *ProjectApiService) ProjectViewExecute(r ApiProjectViewRequest) (*Projec
 		localVarReturnValue *ProjectItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectApiService.ProjectView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProjectAPIService.ProjectView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/projects/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -260,20 +274,6 @@ func (a *ProjectApiService) ProjectViewExecute(r ApiProjectViewRequest) (*Projec
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -282,6 +282,20 @@ func (a *ProjectApiService) ProjectViewExecute(r ApiProjectViewRequest) (*Projec
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -314,6 +328,7 @@ func (a *ProjectApiService) ProjectViewExecute(r ApiProjectViewRequest) (*Projec
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

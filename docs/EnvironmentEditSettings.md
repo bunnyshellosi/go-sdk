@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AutoUpdate** | Pointer to **NullableBool** |  | [optional] 
 **KubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
 **Edit** | Pointer to [**EnvironmentEditSettingsEdit**](EnvironmentEditSettingsEdit.md) |  | [optional] 
+**Labels** | Pointer to [**NullableEdit**](Edit.md) |  | [optional] 
 
 ## Methods
 
@@ -194,6 +195,41 @@ SetEdit sets Edit field to given value.
 
 HasEdit returns a boolean if a field has been set.
 
+### GetLabels
+
+`func (o *EnvironmentEditSettings) GetLabels() Edit`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *EnvironmentEditSettings) GetLabelsOk() (*Edit, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *EnvironmentEditSettings) SetLabels(v Edit)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *EnvironmentEditSettings) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
+
+### SetLabelsNil
+
+`func (o *EnvironmentEditSettings) SetLabelsNil(b bool)`
+
+ SetLabelsNil sets the value for Labels to be an explicit nil
+
+### UnsetLabels
+`func (o *EnvironmentEditSettings) UnsetLabels()`
+
+UnsetLabels ensures that no value is present for Labels, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

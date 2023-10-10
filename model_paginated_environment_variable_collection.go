@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaginatedEnvironmentVariableCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaginatedEnvironmentVariableCollection{}
+
 // PaginatedEnvironmentVariableCollection Paginated result
 type PaginatedEnvironmentVariableCollection struct {
 	Links        *PaginatedLinks                        `json:"_links,omitempty"`
@@ -43,7 +46,7 @@ func NewPaginatedEnvironmentVariableCollectionWithDefaults() *PaginatedEnvironme
 
 // GetLinks returns the Links field value if set, zero value otherwise.
 func (o *PaginatedEnvironmentVariableCollection) GetLinks() PaginatedLinks {
-	if o == nil || o.Links == nil {
+	if o == nil || IsNil(o.Links) {
 		var ret PaginatedLinks
 		return ret
 	}
@@ -53,7 +56,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetLinks() PaginatedLinks {
 // GetLinksOk returns a tuple with the Links field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEnvironmentVariableCollection) GetLinksOk() (*PaginatedLinks, bool) {
-	if o == nil || o.Links == nil {
+	if o == nil || IsNil(o.Links) {
 		return nil, false
 	}
 	return o.Links, true
@@ -61,7 +64,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetLinksOk() (*PaginatedLinks, 
 
 // HasLinks returns a boolean if a field has been set.
 func (o *PaginatedEnvironmentVariableCollection) HasLinks() bool {
-	if o != nil && o.Links != nil {
+	if o != nil && !IsNil(o.Links) {
 		return true
 	}
 
@@ -75,7 +78,7 @@ func (o *PaginatedEnvironmentVariableCollection) SetLinks(v PaginatedLinks) {
 
 // GetTotalItems returns the TotalItems field value if set, zero value otherwise.
 func (o *PaginatedEnvironmentVariableCollection) GetTotalItems() int32 {
-	if o == nil || o.TotalItems == nil {
+	if o == nil || IsNil(o.TotalItems) {
 		var ret int32
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetTotalItems() int32 {
 // GetTotalItemsOk returns a tuple with the TotalItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEnvironmentVariableCollection) GetTotalItemsOk() (*int32, bool) {
-	if o == nil || o.TotalItems == nil {
+	if o == nil || IsNil(o.TotalItems) {
 		return nil, false
 	}
 	return o.TotalItems, true
@@ -93,7 +96,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetTotalItemsOk() (*int32, bool
 
 // HasTotalItems returns a boolean if a field has been set.
 func (o *PaginatedEnvironmentVariableCollection) HasTotalItems() bool {
-	if o != nil && o.TotalItems != nil {
+	if o != nil && !IsNil(o.TotalItems) {
 		return true
 	}
 
@@ -107,7 +110,7 @@ func (o *PaginatedEnvironmentVariableCollection) SetTotalItems(v int32) {
 
 // GetPage returns the Page field value if set, zero value otherwise.
 func (o *PaginatedEnvironmentVariableCollection) GetPage() int32 {
-	if o == nil || o.Page == nil {
+	if o == nil || IsNil(o.Page) {
 		var ret int32
 		return ret
 	}
@@ -117,7 +120,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetPage() int32 {
 // GetPageOk returns a tuple with the Page field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEnvironmentVariableCollection) GetPageOk() (*int32, bool) {
-	if o == nil || o.Page == nil {
+	if o == nil || IsNil(o.Page) {
 		return nil, false
 	}
 	return o.Page, true
@@ -125,7 +128,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetPageOk() (*int32, bool) {
 
 // HasPage returns a boolean if a field has been set.
 func (o *PaginatedEnvironmentVariableCollection) HasPage() bool {
-	if o != nil && o.Page != nil {
+	if o != nil && !IsNil(o.Page) {
 		return true
 	}
 
@@ -139,7 +142,7 @@ func (o *PaginatedEnvironmentVariableCollection) SetPage(v int32) {
 
 // GetItemsPerPage returns the ItemsPerPage field value if set, zero value otherwise.
 func (o *PaginatedEnvironmentVariableCollection) GetItemsPerPage() int32 {
-	if o == nil || o.ItemsPerPage == nil {
+	if o == nil || IsNil(o.ItemsPerPage) {
 		var ret int32
 		return ret
 	}
@@ -149,7 +152,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetItemsPerPage() int32 {
 // GetItemsPerPageOk returns a tuple with the ItemsPerPage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEnvironmentVariableCollection) GetItemsPerPageOk() (*int32, bool) {
-	if o == nil || o.ItemsPerPage == nil {
+	if o == nil || IsNil(o.ItemsPerPage) {
 		return nil, false
 	}
 	return o.ItemsPerPage, true
@@ -157,7 +160,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetItemsPerPageOk() (*int32, bo
 
 // HasItemsPerPage returns a boolean if a field has been set.
 func (o *PaginatedEnvironmentVariableCollection) HasItemsPerPage() bool {
-	if o != nil && o.ItemsPerPage != nil {
+	if o != nil && !IsNil(o.ItemsPerPage) {
 		return true
 	}
 
@@ -171,7 +174,7 @@ func (o *PaginatedEnvironmentVariableCollection) SetItemsPerPage(v int32) {
 
 // GetEmbedded returns the Embedded field value if set, zero value otherwise.
 func (o *PaginatedEnvironmentVariableCollection) GetEmbedded() EmbeddedEnvironmentVariableCollection {
-	if o == nil || o.Embedded == nil {
+	if o == nil || IsNil(o.Embedded) {
 		var ret EmbeddedEnvironmentVariableCollection
 		return ret
 	}
@@ -181,7 +184,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetEmbedded() EmbeddedEnvironme
 // GetEmbeddedOk returns a tuple with the Embedded field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedEnvironmentVariableCollection) GetEmbeddedOk() (*EmbeddedEnvironmentVariableCollection, bool) {
-	if o == nil || o.Embedded == nil {
+	if o == nil || IsNil(o.Embedded) {
 		return nil, false
 	}
 	return o.Embedded, true
@@ -189,7 +192,7 @@ func (o *PaginatedEnvironmentVariableCollection) GetEmbeddedOk() (*EmbeddedEnvir
 
 // HasEmbedded returns a boolean if a field has been set.
 func (o *PaginatedEnvironmentVariableCollection) HasEmbedded() bool {
-	if o != nil && o.Embedded != nil {
+	if o != nil && !IsNil(o.Embedded) {
 		return true
 	}
 
@@ -202,23 +205,31 @@ func (o *PaginatedEnvironmentVariableCollection) SetEmbedded(v EmbeddedEnvironme
 }
 
 func (o PaginatedEnvironmentVariableCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Links != nil {
-		toSerialize["_links"] = o.Links
-	}
-	if o.TotalItems != nil {
-		toSerialize["totalItems"] = o.TotalItems
-	}
-	if o.Page != nil {
-		toSerialize["page"] = o.Page
-	}
-	if o.ItemsPerPage != nil {
-		toSerialize["itemsPerPage"] = o.ItemsPerPage
-	}
-	if o.Embedded != nil {
-		toSerialize["_embedded"] = o.Embedded
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PaginatedEnvironmentVariableCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Links) {
+		toSerialize["_links"] = o.Links
+	}
+	if !IsNil(o.TotalItems) {
+		toSerialize["totalItems"] = o.TotalItems
+	}
+	if !IsNil(o.Page) {
+		toSerialize["page"] = o.Page
+	}
+	if !IsNil(o.ItemsPerPage) {
+		toSerialize["itemsPerPage"] = o.ItemsPerPage
+	}
+	if !IsNil(o.Embedded) {
+		toSerialize["_embedded"] = o.Embedded
+	}
+	return toSerialize, nil
 }
 
 type NullablePaginatedEnvironmentVariableCollection struct {

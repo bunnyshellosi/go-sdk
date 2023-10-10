@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ClusterKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ClusterKubeConfigRead{}
+
 // ClusterKubeConfigRead struct for ClusterKubeConfigRead
 type ClusterKubeConfigRead struct {
 	CertificateAuthorityData string `json:"certificate-authority-data"`
@@ -89,14 +92,18 @@ func (o *ClusterKubeConfigRead) SetServer(v string) {
 }
 
 func (o ClusterKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["certificate-authority-data"] = o.CertificateAuthorityData
-	}
-	if true {
-		toSerialize["server"] = o.Server
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ClusterKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["certificate-authority-data"] = o.CertificateAuthorityData
+	toSerialize["server"] = o.Server
+	return toSerialize, nil
 }
 
 type NullableClusterKubeConfigRead struct {

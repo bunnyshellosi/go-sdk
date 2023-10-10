@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the FromGit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FromGit{}
+
 // FromGit struct for FromGit
 type FromGit struct {
 	Type     *string `json:"type,omitempty"`
@@ -46,7 +49,7 @@ func NewFromGitWithDefaults() *FromGit {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FromGit) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *FromGit) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -64,7 +67,7 @@ func (o *FromGit) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FromGit) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *FromGit) SetType(v string) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *FromGit) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *FromGit) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -96,7 +99,7 @@ func (o *FromGit) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *FromGit) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *FromGit) SetUrl(v string) {
 
 // GetBranch returns the Branch field value if set, zero value otherwise.
 func (o *FromGit) GetBranch() string {
-	if o == nil || o.Branch == nil {
+	if o == nil || IsNil(o.Branch) {
 		var ret string
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *FromGit) GetBranch() string {
 // GetBranchOk returns a tuple with the Branch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetBranchOk() (*string, bool) {
-	if o == nil || o.Branch == nil {
+	if o == nil || IsNil(o.Branch) {
 		return nil, false
 	}
 	return o.Branch, true
@@ -128,7 +131,7 @@ func (o *FromGit) GetBranchOk() (*string, bool) {
 
 // HasBranch returns a boolean if a field has been set.
 func (o *FromGit) HasBranch() bool {
-	if o != nil && o.Branch != nil {
+	if o != nil && !IsNil(o.Branch) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *FromGit) SetBranch(v string) {
 
 // GetYamlPath returns the YamlPath field value if set, zero value otherwise.
 func (o *FromGit) GetYamlPath() string {
-	if o == nil || o.YamlPath == nil {
+	if o == nil || IsNil(o.YamlPath) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *FromGit) GetYamlPath() string {
 // GetYamlPathOk returns a tuple with the YamlPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetYamlPathOk() (*string, bool) {
-	if o == nil || o.YamlPath == nil {
+	if o == nil || IsNil(o.YamlPath) {
 		return nil, false
 	}
 	return o.YamlPath, true
@@ -160,7 +163,7 @@ func (o *FromGit) GetYamlPathOk() (*string, bool) {
 
 // HasYamlPath returns a boolean if a field has been set.
 func (o *FromGit) HasYamlPath() bool {
-	if o != nil && o.YamlPath != nil {
+	if o != nil && !IsNil(o.YamlPath) {
 		return true
 	}
 
@@ -173,20 +176,28 @@ func (o *FromGit) SetYamlPath(v string) {
 }
 
 func (o FromGit) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if o.Url != nil {
-		toSerialize["url"] = o.Url
-	}
-	if o.Branch != nil {
-		toSerialize["branch"] = o.Branch
-	}
-	if o.YamlPath != nil {
-		toSerialize["yamlPath"] = o.YamlPath
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o FromGit) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
+	}
+	if !IsNil(o.Branch) {
+		toSerialize["branch"] = o.Branch
+	}
+	if !IsNil(o.YamlPath) {
+		toSerialize["yamlPath"] = o.YamlPath
+	}
+	return toSerialize, nil
 }
 
 type NullableFromGit struct {

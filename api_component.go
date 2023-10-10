@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// ComponentApiService ComponentApi service
-type ComponentApiService service
+// ComponentAPIService ComponentAPI service
+type ComponentAPIService service
 
 type ApiComponentListRequest struct {
 	ctx             context.Context
-	ApiService      *ComponentApiService
+	ApiService      *ComponentAPIService
 	page            *int32
 	environment     *string
 	operationStatus *string
@@ -82,7 +82,7 @@ List service components matching any selected filters
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiComponentListRequest
 */
-func (a *ComponentApiService) ComponentList(ctx context.Context) ApiComponentListRequest {
+func (a *ComponentAPIService) ComponentList(ctx context.Context) ApiComponentListRequest {
 	return ApiComponentListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -92,7 +92,7 @@ func (a *ComponentApiService) ComponentList(ctx context.Context) ApiComponentLis
 // Execute executes the request
 //
 //	@return PaginatedComponentCollection
-func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*PaginatedComponentCollection, *http.Response, error) {
+func (a *ComponentAPIService) ComponentListExecute(r ApiComponentListRequest) (*PaginatedComponentCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -100,7 +100,7 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 		localVarReturnValue *PaginatedComponentCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentApiService.ComponentList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -112,22 +112,25 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.operationStatus != nil {
-		localVarQueryParams.Add("operationStatus", parameterToString(*r.operationStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "operationStatus", r.operationStatus, "")
 	}
 	if r.clusterStatus != nil {
-		localVarQueryParams.Add("clusterStatus", parameterToString(*r.clusterStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "clusterStatus", r.clusterStatus, "")
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.project != nil {
-		localVarQueryParams.Add("project", parameterToString(*r.project, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -149,20 +152,6 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -171,6 +160,20 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -203,6 +206,7 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -222,7 +226,7 @@ func (a *ComponentApiService) ComponentListExecute(r ApiComponentListRequest) (*
 
 type ApiComponentRemoteDevConfigRequest struct {
 	ctx        context.Context
-	ApiService *ComponentApiService
+	ApiService *ComponentAPIService
 	id         string
 }
 
@@ -239,7 +243,7 @@ Get remote dev config
 	@param id Resource identifier
 	@return ApiComponentRemoteDevConfigRequest
 */
-func (a *ComponentApiService) ComponentRemoteDevConfig(ctx context.Context, id string) ApiComponentRemoteDevConfigRequest {
+func (a *ComponentAPIService) ComponentRemoteDevConfig(ctx context.Context, id string) ApiComponentRemoteDevConfigRequest {
 	return ApiComponentRemoteDevConfigRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -250,7 +254,7 @@ func (a *ComponentApiService) ComponentRemoteDevConfig(ctx context.Context, id s
 // Execute executes the request
 //
 //	@return ComponentConfigItem
-func (a *ComponentApiService) ComponentRemoteDevConfigExecute(r ApiComponentRemoteDevConfigRequest) (*ComponentConfigItem, *http.Response, error) {
+func (a *ComponentAPIService) ComponentRemoteDevConfigExecute(r ApiComponentRemoteDevConfigRequest) (*ComponentConfigItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -258,13 +262,13 @@ func (a *ComponentApiService) ComponentRemoteDevConfigExecute(r ApiComponentRemo
 		localVarReturnValue *ComponentConfigItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentApiService.ComponentRemoteDevConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentRemoteDevConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/components/{id}/remotedev/config"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -290,20 +294,6 @@ func (a *ComponentApiService) ComponentRemoteDevConfigExecute(r ApiComponentRemo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -312,6 +302,20 @@ func (a *ComponentApiService) ComponentRemoteDevConfigExecute(r ApiComponentRemo
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -344,6 +348,7 @@ func (a *ComponentApiService) ComponentRemoteDevConfigExecute(r ApiComponentRemo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -363,7 +368,7 @@ func (a *ComponentApiService) ComponentRemoteDevConfigExecute(r ApiComponentRemo
 
 type ApiComponentRemoteDevProfileRequest struct {
 	ctx        context.Context
-	ApiService *ComponentApiService
+	ApiService *ComponentAPIService
 	id         string
 	body       *interface{}
 }
@@ -387,7 +392,7 @@ Parse, validate and interpolate the provided remoteDevProfile
 	@param id Resource identifier
 	@return ApiComponentRemoteDevProfileRequest
 */
-func (a *ComponentApiService) ComponentRemoteDevProfile(ctx context.Context, id string) ApiComponentRemoteDevProfileRequest {
+func (a *ComponentAPIService) ComponentRemoteDevProfile(ctx context.Context, id string) ApiComponentRemoteDevProfileRequest {
 	return ApiComponentRemoteDevProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -398,7 +403,7 @@ func (a *ComponentApiService) ComponentRemoteDevProfile(ctx context.Context, id 
 // Execute executes the request
 //
 //	@return ComponentProfileItem
-func (a *ComponentApiService) ComponentRemoteDevProfileExecute(r ApiComponentRemoteDevProfileRequest) (*ComponentProfileItem, *http.Response, error) {
+func (a *ComponentAPIService) ComponentRemoteDevProfileExecute(r ApiComponentRemoteDevProfileRequest) (*ComponentProfileItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -406,13 +411,13 @@ func (a *ComponentApiService) ComponentRemoteDevProfileExecute(r ApiComponentRem
 		localVarReturnValue *ComponentProfileItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentApiService.ComponentRemoteDevProfile")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentRemoteDevProfile")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/components/{id}/remotedev/profile"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -440,20 +445,6 @@ func (a *ComponentApiService) ComponentRemoteDevProfileExecute(r ApiComponentRem
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -462,6 +453,20 @@ func (a *ComponentApiService) ComponentRemoteDevProfileExecute(r ApiComponentRem
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -494,6 +499,7 @@ func (a *ComponentApiService) ComponentRemoteDevProfileExecute(r ApiComponentRem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -513,7 +519,7 @@ func (a *ComponentApiService) ComponentRemoteDevProfileExecute(r ApiComponentRem
 
 type ApiComponentResourcesRequest struct {
 	ctx        context.Context
-	ApiService *ComponentApiService
+	ApiService *ComponentAPIService
 	id         string
 }
 
@@ -530,7 +536,7 @@ Get kubernetes resources
 	@param id Resource identifier
 	@return ApiComponentResourcesRequest
 */
-func (a *ComponentApiService) ComponentResources(ctx context.Context, id string) ApiComponentResourcesRequest {
+func (a *ComponentAPIService) ComponentResources(ctx context.Context, id string) ApiComponentResourcesRequest {
 	return ApiComponentResourcesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -541,7 +547,7 @@ func (a *ComponentApiService) ComponentResources(ctx context.Context, id string)
 // Execute executes the request
 //
 //	@return []ComponentResourceItem
-func (a *ComponentApiService) ComponentResourcesExecute(r ApiComponentResourcesRequest) ([]ComponentResourceItem, *http.Response, error) {
+func (a *ComponentAPIService) ComponentResourcesExecute(r ApiComponentResourcesRequest) ([]ComponentResourceItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -549,13 +555,13 @@ func (a *ComponentApiService) ComponentResourcesExecute(r ApiComponentResourcesR
 		localVarReturnValue []ComponentResourceItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentApiService.ComponentResources")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentResources")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/components/{id}/resources"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -581,20 +587,6 @@ func (a *ComponentApiService) ComponentResourcesExecute(r ApiComponentResourcesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -603,6 +595,20 @@ func (a *ComponentApiService) ComponentResourcesExecute(r ApiComponentResourcesR
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -635,6 +641,7 @@ func (a *ComponentApiService) ComponentResourcesExecute(r ApiComponentResourcesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -654,7 +661,7 @@ func (a *ComponentApiService) ComponentResourcesExecute(r ApiComponentResourcesR
 
 type ApiComponentViewRequest struct {
 	ctx        context.Context
-	ApiService *ComponentApiService
+	ApiService *ComponentAPIService
 	id         string
 }
 
@@ -671,7 +678,7 @@ View a specific service component
 	@param id Resource identifier
 	@return ApiComponentViewRequest
 */
-func (a *ComponentApiService) ComponentView(ctx context.Context, id string) ApiComponentViewRequest {
+func (a *ComponentAPIService) ComponentView(ctx context.Context, id string) ApiComponentViewRequest {
 	return ApiComponentViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -682,7 +689,7 @@ func (a *ComponentApiService) ComponentView(ctx context.Context, id string) ApiC
 // Execute executes the request
 //
 //	@return ComponentItem
-func (a *ComponentApiService) ComponentViewExecute(r ApiComponentViewRequest) (*ComponentItem, *http.Response, error) {
+func (a *ComponentAPIService) ComponentViewExecute(r ApiComponentViewRequest) (*ComponentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -690,13 +697,13 @@ func (a *ComponentApiService) ComponentViewExecute(r ApiComponentViewRequest) (*
 		localVarReturnValue *ComponentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentApiService.ComponentView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/components/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -722,20 +729,6 @@ func (a *ComponentApiService) ComponentViewExecute(r ApiComponentViewRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -744,6 +737,20 @@ func (a *ComponentApiService) ComponentViewExecute(r ApiComponentViewRequest) (*
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -776,6 +783,7 @@ func (a *ComponentApiService) ComponentViewExecute(r ApiComponentViewRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

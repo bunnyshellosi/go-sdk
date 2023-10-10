@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Environment identifier. | [optional] [readonly] 
+**Labels** | Pointer to **map[string]string** | Environment labels. | [optional] [readonly] 
 **Type** | Pointer to **string** | Environment type: primary or ephemeral. | [optional] [readonly] 
 **Name** | Pointer to **string** | Environment name. | [optional] [readonly] 
 **Namespace** | Pointer to **string** | Environment k8s namespace. | [optional] [readonly] 
@@ -57,6 +58,31 @@ SetId sets Id field to given value.
 `func (o *EnvironmentItem) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetLabels
+
+`func (o *EnvironmentItem) GetLabels() map[string]string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *EnvironmentItem) GetLabelsOk() (*map[string]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *EnvironmentItem) SetLabels(v map[string]string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *EnvironmentItem) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
 
 ### GetType
 

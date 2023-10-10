@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentCreateAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentCreateAction{}
+
 // EnvironmentCreateAction An environment holds a collection of buildable and deployable components.
 type EnvironmentCreateAction struct {
 	Name                           string                          `json:"name"`
@@ -27,6 +30,7 @@ type EnvironmentCreateAction struct {
 	DestroyEphemeralOnPrClose      *bool                           `json:"destroyEphemeralOnPrClose,omitempty"`
 	KubernetesIntegration          NullableString                  `json:"kubernetesIntegration,omitempty"`
 	EphemeralKubernetesIntegration NullableString                  `json:"ephemeralKubernetesIntegration,omitempty"`
+	Labels                         *map[string]string              `json:"labels,omitempty"`
 }
 
 // NewEnvironmentCreateAction instantiates a new EnvironmentCreateAction object
@@ -98,7 +102,7 @@ func (o *EnvironmentCreateAction) SetProject(v string) {
 
 // GetGenesis returns the Genesis field value if set, zero value otherwise.
 func (o *EnvironmentCreateAction) GetGenesis() EnvironmentCreateActionGenesis {
-	if o == nil || o.Genesis == nil {
+	if o == nil || IsNil(o.Genesis) {
 		var ret EnvironmentCreateActionGenesis
 		return ret
 	}
@@ -108,7 +112,7 @@ func (o *EnvironmentCreateAction) GetGenesis() EnvironmentCreateActionGenesis {
 // GetGenesisOk returns a tuple with the Genesis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentCreateAction) GetGenesisOk() (*EnvironmentCreateActionGenesis, bool) {
-	if o == nil || o.Genesis == nil {
+	if o == nil || IsNil(o.Genesis) {
 		return nil, false
 	}
 	return o.Genesis, true
@@ -116,7 +120,7 @@ func (o *EnvironmentCreateAction) GetGenesisOk() (*EnvironmentCreateActionGenesi
 
 // HasGenesis returns a boolean if a field has been set.
 func (o *EnvironmentCreateAction) HasGenesis() bool {
-	if o != nil && o.Genesis != nil {
+	if o != nil && !IsNil(o.Genesis) {
 		return true
 	}
 
@@ -130,7 +134,7 @@ func (o *EnvironmentCreateAction) SetGenesis(v EnvironmentCreateActionGenesis) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *EnvironmentCreateAction) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -140,7 +144,7 @@ func (o *EnvironmentCreateAction) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentCreateAction) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -148,7 +152,7 @@ func (o *EnvironmentCreateAction) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *EnvironmentCreateAction) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -162,7 +166,7 @@ func (o *EnvironmentCreateAction) SetType(v string) {
 
 // GetRemoteDevelopmentAllowed returns the RemoteDevelopmentAllowed field value if set, zero value otherwise.
 func (o *EnvironmentCreateAction) GetRemoteDevelopmentAllowed() bool {
-	if o == nil || o.RemoteDevelopmentAllowed == nil {
+	if o == nil || IsNil(o.RemoteDevelopmentAllowed) {
 		var ret bool
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *EnvironmentCreateAction) GetRemoteDevelopmentAllowed() bool {
 // GetRemoteDevelopmentAllowedOk returns a tuple with the RemoteDevelopmentAllowed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentCreateAction) GetRemoteDevelopmentAllowedOk() (*bool, bool) {
-	if o == nil || o.RemoteDevelopmentAllowed == nil {
+	if o == nil || IsNil(o.RemoteDevelopmentAllowed) {
 		return nil, false
 	}
 	return o.RemoteDevelopmentAllowed, true
@@ -180,7 +184,7 @@ func (o *EnvironmentCreateAction) GetRemoteDevelopmentAllowedOk() (*bool, bool) 
 
 // HasRemoteDevelopmentAllowed returns a boolean if a field has been set.
 func (o *EnvironmentCreateAction) HasRemoteDevelopmentAllowed() bool {
-	if o != nil && o.RemoteDevelopmentAllowed != nil {
+	if o != nil && !IsNil(o.RemoteDevelopmentAllowed) {
 		return true
 	}
 
@@ -194,7 +198,7 @@ func (o *EnvironmentCreateAction) SetRemoteDevelopmentAllowed(v bool) {
 
 // GetAutoUpdate returns the AutoUpdate field value if set, zero value otherwise.
 func (o *EnvironmentCreateAction) GetAutoUpdate() bool {
-	if o == nil || o.AutoUpdate == nil {
+	if o == nil || IsNil(o.AutoUpdate) {
 		var ret bool
 		return ret
 	}
@@ -204,7 +208,7 @@ func (o *EnvironmentCreateAction) GetAutoUpdate() bool {
 // GetAutoUpdateOk returns a tuple with the AutoUpdate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentCreateAction) GetAutoUpdateOk() (*bool, bool) {
-	if o == nil || o.AutoUpdate == nil {
+	if o == nil || IsNil(o.AutoUpdate) {
 		return nil, false
 	}
 	return o.AutoUpdate, true
@@ -212,7 +216,7 @@ func (o *EnvironmentCreateAction) GetAutoUpdateOk() (*bool, bool) {
 
 // HasAutoUpdate returns a boolean if a field has been set.
 func (o *EnvironmentCreateAction) HasAutoUpdate() bool {
-	if o != nil && o.AutoUpdate != nil {
+	if o != nil && !IsNil(o.AutoUpdate) {
 		return true
 	}
 
@@ -226,7 +230,7 @@ func (o *EnvironmentCreateAction) SetAutoUpdate(v bool) {
 
 // GetCreateEphemeralOnPrCreate returns the CreateEphemeralOnPrCreate field value if set, zero value otherwise.
 func (o *EnvironmentCreateAction) GetCreateEphemeralOnPrCreate() bool {
-	if o == nil || o.CreateEphemeralOnPrCreate == nil {
+	if o == nil || IsNil(o.CreateEphemeralOnPrCreate) {
 		var ret bool
 		return ret
 	}
@@ -236,7 +240,7 @@ func (o *EnvironmentCreateAction) GetCreateEphemeralOnPrCreate() bool {
 // GetCreateEphemeralOnPrCreateOk returns a tuple with the CreateEphemeralOnPrCreate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentCreateAction) GetCreateEphemeralOnPrCreateOk() (*bool, bool) {
-	if o == nil || o.CreateEphemeralOnPrCreate == nil {
+	if o == nil || IsNil(o.CreateEphemeralOnPrCreate) {
 		return nil, false
 	}
 	return o.CreateEphemeralOnPrCreate, true
@@ -244,7 +248,7 @@ func (o *EnvironmentCreateAction) GetCreateEphemeralOnPrCreateOk() (*bool, bool)
 
 // HasCreateEphemeralOnPrCreate returns a boolean if a field has been set.
 func (o *EnvironmentCreateAction) HasCreateEphemeralOnPrCreate() bool {
-	if o != nil && o.CreateEphemeralOnPrCreate != nil {
+	if o != nil && !IsNil(o.CreateEphemeralOnPrCreate) {
 		return true
 	}
 
@@ -258,7 +262,7 @@ func (o *EnvironmentCreateAction) SetCreateEphemeralOnPrCreate(v bool) {
 
 // GetDestroyEphemeralOnPrClose returns the DestroyEphemeralOnPrClose field value if set, zero value otherwise.
 func (o *EnvironmentCreateAction) GetDestroyEphemeralOnPrClose() bool {
-	if o == nil || o.DestroyEphemeralOnPrClose == nil {
+	if o == nil || IsNil(o.DestroyEphemeralOnPrClose) {
 		var ret bool
 		return ret
 	}
@@ -268,7 +272,7 @@ func (o *EnvironmentCreateAction) GetDestroyEphemeralOnPrClose() bool {
 // GetDestroyEphemeralOnPrCloseOk returns a tuple with the DestroyEphemeralOnPrClose field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentCreateAction) GetDestroyEphemeralOnPrCloseOk() (*bool, bool) {
-	if o == nil || o.DestroyEphemeralOnPrClose == nil {
+	if o == nil || IsNil(o.DestroyEphemeralOnPrClose) {
 		return nil, false
 	}
 	return o.DestroyEphemeralOnPrClose, true
@@ -276,7 +280,7 @@ func (o *EnvironmentCreateAction) GetDestroyEphemeralOnPrCloseOk() (*bool, bool)
 
 // HasDestroyEphemeralOnPrClose returns a boolean if a field has been set.
 func (o *EnvironmentCreateAction) HasDestroyEphemeralOnPrClose() bool {
-	if o != nil && o.DestroyEphemeralOnPrClose != nil {
+	if o != nil && !IsNil(o.DestroyEphemeralOnPrClose) {
 		return true
 	}
 
@@ -290,7 +294,7 @@ func (o *EnvironmentCreateAction) SetDestroyEphemeralOnPrClose(v bool) {
 
 // GetKubernetesIntegration returns the KubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentCreateAction) GetKubernetesIntegration() string {
-	if o == nil || o.KubernetesIntegration.Get() == nil {
+	if o == nil || IsNil(o.KubernetesIntegration.Get()) {
 		var ret string
 		return ret
 	}
@@ -333,7 +337,7 @@ func (o *EnvironmentCreateAction) UnsetKubernetesIntegration() {
 
 // GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentCreateAction) GetEphemeralKubernetesIntegration() string {
-	if o == nil || o.EphemeralKubernetesIntegration.Get() == nil {
+	if o == nil || IsNil(o.EphemeralKubernetesIntegration.Get()) {
 		var ret string
 		return ret
 	}
@@ -374,30 +378,66 @@ func (o *EnvironmentCreateAction) UnsetEphemeralKubernetesIntegration() {
 	o.EphemeralKubernetesIntegration.Unset()
 }
 
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *EnvironmentCreateAction) GetLabels() map[string]string {
+	if o == nil || IsNil(o.Labels) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCreateAction) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Labels) {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *EnvironmentCreateAction) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *EnvironmentCreateAction) SetLabels(v map[string]string) {
+	o.Labels = &v
+}
+
 func (o EnvironmentCreateAction) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentCreateAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["project"] = o.Project
-	}
-	if o.Genesis != nil {
+	toSerialize["name"] = o.Name
+	toSerialize["project"] = o.Project
+	if !IsNil(o.Genesis) {
 		toSerialize["genesis"] = o.Genesis
 	}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if o.RemoteDevelopmentAllowed != nil {
+	if !IsNil(o.RemoteDevelopmentAllowed) {
 		toSerialize["remoteDevelopmentAllowed"] = o.RemoteDevelopmentAllowed
 	}
-	if o.AutoUpdate != nil {
+	if !IsNil(o.AutoUpdate) {
 		toSerialize["autoUpdate"] = o.AutoUpdate
 	}
-	if o.CreateEphemeralOnPrCreate != nil {
+	if !IsNil(o.CreateEphemeralOnPrCreate) {
 		toSerialize["createEphemeralOnPrCreate"] = o.CreateEphemeralOnPrCreate
 	}
-	if o.DestroyEphemeralOnPrClose != nil {
+	if !IsNil(o.DestroyEphemeralOnPrClose) {
 		toSerialize["destroyEphemeralOnPrClose"] = o.DestroyEphemeralOnPrClose
 	}
 	if o.KubernetesIntegration.IsSet() {
@@ -406,7 +446,10 @@ func (o EnvironmentCreateAction) MarshalJSON() ([]byte, error) {
 	if o.EphemeralKubernetesIntegration.IsSet() {
 		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
 	}
-	return json.Marshal(toSerialize)
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
+	}
+	return toSerialize, nil
 }
 
 type NullableEnvironmentCreateAction struct {

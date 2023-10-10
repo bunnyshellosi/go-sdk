@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the Primary type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Primary{}
+
 // Primary struct for Primary
 type Primary struct {
 	Type                           *string        `json:"type,omitempty"`
@@ -46,7 +49,7 @@ func NewPrimaryWithDefaults() *Primary {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *Primary) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *Primary) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Primary) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -64,7 +67,7 @@ func (o *Primary) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *Primary) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *Primary) SetType(v string) {
 
 // GetCreateEphemeralOnPrCreate returns the CreateEphemeralOnPrCreate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Primary) GetCreateEphemeralOnPrCreate() bool {
-	if o == nil || o.CreateEphemeralOnPrCreate.Get() == nil {
+	if o == nil || IsNil(o.CreateEphemeralOnPrCreate.Get()) {
 		var ret bool
 		return ret
 	}
@@ -121,7 +124,7 @@ func (o *Primary) UnsetCreateEphemeralOnPrCreate() {
 
 // GetDestroyEphemeralOnPrClose returns the DestroyEphemeralOnPrClose field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Primary) GetDestroyEphemeralOnPrClose() bool {
-	if o == nil || o.DestroyEphemeralOnPrClose.Get() == nil {
+	if o == nil || IsNil(o.DestroyEphemeralOnPrClose.Get()) {
 		var ret bool
 		return ret
 	}
@@ -164,7 +167,7 @@ func (o *Primary) UnsetDestroyEphemeralOnPrClose() {
 
 // GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Primary) GetEphemeralKubernetesIntegration() string {
-	if o == nil || o.EphemeralKubernetesIntegration.Get() == nil {
+	if o == nil || IsNil(o.EphemeralKubernetesIntegration.Get()) {
 		var ret string
 		return ret
 	}
@@ -206,8 +209,16 @@ func (o *Primary) UnsetEphemeralKubernetesIntegration() {
 }
 
 func (o Primary) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Primary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	if o.CreateEphemeralOnPrCreate.IsSet() {
@@ -219,7 +230,7 @@ func (o Primary) MarshalJSON() ([]byte, error) {
 	if o.EphemeralKubernetesIntegration.IsSet() {
 		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePrimary struct {

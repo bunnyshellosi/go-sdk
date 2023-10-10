@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentEditSettings type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentEditSettings{}
+
 // EnvironmentEditSettings An environment holds a collection of buildable and deployable components.
 type EnvironmentEditSettings struct {
 	Name                     NullableString               `json:"name,omitempty"`
@@ -22,6 +25,7 @@ type EnvironmentEditSettings struct {
 	AutoUpdate               NullableBool                 `json:"autoUpdate,omitempty"`
 	KubernetesIntegration    NullableString               `json:"kubernetesIntegration,omitempty"`
 	Edit                     *EnvironmentEditSettingsEdit `json:"edit,omitempty"`
+	Labels                   NullableEdit                 `json:"labels,omitempty"`
 }
 
 // NewEnvironmentEditSettings instantiates a new EnvironmentEditSettings object
@@ -43,7 +47,7 @@ func NewEnvironmentEditSettingsWithDefaults() *EnvironmentEditSettings {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentEditSettings) GetName() string {
-	if o == nil || o.Name.Get() == nil {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -86,7 +90,7 @@ func (o *EnvironmentEditSettings) UnsetName() {
 
 // GetRemoteDevelopmentAllowed returns the RemoteDevelopmentAllowed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentEditSettings) GetRemoteDevelopmentAllowed() bool {
-	if o == nil || o.RemoteDevelopmentAllowed.Get() == nil {
+	if o == nil || IsNil(o.RemoteDevelopmentAllowed.Get()) {
 		var ret bool
 		return ret
 	}
@@ -129,7 +133,7 @@ func (o *EnvironmentEditSettings) UnsetRemoteDevelopmentAllowed() {
 
 // GetAutoUpdate returns the AutoUpdate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentEditSettings) GetAutoUpdate() bool {
-	if o == nil || o.AutoUpdate.Get() == nil {
+	if o == nil || IsNil(o.AutoUpdate.Get()) {
 		var ret bool
 		return ret
 	}
@@ -172,7 +176,7 @@ func (o *EnvironmentEditSettings) UnsetAutoUpdate() {
 
 // GetKubernetesIntegration returns the KubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentEditSettings) GetKubernetesIntegration() string {
-	if o == nil || o.KubernetesIntegration.Get() == nil {
+	if o == nil || IsNil(o.KubernetesIntegration.Get()) {
 		var ret string
 		return ret
 	}
@@ -215,7 +219,7 @@ func (o *EnvironmentEditSettings) UnsetKubernetesIntegration() {
 
 // GetEdit returns the Edit field value if set, zero value otherwise.
 func (o *EnvironmentEditSettings) GetEdit() EnvironmentEditSettingsEdit {
-	if o == nil || o.Edit == nil {
+	if o == nil || IsNil(o.Edit) {
 		var ret EnvironmentEditSettingsEdit
 		return ret
 	}
@@ -225,7 +229,7 @@ func (o *EnvironmentEditSettings) GetEdit() EnvironmentEditSettingsEdit {
 // GetEditOk returns a tuple with the Edit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentEditSettings) GetEditOk() (*EnvironmentEditSettingsEdit, bool) {
-	if o == nil || o.Edit == nil {
+	if o == nil || IsNil(o.Edit) {
 		return nil, false
 	}
 	return o.Edit, true
@@ -233,7 +237,7 @@ func (o *EnvironmentEditSettings) GetEditOk() (*EnvironmentEditSettingsEdit, boo
 
 // HasEdit returns a boolean if a field has been set.
 func (o *EnvironmentEditSettings) HasEdit() bool {
-	if o != nil && o.Edit != nil {
+	if o != nil && !IsNil(o.Edit) {
 		return true
 	}
 
@@ -245,7 +249,58 @@ func (o *EnvironmentEditSettings) SetEdit(v EnvironmentEditSettingsEdit) {
 	o.Edit = &v
 }
 
+// GetLabels returns the Labels field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentEditSettings) GetLabels() Edit {
+	if o == nil || IsNil(o.Labels.Get()) {
+		var ret Edit
+		return ret
+	}
+	return *o.Labels.Get()
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentEditSettings) GetLabelsOk() (*Edit, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Labels.Get(), o.Labels.IsSet()
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *EnvironmentEditSettings) HasLabels() bool {
+	if o != nil && o.Labels.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given NullableEdit and assigns it to the Labels field.
+func (o *EnvironmentEditSettings) SetLabels(v Edit) {
+	o.Labels.Set(&v)
+}
+
+// SetLabelsNil sets the value for Labels to be an explicit nil
+func (o *EnvironmentEditSettings) SetLabelsNil() {
+	o.Labels.Set(nil)
+}
+
+// UnsetLabels ensures that no value is present for Labels, not even an explicit nil
+func (o *EnvironmentEditSettings) UnsetLabels() {
+	o.Labels.Unset()
+}
+
 func (o EnvironmentEditSettings) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentEditSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
@@ -259,10 +314,13 @@ func (o EnvironmentEditSettings) MarshalJSON() ([]byte, error) {
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
 	}
-	if o.Edit != nil {
+	if !IsNil(o.Edit) {
 		toSerialize["edit"] = o.Edit
 	}
-	return json.Marshal(toSerialize)
+	if o.Labels.IsSet() {
+		toSerialize["labels"] = o.Labels.Get()
+	}
+	return toSerialize, nil
 }
 
 type NullableEnvironmentEditSettings struct {

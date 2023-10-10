@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ClusterWrapperKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ClusterWrapperKubeConfigRead{}
+
 // ClusterWrapperKubeConfigRead struct for ClusterWrapperKubeConfigRead
 type ClusterWrapperKubeConfigRead struct {
 	Name    string                 `json:"name"`
@@ -65,7 +68,7 @@ func (o *ClusterWrapperKubeConfigRead) SetName(v string) {
 
 // GetCluster returns the Cluster field value if set, zero value otherwise.
 func (o *ClusterWrapperKubeConfigRead) GetCluster() ClusterKubeConfigRead {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster) {
 		var ret ClusterKubeConfigRead
 		return ret
 	}
@@ -75,7 +78,7 @@ func (o *ClusterWrapperKubeConfigRead) GetCluster() ClusterKubeConfigRead {
 // GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ClusterWrapperKubeConfigRead) GetClusterOk() (*ClusterKubeConfigRead, bool) {
-	if o == nil || o.Cluster == nil {
+	if o == nil || IsNil(o.Cluster) {
 		return nil, false
 	}
 	return o.Cluster, true
@@ -83,7 +86,7 @@ func (o *ClusterWrapperKubeConfigRead) GetClusterOk() (*ClusterKubeConfigRead, b
 
 // HasCluster returns a boolean if a field has been set.
 func (o *ClusterWrapperKubeConfigRead) HasCluster() bool {
-	if o != nil && o.Cluster != nil {
+	if o != nil && !IsNil(o.Cluster) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *ClusterWrapperKubeConfigRead) SetCluster(v ClusterKubeConfigRead) {
 }
 
 func (o ClusterWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if o.Cluster != nil {
-		toSerialize["cluster"] = o.Cluster
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ClusterWrapperKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Cluster) {
+		toSerialize["cluster"] = o.Cluster
+	}
+	return toSerialize, nil
 }
 
 type NullableClusterWrapperKubeConfigRead struct {

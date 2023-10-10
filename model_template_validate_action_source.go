@@ -71,11 +71,11 @@ func (dst *TemplateValidateActionSource) UnmarshalJSON(data []byte) error {
 		dst.ValidateSourceGit = nil
 		dst.ValidateSourceString = nil
 
-		return fmt.Errorf("Data matches more than one schema in oneOf(TemplateValidateActionSource)")
+		return fmt.Errorf("data matches more than one schema in oneOf(TemplateValidateActionSource)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(TemplateValidateActionSource)")
+		return fmt.Errorf("data failed to match schemas in oneOf(TemplateValidateActionSource)")
 	}
 }
 

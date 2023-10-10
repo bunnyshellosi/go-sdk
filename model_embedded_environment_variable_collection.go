@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedEnvironmentVariableCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedEnvironmentVariableCollection{}
+
 // EmbeddedEnvironmentVariableCollection struct for EmbeddedEnvironmentVariableCollection
 type EmbeddedEnvironmentVariableCollection struct {
 	Item []EnvironmentVariableCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedEnvironmentVariableCollectionWithDefaults() *EmbeddedEnvironment
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedEnvironmentVariableCollection) GetItem() []EnvironmentVariableCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []EnvironmentVariableCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedEnvironmentVariableCollection) GetItem() []EnvironmentVariableC
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedEnvironmentVariableCollection) GetItemOk() ([]EnvironmentVariableCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedEnvironmentVariableCollection) GetItemOk() ([]EnvironmentVariab
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedEnvironmentVariableCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedEnvironmentVariableCollection) SetItem(v []EnvironmentVariableC
 }
 
 func (o EmbeddedEnvironmentVariableCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedEnvironmentVariableCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedEnvironmentVariableCollection struct {

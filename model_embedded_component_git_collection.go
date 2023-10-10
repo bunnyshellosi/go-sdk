@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedComponentGitCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedComponentGitCollection{}
+
 // EmbeddedComponentGitCollection struct for EmbeddedComponentGitCollection
 type EmbeddedComponentGitCollection struct {
 	Item []ComponentGitCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedComponentGitCollectionWithDefaults() *EmbeddedComponentGitCollec
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedComponentGitCollection) GetItem() []ComponentGitCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []ComponentGitCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedComponentGitCollection) GetItem() []ComponentGitCollection {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedComponentGitCollection) GetItemOk() ([]ComponentGitCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedComponentGitCollection) GetItemOk() ([]ComponentGitCollection, 
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedComponentGitCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedComponentGitCollection) SetItem(v []ComponentGitCollection) {
 }
 
 func (o EmbeddedComponentGitCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedComponentGitCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedComponentGitCollection struct {

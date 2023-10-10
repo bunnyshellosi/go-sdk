@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// KubernetesIntegrationApiService KubernetesIntegrationApi service
-type KubernetesIntegrationApiService service
+// KubernetesIntegrationAPIService KubernetesIntegrationAPI service
+type KubernetesIntegrationAPIService service
 
 type ApiKubernetesIntegrationListRequest struct {
 	ctx           context.Context
-	ApiService    *KubernetesIntegrationApiService
+	ApiService    *KubernetesIntegrationAPIService
 	page          *int32
 	organization  *string
 	environment   *string
@@ -75,7 +75,7 @@ List Kubernetes integrations matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiKubernetesIntegrationListRequest
 */
-func (a *KubernetesIntegrationApiService) KubernetesIntegrationList(ctx context.Context) ApiKubernetesIntegrationListRequest {
+func (a *KubernetesIntegrationAPIService) KubernetesIntegrationList(ctx context.Context) ApiKubernetesIntegrationListRequest {
 	return ApiKubernetesIntegrationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -85,7 +85,7 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationList(ctx context.
 // Execute executes the request
 //
 //	@return PaginatedKubernetesIntegrationCollection
-func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r ApiKubernetesIntegrationListRequest) (*PaginatedKubernetesIntegrationCollection, *http.Response, error) {
+func (a *KubernetesIntegrationAPIService) KubernetesIntegrationListExecute(r ApiKubernetesIntegrationListRequest) (*PaginatedKubernetesIntegrationCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -93,7 +93,7 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r Api
 		localVarReturnValue *PaginatedKubernetesIntegrationCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesIntegrationApiService.KubernetesIntegrationList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesIntegrationAPIService.KubernetesIntegrationList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -105,19 +105,22 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r Api
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.status != nil {
-		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
 	}
 	if r.cloudProvider != nil {
-		localVarQueryParams.Add("cloudProvider", parameterToString(*r.cloudProvider, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cloudProvider", r.cloudProvider, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -139,20 +142,6 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r Api
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -161,6 +150,20 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r Api
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -193,6 +196,7 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -212,7 +216,7 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationListExecute(r Api
 
 type ApiKubernetesIntegrationViewRequest struct {
 	ctx        context.Context
-	ApiService *KubernetesIntegrationApiService
+	ApiService *KubernetesIntegrationAPIService
 	id         string
 }
 
@@ -229,7 +233,7 @@ View a specific Kubernetes integration.
 	@param id Resource identifier
 	@return ApiKubernetesIntegrationViewRequest
 */
-func (a *KubernetesIntegrationApiService) KubernetesIntegrationView(ctx context.Context, id string) ApiKubernetesIntegrationViewRequest {
+func (a *KubernetesIntegrationAPIService) KubernetesIntegrationView(ctx context.Context, id string) ApiKubernetesIntegrationViewRequest {
 	return ApiKubernetesIntegrationViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -240,7 +244,7 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationView(ctx context.
 // Execute executes the request
 //
 //	@return KubernetesIntegrationItem
-func (a *KubernetesIntegrationApiService) KubernetesIntegrationViewExecute(r ApiKubernetesIntegrationViewRequest) (*KubernetesIntegrationItem, *http.Response, error) {
+func (a *KubernetesIntegrationAPIService) KubernetesIntegrationViewExecute(r ApiKubernetesIntegrationViewRequest) (*KubernetesIntegrationItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -248,13 +252,13 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationViewExecute(r Api
 		localVarReturnValue *KubernetesIntegrationItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesIntegrationApiService.KubernetesIntegrationView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesIntegrationAPIService.KubernetesIntegrationView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/kubernetes_integrations/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -280,20 +284,6 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationViewExecute(r Api
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -302,6 +292,20 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationViewExecute(r Api
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -334,6 +338,7 @@ func (a *KubernetesIntegrationApiService) KubernetesIntegrationViewExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

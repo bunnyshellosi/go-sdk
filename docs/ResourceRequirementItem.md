@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Requests** | Pointer to [**NullableResourceRequirementItemRequests**](ResourceRequirementItemRequests.md) |  | [optional] 
-**Limits** | Pointer to [**NullableResourceRequirementItemLimits**](ResourceRequirementItemLimits.md) |  | [optional] 
+**Requests** | Pointer to [**NullableResourceListItem**](ResourceListItem.md) |  | [optional] 
+**Limits** | Pointer to [**NullableResourceListItem**](ResourceListItem.md) |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetRequests
 
-`func (o *ResourceRequirementItem) GetRequests() ResourceRequirementItemRequests`
+`func (o *ResourceRequirementItem) GetRequests() ResourceListItem`
 
 GetRequests returns the Requests field if non-nil, zero value otherwise.
 
 ### GetRequestsOk
 
-`func (o *ResourceRequirementItem) GetRequestsOk() (*ResourceRequirementItemRequests, bool)`
+`func (o *ResourceRequirementItem) GetRequestsOk() (*ResourceListItem, bool)`
 
 GetRequestsOk returns a tuple with the Requests field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequests
 
-`func (o *ResourceRequirementItem) SetRequests(v ResourceRequirementItemRequests)`
+`func (o *ResourceRequirementItem) SetRequests(v ResourceListItem)`
 
 SetRequests sets Requests field to given value.
 
@@ -63,20 +63,20 @@ HasRequests returns a boolean if a field has been set.
 UnsetRequests ensures that no value is present for Requests, not even an explicit nil
 ### GetLimits
 
-`func (o *ResourceRequirementItem) GetLimits() ResourceRequirementItemLimits`
+`func (o *ResourceRequirementItem) GetLimits() ResourceListItem`
 
 GetLimits returns the Limits field if non-nil, zero value otherwise.
 
 ### GetLimitsOk
 
-`func (o *ResourceRequirementItem) GetLimitsOk() (*ResourceRequirementItemLimits, bool)`
+`func (o *ResourceRequirementItem) GetLimitsOk() (*ResourceListItem, bool)`
 
 GetLimitsOk returns a tuple with the Limits field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimits
 
-`func (o *ResourceRequirementItem) SetLimits(v ResourceRequirementItemLimits)`
+`func (o *ResourceRequirementItem) SetLimits(v ResourceListItem)`
 
 SetLimits sets Limits field to given value.
 

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserKubeConfigRead{}
+
 // UserKubeConfigRead struct for UserKubeConfigRead
 type UserKubeConfigRead struct {
 	Token string `json:"token"`
@@ -63,11 +66,17 @@ func (o *UserKubeConfigRead) SetToken(v string) {
 }
 
 func (o UserKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["token"] = o.Token
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UserKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["token"] = o.Token
+	return toSerialize, nil
 }
 
 type NullableUserKubeConfigRead struct {

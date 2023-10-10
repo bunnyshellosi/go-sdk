@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the FromString type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FromString{}
+
 // FromString struct for FromString
 type FromString struct {
 	Type *string `json:"type,omitempty"`
@@ -44,7 +47,7 @@ func NewFromStringWithDefaults() *FromString {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FromString) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *FromString) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromString) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -62,7 +65,7 @@ func (o *FromString) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FromString) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *FromString) SetType(v string) {
 
 // GetYaml returns the Yaml field value if set, zero value otherwise.
 func (o *FromString) GetYaml() string {
-	if o == nil || o.Yaml == nil {
+	if o == nil || IsNil(o.Yaml) {
 		var ret string
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *FromString) GetYaml() string {
 // GetYamlOk returns a tuple with the Yaml field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromString) GetYamlOk() (*string, bool) {
-	if o == nil || o.Yaml == nil {
+	if o == nil || IsNil(o.Yaml) {
 		return nil, false
 	}
 	return o.Yaml, true
@@ -94,7 +97,7 @@ func (o *FromString) GetYamlOk() (*string, bool) {
 
 // HasYaml returns a boolean if a field has been set.
 func (o *FromString) HasYaml() bool {
-	if o != nil && o.Yaml != nil {
+	if o != nil && !IsNil(o.Yaml) {
 		return true
 	}
 
@@ -107,14 +110,22 @@ func (o *FromString) SetYaml(v string) {
 }
 
 func (o FromString) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if o.Yaml != nil {
-		toSerialize["yaml"] = o.Yaml
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o FromString) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Yaml) {
+		toSerialize["yaml"] = o.Yaml
+	}
+	return toSerialize, nil
 }
 
 type NullableFromString struct {

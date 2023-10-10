@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the OrganizationItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationItem{}
+
 // OrganizationItem An organization holds multiple projects and all the integrations used by environments
 type OrganizationItem struct {
 	// Organization identifier.
@@ -54,7 +57,7 @@ func NewOrganizationItemWithDefaults() *OrganizationItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *OrganizationItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -64,7 +67,7 @@ func (o *OrganizationItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -72,7 +75,7 @@ func (o *OrganizationItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *OrganizationItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -86,7 +89,7 @@ func (o *OrganizationItem) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OrganizationItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -96,7 +99,7 @@ func (o *OrganizationItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -104,7 +107,7 @@ func (o *OrganizationItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OrganizationItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -118,7 +121,7 @@ func (o *OrganizationItem) SetName(v string) {
 
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
 func (o *OrganizationItem) GetTimezone() string {
-	if o == nil || o.Timezone == nil {
+	if o == nil || IsNil(o.Timezone) {
 		var ret string
 		return ret
 	}
@@ -128,7 +131,7 @@ func (o *OrganizationItem) GetTimezone() string {
 // GetTimezoneOk returns a tuple with the Timezone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetTimezoneOk() (*string, bool) {
-	if o == nil || o.Timezone == nil {
+	if o == nil || IsNil(o.Timezone) {
 		return nil, false
 	}
 	return o.Timezone, true
@@ -136,7 +139,7 @@ func (o *OrganizationItem) GetTimezoneOk() (*string, bool) {
 
 // HasTimezone returns a boolean if a field has been set.
 func (o *OrganizationItem) HasTimezone() bool {
-	if o != nil && o.Timezone != nil {
+	if o != nil && !IsNil(o.Timezone) {
 		return true
 	}
 
@@ -150,7 +153,7 @@ func (o *OrganizationItem) SetTimezone(v string) {
 
 // GetTotalUsers returns the TotalUsers field value if set, zero value otherwise.
 func (o *OrganizationItem) GetTotalUsers() int32 {
-	if o == nil || o.TotalUsers == nil {
+	if o == nil || IsNil(o.TotalUsers) {
 		var ret int32
 		return ret
 	}
@@ -160,7 +163,7 @@ func (o *OrganizationItem) GetTotalUsers() int32 {
 // GetTotalUsersOk returns a tuple with the TotalUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetTotalUsersOk() (*int32, bool) {
-	if o == nil || o.TotalUsers == nil {
+	if o == nil || IsNil(o.TotalUsers) {
 		return nil, false
 	}
 	return o.TotalUsers, true
@@ -168,7 +171,7 @@ func (o *OrganizationItem) GetTotalUsersOk() (*int32, bool) {
 
 // HasTotalUsers returns a boolean if a field has been set.
 func (o *OrganizationItem) HasTotalUsers() bool {
-	if o != nil && o.TotalUsers != nil {
+	if o != nil && !IsNil(o.TotalUsers) {
 		return true
 	}
 
@@ -182,7 +185,7 @@ func (o *OrganizationItem) SetTotalUsers(v int32) {
 
 // GetTotalProjects returns the TotalProjects field value if set, zero value otherwise.
 func (o *OrganizationItem) GetTotalProjects() int32 {
-	if o == nil || o.TotalProjects == nil {
+	if o == nil || IsNil(o.TotalProjects) {
 		var ret int32
 		return ret
 	}
@@ -192,7 +195,7 @@ func (o *OrganizationItem) GetTotalProjects() int32 {
 // GetTotalProjectsOk returns a tuple with the TotalProjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetTotalProjectsOk() (*int32, bool) {
-	if o == nil || o.TotalProjects == nil {
+	if o == nil || IsNil(o.TotalProjects) {
 		return nil, false
 	}
 	return o.TotalProjects, true
@@ -200,7 +203,7 @@ func (o *OrganizationItem) GetTotalProjectsOk() (*int32, bool) {
 
 // HasTotalProjects returns a boolean if a field has been set.
 func (o *OrganizationItem) HasTotalProjects() bool {
-	if o != nil && o.TotalProjects != nil {
+	if o != nil && !IsNil(o.TotalProjects) {
 		return true
 	}
 
@@ -214,7 +217,7 @@ func (o *OrganizationItem) SetTotalProjects(v int32) {
 
 // GetAvailableRegistries returns the AvailableRegistries field value if set, zero value otherwise.
 func (o *OrganizationItem) GetAvailableRegistries() int32 {
-	if o == nil || o.AvailableRegistries == nil {
+	if o == nil || IsNil(o.AvailableRegistries) {
 		var ret int32
 		return ret
 	}
@@ -224,7 +227,7 @@ func (o *OrganizationItem) GetAvailableRegistries() int32 {
 // GetAvailableRegistriesOk returns a tuple with the AvailableRegistries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetAvailableRegistriesOk() (*int32, bool) {
-	if o == nil || o.AvailableRegistries == nil {
+	if o == nil || IsNil(o.AvailableRegistries) {
 		return nil, false
 	}
 	return o.AvailableRegistries, true
@@ -232,7 +235,7 @@ func (o *OrganizationItem) GetAvailableRegistriesOk() (*int32, bool) {
 
 // HasAvailableRegistries returns a boolean if a field has been set.
 func (o *OrganizationItem) HasAvailableRegistries() bool {
-	if o != nil && o.AvailableRegistries != nil {
+	if o != nil && !IsNil(o.AvailableRegistries) {
 		return true
 	}
 
@@ -246,7 +249,7 @@ func (o *OrganizationItem) SetAvailableRegistries(v int32) {
 
 // GetAvailableClusters returns the AvailableClusters field value if set, zero value otherwise.
 func (o *OrganizationItem) GetAvailableClusters() int32 {
-	if o == nil || o.AvailableClusters == nil {
+	if o == nil || IsNil(o.AvailableClusters) {
 		var ret int32
 		return ret
 	}
@@ -256,7 +259,7 @@ func (o *OrganizationItem) GetAvailableClusters() int32 {
 // GetAvailableClustersOk returns a tuple with the AvailableClusters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetAvailableClustersOk() (*int32, bool) {
-	if o == nil || o.AvailableClusters == nil {
+	if o == nil || IsNil(o.AvailableClusters) {
 		return nil, false
 	}
 	return o.AvailableClusters, true
@@ -264,7 +267,7 @@ func (o *OrganizationItem) GetAvailableClustersOk() (*int32, bool) {
 
 // HasAvailableClusters returns a boolean if a field has been set.
 func (o *OrganizationItem) HasAvailableClusters() bool {
-	if o != nil && o.AvailableClusters != nil {
+	if o != nil && !IsNil(o.AvailableClusters) {
 		return true
 	}
 
@@ -278,7 +281,7 @@ func (o *OrganizationItem) SetAvailableClusters(v int32) {
 
 // GetAvailableGitIntegration returns the AvailableGitIntegration field value if set, zero value otherwise.
 func (o *OrganizationItem) GetAvailableGitIntegration() int32 {
-	if o == nil || o.AvailableGitIntegration == nil {
+	if o == nil || IsNil(o.AvailableGitIntegration) {
 		var ret int32
 		return ret
 	}
@@ -288,7 +291,7 @@ func (o *OrganizationItem) GetAvailableGitIntegration() int32 {
 // GetAvailableGitIntegrationOk returns a tuple with the AvailableGitIntegration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationItem) GetAvailableGitIntegrationOk() (*int32, bool) {
-	if o == nil || o.AvailableGitIntegration == nil {
+	if o == nil || IsNil(o.AvailableGitIntegration) {
 		return nil, false
 	}
 	return o.AvailableGitIntegration, true
@@ -296,7 +299,7 @@ func (o *OrganizationItem) GetAvailableGitIntegrationOk() (*int32, bool) {
 
 // HasAvailableGitIntegration returns a boolean if a field has been set.
 func (o *OrganizationItem) HasAvailableGitIntegration() bool {
-	if o != nil && o.AvailableGitIntegration != nil {
+	if o != nil && !IsNil(o.AvailableGitIntegration) {
 		return true
 	}
 
@@ -309,32 +312,40 @@ func (o *OrganizationItem) SetAvailableGitIntegration(v int32) {
 }
 
 func (o OrganizationItem) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Timezone != nil {
-		toSerialize["timezone"] = o.Timezone
-	}
-	if o.TotalUsers != nil {
-		toSerialize["totalUsers"] = o.TotalUsers
-	}
-	if o.TotalProjects != nil {
-		toSerialize["totalProjects"] = o.TotalProjects
-	}
-	if o.AvailableRegistries != nil {
-		toSerialize["availableRegistries"] = o.AvailableRegistries
-	}
-	if o.AvailableClusters != nil {
-		toSerialize["availableClusters"] = o.AvailableClusters
-	}
-	if o.AvailableGitIntegration != nil {
-		toSerialize["availableGitIntegration"] = o.AvailableGitIntegration
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationItem) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Timezone) {
+		toSerialize["timezone"] = o.Timezone
+	}
+	if !IsNil(o.TotalUsers) {
+		toSerialize["totalUsers"] = o.TotalUsers
+	}
+	if !IsNil(o.TotalProjects) {
+		toSerialize["totalProjects"] = o.TotalProjects
+	}
+	if !IsNil(o.AvailableRegistries) {
+		toSerialize["availableRegistries"] = o.AvailableRegistries
+	}
+	if !IsNil(o.AvailableClusters) {
+		toSerialize["availableClusters"] = o.AvailableClusters
+	}
+	if !IsNil(o.AvailableGitIntegration) {
+		toSerialize["availableGitIntegration"] = o.AvailableGitIntegration
+	}
+	return toSerialize, nil
 }
 
 type NullableOrganizationItem struct {

@@ -15,14 +15,17 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaginatedLinks type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaginatedLinks{}
+
 // PaginatedLinks struct for PaginatedLinks
 type PaginatedLinks struct {
-	Self  *PaginatedLink              `json:"self,omitempty"`
-	First NullablePaginatedLinksFirst `json:"first,omitempty"`
-	Prev  NullablePaginatedLinksFirst `json:"prev,omitempty"`
-	Next  NullablePaginatedLinksFirst `json:"next,omitempty"`
-	Last  NullablePaginatedLinksFirst `json:"last,omitempty"`
-	Item  []PaginatedLink             `json:"item,omitempty"`
+	Self  *PaginatedLink        `json:"self,omitempty"`
+	First NullablePaginatedLink `json:"first,omitempty"`
+	Prev  NullablePaginatedLink `json:"prev,omitempty"`
+	Next  NullablePaginatedLink `json:"next,omitempty"`
+	Last  NullablePaginatedLink `json:"last,omitempty"`
+	Item  []PaginatedLink       `json:"item,omitempty"`
 }
 
 // NewPaginatedLinks instantiates a new PaginatedLinks object
@@ -44,7 +47,7 @@ func NewPaginatedLinksWithDefaults() *PaginatedLinks {
 
 // GetSelf returns the Self field value if set, zero value otherwise.
 func (o *PaginatedLinks) GetSelf() PaginatedLink {
-	if o == nil || o.Self == nil {
+	if o == nil || IsNil(o.Self) {
 		var ret PaginatedLink
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *PaginatedLinks) GetSelf() PaginatedLink {
 // GetSelfOk returns a tuple with the Self field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedLinks) GetSelfOk() (*PaginatedLink, bool) {
-	if o == nil || o.Self == nil {
+	if o == nil || IsNil(o.Self) {
 		return nil, false
 	}
 	return o.Self, true
@@ -62,7 +65,7 @@ func (o *PaginatedLinks) GetSelfOk() (*PaginatedLink, bool) {
 
 // HasSelf returns a boolean if a field has been set.
 func (o *PaginatedLinks) HasSelf() bool {
-	if o != nil && o.Self != nil {
+	if o != nil && !IsNil(o.Self) {
 		return true
 	}
 
@@ -75,9 +78,9 @@ func (o *PaginatedLinks) SetSelf(v PaginatedLink) {
 }
 
 // GetFirst returns the First field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedLinks) GetFirst() PaginatedLinksFirst {
-	if o == nil || o.First.Get() == nil {
-		var ret PaginatedLinksFirst
+func (o *PaginatedLinks) GetFirst() PaginatedLink {
+	if o == nil || IsNil(o.First.Get()) {
+		var ret PaginatedLink
 		return ret
 	}
 	return *o.First.Get()
@@ -86,7 +89,7 @@ func (o *PaginatedLinks) GetFirst() PaginatedLinksFirst {
 // GetFirstOk returns a tuple with the First field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedLinks) GetFirstOk() (*PaginatedLinksFirst, bool) {
+func (o *PaginatedLinks) GetFirstOk() (*PaginatedLink, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,8 +105,8 @@ func (o *PaginatedLinks) HasFirst() bool {
 	return false
 }
 
-// SetFirst gets a reference to the given NullablePaginatedLinksFirst and assigns it to the First field.
-func (o *PaginatedLinks) SetFirst(v PaginatedLinksFirst) {
+// SetFirst gets a reference to the given NullablePaginatedLink and assigns it to the First field.
+func (o *PaginatedLinks) SetFirst(v PaginatedLink) {
 	o.First.Set(&v)
 }
 
@@ -118,9 +121,9 @@ func (o *PaginatedLinks) UnsetFirst() {
 }
 
 // GetPrev returns the Prev field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedLinks) GetPrev() PaginatedLinksFirst {
-	if o == nil || o.Prev.Get() == nil {
-		var ret PaginatedLinksFirst
+func (o *PaginatedLinks) GetPrev() PaginatedLink {
+	if o == nil || IsNil(o.Prev.Get()) {
+		var ret PaginatedLink
 		return ret
 	}
 	return *o.Prev.Get()
@@ -129,7 +132,7 @@ func (o *PaginatedLinks) GetPrev() PaginatedLinksFirst {
 // GetPrevOk returns a tuple with the Prev field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedLinks) GetPrevOk() (*PaginatedLinksFirst, bool) {
+func (o *PaginatedLinks) GetPrevOk() (*PaginatedLink, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,8 +148,8 @@ func (o *PaginatedLinks) HasPrev() bool {
 	return false
 }
 
-// SetPrev gets a reference to the given NullablePaginatedLinksFirst and assigns it to the Prev field.
-func (o *PaginatedLinks) SetPrev(v PaginatedLinksFirst) {
+// SetPrev gets a reference to the given NullablePaginatedLink and assigns it to the Prev field.
+func (o *PaginatedLinks) SetPrev(v PaginatedLink) {
 	o.Prev.Set(&v)
 }
 
@@ -161,9 +164,9 @@ func (o *PaginatedLinks) UnsetPrev() {
 }
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedLinks) GetNext() PaginatedLinksFirst {
-	if o == nil || o.Next.Get() == nil {
-		var ret PaginatedLinksFirst
+func (o *PaginatedLinks) GetNext() PaginatedLink {
+	if o == nil || IsNil(o.Next.Get()) {
+		var ret PaginatedLink
 		return ret
 	}
 	return *o.Next.Get()
@@ -172,7 +175,7 @@ func (o *PaginatedLinks) GetNext() PaginatedLinksFirst {
 // GetNextOk returns a tuple with the Next field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedLinks) GetNextOk() (*PaginatedLinksFirst, bool) {
+func (o *PaginatedLinks) GetNextOk() (*PaginatedLink, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,8 +191,8 @@ func (o *PaginatedLinks) HasNext() bool {
 	return false
 }
 
-// SetNext gets a reference to the given NullablePaginatedLinksFirst and assigns it to the Next field.
-func (o *PaginatedLinks) SetNext(v PaginatedLinksFirst) {
+// SetNext gets a reference to the given NullablePaginatedLink and assigns it to the Next field.
+func (o *PaginatedLinks) SetNext(v PaginatedLink) {
 	o.Next.Set(&v)
 }
 
@@ -204,9 +207,9 @@ func (o *PaginatedLinks) UnsetNext() {
 }
 
 // GetLast returns the Last field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaginatedLinks) GetLast() PaginatedLinksFirst {
-	if o == nil || o.Last.Get() == nil {
-		var ret PaginatedLinksFirst
+func (o *PaginatedLinks) GetLast() PaginatedLink {
+	if o == nil || IsNil(o.Last.Get()) {
+		var ret PaginatedLink
 		return ret
 	}
 	return *o.Last.Get()
@@ -215,7 +218,7 @@ func (o *PaginatedLinks) GetLast() PaginatedLinksFirst {
 // GetLastOk returns a tuple with the Last field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaginatedLinks) GetLastOk() (*PaginatedLinksFirst, bool) {
+func (o *PaginatedLinks) GetLastOk() (*PaginatedLink, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -231,8 +234,8 @@ func (o *PaginatedLinks) HasLast() bool {
 	return false
 }
 
-// SetLast gets a reference to the given NullablePaginatedLinksFirst and assigns it to the Last field.
-func (o *PaginatedLinks) SetLast(v PaginatedLinksFirst) {
+// SetLast gets a reference to the given NullablePaginatedLink and assigns it to the Last field.
+func (o *PaginatedLinks) SetLast(v PaginatedLink) {
 	o.Last.Set(&v)
 }
 
@@ -248,7 +251,7 @@ func (o *PaginatedLinks) UnsetLast() {
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *PaginatedLinks) GetItem() []PaginatedLink {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []PaginatedLink
 		return ret
 	}
@@ -258,7 +261,7 @@ func (o *PaginatedLinks) GetItem() []PaginatedLink {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedLinks) GetItemOk() ([]PaginatedLink, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -266,7 +269,7 @@ func (o *PaginatedLinks) GetItemOk() ([]PaginatedLink, bool) {
 
 // HasItem returns a boolean if a field has been set.
 func (o *PaginatedLinks) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -279,8 +282,16 @@ func (o *PaginatedLinks) SetItem(v []PaginatedLink) {
 }
 
 func (o PaginatedLinks) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PaginatedLinks) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Self != nil {
+	if !IsNil(o.Self) {
 		toSerialize["self"] = o.Self
 	}
 	if o.First.IsSet() {
@@ -295,10 +306,10 @@ func (o PaginatedLinks) MarshalJSON() ([]byte, error) {
 	if o.Last.IsSet() {
 		toSerialize["last"] = o.Last.Get()
 	}
-	if o.Item != nil {
+	if !IsNil(o.Item) {
 		toSerialize["item"] = o.Item
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePaginatedLinks struct {

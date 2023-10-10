@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ComponentGitCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentGitCollection{}
+
 // ComponentGitCollection Git info
 type ComponentGitCollection struct {
 	// Service component identifier
@@ -54,7 +57,7 @@ func NewComponentGitCollectionWithDefaults() *ComponentGitCollection {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ComponentGitCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -64,7 +67,7 @@ func (o *ComponentGitCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentGitCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -72,7 +75,7 @@ func (o *ComponentGitCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ComponentGitCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -86,7 +89,7 @@ func (o *ComponentGitCollection) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComponentGitCollection) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -96,7 +99,7 @@ func (o *ComponentGitCollection) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentGitCollection) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -104,7 +107,7 @@ func (o *ComponentGitCollection) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComponentGitCollection) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -118,7 +121,7 @@ func (o *ComponentGitCollection) SetName(v string) {
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
 func (o *ComponentGitCollection) GetRepository() string {
-	if o == nil || o.Repository == nil {
+	if o == nil || IsNil(o.Repository) {
 		var ret string
 		return ret
 	}
@@ -128,7 +131,7 @@ func (o *ComponentGitCollection) GetRepository() string {
 // GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentGitCollection) GetRepositoryOk() (*string, bool) {
-	if o == nil || o.Repository == nil {
+	if o == nil || IsNil(o.Repository) {
 		return nil, false
 	}
 	return o.Repository, true
@@ -136,7 +139,7 @@ func (o *ComponentGitCollection) GetRepositoryOk() (*string, bool) {
 
 // HasRepository returns a boolean if a field has been set.
 func (o *ComponentGitCollection) HasRepository() bool {
-	if o != nil && o.Repository != nil {
+	if o != nil && !IsNil(o.Repository) {
 		return true
 	}
 
@@ -150,7 +153,7 @@ func (o *ComponentGitCollection) SetRepository(v string) {
 
 // GetRefName returns the RefName field value if set, zero value otherwise.
 func (o *ComponentGitCollection) GetRefName() string {
-	if o == nil || o.RefName == nil {
+	if o == nil || IsNil(o.RefName) {
 		var ret string
 		return ret
 	}
@@ -160,7 +163,7 @@ func (o *ComponentGitCollection) GetRefName() string {
 // GetRefNameOk returns a tuple with the RefName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentGitCollection) GetRefNameOk() (*string, bool) {
-	if o == nil || o.RefName == nil {
+	if o == nil || IsNil(o.RefName) {
 		return nil, false
 	}
 	return o.RefName, true
@@ -168,7 +171,7 @@ func (o *ComponentGitCollection) GetRefNameOk() (*string, bool) {
 
 // HasRefName returns a boolean if a field has been set.
 func (o *ComponentGitCollection) HasRefName() bool {
-	if o != nil && o.RefName != nil {
+	if o != nil && !IsNil(o.RefName) {
 		return true
 	}
 
@@ -182,7 +185,7 @@ func (o *ComponentGitCollection) SetRefName(v string) {
 
 // GetPath returns the Path field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComponentGitCollection) GetPath() string {
-	if o == nil || o.Path.Get() == nil {
+	if o == nil || IsNil(o.Path.Get()) {
 		var ret string
 		return ret
 	}
@@ -225,7 +228,7 @@ func (o *ComponentGitCollection) UnsetPath() {
 
 // GetRefSha returns the RefSha field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComponentGitCollection) GetRefSha() string {
-	if o == nil || o.RefSha.Get() == nil {
+	if o == nil || IsNil(o.RefSha.Get()) {
 		var ret string
 		return ret
 	}
@@ -268,7 +271,7 @@ func (o *ComponentGitCollection) UnsetRefSha() {
 
 // GetDeployedSha returns the DeployedSha field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComponentGitCollection) GetDeployedSha() string {
-	if o == nil || o.DeployedSha.Get() == nil {
+	if o == nil || IsNil(o.DeployedSha.Get()) {
 		var ret string
 		return ret
 	}
@@ -311,7 +314,7 @@ func (o *ComponentGitCollection) UnsetDeployedSha() {
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *ComponentGitCollection) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		var ret string
 		return ret
 	}
@@ -321,7 +324,7 @@ func (o *ComponentGitCollection) GetEnvironment() string {
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentGitCollection) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -329,7 +332,7 @@ func (o *ComponentGitCollection) GetEnvironmentOk() (*string, bool) {
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *ComponentGitCollection) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -342,17 +345,25 @@ func (o *ComponentGitCollection) SetEnvironment(v string) {
 }
 
 func (o ComponentGitCollection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComponentGitCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Repository != nil {
+	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
 	}
-	if o.RefName != nil {
+	if !IsNil(o.RefName) {
 		toSerialize["refName"] = o.RefName
 	}
 	if o.Path.IsSet() {
@@ -364,10 +375,10 @@ func (o ComponentGitCollection) MarshalJSON() ([]byte, error) {
 	if o.DeployedSha.IsSet() {
 		toSerialize["deployedSha"] = o.DeployedSha.Get()
 	}
-	if o.Environment != nil {
+	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableComponentGitCollection struct {

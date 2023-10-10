@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// EnvironmentApiService EnvironmentApi service
-type EnvironmentApiService service
+// EnvironmentAPIService EnvironmentAPI service
+type EnvironmentAPIService service
 
 type ApiEnvironmentCloneRequest struct {
 	ctx                    context.Context
-	ApiService             *EnvironmentApiService
+	ApiService             *EnvironmentAPIService
 	id                     string
 	environmentCloneAction *EnvironmentCloneAction
 }
@@ -49,7 +49,7 @@ Clone an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentCloneRequest
 */
-func (a *EnvironmentApiService) EnvironmentClone(ctx context.Context, id string) ApiEnvironmentCloneRequest {
+func (a *EnvironmentAPIService) EnvironmentClone(ctx context.Context, id string) ApiEnvironmentCloneRequest {
 	return ApiEnvironmentCloneRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -60,7 +60,7 @@ func (a *EnvironmentApiService) EnvironmentClone(ctx context.Context, id string)
 // Execute executes the request
 //
 //	@return EnvironmentItem
-func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneRequest) (*EnvironmentItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentCloneExecute(r ApiEnvironmentCloneRequest) (*EnvironmentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -68,13 +68,13 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 		localVarReturnValue *EnvironmentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentClone")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentClone")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/clone"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -105,20 +105,6 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -127,6 +113,20 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -159,6 +159,7 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -178,7 +179,7 @@ func (a *EnvironmentApiService) EnvironmentCloneExecute(r ApiEnvironmentCloneReq
 
 type ApiEnvironmentCreateRequest struct {
 	ctx                     context.Context
-	ApiService              *EnvironmentApiService
+	ApiService              *EnvironmentAPIService
 	environmentCreateAction *EnvironmentCreateAction
 }
 
@@ -200,7 +201,7 @@ Creates a new environment.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiEnvironmentCreateRequest
 */
-func (a *EnvironmentApiService) EnvironmentCreate(ctx context.Context) ApiEnvironmentCreateRequest {
+func (a *EnvironmentAPIService) EnvironmentCreate(ctx context.Context) ApiEnvironmentCreateRequest {
 	return ApiEnvironmentCreateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -210,7 +211,7 @@ func (a *EnvironmentApiService) EnvironmentCreate(ctx context.Context) ApiEnviro
 // Execute executes the request
 //
 //	@return EnvironmentItem
-func (a *EnvironmentApiService) EnvironmentCreateExecute(r ApiEnvironmentCreateRequest) (*EnvironmentItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentCreateExecute(r ApiEnvironmentCreateRequest) (*EnvironmentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -218,7 +219,7 @@ func (a *EnvironmentApiService) EnvironmentCreateExecute(r ApiEnvironmentCreateR
 		localVarReturnValue *EnvironmentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentCreate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentCreate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -254,20 +255,6 @@ func (a *EnvironmentApiService) EnvironmentCreateExecute(r ApiEnvironmentCreateR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -276,6 +263,20 @@ func (a *EnvironmentApiService) EnvironmentCreateExecute(r ApiEnvironmentCreateR
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -308,6 +309,7 @@ func (a *EnvironmentApiService) EnvironmentCreateExecute(r ApiEnvironmentCreateR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -327,7 +329,7 @@ func (a *EnvironmentApiService) EnvironmentCreateExecute(r ApiEnvironmentCreateR
 
 type ApiEnvironmentDefinitionRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 }
 
@@ -344,7 +346,7 @@ View the bunnyshell manifest for the environment
 	@param id Resource identifier
 	@return ApiEnvironmentDefinitionRequest
 */
-func (a *EnvironmentApiService) EnvironmentDefinition(ctx context.Context, id string) ApiEnvironmentDefinitionRequest {
+func (a *EnvironmentAPIService) EnvironmentDefinition(ctx context.Context, id string) ApiEnvironmentDefinitionRequest {
 	return ApiEnvironmentDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -355,7 +357,7 @@ func (a *EnvironmentApiService) EnvironmentDefinition(ctx context.Context, id st
 // Execute executes the request
 //
 //	@return map[string]interface{}
-func (a *EnvironmentApiService) EnvironmentDefinitionExecute(r ApiEnvironmentDefinitionRequest) (map[string]interface{}, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentDefinitionExecute(r ApiEnvironmentDefinitionRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -363,13 +365,13 @@ func (a *EnvironmentApiService) EnvironmentDefinitionExecute(r ApiEnvironmentDef
 		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentDefinition")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentDefinition")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/definition"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -395,20 +397,6 @@ func (a *EnvironmentApiService) EnvironmentDefinitionExecute(r ApiEnvironmentDef
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -417,6 +405,20 @@ func (a *EnvironmentApiService) EnvironmentDefinitionExecute(r ApiEnvironmentDef
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -449,6 +451,7 @@ func (a *EnvironmentApiService) EnvironmentDefinitionExecute(r ApiEnvironmentDef
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -468,7 +471,7 @@ func (a *EnvironmentApiService) EnvironmentDefinitionExecute(r ApiEnvironmentDef
 
 type ApiEnvironmentDeleteRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 	body       *interface{}
 }
@@ -492,7 +495,7 @@ Delete a specific environment.
 	@param id Resource identifier
 	@return ApiEnvironmentDeleteRequest
 */
-func (a *EnvironmentApiService) EnvironmentDelete(ctx context.Context, id string) ApiEnvironmentDeleteRequest {
+func (a *EnvironmentAPIService) EnvironmentDelete(ctx context.Context, id string) ApiEnvironmentDeleteRequest {
 	return ApiEnvironmentDeleteRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -503,7 +506,7 @@ func (a *EnvironmentApiService) EnvironmentDelete(ctx context.Context, id string
 // Execute executes the request
 //
 //	@return EventItem
-func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteRequest) (*EventItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteRequest) (*EventItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -511,13 +514,13 @@ func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 		localVarReturnValue *EventItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentDelete")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentDelete")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/delete"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -545,20 +548,6 @@ func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -567,6 +556,20 @@ func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -599,6 +602,7 @@ func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -618,7 +622,7 @@ func (a *EnvironmentApiService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 
 type ApiEnvironmentDeployRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 	body       *interface{}
 }
@@ -642,7 +646,7 @@ Deploy an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentDeployRequest
 */
-func (a *EnvironmentApiService) EnvironmentDeploy(ctx context.Context, id string) ApiEnvironmentDeployRequest {
+func (a *EnvironmentAPIService) EnvironmentDeploy(ctx context.Context, id string) ApiEnvironmentDeployRequest {
 	return ApiEnvironmentDeployRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -653,7 +657,7 @@ func (a *EnvironmentApiService) EnvironmentDeploy(ctx context.Context, id string
 // Execute executes the request
 //
 //	@return EventItem
-func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployRequest) (*EventItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentDeployExecute(r ApiEnvironmentDeployRequest) (*EventItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -661,13 +665,13 @@ func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 		localVarReturnValue *EventItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentDeploy")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentDeploy")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/deploy"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -695,20 +699,6 @@ func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -717,6 +707,20 @@ func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -749,6 +753,7 @@ func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -768,7 +773,7 @@ func (a *EnvironmentApiService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 
 type ApiEnvironmentEditComponentsRequest struct {
 	ctx                             context.Context
-	ApiService                      *EnvironmentApiService
+	ApiService                      *EnvironmentAPIService
 	id                              string
 	environmentEditComponentsAction *EnvironmentEditComponentsAction
 }
@@ -792,7 +797,7 @@ Edit the components of an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentEditComponentsRequest
 */
-func (a *EnvironmentApiService) EnvironmentEditComponents(ctx context.Context, id string) ApiEnvironmentEditComponentsRequest {
+func (a *EnvironmentAPIService) EnvironmentEditComponents(ctx context.Context, id string) ApiEnvironmentEditComponentsRequest {
 	return ApiEnvironmentEditComponentsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -803,7 +808,7 @@ func (a *EnvironmentApiService) EnvironmentEditComponents(ctx context.Context, i
 // Execute executes the request
 //
 //	@return EnvironmentItem
-func (a *EnvironmentApiService) EnvironmentEditComponentsExecute(r ApiEnvironmentEditComponentsRequest) (*EnvironmentItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentEditComponentsExecute(r ApiEnvironmentEditComponentsRequest) (*EnvironmentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -811,13 +816,13 @@ func (a *EnvironmentApiService) EnvironmentEditComponentsExecute(r ApiEnvironmen
 		localVarReturnValue *EnvironmentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentEditComponents")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentEditComponents")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/components"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -848,20 +853,6 @@ func (a *EnvironmentApiService) EnvironmentEditComponentsExecute(r ApiEnvironmen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -870,6 +861,20 @@ func (a *EnvironmentApiService) EnvironmentEditComponentsExecute(r ApiEnvironmen
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -902,6 +907,7 @@ func (a *EnvironmentApiService) EnvironmentEditComponentsExecute(r ApiEnvironmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -921,7 +927,7 @@ func (a *EnvironmentApiService) EnvironmentEditComponentsExecute(r ApiEnvironmen
 
 type ApiEnvironmentEditConfigurationRequest struct {
 	ctx                          context.Context
-	ApiService                   *EnvironmentApiService
+	ApiService                   *EnvironmentAPIService
 	id                           string
 	environmentEditConfiguration *EnvironmentEditConfiguration
 }
@@ -945,7 +951,7 @@ Edit an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentEditConfigurationRequest
 */
-func (a *EnvironmentApiService) EnvironmentEditConfiguration(ctx context.Context, id string) ApiEnvironmentEditConfigurationRequest {
+func (a *EnvironmentAPIService) EnvironmentEditConfiguration(ctx context.Context, id string) ApiEnvironmentEditConfigurationRequest {
 	return ApiEnvironmentEditConfigurationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -956,7 +962,7 @@ func (a *EnvironmentApiService) EnvironmentEditConfiguration(ctx context.Context
 // Execute executes the request
 //
 //	@return EnvironmentItem
-func (a *EnvironmentApiService) EnvironmentEditConfigurationExecute(r ApiEnvironmentEditConfigurationRequest) (*EnvironmentItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentEditConfigurationExecute(r ApiEnvironmentEditConfigurationRequest) (*EnvironmentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -964,13 +970,13 @@ func (a *EnvironmentApiService) EnvironmentEditConfigurationExecute(r ApiEnviron
 		localVarReturnValue *EnvironmentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentEditConfiguration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentEditConfiguration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/configuration"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1001,20 +1007,6 @@ func (a *EnvironmentApiService) EnvironmentEditConfigurationExecute(r ApiEnviron
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1023,6 +1015,20 @@ func (a *EnvironmentApiService) EnvironmentEditConfigurationExecute(r ApiEnviron
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -1055,6 +1061,7 @@ func (a *EnvironmentApiService) EnvironmentEditConfigurationExecute(r ApiEnviron
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1074,7 +1081,7 @@ func (a *EnvironmentApiService) EnvironmentEditConfigurationExecute(r ApiEnviron
 
 type ApiEnvironmentEditSettingsRequest struct {
 	ctx                     context.Context
-	ApiService              *EnvironmentApiService
+	ApiService              *EnvironmentAPIService
 	id                      string
 	environmentEditSettings *EnvironmentEditSettings
 }
@@ -1098,7 +1105,7 @@ Edit an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentEditSettingsRequest
 */
-func (a *EnvironmentApiService) EnvironmentEditSettings(ctx context.Context, id string) ApiEnvironmentEditSettingsRequest {
+func (a *EnvironmentAPIService) EnvironmentEditSettings(ctx context.Context, id string) ApiEnvironmentEditSettingsRequest {
 	return ApiEnvironmentEditSettingsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1109,7 +1116,7 @@ func (a *EnvironmentApiService) EnvironmentEditSettings(ctx context.Context, id 
 // Execute executes the request
 //
 //	@return EnvironmentItem
-func (a *EnvironmentApiService) EnvironmentEditSettingsExecute(r ApiEnvironmentEditSettingsRequest) (*EnvironmentItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentEditSettingsExecute(r ApiEnvironmentEditSettingsRequest) (*EnvironmentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -1117,13 +1124,13 @@ func (a *EnvironmentApiService) EnvironmentEditSettingsExecute(r ApiEnvironmentE
 		localVarReturnValue *EnvironmentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentEditSettings")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentEditSettings")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/settings"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1154,20 +1161,6 @@ func (a *EnvironmentApiService) EnvironmentEditSettingsExecute(r ApiEnvironmentE
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1176,6 +1169,20 @@ func (a *EnvironmentApiService) EnvironmentEditSettingsExecute(r ApiEnvironmentE
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -1208,6 +1215,7 @@ func (a *EnvironmentApiService) EnvironmentEditSettingsExecute(r ApiEnvironmentE
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1227,7 +1235,7 @@ func (a *EnvironmentApiService) EnvironmentEditSettingsExecute(r ApiEnvironmentE
 
 type ApiEnvironmentKubeConfigRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 }
 
@@ -1244,7 +1252,7 @@ Download Kubernetes Config File
 	@param id Resource identifier
 	@return ApiEnvironmentKubeConfigRequest
 */
-func (a *EnvironmentApiService) EnvironmentKubeConfig(ctx context.Context, id string) ApiEnvironmentKubeConfigRequest {
+func (a *EnvironmentAPIService) EnvironmentKubeConfig(ctx context.Context, id string) ApiEnvironmentKubeConfigRequest {
 	return ApiEnvironmentKubeConfigRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1255,7 +1263,7 @@ func (a *EnvironmentApiService) EnvironmentKubeConfig(ctx context.Context, id st
 // Execute executes the request
 //
 //	@return EnvironmentKubeConfigKubeConfigRead
-func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKubeConfigRequest) (*EnvironmentKubeConfigKubeConfigRead, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentKubeConfigExecute(r ApiEnvironmentKubeConfigRequest) (*EnvironmentKubeConfigKubeConfigRead, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -1263,13 +1271,13 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 		localVarReturnValue *EnvironmentKubeConfigKubeConfigRead
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentKubeConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentKubeConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/kube-config"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1295,20 +1303,6 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1317,6 +1311,20 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -1349,6 +1357,7 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1368,7 +1377,7 @@ func (a *EnvironmentApiService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 
 type ApiEnvironmentListRequest struct {
 	ctx                   context.Context
-	ApiService            *EnvironmentApiService
+	ApiService            *EnvironmentAPIService
 	page                  *int32
 	organization          *string
 	kubernetesIntegration *string
@@ -1377,6 +1386,7 @@ type ApiEnvironmentListRequest struct {
 	clusterStatus         *string
 	search                *string
 	project               *string
+	labels                *map[string]string
 }
 
 // The collection page number
@@ -1427,6 +1437,12 @@ func (r ApiEnvironmentListRequest) Project(project string) ApiEnvironmentListReq
 	return r
 }
 
+// Filter by label key-value pair.
+func (r ApiEnvironmentListRequest) Labels(labels map[string]string) ApiEnvironmentListRequest {
+	r.labels = &labels
+	return r
+}
+
 func (r ApiEnvironmentListRequest) Execute() (*PaginatedEnvironmentCollection, *http.Response, error) {
 	return r.ApiService.EnvironmentListExecute(r)
 }
@@ -1439,7 +1455,7 @@ List environments matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiEnvironmentListRequest
 */
-func (a *EnvironmentApiService) EnvironmentList(ctx context.Context) ApiEnvironmentListRequest {
+func (a *EnvironmentAPIService) EnvironmentList(ctx context.Context) ApiEnvironmentListRequest {
 	return ApiEnvironmentListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1449,7 +1465,7 @@ func (a *EnvironmentApiService) EnvironmentList(ctx context.Context) ApiEnvironm
 // Execute executes the request
 //
 //	@return PaginatedEnvironmentCollection
-func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListRequest) (*PaginatedEnvironmentCollection, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentListExecute(r ApiEnvironmentListRequest) (*PaginatedEnvironmentCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -1457,7 +1473,7 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 		localVarReturnValue *PaginatedEnvironmentCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1469,28 +1485,34 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.kubernetesIntegration != nil {
-		localVarQueryParams.Add("kubernetesIntegration", parameterToString(*r.kubernetesIntegration, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "kubernetesIntegration", r.kubernetesIntegration, "")
 	}
 	if r.type_ != nil {
-		localVarQueryParams.Add("type", parameterToString(*r.type_, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
 	}
 	if r.operationStatus != nil {
-		localVarQueryParams.Add("operationStatus", parameterToString(*r.operationStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "operationStatus", r.operationStatus, "")
 	}
 	if r.clusterStatus != nil {
-		localVarQueryParams.Add("clusterStatus", parameterToString(*r.clusterStatus, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "clusterStatus", r.clusterStatus, "")
 	}
 	if r.search != nil {
-		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
 	}
 	if r.project != nil {
-		localVarQueryParams.Add("project", parameterToString(*r.project, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")
+	}
+	if r.labels != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "labels", r.labels, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1512,20 +1534,6 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1534,6 +1542,20 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -1566,6 +1588,7 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1585,7 +1608,7 @@ func (a *EnvironmentApiService) EnvironmentListExecute(r ApiEnvironmentListReque
 
 type ApiEnvironmentStartRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 	body       *interface{}
 }
@@ -1609,7 +1632,7 @@ Start an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentStartRequest
 */
-func (a *EnvironmentApiService) EnvironmentStart(ctx context.Context, id string) ApiEnvironmentStartRequest {
+func (a *EnvironmentAPIService) EnvironmentStart(ctx context.Context, id string) ApiEnvironmentStartRequest {
 	return ApiEnvironmentStartRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1620,7 +1643,7 @@ func (a *EnvironmentApiService) EnvironmentStart(ctx context.Context, id string)
 // Execute executes the request
 //
 //	@return EventItem
-func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartRequest) (*EventItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentStartExecute(r ApiEnvironmentStartRequest) (*EventItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1628,13 +1651,13 @@ func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 		localVarReturnValue *EventItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentStart")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentStart")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/start"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1662,20 +1685,6 @@ func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1684,6 +1693,20 @@ func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -1716,6 +1739,7 @@ func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1735,7 +1759,7 @@ func (a *EnvironmentApiService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 
 type ApiEnvironmentStopRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 	body       *interface{}
 }
@@ -1759,7 +1783,7 @@ Stop an environment.
 	@param id Resource identifier
 	@return ApiEnvironmentStopRequest
 */
-func (a *EnvironmentApiService) EnvironmentStop(ctx context.Context, id string) ApiEnvironmentStopRequest {
+func (a *EnvironmentAPIService) EnvironmentStop(ctx context.Context, id string) ApiEnvironmentStopRequest {
 	return ApiEnvironmentStopRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1770,7 +1794,7 @@ func (a *EnvironmentApiService) EnvironmentStop(ctx context.Context, id string) 
 // Execute executes the request
 //
 //	@return EventItem
-func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopRequest) (*EventItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentStopExecute(r ApiEnvironmentStopRequest) (*EventItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1778,13 +1802,13 @@ func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 		localVarReturnValue *EventItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentStop")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentStop")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}/stop"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1812,20 +1836,6 @@ func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1834,6 +1844,20 @@ func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -1866,6 +1890,7 @@ func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1885,7 +1910,7 @@ func (a *EnvironmentApiService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 
 type ApiEnvironmentViewRequest struct {
 	ctx        context.Context
-	ApiService *EnvironmentApiService
+	ApiService *EnvironmentAPIService
 	id         string
 }
 
@@ -1902,7 +1927,7 @@ View a specific environment.
 	@param id Resource identifier
 	@return ApiEnvironmentViewRequest
 */
-func (a *EnvironmentApiService) EnvironmentView(ctx context.Context, id string) ApiEnvironmentViewRequest {
+func (a *EnvironmentAPIService) EnvironmentView(ctx context.Context, id string) ApiEnvironmentViewRequest {
 	return ApiEnvironmentViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1913,7 +1938,7 @@ func (a *EnvironmentApiService) EnvironmentView(ctx context.Context, id string) 
 // Execute executes the request
 //
 //	@return EnvironmentItem
-func (a *EnvironmentApiService) EnvironmentViewExecute(r ApiEnvironmentViewRequest) (*EnvironmentItem, *http.Response, error) {
+func (a *EnvironmentAPIService) EnvironmentViewExecute(r ApiEnvironmentViewRequest) (*EnvironmentItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -1921,13 +1946,13 @@ func (a *EnvironmentApiService) EnvironmentViewExecute(r ApiEnvironmentViewReque
 		localVarReturnValue *EnvironmentItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentApiService.EnvironmentView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentAPIService.EnvironmentView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/environments/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1953,20 +1978,6 @@ func (a *EnvironmentApiService) EnvironmentViewExecute(r ApiEnvironmentViewReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1975,6 +1986,20 @@ func (a *EnvironmentApiService) EnvironmentViewExecute(r ApiEnvironmentViewReque
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -2007,6 +2032,7 @@ func (a *EnvironmentApiService) EnvironmentViewExecute(r ApiEnvironmentViewReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

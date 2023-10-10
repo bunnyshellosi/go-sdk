@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the KubernetesIntegrationCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &KubernetesIntegrationCollection{}
+
 // KubernetesIntegrationCollection A Kubernetes integration stores connection information for a Kubernetes cluster.
 type KubernetesIntegrationCollection struct {
 	// Kubernetes integration identifier.
@@ -50,7 +53,7 @@ func NewKubernetesIntegrationCollectionWithDefaults() *KubernetesIntegrationColl
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *KubernetesIntegrationCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *KubernetesIntegrationCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesIntegrationCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -68,7 +71,7 @@ func (o *KubernetesIntegrationCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *KubernetesIntegrationCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *KubernetesIntegrationCollection) SetId(v string) {
 
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *KubernetesIntegrationCollection) GetClusterName() string {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		var ret string
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *KubernetesIntegrationCollection) GetClusterName() string {
 // GetClusterNameOk returns a tuple with the ClusterName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesIntegrationCollection) GetClusterNameOk() (*string, bool) {
-	if o == nil || o.ClusterName == nil {
+	if o == nil || IsNil(o.ClusterName) {
 		return nil, false
 	}
 	return o.ClusterName, true
@@ -100,7 +103,7 @@ func (o *KubernetesIntegrationCollection) GetClusterNameOk() (*string, bool) {
 
 // HasClusterName returns a boolean if a field has been set.
 func (o *KubernetesIntegrationCollection) HasClusterName() bool {
-	if o != nil && o.ClusterName != nil {
+	if o != nil && !IsNil(o.ClusterName) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *KubernetesIntegrationCollection) SetClusterName(v string) {
 
 // GetCloudName returns the CloudName field value if set, zero value otherwise.
 func (o *KubernetesIntegrationCollection) GetCloudName() string {
-	if o == nil || o.CloudName == nil {
+	if o == nil || IsNil(o.CloudName) {
 		var ret string
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *KubernetesIntegrationCollection) GetCloudName() string {
 // GetCloudNameOk returns a tuple with the CloudName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesIntegrationCollection) GetCloudNameOk() (*string, bool) {
-	if o == nil || o.CloudName == nil {
+	if o == nil || IsNil(o.CloudName) {
 		return nil, false
 	}
 	return o.CloudName, true
@@ -132,7 +135,7 @@ func (o *KubernetesIntegrationCollection) GetCloudNameOk() (*string, bool) {
 
 // HasCloudName returns a boolean if a field has been set.
 func (o *KubernetesIntegrationCollection) HasCloudName() bool {
-	if o != nil && o.CloudName != nil {
+	if o != nil && !IsNil(o.CloudName) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *KubernetesIntegrationCollection) SetCloudName(v string) {
 
 // GetCloudProvider returns the CloudProvider field value if set, zero value otherwise.
 func (o *KubernetesIntegrationCollection) GetCloudProvider() string {
-	if o == nil || o.CloudProvider == nil {
+	if o == nil || IsNil(o.CloudProvider) {
 		var ret string
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *KubernetesIntegrationCollection) GetCloudProvider() string {
 // GetCloudProviderOk returns a tuple with the CloudProvider field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesIntegrationCollection) GetCloudProviderOk() (*string, bool) {
-	if o == nil || o.CloudProvider == nil {
+	if o == nil || IsNil(o.CloudProvider) {
 		return nil, false
 	}
 	return o.CloudProvider, true
@@ -164,7 +167,7 @@ func (o *KubernetesIntegrationCollection) GetCloudProviderOk() (*string, bool) {
 
 // HasCloudProvider returns a boolean if a field has been set.
 func (o *KubernetesIntegrationCollection) HasCloudProvider() bool {
-	if o != nil && o.CloudProvider != nil {
+	if o != nil && !IsNil(o.CloudProvider) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *KubernetesIntegrationCollection) SetCloudProvider(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *KubernetesIntegrationCollection) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -188,7 +191,7 @@ func (o *KubernetesIntegrationCollection) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KubernetesIntegrationCollection) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -196,7 +199,7 @@ func (o *KubernetesIntegrationCollection) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *KubernetesIntegrationCollection) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -210,7 +213,7 @@ func (o *KubernetesIntegrationCollection) SetStatus(v string) {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesIntegrationCollection) GetOrganization() string {
-	if o == nil || o.Organization.Get() == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret string
 		return ret
 	}
@@ -252,26 +255,34 @@ func (o *KubernetesIntegrationCollection) UnsetOrganization() {
 }
 
 func (o KubernetesIntegrationCollection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o KubernetesIntegrationCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.ClusterName != nil {
+	if !IsNil(o.ClusterName) {
 		toSerialize["clusterName"] = o.ClusterName
 	}
-	if o.CloudName != nil {
+	if !IsNil(o.CloudName) {
 		toSerialize["cloudName"] = o.CloudName
 	}
-	if o.CloudProvider != nil {
+	if !IsNil(o.CloudProvider) {
 		toSerialize["cloudProvider"] = o.CloudProvider
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	if o.Organization.IsSet() {
 		toSerialize["organization"] = o.Organization.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableKubernetesIntegrationCollection struct {

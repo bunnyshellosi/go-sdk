@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// EventApiService EventApi service
-type EventApiService service
+// EventAPIService EventAPI service
+type EventAPIService service
 
 type ApiEventListRequest struct {
 	ctx          context.Context
-	ApiService   *EventApiService
+	ApiService   *EventAPIService
 	page         *int32
 	type_        *string
 	status       *string
@@ -75,7 +75,7 @@ List events matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiEventListRequest
 */
-func (a *EventApiService) EventList(ctx context.Context) ApiEventListRequest {
+func (a *EventAPIService) EventList(ctx context.Context) ApiEventListRequest {
 	return ApiEventListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -85,7 +85,7 @@ func (a *EventApiService) EventList(ctx context.Context) ApiEventListRequest {
 // Execute executes the request
 //
 //	@return PaginatedEventCollection
-func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEventCollection, *http.Response, error) {
+func (a *EventAPIService) EventListExecute(r ApiEventListRequest) (*PaginatedEventCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -93,7 +93,7 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 		localVarReturnValue *PaginatedEventCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventApiService.EventList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventAPIService.EventList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -105,19 +105,22 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.type_ != nil {
-		localVarQueryParams.Add("type", parameterToString(*r.type_, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
 	}
 	if r.status != nil {
-		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
 	}
 	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -139,20 +142,6 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -161,6 +150,20 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -193,6 +196,7 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -212,7 +216,7 @@ func (a *EventApiService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 
 type ApiEventViewRequest struct {
 	ctx        context.Context
-	ApiService *EventApiService
+	ApiService *EventAPIService
 	id         string
 }
 
@@ -229,7 +233,7 @@ View a specific event.
 	@param id Resource identifier
 	@return ApiEventViewRequest
 */
-func (a *EventApiService) EventView(ctx context.Context, id string) ApiEventViewRequest {
+func (a *EventAPIService) EventView(ctx context.Context, id string) ApiEventViewRequest {
 	return ApiEventViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -240,7 +244,7 @@ func (a *EventApiService) EventView(ctx context.Context, id string) ApiEventView
 // Execute executes the request
 //
 //	@return EventItem
-func (a *EventApiService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *http.Response, error) {
+func (a *EventAPIService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -248,13 +252,13 @@ func (a *EventApiService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *
 		localVarReturnValue *EventItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventApiService.EventView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EventAPIService.EventView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/events/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -280,20 +284,6 @@ func (a *EventApiService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -302,6 +292,20 @@ func (a *EventApiService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -334,6 +338,7 @@ func (a *EventApiService) EventViewExecute(r ApiEventViewRequest) (*EventItem, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

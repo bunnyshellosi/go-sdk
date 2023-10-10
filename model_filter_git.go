@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the FilterGit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FilterGit{}
+
 // FilterGit struct for FilterGit
 type FilterGit struct {
 	Type       *string        `json:"type,omitempty"`
@@ -45,7 +48,7 @@ func NewFilterGitWithDefaults() *FilterGit {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FilterGit) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -55,7 +58,7 @@ func (o *FilterGit) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FilterGit) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -63,7 +66,7 @@ func (o *FilterGit) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FilterGit) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -77,7 +80,7 @@ func (o *FilterGit) SetType(v string) {
 
 // GetRepository returns the Repository field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FilterGit) GetRepository() string {
-	if o == nil || o.Repository.Get() == nil {
+	if o == nil || IsNil(o.Repository.Get()) {
 		var ret string
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *FilterGit) UnsetRepository() {
 
 // GetBranch returns the Branch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FilterGit) GetBranch() string {
-	if o == nil || o.Branch.Get() == nil {
+	if o == nil || IsNil(o.Branch.Get()) {
 		var ret string
 		return ret
 	}
@@ -162,8 +165,16 @@ func (o *FilterGit) UnsetBranch() {
 }
 
 func (o FilterGit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FilterGit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	if o.Repository.IsSet() {
@@ -172,7 +183,7 @@ func (o FilterGit) MarshalJSON() ([]byte, error) {
 	if o.Branch.IsSet() {
 		toSerialize["branch"] = o.Branch.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableFilterGit struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentEditComponentsAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentEditComponentsAction{}
+
 // EnvironmentEditComponentsAction An environment holds a collection of buildable and deployable components.
 type EnvironmentEditComponentsAction struct {
 	Filter EnvironmentEditComponentsActionFilter `json:"filter"`
@@ -89,14 +92,18 @@ func (o *EnvironmentEditComponentsAction) SetTarget(v GitInfo) {
 }
 
 func (o EnvironmentEditComponentsAction) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["filter"] = o.Filter
-	}
-	if true {
-		toSerialize["target"] = o.Target
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentEditComponentsAction) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["filter"] = o.Filter
+	toSerialize["target"] = o.Target
+	return toSerialize, nil
 }
 
 type NullableEnvironmentEditComponentsAction struct {

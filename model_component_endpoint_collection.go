@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ComponentEndpointCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentEndpointCollection{}
+
 // ComponentEndpointCollection Endpoint
 type ComponentEndpointCollection struct {
 	// Service component identifier
@@ -46,7 +49,7 @@ func NewComponentEndpointCollectionWithDefaults() *ComponentEndpointCollection {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ComponentEndpointCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *ComponentEndpointCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentEndpointCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -64,7 +67,7 @@ func (o *ComponentEndpointCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ComponentEndpointCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *ComponentEndpointCollection) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComponentEndpointCollection) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *ComponentEndpointCollection) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentEndpointCollection) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -96,7 +99,7 @@ func (o *ComponentEndpointCollection) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComponentEndpointCollection) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *ComponentEndpointCollection) SetName(v string) {
 
 // GetEndpoints returns the Endpoints field value if set, zero value otherwise.
 func (o *ComponentEndpointCollection) GetEndpoints() []string {
-	if o == nil || o.Endpoints == nil {
+	if o == nil || IsNil(o.Endpoints) {
 		var ret []string
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *ComponentEndpointCollection) GetEndpoints() []string {
 // GetEndpointsOk returns a tuple with the Endpoints field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentEndpointCollection) GetEndpointsOk() ([]string, bool) {
-	if o == nil || o.Endpoints == nil {
+	if o == nil || IsNil(o.Endpoints) {
 		return nil, false
 	}
 	return o.Endpoints, true
@@ -128,7 +131,7 @@ func (o *ComponentEndpointCollection) GetEndpointsOk() ([]string, bool) {
 
 // HasEndpoints returns a boolean if a field has been set.
 func (o *ComponentEndpointCollection) HasEndpoints() bool {
-	if o != nil && o.Endpoints != nil {
+	if o != nil && !IsNil(o.Endpoints) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *ComponentEndpointCollection) SetEndpoints(v []string) {
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *ComponentEndpointCollection) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *ComponentEndpointCollection) GetEnvironment() string {
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentEndpointCollection) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -160,7 +163,7 @@ func (o *ComponentEndpointCollection) GetEnvironmentOk() (*string, bool) {
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *ComponentEndpointCollection) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -173,20 +176,28 @@ func (o *ComponentEndpointCollection) SetEnvironment(v string) {
 }
 
 func (o ComponentEndpointCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Endpoints != nil {
-		toSerialize["endpoints"] = o.Endpoints
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ComponentEndpointCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Endpoints) {
+		toSerialize["endpoints"] = o.Endpoints
+	}
+	if !IsNil(o.Environment) {
+		toSerialize["environment"] = o.Environment
+	}
+	return toSerialize, nil
 }
 
 type NullableComponentEndpointCollection struct {

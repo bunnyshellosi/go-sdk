@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentVariableEdit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentVariableEdit{}
+
 // EnvironmentVariableEdit An environment variable used during bunnyshell workflows.
 type EnvironmentVariableEdit struct {
 	Value NullableString `json:"value,omitempty"`
@@ -39,7 +42,7 @@ func NewEnvironmentVariableEditWithDefaults() *EnvironmentVariableEdit {
 
 // GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentVariableEdit) GetValue() string {
-	if o == nil || o.Value.Get() == nil {
+	if o == nil || IsNil(o.Value.Get()) {
 		var ret string
 		return ret
 	}
@@ -81,11 +84,19 @@ func (o *EnvironmentVariableEdit) UnsetValue() {
 }
 
 func (o EnvironmentVariableEdit) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentVariableEdit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Value.IsSet() {
 		toSerialize["value"] = o.Value.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableEnvironmentVariableEdit struct {

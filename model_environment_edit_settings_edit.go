@@ -71,11 +71,11 @@ func (dst *EnvironmentEditSettingsEdit) UnmarshalJSON(data []byte) error {
 		dst.Ephemeral = nil
 		dst.Primary = nil
 
-		return fmt.Errorf("Data matches more than one schema in oneOf(EnvironmentEditSettingsEdit)")
+		return fmt.Errorf("data matches more than one schema in oneOf(EnvironmentEditSettingsEdit)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(EnvironmentEditSettingsEdit)")
+		return fmt.Errorf("data failed to match schemas in oneOf(EnvironmentEditSettingsEdit)")
 	}
 }
 

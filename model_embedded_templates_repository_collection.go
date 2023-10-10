@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedTemplatesRepositoryCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedTemplatesRepositoryCollection{}
+
 // EmbeddedTemplatesRepositoryCollection struct for EmbeddedTemplatesRepositoryCollection
 type EmbeddedTemplatesRepositoryCollection struct {
 	Item []TemplatesRepositoryCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedTemplatesRepositoryCollectionWithDefaults() *EmbeddedTemplatesRe
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedTemplatesRepositoryCollection) GetItem() []TemplatesRepositoryCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []TemplatesRepositoryCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedTemplatesRepositoryCollection) GetItem() []TemplatesRepositoryC
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedTemplatesRepositoryCollection) GetItemOk() ([]TemplatesRepositoryCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedTemplatesRepositoryCollection) GetItemOk() ([]TemplatesReposito
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedTemplatesRepositoryCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedTemplatesRepositoryCollection) SetItem(v []TemplatesRepositoryC
 }
 
 func (o EmbeddedTemplatesRepositoryCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedTemplatesRepositoryCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedTemplatesRepositoryCollection struct {

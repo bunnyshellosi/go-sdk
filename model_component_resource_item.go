@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ComponentResourceItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentResourceItem{}
+
 // ComponentResourceItem A service component represents either an application or a group of applications as a single unit
 type ComponentResourceItem struct {
 	// Kubernetes resource kind.
@@ -44,7 +47,7 @@ func NewComponentResourceItemWithDefaults() *ComponentResourceItem {
 
 // GetKind returns the Kind field value if set, zero value otherwise.
 func (o *ComponentResourceItem) GetKind() string {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *ComponentResourceItem) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentResourceItem) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
 	return o.Kind, true
@@ -62,7 +65,7 @@ func (o *ComponentResourceItem) GetKindOk() (*string, bool) {
 
 // HasKind returns a boolean if a field has been set.
 func (o *ComponentResourceItem) HasKind() bool {
-	if o != nil && o.Kind != nil {
+	if o != nil && !IsNil(o.Kind) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *ComponentResourceItem) SetKind(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComponentResourceItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *ComponentResourceItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentResourceItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -94,7 +97,7 @@ func (o *ComponentResourceItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComponentResourceItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -108,7 +111,7 @@ func (o *ComponentResourceItem) SetName(v string) {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComponentResourceItem) GetNamespace() string {
-	if o == nil || o.Namespace.Get() == nil {
+	if o == nil || IsNil(o.Namespace.Get()) {
 		var ret string
 		return ret
 	}
@@ -150,17 +153,25 @@ func (o *ComponentResourceItem) UnsetNamespace() {
 }
 
 func (o ComponentResourceItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComponentResourceItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Kind != nil {
+	if !IsNil(o.Kind) {
 		toSerialize["kind"] = o.Kind
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if o.Namespace.IsSet() {
 		toSerialize["namespace"] = o.Namespace.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableComponentResourceItem struct {

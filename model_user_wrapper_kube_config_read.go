@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UserWrapperKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserWrapperKubeConfigRead{}
+
 // UserWrapperKubeConfigRead struct for UserWrapperKubeConfigRead
 type UserWrapperKubeConfigRead struct {
 	Name string              `json:"name"`
@@ -65,7 +68,7 @@ func (o *UserWrapperKubeConfigRead) SetName(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *UserWrapperKubeConfigRead) GetUser() UserKubeConfigRead {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		var ret UserKubeConfigRead
 		return ret
 	}
@@ -75,7 +78,7 @@ func (o *UserWrapperKubeConfigRead) GetUser() UserKubeConfigRead {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserWrapperKubeConfigRead) GetUserOk() (*UserKubeConfigRead, bool) {
-	if o == nil || o.User == nil {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -83,7 +86,7 @@ func (o *UserWrapperKubeConfigRead) GetUserOk() (*UserKubeConfigRead, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *UserWrapperKubeConfigRead) HasUser() bool {
-	if o != nil && o.User != nil {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *UserWrapperKubeConfigRead) SetUser(v UserKubeConfigRead) {
 }
 
 func (o UserWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if o.User != nil {
-		toSerialize["user"] = o.User
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UserWrapperKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.User) {
+		toSerialize["user"] = o.User
+	}
+	return toSerialize, nil
 }
 
 type NullableUserWrapperKubeConfigRead struct {

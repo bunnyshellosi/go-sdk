@@ -71,11 +71,11 @@ func (dst *EnvironmentEditComponentsActionFilter) UnmarshalJSON(data []byte) err
 		dst.FilterGit = nil
 		dst.FilterName = nil
 
-		return fmt.Errorf("Data matches more than one schema in oneOf(EnvironmentEditComponentsActionFilter)")
+		return fmt.Errorf("data matches more than one schema in oneOf(EnvironmentEditComponentsActionFilter)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(EnvironmentEditComponentsActionFilter)")
+		return fmt.Errorf("data failed to match schemas in oneOf(EnvironmentEditComponentsActionFilter)")
 	}
 }
 

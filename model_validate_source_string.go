@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ValidateSourceString type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ValidateSourceString{}
+
 // ValidateSourceString struct for ValidateSourceString
 type ValidateSourceString struct {
 	Type                      *string        `json:"type,omitempty"`
@@ -49,7 +52,7 @@ func NewValidateSourceStringWithDefaults() *ValidateSourceString {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ValidateSourceString) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -59,7 +62,7 @@ func (o *ValidateSourceString) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ValidateSourceString) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -67,7 +70,7 @@ func (o *ValidateSourceString) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *ValidateSourceString) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -129,7 +132,7 @@ func (o *ValidateSourceString) SetTemplateYaml(v string) {
 
 // GetValidateComponents returns the ValidateComponents field value if set, zero value otherwise.
 func (o *ValidateSourceString) GetValidateComponents() bool {
-	if o == nil || o.ValidateComponents == nil {
+	if o == nil || IsNil(o.ValidateComponents) {
 		var ret bool
 		return ret
 	}
@@ -139,7 +142,7 @@ func (o *ValidateSourceString) GetValidateComponents() bool {
 // GetValidateComponentsOk returns a tuple with the ValidateComponents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ValidateSourceString) GetValidateComponentsOk() (*bool, bool) {
-	if o == nil || o.ValidateComponents == nil {
+	if o == nil || IsNil(o.ValidateComponents) {
 		return nil, false
 	}
 	return o.ValidateComponents, true
@@ -147,7 +150,7 @@ func (o *ValidateSourceString) GetValidateComponentsOk() (*bool, bool) {
 
 // HasValidateComponents returns a boolean if a field has been set.
 func (o *ValidateSourceString) HasValidateComponents() bool {
-	if o != nil && o.ValidateComponents != nil {
+	if o != nil && !IsNil(o.ValidateComponents) {
 		return true
 	}
 
@@ -161,7 +164,7 @@ func (o *ValidateSourceString) SetValidateComponents(v bool) {
 
 // GetValidateForOrganizationId returns the ValidateForOrganizationId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ValidateSourceString) GetValidateForOrganizationId() string {
-	if o == nil || o.ValidateForOrganizationId.Get() == nil {
+	if o == nil || IsNil(o.ValidateForOrganizationId.Get()) {
 		var ret string
 		return ret
 	}
@@ -203,23 +206,27 @@ func (o *ValidateSourceString) UnsetValidateForOrganizationId() {
 }
 
 func (o ValidateSourceString) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ValidateSourceString) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if true {
-		toSerialize["bunnyshellYaml"] = o.BunnyshellYaml
-	}
-	if true {
-		toSerialize["templateYaml"] = o.TemplateYaml
-	}
-	if o.ValidateComponents != nil {
+	toSerialize["bunnyshellYaml"] = o.BunnyshellYaml
+	toSerialize["templateYaml"] = o.TemplateYaml
+	if !IsNil(o.ValidateComponents) {
 		toSerialize["validateComponents"] = o.ValidateComponents
 	}
 	if o.ValidateForOrganizationId.IsSet() {
 		toSerialize["validateForOrganizationId"] = o.ValidateForOrganizationId.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableValidateSourceString struct {

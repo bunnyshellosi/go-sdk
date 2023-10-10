@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// PipelineApiService PipelineApi service
-type PipelineApiService service
+// PipelineAPIService PipelineAPI service
+type PipelineAPIService service
 
 type ApiPipelineListRequest struct {
 	ctx          context.Context
-	ApiService   *PipelineApiService
+	ApiService   *PipelineAPIService
 	page         *int32
 	environment  *string
 	event        *string
@@ -75,7 +75,7 @@ List pipelines matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiPipelineListRequest
 */
-func (a *PipelineApiService) PipelineList(ctx context.Context) ApiPipelineListRequest {
+func (a *PipelineAPIService) PipelineList(ctx context.Context) ApiPipelineListRequest {
 	return ApiPipelineListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -85,7 +85,7 @@ func (a *PipelineApiService) PipelineList(ctx context.Context) ApiPipelineListRe
 // Execute executes the request
 //
 //	@return PaginatedPipelineCollection
-func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*PaginatedPipelineCollection, *http.Response, error) {
+func (a *PipelineAPIService) PipelineListExecute(r ApiPipelineListRequest) (*PaginatedPipelineCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -93,7 +93,7 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 		localVarReturnValue *PaginatedPipelineCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PipelineApiService.PipelineList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PipelineAPIService.PipelineList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -105,19 +105,22 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.event != nil {
-		localVarQueryParams.Add("event", parameterToString(*r.event, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "event", r.event, "")
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.status != nil {
-		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -139,20 +142,6 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -161,6 +150,20 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -193,6 +196,7 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -212,7 +216,7 @@ func (a *PipelineApiService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 
 type ApiPipelineViewRequest struct {
 	ctx        context.Context
-	ApiService *PipelineApiService
+	ApiService *PipelineAPIService
 	id         string
 }
 
@@ -229,7 +233,7 @@ View a specific Pipeline.
 	@param id Resource identifier
 	@return ApiPipelineViewRequest
 */
-func (a *PipelineApiService) PipelineView(ctx context.Context, id string) ApiPipelineViewRequest {
+func (a *PipelineAPIService) PipelineView(ctx context.Context, id string) ApiPipelineViewRequest {
 	return ApiPipelineViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -240,7 +244,7 @@ func (a *PipelineApiService) PipelineView(ctx context.Context, id string) ApiPip
 // Execute executes the request
 //
 //	@return PipelineItem
-func (a *PipelineApiService) PipelineViewExecute(r ApiPipelineViewRequest) (*PipelineItem, *http.Response, error) {
+func (a *PipelineAPIService) PipelineViewExecute(r ApiPipelineViewRequest) (*PipelineItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -248,13 +252,13 @@ func (a *PipelineApiService) PipelineViewExecute(r ApiPipelineViewRequest) (*Pip
 		localVarReturnValue *PipelineItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PipelineApiService.PipelineView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PipelineAPIService.PipelineView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/pipelines/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -280,20 +284,6 @@ func (a *PipelineApiService) PipelineViewExecute(r ApiPipelineViewRequest) (*Pip
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -302,6 +292,20 @@ func (a *PipelineApiService) PipelineViewExecute(r ApiPipelineViewRequest) (*Pip
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -334,6 +338,7 @@ func (a *PipelineApiService) PipelineViewExecute(r ApiPipelineViewRequest) (*Pip
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

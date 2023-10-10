@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TemplatesRepositoryItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TemplatesRepositoryItem{}
+
 // TemplatesRepositoryItem A templates repository holds multiple templates.
 type TemplatesRepositoryItem struct {
 	// Templates repository identifier.
@@ -50,7 +53,7 @@ func NewTemplatesRepositoryItemWithDefaults() *TemplatesRepositoryItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *TemplatesRepositoryItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *TemplatesRepositoryItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -68,7 +71,7 @@ func (o *TemplatesRepositoryItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *TemplatesRepositoryItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *TemplatesRepositoryItem) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *TemplatesRepositoryItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *TemplatesRepositoryItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -100,7 +103,7 @@ func (o *TemplatesRepositoryItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *TemplatesRepositoryItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *TemplatesRepositoryItem) SetName(v string) {
 
 // GetGitRepositoryUrl returns the GitRepositoryUrl field value if set, zero value otherwise.
 func (o *TemplatesRepositoryItem) GetGitRepositoryUrl() string {
-	if o == nil || o.GitRepositoryUrl == nil {
+	if o == nil || IsNil(o.GitRepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *TemplatesRepositoryItem) GetGitRepositoryUrl() string {
 // GetGitRepositoryUrlOk returns a tuple with the GitRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryItem) GetGitRepositoryUrlOk() (*string, bool) {
-	if o == nil || o.GitRepositoryUrl == nil {
+	if o == nil || IsNil(o.GitRepositoryUrl) {
 		return nil, false
 	}
 	return o.GitRepositoryUrl, true
@@ -132,7 +135,7 @@ func (o *TemplatesRepositoryItem) GetGitRepositoryUrlOk() (*string, bool) {
 
 // HasGitRepositoryUrl returns a boolean if a field has been set.
 func (o *TemplatesRepositoryItem) HasGitRepositoryUrl() bool {
-	if o != nil && o.GitRepositoryUrl != nil {
+	if o != nil && !IsNil(o.GitRepositoryUrl) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *TemplatesRepositoryItem) SetGitRepositoryUrl(v string) {
 
 // GetGitRef returns the GitRef field value if set, zero value otherwise.
 func (o *TemplatesRepositoryItem) GetGitRef() string {
-	if o == nil || o.GitRef == nil {
+	if o == nil || IsNil(o.GitRef) {
 		var ret string
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *TemplatesRepositoryItem) GetGitRef() string {
 // GetGitRefOk returns a tuple with the GitRef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryItem) GetGitRefOk() (*string, bool) {
-	if o == nil || o.GitRef == nil {
+	if o == nil || IsNil(o.GitRef) {
 		return nil, false
 	}
 	return o.GitRef, true
@@ -164,7 +167,7 @@ func (o *TemplatesRepositoryItem) GetGitRefOk() (*string, bool) {
 
 // HasGitRef returns a boolean if a field has been set.
 func (o *TemplatesRepositoryItem) HasGitRef() bool {
-	if o != nil && o.GitRef != nil {
+	if o != nil && !IsNil(o.GitRef) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *TemplatesRepositoryItem) SetGitRef(v string) {
 
 // GetLastSyncSha returns the LastSyncSha field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplatesRepositoryItem) GetLastSyncSha() string {
-	if o == nil || o.LastSyncSha.Get() == nil {
+	if o == nil || IsNil(o.LastSyncSha.Get()) {
 		var ret string
 		return ret
 	}
@@ -221,7 +224,7 @@ func (o *TemplatesRepositoryItem) UnsetLastSyncSha() {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplatesRepositoryItem) GetOrganization() string {
-	if o == nil || o.Organization.Get() == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret string
 		return ret
 	}
@@ -263,17 +266,25 @@ func (o *TemplatesRepositoryItem) UnsetOrganization() {
 }
 
 func (o TemplatesRepositoryItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TemplatesRepositoryItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.GitRepositoryUrl != nil {
+	if !IsNil(o.GitRepositoryUrl) {
 		toSerialize["gitRepositoryUrl"] = o.GitRepositoryUrl
 	}
-	if o.GitRef != nil {
+	if !IsNil(o.GitRef) {
 		toSerialize["gitRef"] = o.GitRef
 	}
 	if o.LastSyncSha.IsSet() {
@@ -282,7 +293,7 @@ func (o TemplatesRepositoryItem) MarshalJSON() ([]byte, error) {
 	if o.Organization.IsSet() {
 		toSerialize["organization"] = o.Organization.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableTemplatesRepositoryItem struct {

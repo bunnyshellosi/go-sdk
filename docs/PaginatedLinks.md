@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Self** | Pointer to [**PaginatedLink**](PaginatedLink.md) |  | [optional] 
-**First** | Pointer to [**NullablePaginatedLinksFirst**](PaginatedLinksFirst.md) |  | [optional] 
-**Prev** | Pointer to [**NullablePaginatedLinksFirst**](PaginatedLinksFirst.md) |  | [optional] 
-**Next** | Pointer to [**NullablePaginatedLinksFirst**](PaginatedLinksFirst.md) |  | [optional] 
-**Last** | Pointer to [**NullablePaginatedLinksFirst**](PaginatedLinksFirst.md) |  | [optional] 
+**First** | Pointer to [**NullablePaginatedLink**](PaginatedLink.md) |  | [optional] 
+**Prev** | Pointer to [**NullablePaginatedLink**](PaginatedLink.md) |  | [optional] 
+**Next** | Pointer to [**NullablePaginatedLink**](PaginatedLink.md) |  | [optional] 
+**Last** | Pointer to [**NullablePaginatedLink**](PaginatedLink.md) |  | [optional] 
 **Item** | Pointer to [**[]PaginatedLink**](PaginatedLink.md) |  | [optional] 
 
 ## Methods
@@ -57,20 +57,20 @@ HasSelf returns a boolean if a field has been set.
 
 ### GetFirst
 
-`func (o *PaginatedLinks) GetFirst() PaginatedLinksFirst`
+`func (o *PaginatedLinks) GetFirst() PaginatedLink`
 
 GetFirst returns the First field if non-nil, zero value otherwise.
 
 ### GetFirstOk
 
-`func (o *PaginatedLinks) GetFirstOk() (*PaginatedLinksFirst, bool)`
+`func (o *PaginatedLinks) GetFirstOk() (*PaginatedLink, bool)`
 
 GetFirstOk returns a tuple with the First field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFirst
 
-`func (o *PaginatedLinks) SetFirst(v PaginatedLinksFirst)`
+`func (o *PaginatedLinks) SetFirst(v PaginatedLink)`
 
 SetFirst sets First field to given value.
 
@@ -92,20 +92,20 @@ HasFirst returns a boolean if a field has been set.
 UnsetFirst ensures that no value is present for First, not even an explicit nil
 ### GetPrev
 
-`func (o *PaginatedLinks) GetPrev() PaginatedLinksFirst`
+`func (o *PaginatedLinks) GetPrev() PaginatedLink`
 
 GetPrev returns the Prev field if non-nil, zero value otherwise.
 
 ### GetPrevOk
 
-`func (o *PaginatedLinks) GetPrevOk() (*PaginatedLinksFirst, bool)`
+`func (o *PaginatedLinks) GetPrevOk() (*PaginatedLink, bool)`
 
 GetPrevOk returns a tuple with the Prev field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrev
 
-`func (o *PaginatedLinks) SetPrev(v PaginatedLinksFirst)`
+`func (o *PaginatedLinks) SetPrev(v PaginatedLink)`
 
 SetPrev sets Prev field to given value.
 
@@ -127,20 +127,20 @@ HasPrev returns a boolean if a field has been set.
 UnsetPrev ensures that no value is present for Prev, not even an explicit nil
 ### GetNext
 
-`func (o *PaginatedLinks) GetNext() PaginatedLinksFirst`
+`func (o *PaginatedLinks) GetNext() PaginatedLink`
 
 GetNext returns the Next field if non-nil, zero value otherwise.
 
 ### GetNextOk
 
-`func (o *PaginatedLinks) GetNextOk() (*PaginatedLinksFirst, bool)`
+`func (o *PaginatedLinks) GetNextOk() (*PaginatedLink, bool)`
 
 GetNextOk returns a tuple with the Next field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNext
 
-`func (o *PaginatedLinks) SetNext(v PaginatedLinksFirst)`
+`func (o *PaginatedLinks) SetNext(v PaginatedLink)`
 
 SetNext sets Next field to given value.
 
@@ -162,20 +162,20 @@ HasNext returns a boolean if a field has been set.
 UnsetNext ensures that no value is present for Next, not even an explicit nil
 ### GetLast
 
-`func (o *PaginatedLinks) GetLast() PaginatedLinksFirst`
+`func (o *PaginatedLinks) GetLast() PaginatedLink`
 
 GetLast returns the Last field if non-nil, zero value otherwise.
 
 ### GetLastOk
 
-`func (o *PaginatedLinks) GetLastOk() (*PaginatedLinksFirst, bool)`
+`func (o *PaginatedLinks) GetLastOk() (*PaginatedLink, bool)`
 
 GetLastOk returns a tuple with the Last field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLast
 
-`func (o *PaginatedLinks) SetLast(v PaginatedLinksFirst)`
+`func (o *PaginatedLinks) SetLast(v PaginatedLink)`
 
 SetLast sets Last field to given value.
 

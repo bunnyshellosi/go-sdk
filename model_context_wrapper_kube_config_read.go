@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ContextWrapperKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ContextWrapperKubeConfigRead{}
+
 // ContextWrapperKubeConfigRead struct for ContextWrapperKubeConfigRead
 type ContextWrapperKubeConfigRead struct {
 	Name    string                 `json:"name"`
@@ -65,7 +68,7 @@ func (o *ContextWrapperKubeConfigRead) SetName(v string) {
 
 // GetContext returns the Context field value if set, zero value otherwise.
 func (o *ContextWrapperKubeConfigRead) GetContext() ContextKubeConfigRead {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		var ret ContextKubeConfigRead
 		return ret
 	}
@@ -75,7 +78,7 @@ func (o *ContextWrapperKubeConfigRead) GetContext() ContextKubeConfigRead {
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContextWrapperKubeConfigRead) GetContextOk() (*ContextKubeConfigRead, bool) {
-	if o == nil || o.Context == nil {
+	if o == nil || IsNil(o.Context) {
 		return nil, false
 	}
 	return o.Context, true
@@ -83,7 +86,7 @@ func (o *ContextWrapperKubeConfigRead) GetContextOk() (*ContextKubeConfigRead, b
 
 // HasContext returns a boolean if a field has been set.
 func (o *ContextWrapperKubeConfigRead) HasContext() bool {
-	if o != nil && o.Context != nil {
+	if o != nil && !IsNil(o.Context) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *ContextWrapperKubeConfigRead) SetContext(v ContextKubeConfigRead) {
 }
 
 func (o ContextWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if o.Context != nil {
-		toSerialize["context"] = o.Context
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ContextWrapperKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Context) {
+		toSerialize["context"] = o.Context
+	}
+	return toSerialize, nil
 }
 
 type NullableContextWrapperKubeConfigRead struct {

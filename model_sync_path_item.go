@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the SyncPathItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SyncPathItem{}
+
 // SyncPathItem struct for SyncPathItem
 type SyncPathItem struct {
 	// The local path on the host os to sync from.
@@ -42,7 +45,7 @@ func NewSyncPathItemWithDefaults() *SyncPathItem {
 
 // GetLocalPath returns the LocalPath field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SyncPathItem) GetLocalPath() string {
-	if o == nil || o.LocalPath.Get() == nil {
+	if o == nil || IsNil(o.LocalPath.Get()) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *SyncPathItem) UnsetLocalPath() {
 
 // GetRemotePath returns the RemotePath field value if set, zero value otherwise.
 func (o *SyncPathItem) GetRemotePath() string {
-	if o == nil || o.RemotePath == nil {
+	if o == nil || IsNil(o.RemotePath) {
 		var ret string
 		return ret
 	}
@@ -95,7 +98,7 @@ func (o *SyncPathItem) GetRemotePath() string {
 // GetRemotePathOk returns a tuple with the RemotePath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SyncPathItem) GetRemotePathOk() (*string, bool) {
-	if o == nil || o.RemotePath == nil {
+	if o == nil || IsNil(o.RemotePath) {
 		return nil, false
 	}
 	return o.RemotePath, true
@@ -103,7 +106,7 @@ func (o *SyncPathItem) GetRemotePathOk() (*string, bool) {
 
 // HasRemotePath returns a boolean if a field has been set.
 func (o *SyncPathItem) HasRemotePath() bool {
-	if o != nil && o.RemotePath != nil {
+	if o != nil && !IsNil(o.RemotePath) {
 		return true
 	}
 
@@ -116,14 +119,22 @@ func (o *SyncPathItem) SetRemotePath(v string) {
 }
 
 func (o SyncPathItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o SyncPathItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.LocalPath.IsSet() {
 		toSerialize["localPath"] = o.LocalPath.Get()
 	}
-	if o.RemotePath != nil {
+	if !IsNil(o.RemotePath) {
 		toSerialize["remotePath"] = o.RemotePath
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableSyncPathItem struct {

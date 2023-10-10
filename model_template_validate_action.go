@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TemplateValidateAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TemplateValidateAction{}
+
 // TemplateValidateAction A template holds information for generating an environment.
 type TemplateValidateAction struct {
 	Source *TemplateValidateActionSource `json:"source,omitempty"`
@@ -39,7 +42,7 @@ func NewTemplateValidateActionWithDefaults() *TemplateValidateAction {
 
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *TemplateValidateAction) GetSource() TemplateValidateActionSource {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		var ret TemplateValidateActionSource
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *TemplateValidateAction) GetSource() TemplateValidateActionSource {
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplateValidateAction) GetSourceOk() (*TemplateValidateActionSource, bool) {
-	if o == nil || o.Source == nil {
+	if o == nil || IsNil(o.Source) {
 		return nil, false
 	}
 	return o.Source, true
@@ -57,7 +60,7 @@ func (o *TemplateValidateAction) GetSourceOk() (*TemplateValidateActionSource, b
 
 // HasSource returns a boolean if a field has been set.
 func (o *TemplateValidateAction) HasSource() bool {
-	if o != nil && o.Source != nil {
+	if o != nil && !IsNil(o.Source) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *TemplateValidateAction) SetSource(v TemplateValidateActionSource) {
 }
 
 func (o TemplateValidateAction) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Source != nil {
-		toSerialize["source"] = o.Source
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o TemplateValidateAction) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
+	return toSerialize, nil
 }
 
 type NullableTemplateValidateAction struct {

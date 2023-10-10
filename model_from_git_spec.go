@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the FromGitSpec type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FromGitSpec{}
+
 // FromGitSpec struct for FromGitSpec
 type FromGitSpec struct {
 	Type *string `json:"type,omitempty"`
@@ -44,7 +47,7 @@ func NewFromGitSpecWithDefaults() *FromGitSpec {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FromGitSpec) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *FromGitSpec) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromGitSpec) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -62,7 +65,7 @@ func (o *FromGitSpec) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FromGitSpec) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *FromGitSpec) SetType(v string) {
 
 // GetSpec returns the Spec field value if set, zero value otherwise.
 func (o *FromGitSpec) GetSpec() string {
-	if o == nil || o.Spec == nil {
+	if o == nil || IsNil(o.Spec) {
 		var ret string
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *FromGitSpec) GetSpec() string {
 // GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromGitSpec) GetSpecOk() (*string, bool) {
-	if o == nil || o.Spec == nil {
+	if o == nil || IsNil(o.Spec) {
 		return nil, false
 	}
 	return o.Spec, true
@@ -94,7 +97,7 @@ func (o *FromGitSpec) GetSpecOk() (*string, bool) {
 
 // HasSpec returns a boolean if a field has been set.
 func (o *FromGitSpec) HasSpec() bool {
-	if o != nil && o.Spec != nil {
+	if o != nil && !IsNil(o.Spec) {
 		return true
 	}
 
@@ -107,14 +110,22 @@ func (o *FromGitSpec) SetSpec(v string) {
 }
 
 func (o FromGitSpec) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if o.Spec != nil {
-		toSerialize["spec"] = o.Spec
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o FromGitSpec) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Spec) {
+		toSerialize["spec"] = o.Spec
+	}
+	return toSerialize, nil
 }
 
 type NullableFromGitSpec struct {

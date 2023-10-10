@@ -71,11 +71,11 @@ func (dst *ComponentConfigItemConfig) UnmarshalJSON(data []byte) error {
 		dst.ArrayOfExtendedResourceConfigItem = nil
 		dst.ArrayOfSimpleResourceConfigItem = nil
 
-		return fmt.Errorf("Data matches more than one schema in oneOf(ComponentConfigItemConfig)")
+		return fmt.Errorf("data matches more than one schema in oneOf(ComponentConfigItemConfig)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(ComponentConfigItemConfig)")
+		return fmt.Errorf("data failed to match schemas in oneOf(ComponentConfigItemConfig)")
 	}
 }
 

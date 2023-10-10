@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// TemplatesRepositoryApiService TemplatesRepositoryApi service
-type TemplatesRepositoryApiService service
+// TemplatesRepositoryAPIService TemplatesRepositoryAPI service
+type TemplatesRepositoryAPIService service
 
 type ApiTemplatesRepositoryListRequest struct {
 	ctx          context.Context
-	ApiService   *TemplatesRepositoryApiService
+	ApiService   *TemplatesRepositoryAPIService
 	page         *int32
 	organization *string
 }
@@ -54,7 +54,7 @@ List templates repositories matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiTemplatesRepositoryListRequest
 */
-func (a *TemplatesRepositoryApiService) TemplatesRepositoryList(ctx context.Context) ApiTemplatesRepositoryListRequest {
+func (a *TemplatesRepositoryAPIService) TemplatesRepositoryList(ctx context.Context) ApiTemplatesRepositoryListRequest {
 	return ApiTemplatesRepositoryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -64,7 +64,7 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryList(ctx context.Cont
 // Execute executes the request
 //
 //	@return PaginatedTemplatesRepositoryCollection
-func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemplatesRepositoryListRequest) (*PaginatedTemplatesRepositoryCollection, *http.Response, error) {
+func (a *TemplatesRepositoryAPIService) TemplatesRepositoryListExecute(r ApiTemplatesRepositoryListRequest) (*PaginatedTemplatesRepositoryCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -72,7 +72,7 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemp
 		localVarReturnValue *PaginatedTemplatesRepositoryCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplatesRepositoryApiService.TemplatesRepositoryList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplatesRepositoryAPIService.TemplatesRepositoryList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -84,10 +84,13 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemp
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -109,20 +112,6 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemp
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -131,6 +120,20 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemp
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -163,6 +166,7 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -182,7 +186,7 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryListExecute(r ApiTemp
 
 type ApiTemplatesRepositoryViewRequest struct {
 	ctx        context.Context
-	ApiService *TemplatesRepositoryApiService
+	ApiService *TemplatesRepositoryAPIService
 	id         string
 }
 
@@ -199,7 +203,7 @@ View a specific templates repository.
 	@param id Resource identifier
 	@return ApiTemplatesRepositoryViewRequest
 */
-func (a *TemplatesRepositoryApiService) TemplatesRepositoryView(ctx context.Context, id string) ApiTemplatesRepositoryViewRequest {
+func (a *TemplatesRepositoryAPIService) TemplatesRepositoryView(ctx context.Context, id string) ApiTemplatesRepositoryViewRequest {
 	return ApiTemplatesRepositoryViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -210,7 +214,7 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryView(ctx context.Cont
 // Execute executes the request
 //
 //	@return TemplatesRepositoryItem
-func (a *TemplatesRepositoryApiService) TemplatesRepositoryViewExecute(r ApiTemplatesRepositoryViewRequest) (*TemplatesRepositoryItem, *http.Response, error) {
+func (a *TemplatesRepositoryAPIService) TemplatesRepositoryViewExecute(r ApiTemplatesRepositoryViewRequest) (*TemplatesRepositoryItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -218,13 +222,13 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryViewExecute(r ApiTemp
 		localVarReturnValue *TemplatesRepositoryItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplatesRepositoryApiService.TemplatesRepositoryView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplatesRepositoryAPIService.TemplatesRepositoryView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/templates_repositories/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -250,20 +254,6 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryViewExecute(r ApiTemp
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -272,6 +262,20 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryViewExecute(r ApiTemp
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -304,6 +308,7 @@ func (a *TemplatesRepositoryApiService) TemplatesRepositoryViewExecute(r ApiTemp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

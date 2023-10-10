@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TemplateCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TemplateCollection{}
+
 // TemplateCollection A template holds information for generating an environment.
 type TemplateCollection struct {
 	// Template identifier.
@@ -54,7 +57,7 @@ func NewTemplateCollectionWithDefaults() *TemplateCollection {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *TemplateCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -64,7 +67,7 @@ func (o *TemplateCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplateCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -72,7 +75,7 @@ func (o *TemplateCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *TemplateCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -86,7 +89,7 @@ func (o *TemplateCollection) SetId(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *TemplateCollection) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -96,7 +99,7 @@ func (o *TemplateCollection) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplateCollection) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -104,7 +107,7 @@ func (o *TemplateCollection) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *TemplateCollection) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -118,7 +121,7 @@ func (o *TemplateCollection) SetKey(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *TemplateCollection) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -128,7 +131,7 @@ func (o *TemplateCollection) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplateCollection) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -136,7 +139,7 @@ func (o *TemplateCollection) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *TemplateCollection) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -150,7 +153,7 @@ func (o *TemplateCollection) SetName(v string) {
 
 // GetGitSha returns the GitSha field value if set, zero value otherwise.
 func (o *TemplateCollection) GetGitSha() string {
-	if o == nil || o.GitSha == nil {
+	if o == nil || IsNil(o.GitSha) {
 		var ret string
 		return ret
 	}
@@ -160,7 +163,7 @@ func (o *TemplateCollection) GetGitSha() string {
 // GetGitShaOk returns a tuple with the GitSha field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplateCollection) GetGitShaOk() (*string, bool) {
-	if o == nil || o.GitSha == nil {
+	if o == nil || IsNil(o.GitSha) {
 		return nil, false
 	}
 	return o.GitSha, true
@@ -168,7 +171,7 @@ func (o *TemplateCollection) GetGitShaOk() (*string, bool) {
 
 // HasGitSha returns a boolean if a field has been set.
 func (o *TemplateCollection) HasGitSha() bool {
-	if o != nil && o.GitSha != nil {
+	if o != nil && !IsNil(o.GitSha) {
 		return true
 	}
 
@@ -182,7 +185,7 @@ func (o *TemplateCollection) SetGitSha(v string) {
 
 // GetShortDescription returns the ShortDescription field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplateCollection) GetShortDescription() string {
-	if o == nil || o.ShortDescription.Get() == nil {
+	if o == nil || IsNil(o.ShortDescription.Get()) {
 		var ret string
 		return ret
 	}
@@ -225,7 +228,7 @@ func (o *TemplateCollection) UnsetShortDescription() {
 
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *TemplateCollection) GetTags() []string {
-	if o == nil || o.Tags == nil {
+	if o == nil || IsNil(o.Tags) {
 		var ret []string
 		return ret
 	}
@@ -235,7 +238,7 @@ func (o *TemplateCollection) GetTags() []string {
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplateCollection) GetTagsOk() ([]string, bool) {
-	if o == nil || o.Tags == nil {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
 	return o.Tags, true
@@ -243,7 +246,7 @@ func (o *TemplateCollection) GetTagsOk() ([]string, bool) {
 
 // HasTags returns a boolean if a field has been set.
 func (o *TemplateCollection) HasTags() bool {
-	if o != nil && o.Tags != nil {
+	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
 
@@ -257,7 +260,7 @@ func (o *TemplateCollection) SetTags(v []string) {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplateCollection) GetOrganization() string {
-	if o == nil || o.Organization.Get() == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret string
 		return ret
 	}
@@ -300,7 +303,7 @@ func (o *TemplateCollection) UnsetOrganization() {
 
 // GetTemplatesRepository returns the TemplatesRepository field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplateCollection) GetTemplatesRepository() string {
-	if o == nil || o.TemplatesRepository.Get() == nil {
+	if o == nil || IsNil(o.TemplatesRepository.Get()) {
 		var ret string
 		return ret
 	}
@@ -342,23 +345,31 @@ func (o *TemplateCollection) UnsetTemplatesRepository() {
 }
 
 func (o TemplateCollection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TemplateCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Key != nil {
+	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.GitSha != nil {
+	if !IsNil(o.GitSha) {
 		toSerialize["gitSha"] = o.GitSha
 	}
 	if o.ShortDescription.IsSet() {
 		toSerialize["shortDescription"] = o.ShortDescription.Get()
 	}
-	if o.Tags != nil {
+	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
 	if o.Organization.IsSet() {
@@ -367,7 +378,7 @@ func (o TemplateCollection) MarshalJSON() ([]byte, error) {
 	if o.TemplatesRepository.IsSet() {
 		toSerialize["templatesRepository"] = o.TemplatesRepository.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableTemplateCollection struct {

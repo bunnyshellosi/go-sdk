@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedComponentCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedComponentCollection{}
+
 // EmbeddedComponentCollection struct for EmbeddedComponentCollection
 type EmbeddedComponentCollection struct {
 	Item []ComponentCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedComponentCollectionWithDefaults() *EmbeddedComponentCollection {
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedComponentCollection) GetItem() []ComponentCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []ComponentCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedComponentCollection) GetItem() []ComponentCollection {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedComponentCollection) GetItemOk() ([]ComponentCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedComponentCollection) GetItemOk() ([]ComponentCollection, bool) 
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedComponentCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedComponentCollection) SetItem(v []ComponentCollection) {
 }
 
 func (o EmbeddedComponentCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedComponentCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedComponentCollection struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedKubernetesIntegrationCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedKubernetesIntegrationCollection{}
+
 // EmbeddedKubernetesIntegrationCollection struct for EmbeddedKubernetesIntegrationCollection
 type EmbeddedKubernetesIntegrationCollection struct {
 	Item []KubernetesIntegrationCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedKubernetesIntegrationCollectionWithDefaults() *EmbeddedKubernete
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedKubernetesIntegrationCollection) GetItem() []KubernetesIntegrationCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []KubernetesIntegrationCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedKubernetesIntegrationCollection) GetItem() []KubernetesIntegrat
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedKubernetesIntegrationCollection) GetItemOk() ([]KubernetesIntegrationCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedKubernetesIntegrationCollection) GetItemOk() ([]KubernetesInteg
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedKubernetesIntegrationCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedKubernetesIntegrationCollection) SetItem(v []KubernetesIntegrat
 }
 
 func (o EmbeddedKubernetesIntegrationCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedKubernetesIntegrationCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedKubernetesIntegrationCollection struct {

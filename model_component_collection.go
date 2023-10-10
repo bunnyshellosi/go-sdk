@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ComponentCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentCollection{}
+
 // ComponentCollection A service component represents either an application or a group of applications as a single unit
 type ComponentCollection struct {
 	// Service component identifier
@@ -48,7 +51,7 @@ func NewComponentCollectionWithDefaults() *ComponentCollection {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ComponentCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -58,7 +61,7 @@ func (o *ComponentCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -66,7 +69,7 @@ func (o *ComponentCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ComponentCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -80,7 +83,7 @@ func (o *ComponentCollection) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComponentCollection) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -90,7 +93,7 @@ func (o *ComponentCollection) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentCollection) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -98,7 +101,7 @@ func (o *ComponentCollection) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComponentCollection) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -112,7 +115,7 @@ func (o *ComponentCollection) SetName(v string) {
 
 // GetClusterStatus returns the ClusterStatus field value if set, zero value otherwise.
 func (o *ComponentCollection) GetClusterStatus() string {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		var ret string
 		return ret
 	}
@@ -122,7 +125,7 @@ func (o *ComponentCollection) GetClusterStatus() string {
 // GetClusterStatusOk returns a tuple with the ClusterStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentCollection) GetClusterStatusOk() (*string, bool) {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		return nil, false
 	}
 	return o.ClusterStatus, true
@@ -130,7 +133,7 @@ func (o *ComponentCollection) GetClusterStatusOk() (*string, bool) {
 
 // HasClusterStatus returns a boolean if a field has been set.
 func (o *ComponentCollection) HasClusterStatus() bool {
-	if o != nil && o.ClusterStatus != nil {
+	if o != nil && !IsNil(o.ClusterStatus) {
 		return true
 	}
 
@@ -144,7 +147,7 @@ func (o *ComponentCollection) SetClusterStatus(v string) {
 
 // GetOperationStatus returns the OperationStatus field value if set, zero value otherwise.
 func (o *ComponentCollection) GetOperationStatus() string {
-	if o == nil || o.OperationStatus == nil {
+	if o == nil || IsNil(o.OperationStatus) {
 		var ret string
 		return ret
 	}
@@ -154,7 +157,7 @@ func (o *ComponentCollection) GetOperationStatus() string {
 // GetOperationStatusOk returns a tuple with the OperationStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentCollection) GetOperationStatusOk() (*string, bool) {
-	if o == nil || o.OperationStatus == nil {
+	if o == nil || IsNil(o.OperationStatus) {
 		return nil, false
 	}
 	return o.OperationStatus, true
@@ -162,7 +165,7 @@ func (o *ComponentCollection) GetOperationStatusOk() (*string, bool) {
 
 // HasOperationStatus returns a boolean if a field has been set.
 func (o *ComponentCollection) HasOperationStatus() bool {
-	if o != nil && o.OperationStatus != nil {
+	if o != nil && !IsNil(o.OperationStatus) {
 		return true
 	}
 
@@ -176,7 +179,7 @@ func (o *ComponentCollection) SetOperationStatus(v string) {
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *ComponentCollection) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		var ret string
 		return ret
 	}
@@ -186,7 +189,7 @@ func (o *ComponentCollection) GetEnvironment() string {
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentCollection) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -194,7 +197,7 @@ func (o *ComponentCollection) GetEnvironmentOk() (*string, bool) {
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *ComponentCollection) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -207,23 +210,31 @@ func (o *ComponentCollection) SetEnvironment(v string) {
 }
 
 func (o ComponentCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.ClusterStatus != nil {
-		toSerialize["clusterStatus"] = o.ClusterStatus
-	}
-	if o.OperationStatus != nil {
-		toSerialize["operationStatus"] = o.OperationStatus
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ComponentCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ClusterStatus) {
+		toSerialize["clusterStatus"] = o.ClusterStatus
+	}
+	if !IsNil(o.OperationStatus) {
+		toSerialize["operationStatus"] = o.OperationStatus
+	}
+	if !IsNil(o.Environment) {
+		toSerialize["environment"] = o.Environment
+	}
+	return toSerialize, nil
 }
 
 type NullableComponentCollection struct {

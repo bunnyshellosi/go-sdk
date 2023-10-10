@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ContextKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ContextKubeConfigRead{}
+
 // ContextKubeConfigRead struct for ContextKubeConfigRead
 type ContextKubeConfigRead struct {
 	Cluster   string `json:"cluster"`
@@ -115,17 +118,19 @@ func (o *ContextKubeConfigRead) SetUser(v string) {
 }
 
 func (o ContextKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["cluster"] = o.Cluster
-	}
-	if true {
-		toSerialize["namespace"] = o.Namespace
-	}
-	if true {
-		toSerialize["user"] = o.User
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ContextKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["cluster"] = o.Cluster
+	toSerialize["namespace"] = o.Namespace
+	toSerialize["user"] = o.User
+	return toSerialize, nil
 }
 
 type NullableContextKubeConfigRead struct {

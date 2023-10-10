@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ProblemGeneric type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ProblemGeneric{}
+
 // ProblemGeneric Generic Error
 type ProblemGeneric struct {
 	Title      *string            `json:"title,omitempty"`
@@ -41,7 +44,7 @@ func NewProblemGenericWithDefaults() *ProblemGeneric {
 
 // GetTitle returns the Title field value if set, zero value otherwise.
 func (o *ProblemGeneric) GetTitle() string {
-	if o == nil || o.Title == nil {
+	if o == nil || IsNil(o.Title) {
 		var ret string
 		return ret
 	}
@@ -51,7 +54,7 @@ func (o *ProblemGeneric) GetTitle() string {
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProblemGeneric) GetTitleOk() (*string, bool) {
-	if o == nil || o.Title == nil {
+	if o == nil || IsNil(o.Title) {
 		return nil, false
 	}
 	return o.Title, true
@@ -59,7 +62,7 @@ func (o *ProblemGeneric) GetTitleOk() (*string, bool) {
 
 // HasTitle returns a boolean if a field has been set.
 func (o *ProblemGeneric) HasTitle() bool {
-	if o != nil && o.Title != nil {
+	if o != nil && !IsNil(o.Title) {
 		return true
 	}
 
@@ -73,7 +76,7 @@ func (o *ProblemGeneric) SetTitle(v string) {
 
 // GetDetail returns the Detail field value if set, zero value otherwise.
 func (o *ProblemGeneric) GetDetail() string {
-	if o == nil || o.Detail == nil {
+	if o == nil || IsNil(o.Detail) {
 		var ret string
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *ProblemGeneric) GetDetail() string {
 // GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProblemGeneric) GetDetailOk() (*string, bool) {
-	if o == nil || o.Detail == nil {
+	if o == nil || IsNil(o.Detail) {
 		return nil, false
 	}
 	return o.Detail, true
@@ -91,7 +94,7 @@ func (o *ProblemGeneric) GetDetailOk() (*string, bool) {
 
 // HasDetail returns a boolean if a field has been set.
 func (o *ProblemGeneric) HasDetail() bool {
-	if o != nil && o.Detail != nil {
+	if o != nil && !IsNil(o.Detail) {
 		return true
 	}
 
@@ -116,7 +119,7 @@ func (o *ProblemGeneric) GetViolations() []ProblemViolation {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProblemGeneric) GetViolationsOk() ([]ProblemViolation, bool) {
-	if o == nil || o.Violations == nil {
+	if o == nil || IsNil(o.Violations) {
 		return nil, false
 	}
 	return o.Violations, true
@@ -124,7 +127,7 @@ func (o *ProblemGeneric) GetViolationsOk() ([]ProblemViolation, bool) {
 
 // HasViolations returns a boolean if a field has been set.
 func (o *ProblemGeneric) HasViolations() bool {
-	if o != nil && o.Violations != nil {
+	if o != nil && IsNil(o.Violations) {
 		return true
 	}
 
@@ -137,17 +140,25 @@ func (o *ProblemGeneric) SetViolations(v []ProblemViolation) {
 }
 
 func (o ProblemGeneric) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ProblemGeneric) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Title != nil {
+	if !IsNil(o.Title) {
 		toSerialize["title"] = o.Title
 	}
-	if o.Detail != nil {
+	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
 	if o.Violations != nil {
 		toSerialize["violations"] = o.Violations
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableProblemGeneric struct {
