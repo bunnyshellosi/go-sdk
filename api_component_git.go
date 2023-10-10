@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// ComponentGitApiService ComponentGitApi service
-type ComponentGitApiService service
+// ComponentGitAPIService ComponentGitAPI service
+type ComponentGitAPIService service
 
 type ApiComponentGitListRequest struct {
 	ctx          context.Context
-	ApiService   *ComponentGitApiService
+	ApiService   *ComponentGitAPIService
 	page         *int32
 	organization *string
 	project      *string
@@ -89,7 +89,7 @@ List git info for service components matching any selected filters
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiComponentGitListRequest
 */
-func (a *ComponentGitApiService) ComponentGitList(ctx context.Context) ApiComponentGitListRequest {
+func (a *ComponentGitAPIService) ComponentGitList(ctx context.Context) ApiComponentGitListRequest {
 	return ApiComponentGitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -99,7 +99,7 @@ func (a *ComponentGitApiService) ComponentGitList(ctx context.Context) ApiCompon
 // Execute executes the request
 //
 //	@return PaginatedComponentGitCollection
-func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRequest) (*PaginatedComponentGitCollection, *http.Response, error) {
+func (a *ComponentGitAPIService) ComponentGitListExecute(r ApiComponentGitListRequest) (*PaginatedComponentGitCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -107,7 +107,7 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 		localVarReturnValue *PaginatedComponentGitCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentGitApiService.ComponentGitList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentGitAPIService.ComponentGitList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -119,25 +119,28 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.project != nil {
-		localVarQueryParams.Add("project", parameterToString(*r.project, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")
 	}
 	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.name != nil {
-		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
 	}
 	if r.repository != nil {
-		localVarQueryParams.Add("repository", parameterToString(*r.repository, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "repository", r.repository, "")
 	}
 	if r.branch != nil {
-		localVarQueryParams.Add("branch", parameterToString(*r.branch, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "branch", r.branch, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -159,20 +162,6 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -181,6 +170,20 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -213,6 +216,7 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -232,7 +236,7 @@ func (a *ComponentGitApiService) ComponentGitListExecute(r ApiComponentGitListRe
 
 type ApiComponentGitViewRequest struct {
 	ctx        context.Context
-	ApiService *ComponentGitApiService
+	ApiService *ComponentGitAPIService
 	id         string
 }
 
@@ -249,7 +253,7 @@ View git info for a specific service component
 	@param id Resource identifier
 	@return ApiComponentGitViewRequest
 */
-func (a *ComponentGitApiService) ComponentGitView(ctx context.Context, id string) ApiComponentGitViewRequest {
+func (a *ComponentGitAPIService) ComponentGitView(ctx context.Context, id string) ApiComponentGitViewRequest {
 	return ApiComponentGitViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -260,7 +264,7 @@ func (a *ComponentGitApiService) ComponentGitView(ctx context.Context, id string
 // Execute executes the request
 //
 //	@return ComponentGitItem
-func (a *ComponentGitApiService) ComponentGitViewExecute(r ApiComponentGitViewRequest) (*ComponentGitItem, *http.Response, error) {
+func (a *ComponentGitAPIService) ComponentGitViewExecute(r ApiComponentGitViewRequest) (*ComponentGitItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -268,13 +272,13 @@ func (a *ComponentGitApiService) ComponentGitViewExecute(r ApiComponentGitViewRe
 		localVarReturnValue *ComponentGitItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentGitApiService.ComponentGitView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentGitAPIService.ComponentGitView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/components/{id}/gitinfo"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -300,20 +304,6 @@ func (a *ComponentGitApiService) ComponentGitViewExecute(r ApiComponentGitViewRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -322,6 +312,20 @@ func (a *ComponentGitApiService) ComponentGitViewExecute(r ApiComponentGitViewRe
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -354,6 +358,7 @@ func (a *ComponentGitApiService) ComponentGitViewExecute(r ApiComponentGitViewRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

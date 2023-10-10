@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DestroyEphemeralOnPrClose** | Pointer to **bool** |  | [optional] 
 **KubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
+**Labels** | Pointer to **map[string]string** |  | [optional] 
 
 ## Methods
 
@@ -294,6 +295,31 @@ HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentCreateAction) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetLabels
+
+`func (o *EnvironmentCreateAction) GetLabels() map[string]string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *EnvironmentCreateAction) GetLabelsOk() (*map[string]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *EnvironmentCreateAction) SetLabels(v map[string]string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *EnvironmentCreateAction) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

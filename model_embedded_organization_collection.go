@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedOrganizationCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedOrganizationCollection{}
+
 // EmbeddedOrganizationCollection struct for EmbeddedOrganizationCollection
 type EmbeddedOrganizationCollection struct {
 	Item []OrganizationCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedOrganizationCollectionWithDefaults() *EmbeddedOrganizationCollec
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedOrganizationCollection) GetItem() []OrganizationCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []OrganizationCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedOrganizationCollection) GetItem() []OrganizationCollection {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedOrganizationCollection) GetItemOk() ([]OrganizationCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedOrganizationCollection) GetItemOk() ([]OrganizationCollection, 
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedOrganizationCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedOrganizationCollection) SetItem(v []OrganizationCollection) {
 }
 
 func (o EmbeddedOrganizationCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedOrganizationCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedOrganizationCollection struct {

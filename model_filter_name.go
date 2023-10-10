@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the FilterName type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FilterName{}
+
 // FilterName struct for FilterName
 type FilterName struct {
 	Type *string        `json:"type,omitempty"`
@@ -44,7 +47,7 @@ func NewFilterNameWithDefaults() *FilterName {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FilterName) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *FilterName) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FilterName) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -62,7 +65,7 @@ func (o *FilterName) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FilterName) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *FilterName) SetType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *FilterName) GetName() string {
-	if o == nil || o.Name.Get() == nil {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -118,14 +121,22 @@ func (o *FilterName) UnsetName() {
 }
 
 func (o FilterName) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o FilterName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableFilterName struct {

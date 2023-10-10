@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ComponentProfileItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentProfileItem{}
+
 // ComponentProfileItem A service component represents either an application or a group of applications as a single unit
 type ComponentProfileItem struct {
 	// The command to be run when starting the container.
@@ -25,7 +28,7 @@ type ComponentProfileItem struct {
 	Environ *map[string]string `json:"environ,omitempty"`
 	// The sync paths for the container.
 	SyncPaths    []SyncPathItem                  `json:"syncPaths,omitempty"`
-	Requirements NullableProfileItemRequirements `json:"requirements,omitempty"`
+	Requirements NullableResourceRequirementItem `json:"requirements,omitempty"`
 }
 
 // NewComponentProfileItem instantiates a new ComponentProfileItem object
@@ -47,7 +50,7 @@ func NewComponentProfileItemWithDefaults() *ComponentProfileItem {
 
 // GetCommand returns the Command field value if set, zero value otherwise.
 func (o *ComponentProfileItem) GetCommand() []string {
-	if o == nil || o.Command == nil {
+	if o == nil || IsNil(o.Command) {
 		var ret []string
 		return ret
 	}
@@ -57,7 +60,7 @@ func (o *ComponentProfileItem) GetCommand() []string {
 // GetCommandOk returns a tuple with the Command field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentProfileItem) GetCommandOk() ([]string, bool) {
-	if o == nil || o.Command == nil {
+	if o == nil || IsNil(o.Command) {
 		return nil, false
 	}
 	return o.Command, true
@@ -65,7 +68,7 @@ func (o *ComponentProfileItem) GetCommandOk() ([]string, bool) {
 
 // HasCommand returns a boolean if a field has been set.
 func (o *ComponentProfileItem) HasCommand() bool {
-	if o != nil && o.Command != nil {
+	if o != nil && !IsNil(o.Command) {
 		return true
 	}
 
@@ -79,7 +82,7 @@ func (o *ComponentProfileItem) SetCommand(v []string) {
 
 // GetPortMapping returns the PortMapping field value if set, zero value otherwise.
 func (o *ComponentProfileItem) GetPortMapping() []string {
-	if o == nil || o.PortMapping == nil {
+	if o == nil || IsNil(o.PortMapping) {
 		var ret []string
 		return ret
 	}
@@ -89,7 +92,7 @@ func (o *ComponentProfileItem) GetPortMapping() []string {
 // GetPortMappingOk returns a tuple with the PortMapping field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentProfileItem) GetPortMappingOk() ([]string, bool) {
-	if o == nil || o.PortMapping == nil {
+	if o == nil || IsNil(o.PortMapping) {
 		return nil, false
 	}
 	return o.PortMapping, true
@@ -97,7 +100,7 @@ func (o *ComponentProfileItem) GetPortMappingOk() ([]string, bool) {
 
 // HasPortMapping returns a boolean if a field has been set.
 func (o *ComponentProfileItem) HasPortMapping() bool {
-	if o != nil && o.PortMapping != nil {
+	if o != nil && !IsNil(o.PortMapping) {
 		return true
 	}
 
@@ -111,7 +114,7 @@ func (o *ComponentProfileItem) SetPortMapping(v []string) {
 
 // GetEnviron returns the Environ field value if set, zero value otherwise.
 func (o *ComponentProfileItem) GetEnviron() map[string]string {
-	if o == nil || o.Environ == nil {
+	if o == nil || IsNil(o.Environ) {
 		var ret map[string]string
 		return ret
 	}
@@ -121,7 +124,7 @@ func (o *ComponentProfileItem) GetEnviron() map[string]string {
 // GetEnvironOk returns a tuple with the Environ field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentProfileItem) GetEnvironOk() (*map[string]string, bool) {
-	if o == nil || o.Environ == nil {
+	if o == nil || IsNil(o.Environ) {
 		return nil, false
 	}
 	return o.Environ, true
@@ -129,7 +132,7 @@ func (o *ComponentProfileItem) GetEnvironOk() (*map[string]string, bool) {
 
 // HasEnviron returns a boolean if a field has been set.
 func (o *ComponentProfileItem) HasEnviron() bool {
-	if o != nil && o.Environ != nil {
+	if o != nil && !IsNil(o.Environ) {
 		return true
 	}
 
@@ -143,7 +146,7 @@ func (o *ComponentProfileItem) SetEnviron(v map[string]string) {
 
 // GetSyncPaths returns the SyncPaths field value if set, zero value otherwise.
 func (o *ComponentProfileItem) GetSyncPaths() []SyncPathItem {
-	if o == nil || o.SyncPaths == nil {
+	if o == nil || IsNil(o.SyncPaths) {
 		var ret []SyncPathItem
 		return ret
 	}
@@ -153,7 +156,7 @@ func (o *ComponentProfileItem) GetSyncPaths() []SyncPathItem {
 // GetSyncPathsOk returns a tuple with the SyncPaths field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentProfileItem) GetSyncPathsOk() ([]SyncPathItem, bool) {
-	if o == nil || o.SyncPaths == nil {
+	if o == nil || IsNil(o.SyncPaths) {
 		return nil, false
 	}
 	return o.SyncPaths, true
@@ -161,7 +164,7 @@ func (o *ComponentProfileItem) GetSyncPathsOk() ([]SyncPathItem, bool) {
 
 // HasSyncPaths returns a boolean if a field has been set.
 func (o *ComponentProfileItem) HasSyncPaths() bool {
-	if o != nil && o.SyncPaths != nil {
+	if o != nil && !IsNil(o.SyncPaths) {
 		return true
 	}
 
@@ -174,9 +177,9 @@ func (o *ComponentProfileItem) SetSyncPaths(v []SyncPathItem) {
 }
 
 // GetRequirements returns the Requirements field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ComponentProfileItem) GetRequirements() ProfileItemRequirements {
-	if o == nil || o.Requirements.Get() == nil {
-		var ret ProfileItemRequirements
+func (o *ComponentProfileItem) GetRequirements() ResourceRequirementItem {
+	if o == nil || IsNil(o.Requirements.Get()) {
+		var ret ResourceRequirementItem
 		return ret
 	}
 	return *o.Requirements.Get()
@@ -185,7 +188,7 @@ func (o *ComponentProfileItem) GetRequirements() ProfileItemRequirements {
 // GetRequirementsOk returns a tuple with the Requirements field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComponentProfileItem) GetRequirementsOk() (*ProfileItemRequirements, bool) {
+func (o *ComponentProfileItem) GetRequirementsOk() (*ResourceRequirementItem, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -201,8 +204,8 @@ func (o *ComponentProfileItem) HasRequirements() bool {
 	return false
 }
 
-// SetRequirements gets a reference to the given NullableProfileItemRequirements and assigns it to the Requirements field.
-func (o *ComponentProfileItem) SetRequirements(v ProfileItemRequirements) {
+// SetRequirements gets a reference to the given NullableResourceRequirementItem and assigns it to the Requirements field.
+func (o *ComponentProfileItem) SetRequirements(v ResourceRequirementItem) {
 	o.Requirements.Set(&v)
 }
 
@@ -217,23 +220,31 @@ func (o *ComponentProfileItem) UnsetRequirements() {
 }
 
 func (o ComponentProfileItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComponentProfileItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Command != nil {
+	if !IsNil(o.Command) {
 		toSerialize["command"] = o.Command
 	}
-	if o.PortMapping != nil {
+	if !IsNil(o.PortMapping) {
 		toSerialize["portMapping"] = o.PortMapping
 	}
-	if o.Environ != nil {
+	if !IsNil(o.Environ) {
 		toSerialize["environ"] = o.Environ
 	}
-	if o.SyncPaths != nil {
+	if !IsNil(o.SyncPaths) {
 		toSerialize["syncPaths"] = o.SyncPaths
 	}
 	if o.Requirements.IsSet() {
 		toSerialize["requirements"] = o.Requirements.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableComponentProfileItem struct {

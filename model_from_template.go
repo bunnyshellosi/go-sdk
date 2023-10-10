@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the FromTemplate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FromTemplate{}
+
 // FromTemplate struct for FromTemplate
 type FromTemplate struct {
 	Type     *string `json:"type,omitempty"`
@@ -44,7 +47,7 @@ func NewFromTemplateWithDefaults() *FromTemplate {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *FromTemplate) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *FromTemplate) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromTemplate) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -62,7 +65,7 @@ func (o *FromTemplate) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *FromTemplate) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *FromTemplate) SetType(v string) {
 
 // GetTemplate returns the Template field value if set, zero value otherwise.
 func (o *FromTemplate) GetTemplate() string {
-	if o == nil || o.Template == nil {
+	if o == nil || IsNil(o.Template) {
 		var ret string
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *FromTemplate) GetTemplate() string {
 // GetTemplateOk returns a tuple with the Template field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FromTemplate) GetTemplateOk() (*string, bool) {
-	if o == nil || o.Template == nil {
+	if o == nil || IsNil(o.Template) {
 		return nil, false
 	}
 	return o.Template, true
@@ -94,7 +97,7 @@ func (o *FromTemplate) GetTemplateOk() (*string, bool) {
 
 // HasTemplate returns a boolean if a field has been set.
 func (o *FromTemplate) HasTemplate() bool {
-	if o != nil && o.Template != nil {
+	if o != nil && !IsNil(o.Template) {
 		return true
 	}
 
@@ -107,14 +110,22 @@ func (o *FromTemplate) SetTemplate(v string) {
 }
 
 func (o FromTemplate) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if o.Template != nil {
-		toSerialize["template"] = o.Template
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o FromTemplate) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Template) {
+		toSerialize["template"] = o.Template
+	}
+	return toSerialize, nil
 }
 
 type NullableFromTemplate struct {

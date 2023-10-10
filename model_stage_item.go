@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the StageItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StageItem{}
+
 // StageItem struct for StageItem
 type StageItem struct {
 	// Stage identifier.
@@ -52,7 +55,7 @@ func NewStageItemWithDefaults() *StageItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *StageItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -62,7 +65,7 @@ func (o *StageItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StageItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -70,7 +73,7 @@ func (o *StageItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *StageItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -84,7 +87,7 @@ func (o *StageItem) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *StageItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -94,7 +97,7 @@ func (o *StageItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StageItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -102,7 +105,7 @@ func (o *StageItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *StageItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -116,7 +119,7 @@ func (o *StageItem) SetName(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *StageItem) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -126,7 +129,7 @@ func (o *StageItem) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StageItem) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -134,7 +137,7 @@ func (o *StageItem) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *StageItem) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -148,7 +151,7 @@ func (o *StageItem) SetStatus(v string) {
 
 // GetDuration returns the Duration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StageItem) GetDuration() int32 {
-	if o == nil || o.Duration.Get() == nil {
+	if o == nil || IsNil(o.Duration.Get()) {
 		var ret int32
 		return ret
 	}
@@ -191,7 +194,7 @@ func (o *StageItem) UnsetDuration() {
 
 // GetJobsCount returns the JobsCount field value if set, zero value otherwise.
 func (o *StageItem) GetJobsCount() int32 {
-	if o == nil || o.JobsCount == nil {
+	if o == nil || IsNil(o.JobsCount) {
 		var ret int32
 		return ret
 	}
@@ -201,7 +204,7 @@ func (o *StageItem) GetJobsCount() int32 {
 // GetJobsCountOk returns a tuple with the JobsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StageItem) GetJobsCountOk() (*int32, bool) {
-	if o == nil || o.JobsCount == nil {
+	if o == nil || IsNil(o.JobsCount) {
 		return nil, false
 	}
 	return o.JobsCount, true
@@ -209,7 +212,7 @@ func (o *StageItem) GetJobsCountOk() (*int32, bool) {
 
 // HasJobsCount returns a boolean if a field has been set.
 func (o *StageItem) HasJobsCount() bool {
-	if o != nil && o.JobsCount != nil {
+	if o != nil && !IsNil(o.JobsCount) {
 		return true
 	}
 
@@ -223,7 +226,7 @@ func (o *StageItem) SetJobsCount(v int32) {
 
 // GetCompletedJobsCount returns the CompletedJobsCount field value if set, zero value otherwise.
 func (o *StageItem) GetCompletedJobsCount() int32 {
-	if o == nil || o.CompletedJobsCount == nil {
+	if o == nil || IsNil(o.CompletedJobsCount) {
 		var ret int32
 		return ret
 	}
@@ -233,7 +236,7 @@ func (o *StageItem) GetCompletedJobsCount() int32 {
 // GetCompletedJobsCountOk returns a tuple with the CompletedJobsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StageItem) GetCompletedJobsCountOk() (*int32, bool) {
-	if o == nil || o.CompletedJobsCount == nil {
+	if o == nil || IsNil(o.CompletedJobsCount) {
 		return nil, false
 	}
 	return o.CompletedJobsCount, true
@@ -241,7 +244,7 @@ func (o *StageItem) GetCompletedJobsCountOk() (*int32, bool) {
 
 // HasCompletedJobsCount returns a boolean if a field has been set.
 func (o *StageItem) HasCompletedJobsCount() bool {
-	if o != nil && o.CompletedJobsCount != nil {
+	if o != nil && !IsNil(o.CompletedJobsCount) {
 		return true
 	}
 
@@ -255,7 +258,7 @@ func (o *StageItem) SetCompletedJobsCount(v int32) {
 
 // GetPipeline returns the Pipeline field value if set, zero value otherwise.
 func (o *StageItem) GetPipeline() string {
-	if o == nil || o.Pipeline == nil {
+	if o == nil || IsNil(o.Pipeline) {
 		var ret string
 		return ret
 	}
@@ -265,7 +268,7 @@ func (o *StageItem) GetPipeline() string {
 // GetPipelineOk returns a tuple with the Pipeline field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StageItem) GetPipelineOk() (*string, bool) {
-	if o == nil || o.Pipeline == nil {
+	if o == nil || IsNil(o.Pipeline) {
 		return nil, false
 	}
 	return o.Pipeline, true
@@ -273,7 +276,7 @@ func (o *StageItem) GetPipelineOk() (*string, bool) {
 
 // HasPipeline returns a boolean if a field has been set.
 func (o *StageItem) HasPipeline() bool {
-	if o != nil && o.Pipeline != nil {
+	if o != nil && !IsNil(o.Pipeline) {
 		return true
 	}
 
@@ -286,29 +289,37 @@ func (o *StageItem) SetPipeline(v string) {
 }
 
 func (o StageItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o StageItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	if o.Duration.IsSet() {
 		toSerialize["duration"] = o.Duration.Get()
 	}
-	if o.JobsCount != nil {
+	if !IsNil(o.JobsCount) {
 		toSerialize["jobsCount"] = o.JobsCount
 	}
-	if o.CompletedJobsCount != nil {
+	if !IsNil(o.CompletedJobsCount) {
 		toSerialize["completedJobsCount"] = o.CompletedJobsCount
 	}
-	if o.Pipeline != nil {
+	if !IsNil(o.Pipeline) {
 		toSerialize["pipeline"] = o.Pipeline
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableStageItem struct {

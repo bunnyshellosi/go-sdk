@@ -115,11 +115,11 @@ func (dst *EnvironmentEditConfigurationConfiguration) UnmarshalJSON(data []byte)
 		dst.FromString = nil
 		dst.FromTemplate = nil
 
-		return fmt.Errorf("Data matches more than one schema in oneOf(EnvironmentEditConfigurationConfiguration)")
+		return fmt.Errorf("data matches more than one schema in oneOf(EnvironmentEditConfigurationConfiguration)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("Data failed to match schemas in oneOf(EnvironmentEditConfigurationConfiguration)")
+		return fmt.Errorf("data failed to match schemas in oneOf(EnvironmentEditConfigurationConfiguration)")
 	}
 }
 

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PaginatedLink type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PaginatedLink{}
+
 // PaginatedLink struct for PaginatedLink
 type PaginatedLink struct {
 	Href *string `json:"href,omitempty"`
@@ -39,7 +42,7 @@ func NewPaginatedLinkWithDefaults() *PaginatedLink {
 
 // GetHref returns the Href field value if set, zero value otherwise.
 func (o *PaginatedLink) GetHref() string {
-	if o == nil || o.Href == nil {
+	if o == nil || IsNil(o.Href) {
 		var ret string
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *PaginatedLink) GetHref() string {
 // GetHrefOk returns a tuple with the Href field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginatedLink) GetHrefOk() (*string, bool) {
-	if o == nil || o.Href == nil {
+	if o == nil || IsNil(o.Href) {
 		return nil, false
 	}
 	return o.Href, true
@@ -57,7 +60,7 @@ func (o *PaginatedLink) GetHrefOk() (*string, bool) {
 
 // HasHref returns a boolean if a field has been set.
 func (o *PaginatedLink) HasHref() bool {
-	if o != nil && o.Href != nil {
+	if o != nil && !IsNil(o.Href) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *PaginatedLink) SetHref(v string) {
 }
 
 func (o PaginatedLink) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Href != nil {
-		toSerialize["href"] = o.Href
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PaginatedLink) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Href) {
+		toSerialize["href"] = o.Href
+	}
+	return toSerialize, nil
 }
 
 type NullablePaginatedLink struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentVariableItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentVariableItem{}
+
 // EnvironmentVariableItem An environment variable used during bunnyshell workflows.
 type EnvironmentVariableItem struct {
 	// Environment variable identifier.
@@ -50,7 +53,7 @@ func NewEnvironmentVariableItemWithDefaults() *EnvironmentVariableItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *EnvironmentVariableItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *EnvironmentVariableItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentVariableItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -68,7 +71,7 @@ func (o *EnvironmentVariableItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *EnvironmentVariableItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *EnvironmentVariableItem) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EnvironmentVariableItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *EnvironmentVariableItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentVariableItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -100,7 +103,7 @@ func (o *EnvironmentVariableItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *EnvironmentVariableItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *EnvironmentVariableItem) SetName(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentVariableItem) GetValue() string {
-	if o == nil || o.Value.Get() == nil {
+	if o == nil || IsNil(o.Value.Get()) {
 		var ret string
 		return ret
 	}
@@ -157,7 +160,7 @@ func (o *EnvironmentVariableItem) UnsetValue() {
 
 // GetSecret returns the Secret field value if set, zero value otherwise.
 func (o *EnvironmentVariableItem) GetSecret() bool {
-	if o == nil || o.Secret == nil {
+	if o == nil || IsNil(o.Secret) {
 		var ret bool
 		return ret
 	}
@@ -167,7 +170,7 @@ func (o *EnvironmentVariableItem) GetSecret() bool {
 // GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentVariableItem) GetSecretOk() (*bool, bool) {
-	if o == nil || o.Secret == nil {
+	if o == nil || IsNil(o.Secret) {
 		return nil, false
 	}
 	return o.Secret, true
@@ -175,7 +178,7 @@ func (o *EnvironmentVariableItem) GetSecretOk() (*bool, bool) {
 
 // HasSecret returns a boolean if a field has been set.
 func (o *EnvironmentVariableItem) HasSecret() bool {
-	if o != nil && o.Secret != nil {
+	if o != nil && !IsNil(o.Secret) {
 		return true
 	}
 
@@ -189,7 +192,7 @@ func (o *EnvironmentVariableItem) SetSecret(v bool) {
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *EnvironmentVariableItem) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		var ret string
 		return ret
 	}
@@ -199,7 +202,7 @@ func (o *EnvironmentVariableItem) GetEnvironment() string {
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentVariableItem) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -207,7 +210,7 @@ func (o *EnvironmentVariableItem) GetEnvironmentOk() (*string, bool) {
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *EnvironmentVariableItem) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -221,7 +224,7 @@ func (o *EnvironmentVariableItem) SetEnvironment(v string) {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *EnvironmentVariableItem) GetOrganization() string {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization) {
 		var ret string
 		return ret
 	}
@@ -231,7 +234,7 @@ func (o *EnvironmentVariableItem) GetOrganization() string {
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentVariableItem) GetOrganizationOk() (*string, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization) {
 		return nil, false
 	}
 	return o.Organization, true
@@ -239,7 +242,7 @@ func (o *EnvironmentVariableItem) GetOrganizationOk() (*string, bool) {
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *EnvironmentVariableItem) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && !IsNil(o.Organization) {
 		return true
 	}
 
@@ -252,26 +255,34 @@ func (o *EnvironmentVariableItem) SetOrganization(v string) {
 }
 
 func (o EnvironmentVariableItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentVariableItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if o.Value.IsSet() {
 		toSerialize["value"] = o.Value.Get()
 	}
-	if o.Secret != nil {
+	if !IsNil(o.Secret) {
 		toSerialize["secret"] = o.Secret
 	}
-	if o.Environment != nil {
+	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
 	}
-	if o.Organization != nil {
+	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableEnvironmentVariableItem struct {

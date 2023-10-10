@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Project identifier. | [optional] [readonly] 
+**Labels** | Pointer to **map[string]string** | Environment labels. | [optional] [readonly] 
 **Name** | Pointer to **string** | Project name. | [optional] [readonly] 
 **TotalEnvironments** | Pointer to **int32** | Environment identifier. | [optional] [readonly] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
@@ -52,6 +53,31 @@ SetId sets Id field to given value.
 `func (o *ProjectItem) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetLabels
+
+`func (o *ProjectItem) GetLabels() map[string]string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *ProjectItem) GetLabelsOk() (*map[string]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *ProjectItem) SetLabels(v map[string]string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *ProjectItem) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
 
 ### GetName
 

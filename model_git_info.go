@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the GitInfo type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GitInfo{}
+
 // GitInfo struct for GitInfo
 type GitInfo struct {
 	Repository NullableString `json:"repository,omitempty"`
@@ -40,7 +43,7 @@ func NewGitInfoWithDefaults() *GitInfo {
 
 // GetRepository returns the Repository field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GitInfo) GetRepository() string {
-	if o == nil || o.Repository.Get() == nil {
+	if o == nil || IsNil(o.Repository.Get()) {
 		var ret string
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *GitInfo) UnsetRepository() {
 
 // GetBranch returns the Branch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GitInfo) GetBranch() string {
-	if o == nil || o.Branch.Get() == nil {
+	if o == nil || IsNil(o.Branch.Get()) {
 		var ret string
 		return ret
 	}
@@ -125,6 +128,14 @@ func (o *GitInfo) UnsetBranch() {
 }
 
 func (o GitInfo) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GitInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Repository.IsSet() {
 		toSerialize["repository"] = o.Repository.Get()
@@ -132,7 +143,7 @@ func (o GitInfo) MarshalJSON() ([]byte, error) {
 	if o.Branch.IsSet() {
 		toSerialize["branch"] = o.Branch.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableGitInfo struct {

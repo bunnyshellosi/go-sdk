@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// OrganizationApiService OrganizationApi service
-type OrganizationApiService service
+// OrganizationAPIService OrganizationAPI service
+type OrganizationAPIService service
 
 type ApiOrganizationListRequest struct {
 	ctx        context.Context
-	ApiService *OrganizationApiService
+	ApiService *OrganizationAPIService
 	page       *int32
 	search     *string
 }
@@ -54,7 +54,7 @@ List organization matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiOrganizationListRequest
 */
-func (a *OrganizationApiService) OrganizationList(ctx context.Context) ApiOrganizationListRequest {
+func (a *OrganizationAPIService) OrganizationList(ctx context.Context) ApiOrganizationListRequest {
 	return ApiOrganizationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -64,7 +64,7 @@ func (a *OrganizationApiService) OrganizationList(ctx context.Context) ApiOrgani
 // Execute executes the request
 //
 //	@return PaginatedOrganizationCollection
-func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRequest) (*PaginatedOrganizationCollection, *http.Response, error) {
+func (a *OrganizationAPIService) OrganizationListExecute(r ApiOrganizationListRequest) (*PaginatedOrganizationCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -72,7 +72,7 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 		localVarReturnValue *PaginatedOrganizationCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationApiService.OrganizationList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationAPIService.OrganizationList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -84,10 +84,13 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.search != nil {
-		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -109,20 +112,6 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -131,6 +120,20 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -163,6 +166,7 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -182,7 +186,7 @@ func (a *OrganizationApiService) OrganizationListExecute(r ApiOrganizationListRe
 
 type ApiOrganizationViewRequest struct {
 	ctx        context.Context
-	ApiService *OrganizationApiService
+	ApiService *OrganizationAPIService
 	id         string
 }
 
@@ -199,7 +203,7 @@ View a specific organization.
 	@param id Resource identifier
 	@return ApiOrganizationViewRequest
 */
-func (a *OrganizationApiService) OrganizationView(ctx context.Context, id string) ApiOrganizationViewRequest {
+func (a *OrganizationAPIService) OrganizationView(ctx context.Context, id string) ApiOrganizationViewRequest {
 	return ApiOrganizationViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -210,7 +214,7 @@ func (a *OrganizationApiService) OrganizationView(ctx context.Context, id string
 // Execute executes the request
 //
 //	@return OrganizationItem
-func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRequest) (*OrganizationItem, *http.Response, error) {
+func (a *OrganizationAPIService) OrganizationViewExecute(r ApiOrganizationViewRequest) (*OrganizationItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -218,13 +222,13 @@ func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRe
 		localVarReturnValue *OrganizationItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationApiService.OrganizationView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationAPIService.OrganizationView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/organizations/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -250,20 +254,6 @@ func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -272,6 +262,20 @@ func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRe
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -304,6 +308,7 @@ func (a *OrganizationApiService) OrganizationViewExecute(r ApiOrganizationViewRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

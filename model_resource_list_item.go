@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceListItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceListItem{}
+
 // ResourceListItem struct for ResourceListItem
 type ResourceListItem struct {
 	// The CPU resources for the container.
@@ -42,7 +45,7 @@ func NewResourceListItemWithDefaults() *ResourceListItem {
 
 // GetCpu returns the Cpu field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceListItem) GetCpu() string {
-	if o == nil || o.Cpu.Get() == nil {
+	if o == nil || IsNil(o.Cpu.Get()) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *ResourceListItem) UnsetCpu() {
 
 // GetMemory returns the Memory field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ResourceListItem) GetMemory() string {
-	if o == nil || o.Memory.Get() == nil {
+	if o == nil || IsNil(o.Memory.Get()) {
 		var ret string
 		return ret
 	}
@@ -127,6 +130,14 @@ func (o *ResourceListItem) UnsetMemory() {
 }
 
 func (o ResourceListItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Cpu.IsSet() {
 		toSerialize["cpu"] = o.Cpu.Get()
@@ -134,7 +145,7 @@ func (o ResourceListItem) MarshalJSON() ([]byte, error) {
 	if o.Memory.IsSet() {
 		toSerialize["memory"] = o.Memory.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableResourceListItem struct {

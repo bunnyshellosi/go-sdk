@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ComponentItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComponentItem{}
+
 // ComponentItem A service component represents either an application or a group of applications as a single unit
 type ComponentItem struct {
 	// Service component identifier
@@ -50,7 +53,7 @@ func NewComponentItemWithDefaults() *ComponentItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ComponentItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *ComponentItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -68,7 +71,7 @@ func (o *ComponentItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ComponentItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *ComponentItem) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ComponentItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *ComponentItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -100,7 +103,7 @@ func (o *ComponentItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ComponentItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *ComponentItem) SetName(v string) {
 
 // GetClusterStatus returns the ClusterStatus field value if set, zero value otherwise.
 func (o *ComponentItem) GetClusterStatus() string {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		var ret string
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *ComponentItem) GetClusterStatus() string {
 // GetClusterStatusOk returns a tuple with the ClusterStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentItem) GetClusterStatusOk() (*string, bool) {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		return nil, false
 	}
 	return o.ClusterStatus, true
@@ -132,7 +135,7 @@ func (o *ComponentItem) GetClusterStatusOk() (*string, bool) {
 
 // HasClusterStatus returns a boolean if a field has been set.
 func (o *ComponentItem) HasClusterStatus() bool {
-	if o != nil && o.ClusterStatus != nil {
+	if o != nil && !IsNil(o.ClusterStatus) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *ComponentItem) SetClusterStatus(v string) {
 
 // GetOperationStatus returns the OperationStatus field value if set, zero value otherwise.
 func (o *ComponentItem) GetOperationStatus() string {
-	if o == nil || o.OperationStatus == nil {
+	if o == nil || IsNil(o.OperationStatus) {
 		var ret string
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *ComponentItem) GetOperationStatus() string {
 // GetOperationStatusOk returns a tuple with the OperationStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentItem) GetOperationStatusOk() (*string, bool) {
-	if o == nil || o.OperationStatus == nil {
+	if o == nil || IsNil(o.OperationStatus) {
 		return nil, false
 	}
 	return o.OperationStatus, true
@@ -164,7 +167,7 @@ func (o *ComponentItem) GetOperationStatusOk() (*string, bool) {
 
 // HasOperationStatus returns a boolean if a field has been set.
 func (o *ComponentItem) HasOperationStatus() bool {
-	if o != nil && o.OperationStatus != nil {
+	if o != nil && !IsNil(o.OperationStatus) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *ComponentItem) SetOperationStatus(v string) {
 
 // GetPublicURLs returns the PublicURLs field value if set, zero value otherwise.
 func (o *ComponentItem) GetPublicURLs() []string {
-	if o == nil || o.PublicURLs == nil {
+	if o == nil || IsNil(o.PublicURLs) {
 		var ret []string
 		return ret
 	}
@@ -188,7 +191,7 @@ func (o *ComponentItem) GetPublicURLs() []string {
 // GetPublicURLsOk returns a tuple with the PublicURLs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentItem) GetPublicURLsOk() ([]string, bool) {
-	if o == nil || o.PublicURLs == nil {
+	if o == nil || IsNil(o.PublicURLs) {
 		return nil, false
 	}
 	return o.PublicURLs, true
@@ -196,7 +199,7 @@ func (o *ComponentItem) GetPublicURLsOk() ([]string, bool) {
 
 // HasPublicURLs returns a boolean if a field has been set.
 func (o *ComponentItem) HasPublicURLs() bool {
-	if o != nil && o.PublicURLs != nil {
+	if o != nil && !IsNil(o.PublicURLs) {
 		return true
 	}
 
@@ -210,7 +213,7 @@ func (o *ComponentItem) SetPublicURLs(v []string) {
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *ComponentItem) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		var ret string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *ComponentItem) GetEnvironment() string {
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComponentItem) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -228,7 +231,7 @@ func (o *ComponentItem) GetEnvironmentOk() (*string, bool) {
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *ComponentItem) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -241,26 +244,34 @@ func (o *ComponentItem) SetEnvironment(v string) {
 }
 
 func (o ComponentItem) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.ClusterStatus != nil {
-		toSerialize["clusterStatus"] = o.ClusterStatus
-	}
-	if o.OperationStatus != nil {
-		toSerialize["operationStatus"] = o.OperationStatus
-	}
-	if o.PublicURLs != nil {
-		toSerialize["publicURLs"] = o.PublicURLs
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ComponentItem) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ClusterStatus) {
+		toSerialize["clusterStatus"] = o.ClusterStatus
+	}
+	if !IsNil(o.OperationStatus) {
+		toSerialize["operationStatus"] = o.OperationStatus
+	}
+	if !IsNil(o.PublicURLs) {
+		toSerialize["publicURLs"] = o.PublicURLs
+	}
+	if !IsNil(o.Environment) {
+		toSerialize["environment"] = o.Environment
+	}
+	return toSerialize, nil
 }
 
 type NullableComponentItem struct {

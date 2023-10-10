@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **PortMapping** | Pointer to **[]string** | The port mapping for the container. | [optional] [readonly] 
 **Environ** | Pointer to **map[string]string** | The environ for the container. | [optional] [readonly] 
 **SyncPaths** | Pointer to [**[]SyncPathItem**](SyncPathItem.md) | The sync paths for the container. | [optional] [readonly] 
-**Requirements** | Pointer to [**NullableProfileItemRequirements**](ProfileItemRequirements.md) |  | [optional] 
+**Requirements** | Pointer to [**NullableResourceRequirementItem**](ResourceRequirementItem.md) |  | [optional] 
 
 ## Methods
 
@@ -131,20 +131,20 @@ HasSyncPaths returns a boolean if a field has been set.
 
 ### GetRequirements
 
-`func (o *ProfileItem) GetRequirements() ProfileItemRequirements`
+`func (o *ProfileItem) GetRequirements() ResourceRequirementItem`
 
 GetRequirements returns the Requirements field if non-nil, zero value otherwise.
 
 ### GetRequirementsOk
 
-`func (o *ProfileItem) GetRequirementsOk() (*ProfileItemRequirements, bool)`
+`func (o *ProfileItem) GetRequirementsOk() (*ResourceRequirementItem, bool)`
 
 GetRequirementsOk returns a tuple with the Requirements field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequirements
 
-`func (o *ProfileItem) SetRequirements(v ProfileItemRequirements)`
+`func (o *ProfileItem) SetRequirements(v ResourceRequirementItem)`
 
 SetRequirements sets Requirements field to given value.
 

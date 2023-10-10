@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ExtendedResourceConfigItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ExtendedResourceConfigItem{}
+
 // ExtendedResourceConfigItem struct for ExtendedResourceConfigItem
 type ExtendedResourceConfigItem struct {
 	Extended *bool `json:"extended,omitempty"`
@@ -47,7 +50,7 @@ func NewExtendedResourceConfigItemWithDefaults() *ExtendedResourceConfigItem {
 
 // GetExtended returns the Extended field value if set, zero value otherwise.
 func (o *ExtendedResourceConfigItem) GetExtended() bool {
-	if o == nil || o.Extended == nil {
+	if o == nil || IsNil(o.Extended) {
 		var ret bool
 		return ret
 	}
@@ -57,7 +60,7 @@ func (o *ExtendedResourceConfigItem) GetExtended() bool {
 // GetExtendedOk returns a tuple with the Extended field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtendedResourceConfigItem) GetExtendedOk() (*bool, bool) {
-	if o == nil || o.Extended == nil {
+	if o == nil || IsNil(o.Extended) {
 		return nil, false
 	}
 	return o.Extended, true
@@ -65,7 +68,7 @@ func (o *ExtendedResourceConfigItem) GetExtendedOk() (*bool, bool) {
 
 // HasExtended returns a boolean if a field has been set.
 func (o *ExtendedResourceConfigItem) HasExtended() bool {
-	if o != nil && o.Extended != nil {
+	if o != nil && !IsNil(o.Extended) {
 		return true
 	}
 
@@ -79,7 +82,7 @@ func (o *ExtendedResourceConfigItem) SetExtended(v bool) {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *ExtendedResourceConfigItem) GetNamespace() string {
-	if o == nil || o.Namespace == nil {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -89,7 +92,7 @@ func (o *ExtendedResourceConfigItem) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtendedResourceConfigItem) GetNamespaceOk() (*string, bool) {
-	if o == nil || o.Namespace == nil {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -97,7 +100,7 @@ func (o *ExtendedResourceConfigItem) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *ExtendedResourceConfigItem) HasNamespace() bool {
-	if o != nil && o.Namespace != nil {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -111,7 +114,7 @@ func (o *ExtendedResourceConfigItem) SetNamespace(v string) {
 
 // GetKind returns the Kind field value if set, zero value otherwise.
 func (o *ExtendedResourceConfigItem) GetKind() string {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
 	}
@@ -121,7 +124,7 @@ func (o *ExtendedResourceConfigItem) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtendedResourceConfigItem) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
 	return o.Kind, true
@@ -129,7 +132,7 @@ func (o *ExtendedResourceConfigItem) GetKindOk() (*string, bool) {
 
 // HasKind returns a boolean if a field has been set.
 func (o *ExtendedResourceConfigItem) HasKind() bool {
-	if o != nil && o.Kind != nil {
+	if o != nil && !IsNil(o.Kind) {
 		return true
 	}
 
@@ -143,7 +146,7 @@ func (o *ExtendedResourceConfigItem) SetKind(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ExtendedResourceConfigItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -153,7 +156,7 @@ func (o *ExtendedResourceConfigItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtendedResourceConfigItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -161,7 +164,7 @@ func (o *ExtendedResourceConfigItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ExtendedResourceConfigItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -175,7 +178,7 @@ func (o *ExtendedResourceConfigItem) SetName(v string) {
 
 // GetContainers returns the Containers field value if set, zero value otherwise.
 func (o *ExtendedResourceConfigItem) GetContainers() map[string]ContainerConfigItem {
-	if o == nil || o.Containers == nil {
+	if o == nil || IsNil(o.Containers) {
 		var ret map[string]ContainerConfigItem
 		return ret
 	}
@@ -185,7 +188,7 @@ func (o *ExtendedResourceConfigItem) GetContainers() map[string]ContainerConfigI
 // GetContainersOk returns a tuple with the Containers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ExtendedResourceConfigItem) GetContainersOk() (*map[string]ContainerConfigItem, bool) {
-	if o == nil || o.Containers == nil {
+	if o == nil || IsNil(o.Containers) {
 		return nil, false
 	}
 	return o.Containers, true
@@ -193,7 +196,7 @@ func (o *ExtendedResourceConfigItem) GetContainersOk() (*map[string]ContainerCon
 
 // HasContainers returns a boolean if a field has been set.
 func (o *ExtendedResourceConfigItem) HasContainers() bool {
-	if o != nil && o.Containers != nil {
+	if o != nil && !IsNil(o.Containers) {
 		return true
 	}
 
@@ -206,23 +209,31 @@ func (o *ExtendedResourceConfigItem) SetContainers(v map[string]ContainerConfigI
 }
 
 func (o ExtendedResourceConfigItem) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Extended != nil {
-		toSerialize["extended"] = o.Extended
-	}
-	if o.Namespace != nil {
-		toSerialize["namespace"] = o.Namespace
-	}
-	if o.Kind != nil {
-		toSerialize["kind"] = o.Kind
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Containers != nil {
-		toSerialize["containers"] = o.Containers
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ExtendedResourceConfigItem) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Extended) {
+		toSerialize["extended"] = o.Extended
+	}
+	if !IsNil(o.Namespace) {
+		toSerialize["namespace"] = o.Namespace
+	}
+	if !IsNil(o.Kind) {
+		toSerialize["kind"] = o.Kind
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Containers) {
+		toSerialize["containers"] = o.Containers
+	}
+	return toSerialize, nil
 }
 
 type NullableExtendedResourceConfigItem struct {

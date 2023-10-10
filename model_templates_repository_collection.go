@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the TemplatesRepositoryCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TemplatesRepositoryCollection{}
+
 // TemplatesRepositoryCollection A templates repository holds multiple templates.
 type TemplatesRepositoryCollection struct {
 	// Templates repository identifier.
@@ -50,7 +53,7 @@ func NewTemplatesRepositoryCollectionWithDefaults() *TemplatesRepositoryCollecti
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *TemplatesRepositoryCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *TemplatesRepositoryCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -68,7 +71,7 @@ func (o *TemplatesRepositoryCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *TemplatesRepositoryCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *TemplatesRepositoryCollection) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *TemplatesRepositoryCollection) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *TemplatesRepositoryCollection) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryCollection) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -100,7 +103,7 @@ func (o *TemplatesRepositoryCollection) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *TemplatesRepositoryCollection) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *TemplatesRepositoryCollection) SetName(v string) {
 
 // GetGitRepositoryUrl returns the GitRepositoryUrl field value if set, zero value otherwise.
 func (o *TemplatesRepositoryCollection) GetGitRepositoryUrl() string {
-	if o == nil || o.GitRepositoryUrl == nil {
+	if o == nil || IsNil(o.GitRepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *TemplatesRepositoryCollection) GetGitRepositoryUrl() string {
 // GetGitRepositoryUrlOk returns a tuple with the GitRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryCollection) GetGitRepositoryUrlOk() (*string, bool) {
-	if o == nil || o.GitRepositoryUrl == nil {
+	if o == nil || IsNil(o.GitRepositoryUrl) {
 		return nil, false
 	}
 	return o.GitRepositoryUrl, true
@@ -132,7 +135,7 @@ func (o *TemplatesRepositoryCollection) GetGitRepositoryUrlOk() (*string, bool) 
 
 // HasGitRepositoryUrl returns a boolean if a field has been set.
 func (o *TemplatesRepositoryCollection) HasGitRepositoryUrl() bool {
-	if o != nil && o.GitRepositoryUrl != nil {
+	if o != nil && !IsNil(o.GitRepositoryUrl) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *TemplatesRepositoryCollection) SetGitRepositoryUrl(v string) {
 
 // GetGitRef returns the GitRef field value if set, zero value otherwise.
 func (o *TemplatesRepositoryCollection) GetGitRef() string {
-	if o == nil || o.GitRef == nil {
+	if o == nil || IsNil(o.GitRef) {
 		var ret string
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *TemplatesRepositoryCollection) GetGitRef() string {
 // GetGitRefOk returns a tuple with the GitRef field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TemplatesRepositoryCollection) GetGitRefOk() (*string, bool) {
-	if o == nil || o.GitRef == nil {
+	if o == nil || IsNil(o.GitRef) {
 		return nil, false
 	}
 	return o.GitRef, true
@@ -164,7 +167,7 @@ func (o *TemplatesRepositoryCollection) GetGitRefOk() (*string, bool) {
 
 // HasGitRef returns a boolean if a field has been set.
 func (o *TemplatesRepositoryCollection) HasGitRef() bool {
-	if o != nil && o.GitRef != nil {
+	if o != nil && !IsNil(o.GitRef) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *TemplatesRepositoryCollection) SetGitRef(v string) {
 
 // GetLastSyncSha returns the LastSyncSha field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplatesRepositoryCollection) GetLastSyncSha() string {
-	if o == nil || o.LastSyncSha.Get() == nil {
+	if o == nil || IsNil(o.LastSyncSha.Get()) {
 		var ret string
 		return ret
 	}
@@ -221,7 +224,7 @@ func (o *TemplatesRepositoryCollection) UnsetLastSyncSha() {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplatesRepositoryCollection) GetOrganization() string {
-	if o == nil || o.Organization.Get() == nil {
+	if o == nil || IsNil(o.Organization.Get()) {
 		var ret string
 		return ret
 	}
@@ -263,17 +266,25 @@ func (o *TemplatesRepositoryCollection) UnsetOrganization() {
 }
 
 func (o TemplatesRepositoryCollection) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o TemplatesRepositoryCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.GitRepositoryUrl != nil {
+	if !IsNil(o.GitRepositoryUrl) {
 		toSerialize["gitRepositoryUrl"] = o.GitRepositoryUrl
 	}
-	if o.GitRef != nil {
+	if !IsNil(o.GitRef) {
 		toSerialize["gitRef"] = o.GitRef
 	}
 	if o.LastSyncSha.IsSet() {
@@ -282,7 +293,7 @@ func (o TemplatesRepositoryCollection) MarshalJSON() ([]byte, error) {
 	if o.Organization.IsSet() {
 		toSerialize["organization"] = o.Organization.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableTemplatesRepositoryCollection struct {

@@ -848,6 +848,19 @@ paths:
         schema:
           type: string
         style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by label key-value pair.
+        explode: true
+        in: query
+        name: labels
+        required: false
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+        style: deepObject
       responses:
         "200":
           content:
@@ -1393,11 +1406,9 @@ paths:
           - env_start_auto
           - env_stop_manual
           - env_stop_auto
+          - env_stop_expired
           - env_abort_manual
           - env_conv_eph_to_primary
-          - tf_delete_module_use
-          - tf_apply_module_use
-          - tf_sync_module_use
           - build_settings_validated
           - kubernetes_apply_configuration
           type: string
@@ -1846,6 +1857,19 @@ paths:
         schema:
           type: string
         style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by label key-value pair.
+        explode: true
+        in: query
+        name: labels
+        required: false
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+        style: deepObject
       responses:
         "200":
           content:
@@ -2218,6 +2242,20 @@ components:
       required:
       - name
       type: object
+    Edit:
+      properties:
+        values:
+          additionalProperties:
+            type: string
+          type: object
+        strategy:
+          default: merge
+          enum:
+          - merge
+          - replace
+          example: merge
+          type: string
+      type: object
     Ephemeral:
       properties:
         type:
@@ -2364,9 +2402,12 @@ components:
           readOnly: true
           type: array
         requirements:
-          $ref: '#/components/schemas/Profile_item_requirements'
+          $ref: '#/components/schemas/ResourceRequirement-item'
       type: object
     ResourceList-item:
+      example:
+        memory: memory
+        cpu: cpu
       properties:
         cpu:
           description: The CPU resources for the container.
@@ -2380,11 +2421,18 @@ components:
           type: string
       type: object
     ResourceRequirement-item:
+      example:
+        requests:
+          memory: memory
+          cpu: cpu
+        limits:
+          memory: memory
+          cpu: cpu
       properties:
         requests:
-          $ref: '#/components/schemas/ResourceRequirement_item_requests'
+          $ref: '#/components/schemas/ResourceList-item'
         limits:
-          $ref: '#/components/schemas/ResourceRequirement_item_limits'
+          $ref: '#/components/schemas/ResourceList-item'
       type: object
     SimpleResourceConfig-item:
       properties:
@@ -2579,7 +2627,13 @@ components:
         portMapping:
         - portMapping
         - portMapping
-        requirements: null
+        requirements:
+          requests:
+            memory: memory
+            cpu: cpu
+          limits:
+            memory: memory
+            cpu: cpu
         syncPaths:
         - remotePath: remotePath
           localPath: localPath
@@ -2616,7 +2670,7 @@ components:
           readOnly: true
           type: array
         requirements:
-          $ref: '#/components/schemas/Profile_item_requirements'
+          $ref: '#/components/schemas/ResourceRequirement-item'
       type: object
     component.Resource-item:
       description: A service component represents either an application or a group
@@ -2803,6 +2857,12 @@ components:
           description: Environment identifier.
           readOnly: true
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Environment labels.
+          readOnly: true
+          type: object
         type:
           description: "Environment type: primary or ephemeral."
           readOnly: true
@@ -2872,6 +2932,10 @@ components:
         ephemeralKubernetesIntegration:
           nullable: true
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
       required:
       - name
       - project
@@ -2911,6 +2975,8 @@ components:
           type: string
         edit:
           $ref: '#/components/schemas/environment_EditSettings_edit'
+        labels:
+          $ref: '#/components/schemas/Edit'
       type: object
     environment.GenericObject:
       description: An environment holds a collection of buildable and deployable components.
@@ -3402,13 +3468,21 @@ components:
         self:
           $ref: '#/components/schemas/paginated_link'
         first:
-          $ref: '#/components/schemas/paginated_links_first'
+          allOf:
+          - $ref: '#/components/schemas/paginated_link'
+          nullable: true
         prev:
-          $ref: '#/components/schemas/paginated_links_first'
+          allOf:
+          - $ref: '#/components/schemas/paginated_link'
+          nullable: true
         next:
-          $ref: '#/components/schemas/paginated_links_first'
+          allOf:
+          - $ref: '#/components/schemas/paginated_link'
+          nullable: true
         last:
-          $ref: '#/components/schemas/paginated_links_first'
+          allOf:
+          - $ref: '#/components/schemas/paginated_link'
+          nullable: true
         item:
           items:
             $ref: '#/components/schemas/paginated_link'
@@ -3532,6 +3606,12 @@ components:
           description: Project identifier.
           readOnly: true
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Environment labels.
+          readOnly: true
+          type: object
         name:
           description: Project name.
           readOnly: true
@@ -3702,24 +3782,6 @@ components:
       - $ref: '#/components/schemas/Profile-item'
       - type: string
       readOnly: true
-    Profile_item_requirements:
-      anyOf:
-      - $ref: '#/components/schemas/ResourceRequirement-item'
-      description: The resource requirements for the container.
-      nullable: true
-      readOnly: true
-    ResourceRequirement_item_requests:
-      anyOf:
-      - $ref: '#/components/schemas/ResourceList-item'
-      description: The minimum resources for the container.
-      nullable: true
-      readOnly: true
-    ResourceRequirement_item_limits:
-      anyOf:
-      - $ref: '#/components/schemas/ResourceList-item'
-      description: The maximum resources for the container.
-      nullable: true
-      readOnly: true
     component_Config_item_config:
       description: A list of container configs.
       oneOf:
@@ -3851,10 +3913,6 @@ components:
           type: array
       title: embedded-templates_repository-collection
       type: object
-    paginated_links_first:
-      allOf:
-      - $ref: '#/components/schemas/paginated_link'
-      nullable: true
     template_ValidateAction_source:
       oneOf:
       - $ref: '#/components/schemas/ValidateSourceGit'

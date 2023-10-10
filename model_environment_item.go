@@ -15,10 +15,15 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentItem{}
+
 // EnvironmentItem An environment holds a collection of buildable and deployable components.
 type EnvironmentItem struct {
 	// Environment identifier.
 	Id *string `json:"id,omitempty"`
+	// Environment labels.
+	Labels *map[string]string `json:"labels,omitempty"`
 	// Environment type: primary or ephemeral.
 	Type *string `json:"type,omitempty"`
 	// Environment name.
@@ -56,7 +61,7 @@ func NewEnvironmentItemWithDefaults() *EnvironmentItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -66,7 +71,7 @@ func (o *EnvironmentItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -74,7 +79,7 @@ func (o *EnvironmentItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -86,9 +91,41 @@ func (o *EnvironmentItem) SetId(v string) {
 	o.Id = &v
 }
 
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetLabels() map[string]string {
+	if o == nil || IsNil(o.Labels) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Labels) {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *EnvironmentItem) SetLabels(v map[string]string) {
+	o.Labels = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -98,7 +135,7 @@ func (o *EnvironmentItem) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -106,7 +143,7 @@ func (o *EnvironmentItem) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -120,7 +157,7 @@ func (o *EnvironmentItem) SetType(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -130,7 +167,7 @@ func (o *EnvironmentItem) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -138,7 +175,7 @@ func (o *EnvironmentItem) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -152,7 +189,7 @@ func (o *EnvironmentItem) SetName(v string) {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetNamespace() string {
-	if o == nil || o.Namespace == nil {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -162,7 +199,7 @@ func (o *EnvironmentItem) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetNamespaceOk() (*string, bool) {
-	if o == nil || o.Namespace == nil {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -170,7 +207,7 @@ func (o *EnvironmentItem) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasNamespace() bool {
-	if o != nil && o.Namespace != nil {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -184,7 +221,7 @@ func (o *EnvironmentItem) SetNamespace(v string) {
 
 // GetTotalComponents returns the TotalComponents field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetTotalComponents() int32 {
-	if o == nil || o.TotalComponents == nil {
+	if o == nil || IsNil(o.TotalComponents) {
 		var ret int32
 		return ret
 	}
@@ -194,7 +231,7 @@ func (o *EnvironmentItem) GetTotalComponents() int32 {
 // GetTotalComponentsOk returns a tuple with the TotalComponents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetTotalComponentsOk() (*int32, bool) {
-	if o == nil || o.TotalComponents == nil {
+	if o == nil || IsNil(o.TotalComponents) {
 		return nil, false
 	}
 	return o.TotalComponents, true
@@ -202,7 +239,7 @@ func (o *EnvironmentItem) GetTotalComponentsOk() (*int32, bool) {
 
 // HasTotalComponents returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasTotalComponents() bool {
-	if o != nil && o.TotalComponents != nil {
+	if o != nil && !IsNil(o.TotalComponents) {
 		return true
 	}
 
@@ -216,7 +253,7 @@ func (o *EnvironmentItem) SetTotalComponents(v int32) {
 
 // GetOperationStatus returns the OperationStatus field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetOperationStatus() string {
-	if o == nil || o.OperationStatus == nil {
+	if o == nil || IsNil(o.OperationStatus) {
 		var ret string
 		return ret
 	}
@@ -226,7 +263,7 @@ func (o *EnvironmentItem) GetOperationStatus() string {
 // GetOperationStatusOk returns a tuple with the OperationStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetOperationStatusOk() (*string, bool) {
-	if o == nil || o.OperationStatus == nil {
+	if o == nil || IsNil(o.OperationStatus) {
 		return nil, false
 	}
 	return o.OperationStatus, true
@@ -234,7 +271,7 @@ func (o *EnvironmentItem) GetOperationStatusOk() (*string, bool) {
 
 // HasOperationStatus returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasOperationStatus() bool {
-	if o != nil && o.OperationStatus != nil {
+	if o != nil && !IsNil(o.OperationStatus) {
 		return true
 	}
 
@@ -248,7 +285,7 @@ func (o *EnvironmentItem) SetOperationStatus(v string) {
 
 // GetClusterStatus returns the ClusterStatus field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetClusterStatus() string {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		var ret string
 		return ret
 	}
@@ -258,7 +295,7 @@ func (o *EnvironmentItem) GetClusterStatus() string {
 // GetClusterStatusOk returns a tuple with the ClusterStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetClusterStatusOk() (*string, bool) {
-	if o == nil || o.ClusterStatus == nil {
+	if o == nil || IsNil(o.ClusterStatus) {
 		return nil, false
 	}
 	return o.ClusterStatus, true
@@ -266,7 +303,7 @@ func (o *EnvironmentItem) GetClusterStatusOk() (*string, bool) {
 
 // HasClusterStatus returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasClusterStatus() bool {
-	if o != nil && o.ClusterStatus != nil {
+	if o != nil && !IsNil(o.ClusterStatus) {
 		return true
 	}
 
@@ -280,7 +317,7 @@ func (o *EnvironmentItem) SetClusterStatus(v string) {
 
 // GetProject returns the Project field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetProject() string {
-	if o == nil || o.Project == nil {
+	if o == nil || IsNil(o.Project) {
 		var ret string
 		return ret
 	}
@@ -290,7 +327,7 @@ func (o *EnvironmentItem) GetProject() string {
 // GetProjectOk returns a tuple with the Project field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentItem) GetProjectOk() (*string, bool) {
-	if o == nil || o.Project == nil {
+	if o == nil || IsNil(o.Project) {
 		return nil, false
 	}
 	return o.Project, true
@@ -298,7 +335,7 @@ func (o *EnvironmentItem) GetProjectOk() (*string, bool) {
 
 // HasProject returns a boolean if a field has been set.
 func (o *EnvironmentItem) HasProject() bool {
-	if o != nil && o.Project != nil {
+	if o != nil && !IsNil(o.Project) {
 		return true
 	}
 
@@ -312,7 +349,7 @@ func (o *EnvironmentItem) SetProject(v string) {
 
 // GetKubernetesIntegration returns the KubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentItem) GetKubernetesIntegration() string {
-	if o == nil || o.KubernetesIntegration.Get() == nil {
+	if o == nil || IsNil(o.KubernetesIntegration.Get()) {
 		var ret string
 		return ret
 	}
@@ -354,35 +391,46 @@ func (o *EnvironmentItem) UnsetKubernetesIntegration() {
 }
 
 func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Type != nil {
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
+	}
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if o.Name != nil {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if o.Namespace != nil {
+	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
-	if o.TotalComponents != nil {
+	if !IsNil(o.TotalComponents) {
 		toSerialize["totalComponents"] = o.TotalComponents
 	}
-	if o.OperationStatus != nil {
+	if !IsNil(o.OperationStatus) {
 		toSerialize["operationStatus"] = o.OperationStatus
 	}
-	if o.ClusterStatus != nil {
+	if !IsNil(o.ClusterStatus) {
 		toSerialize["clusterStatus"] = o.ClusterStatus
 	}
-	if o.Project != nil {
+	if !IsNil(o.Project) {
 		toSerialize["project"] = o.Project
 	}
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableEnvironmentItem struct {

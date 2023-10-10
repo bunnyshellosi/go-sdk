@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EmbeddedPipelineCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmbeddedPipelineCollection{}
+
 // EmbeddedPipelineCollection struct for EmbeddedPipelineCollection
 type EmbeddedPipelineCollection struct {
 	Item []PipelineCollection `json:"item,omitempty"`
@@ -39,7 +42,7 @@ func NewEmbeddedPipelineCollectionWithDefaults() *EmbeddedPipelineCollection {
 
 // GetItem returns the Item field value if set, zero value otherwise.
 func (o *EmbeddedPipelineCollection) GetItem() []PipelineCollection {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		var ret []PipelineCollection
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *EmbeddedPipelineCollection) GetItem() []PipelineCollection {
 // GetItemOk returns a tuple with the Item field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EmbeddedPipelineCollection) GetItemOk() ([]PipelineCollection, bool) {
-	if o == nil || o.Item == nil {
+	if o == nil || IsNil(o.Item) {
 		return nil, false
 	}
 	return o.Item, true
@@ -57,7 +60,7 @@ func (o *EmbeddedPipelineCollection) GetItemOk() ([]PipelineCollection, bool) {
 
 // HasItem returns a boolean if a field has been set.
 func (o *EmbeddedPipelineCollection) HasItem() bool {
-	if o != nil && o.Item != nil {
+	if o != nil && !IsNil(o.Item) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *EmbeddedPipelineCollection) SetItem(v []PipelineCollection) {
 }
 
 func (o EmbeddedPipelineCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Item != nil {
-		toSerialize["item"] = o.Item
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EmbeddedPipelineCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Item) {
+		toSerialize["item"] = o.Item
+	}
+	return toSerialize, nil
 }
 
 type NullableEmbeddedPipelineCollection struct {

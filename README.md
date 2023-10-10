@@ -16,7 +16,6 @@ Install the following dependencies:
 
 ```shell
 go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
@@ -62,7 +61,7 @@ Each operation can use different server URL defined using `OperationServers` map
 An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
-```
+```golang
 ctx := context.WithValue(context.Background(), sdk.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
@@ -79,47 +78,47 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ComponentApi* | [**ComponentList**](docs/ComponentApi.md#componentlist) | **Get** /v1/components | List service components matching any selected filters
-*ComponentApi* | [**ComponentRemoteDevConfig**](docs/ComponentApi.md#componentremotedevconfig) | **Get** /v1/components/{id}/remotedev/config | Get remote dev config
-*ComponentApi* | [**ComponentRemoteDevProfile**](docs/ComponentApi.md#componentremotedevprofile) | **Post** /v1/components/{id}/remotedev/profile | Parse, validate and interpolate the provided remoteDevProfile
-*ComponentApi* | [**ComponentResources**](docs/ComponentApi.md#componentresources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
-*ComponentApi* | [**ComponentView**](docs/ComponentApi.md#componentview) | **Get** /v1/components/{id} | View a specific service component
-*ComponentEndpointApi* | [**ComponentEndpointList**](docs/ComponentEndpointApi.md#componentendpointlist) | **Get** /v1/components/endpoint | List endpoints for service components matching any selected filters
-*ComponentEndpointApi* | [**ComponentEndpointView**](docs/ComponentEndpointApi.md#componentendpointview) | **Get** /v1/components/{id}/endpoint | View endpoints for a specific service component
-*ComponentGitApi* | [**ComponentGitList**](docs/ComponentGitApi.md#componentgitlist) | **Get** /v1/components/gitinfo | List git info for service components matching any selected filters
-*ComponentGitApi* | [**ComponentGitView**](docs/ComponentGitApi.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | View git info for a specific service component
-*EnvironmentApi* | [**EnvironmentClone**](docs/EnvironmentApi.md#environmentclone) | **Post** /v1/environments/{id}/clone | Clone an environment.
-*EnvironmentApi* | [**EnvironmentCreate**](docs/EnvironmentApi.md#environmentcreate) | **Post** /v1/environments | Creates a new environment.
-*EnvironmentApi* | [**EnvironmentDefinition**](docs/EnvironmentApi.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
-*EnvironmentApi* | [**EnvironmentDelete**](docs/EnvironmentApi.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
-*EnvironmentApi* | [**EnvironmentDeploy**](docs/EnvironmentApi.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
-*EnvironmentApi* | [**EnvironmentEditComponents**](docs/EnvironmentApi.md#environmenteditcomponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
-*EnvironmentApi* | [**EnvironmentEditConfiguration**](docs/EnvironmentApi.md#environmenteditconfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
-*EnvironmentApi* | [**EnvironmentEditSettings**](docs/EnvironmentApi.md#environmenteditsettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
-*EnvironmentApi* | [**EnvironmentKubeConfig**](docs/EnvironmentApi.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
-*EnvironmentApi* | [**EnvironmentList**](docs/EnvironmentApi.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
-*EnvironmentApi* | [**EnvironmentStart**](docs/EnvironmentApi.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
-*EnvironmentApi* | [**EnvironmentStop**](docs/EnvironmentApi.md#environmentstop) | **Post** /v1/environments/{id}/stop | Stop an environment.
-*EnvironmentApi* | [**EnvironmentView**](docs/EnvironmentApi.md#environmentview) | **Get** /v1/environments/{id} | View a specific environment.
-*EnvironmentVariableApi* | [**EnvironmentVariableEdit**](docs/EnvironmentVariableApi.md#environmentvariableedit) | **Patch** /v1/environment_variables/{id} | Edit a specific environment variable.
-*EnvironmentVariableApi* | [**EnvironmentVariableList**](docs/EnvironmentVariableApi.md#environmentvariablelist) | **Get** /v1/environment_variables | List environment variables matching any selected filters.
-*EnvironmentVariableApi* | [**EnvironmentVariableView**](docs/EnvironmentVariableApi.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | View a specific environment variable.
-*EventApi* | [**EventList**](docs/EventApi.md#eventlist) | **Get** /v1/events | List events matching any selected filters.
-*EventApi* | [**EventView**](docs/EventApi.md#eventview) | **Get** /v1/events/{id} | View a specific event.
-*KubernetesIntegrationApi* | [**KubernetesIntegrationList**](docs/KubernetesIntegrationApi.md#kubernetesintegrationlist) | **Get** /v1/kubernetes_integrations | List Kubernetes integrations matching any selected filters.
-*KubernetesIntegrationApi* | [**KubernetesIntegrationView**](docs/KubernetesIntegrationApi.md#kubernetesintegrationview) | **Get** /v1/kubernetes_integrations/{id} | View a specific Kubernetes integration.
-*OrganizationApi* | [**OrganizationList**](docs/OrganizationApi.md#organizationlist) | **Get** /v1/organizations | List organization matching any selected filters.
-*OrganizationApi* | [**OrganizationView**](docs/OrganizationApi.md#organizationview) | **Get** /v1/organizations/{id} | View a specific organization.
-*PipelineApi* | [**PipelineList**](docs/PipelineApi.md#pipelinelist) | **Get** /v1/pipelines | List pipelines matching any selected filters.
-*PipelineApi* | [**PipelineView**](docs/PipelineApi.md#pipelineview) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
-*ProjectApi* | [**ProjectList**](docs/ProjectApi.md#projectlist) | **Get** /v1/projects | List projects matching any selected filters.
-*ProjectApi* | [**ProjectView**](docs/ProjectApi.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
-*TemplateApi* | [**TemplateDefinition**](docs/TemplateApi.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
-*TemplateApi* | [**TemplateList**](docs/TemplateApi.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
-*TemplateApi* | [**TemplateValidate**](docs/TemplateApi.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
-*TemplateApi* | [**TemplateView**](docs/TemplateApi.md#templateview) | **Get** /v1/templates/{id} | View a specific template.
-*TemplatesRepositoryApi* | [**TemplatesRepositoryList**](docs/TemplatesRepositoryApi.md#templatesrepositorylist) | **Get** /v1/templates_repositories | List templates repositories matching any selected filters.
-*TemplatesRepositoryApi* | [**TemplatesRepositoryView**](docs/TemplatesRepositoryApi.md#templatesrepositoryview) | **Get** /v1/templates_repositories/{id} | View a specific templates repository.
+*ComponentAPI* | [**ComponentList**](docs/ComponentAPI.md#componentlist) | **Get** /v1/components | List service components matching any selected filters
+*ComponentAPI* | [**ComponentRemoteDevConfig**](docs/ComponentAPI.md#componentremotedevconfig) | **Get** /v1/components/{id}/remotedev/config | Get remote dev config
+*ComponentAPI* | [**ComponentRemoteDevProfile**](docs/ComponentAPI.md#componentremotedevprofile) | **Post** /v1/components/{id}/remotedev/profile | Parse, validate and interpolate the provided remoteDevProfile
+*ComponentAPI* | [**ComponentResources**](docs/ComponentAPI.md#componentresources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
+*ComponentAPI* | [**ComponentView**](docs/ComponentAPI.md#componentview) | **Get** /v1/components/{id} | View a specific service component
+*ComponentEndpointAPI* | [**ComponentEndpointList**](docs/ComponentEndpointAPI.md#componentendpointlist) | **Get** /v1/components/endpoint | List endpoints for service components matching any selected filters
+*ComponentEndpointAPI* | [**ComponentEndpointView**](docs/ComponentEndpointAPI.md#componentendpointview) | **Get** /v1/components/{id}/endpoint | View endpoints for a specific service component
+*ComponentGitAPI* | [**ComponentGitList**](docs/ComponentGitAPI.md#componentgitlist) | **Get** /v1/components/gitinfo | List git info for service components matching any selected filters
+*ComponentGitAPI* | [**ComponentGitView**](docs/ComponentGitAPI.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | View git info for a specific service component
+*EnvironmentAPI* | [**EnvironmentClone**](docs/EnvironmentAPI.md#environmentclone) | **Post** /v1/environments/{id}/clone | Clone an environment.
+*EnvironmentAPI* | [**EnvironmentCreate**](docs/EnvironmentAPI.md#environmentcreate) | **Post** /v1/environments | Creates a new environment.
+*EnvironmentAPI* | [**EnvironmentDefinition**](docs/EnvironmentAPI.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
+*EnvironmentAPI* | [**EnvironmentDelete**](docs/EnvironmentAPI.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
+*EnvironmentAPI* | [**EnvironmentDeploy**](docs/EnvironmentAPI.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+*EnvironmentAPI* | [**EnvironmentEditComponents**](docs/EnvironmentAPI.md#environmenteditcomponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
+*EnvironmentAPI* | [**EnvironmentEditConfiguration**](docs/EnvironmentAPI.md#environmenteditconfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
+*EnvironmentAPI* | [**EnvironmentEditSettings**](docs/EnvironmentAPI.md#environmenteditsettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
+*EnvironmentAPI* | [**EnvironmentKubeConfig**](docs/EnvironmentAPI.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
+*EnvironmentAPI* | [**EnvironmentList**](docs/EnvironmentAPI.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
+*EnvironmentAPI* | [**EnvironmentStart**](docs/EnvironmentAPI.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
+*EnvironmentAPI* | [**EnvironmentStop**](docs/EnvironmentAPI.md#environmentstop) | **Post** /v1/environments/{id}/stop | Stop an environment.
+*EnvironmentAPI* | [**EnvironmentView**](docs/EnvironmentAPI.md#environmentview) | **Get** /v1/environments/{id} | View a specific environment.
+*EnvironmentVariableAPI* | [**EnvironmentVariableEdit**](docs/EnvironmentVariableAPI.md#environmentvariableedit) | **Patch** /v1/environment_variables/{id} | Edit a specific environment variable.
+*EnvironmentVariableAPI* | [**EnvironmentVariableList**](docs/EnvironmentVariableAPI.md#environmentvariablelist) | **Get** /v1/environment_variables | List environment variables matching any selected filters.
+*EnvironmentVariableAPI* | [**EnvironmentVariableView**](docs/EnvironmentVariableAPI.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | View a specific environment variable.
+*EventAPI* | [**EventList**](docs/EventAPI.md#eventlist) | **Get** /v1/events | List events matching any selected filters.
+*EventAPI* | [**EventView**](docs/EventAPI.md#eventview) | **Get** /v1/events/{id} | View a specific event.
+*KubernetesIntegrationAPI* | [**KubernetesIntegrationList**](docs/KubernetesIntegrationAPI.md#kubernetesintegrationlist) | **Get** /v1/kubernetes_integrations | List Kubernetes integrations matching any selected filters.
+*KubernetesIntegrationAPI* | [**KubernetesIntegrationView**](docs/KubernetesIntegrationAPI.md#kubernetesintegrationview) | **Get** /v1/kubernetes_integrations/{id} | View a specific Kubernetes integration.
+*OrganizationAPI* | [**OrganizationList**](docs/OrganizationAPI.md#organizationlist) | **Get** /v1/organizations | List organization matching any selected filters.
+*OrganizationAPI* | [**OrganizationView**](docs/OrganizationAPI.md#organizationview) | **Get** /v1/organizations/{id} | View a specific organization.
+*PipelineAPI* | [**PipelineList**](docs/PipelineAPI.md#pipelinelist) | **Get** /v1/pipelines | List pipelines matching any selected filters.
+*PipelineAPI* | [**PipelineView**](docs/PipelineAPI.md#pipelineview) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
+*ProjectAPI* | [**ProjectList**](docs/ProjectAPI.md#projectlist) | **Get** /v1/projects | List projects matching any selected filters.
+*ProjectAPI* | [**ProjectView**](docs/ProjectAPI.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
+*TemplateAPI* | [**TemplateDefinition**](docs/TemplateAPI.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
+*TemplateAPI* | [**TemplateList**](docs/TemplateAPI.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
+*TemplateAPI* | [**TemplateValidate**](docs/TemplateAPI.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
+*TemplateAPI* | [**TemplateView**](docs/TemplateAPI.md#templateview) | **Get** /v1/templates/{id} | View a specific template.
+*TemplatesRepositoryAPI* | [**TemplatesRepositoryList**](docs/TemplatesRepositoryAPI.md#templatesrepositorylist) | **Get** /v1/templates_repositories | List templates repositories matching any selected filters.
+*TemplatesRepositoryAPI* | [**TemplatesRepositoryView**](docs/TemplatesRepositoryAPI.md#templatesrepositoryview) | **Get** /v1/templates_repositories/{id} | View a specific templates repository.
 
 
 ## Documentation For Models
@@ -140,6 +139,7 @@ Class | Method | HTTP request | Description
  - [ContainerConfigItemProfile](docs/ContainerConfigItemProfile.md)
  - [ContextKubeConfigRead](docs/ContextKubeConfigRead.md)
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
+ - [Edit](docs/Edit.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
  - [EmbeddedComponentEndpointCollection](docs/EmbeddedComponentEndpointCollection.md)
  - [EmbeddedComponentGitCollection](docs/EmbeddedComponentGitCollection.md)
@@ -191,7 +191,6 @@ Class | Method | HTTP request | Description
  - [PaginatedKubernetesIntegrationCollection](docs/PaginatedKubernetesIntegrationCollection.md)
  - [PaginatedLink](docs/PaginatedLink.md)
  - [PaginatedLinks](docs/PaginatedLinks.md)
- - [PaginatedLinksFirst](docs/PaginatedLinksFirst.md)
  - [PaginatedOrganizationCollection](docs/PaginatedOrganizationCollection.md)
  - [PaginatedPipelineCollection](docs/PaginatedPipelineCollection.md)
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
@@ -203,13 +202,10 @@ Class | Method | HTTP request | Description
  - [ProblemGeneric](docs/ProblemGeneric.md)
  - [ProblemViolation](docs/ProblemViolation.md)
  - [ProfileItem](docs/ProfileItem.md)
- - [ProfileItemRequirements](docs/ProfileItemRequirements.md)
  - [ProjectCollection](docs/ProjectCollection.md)
  - [ProjectItem](docs/ProjectItem.md)
  - [ResourceListItem](docs/ResourceListItem.md)
  - [ResourceRequirementItem](docs/ResourceRequirementItem.md)
- - [ResourceRequirementItemLimits](docs/ResourceRequirementItemLimits.md)
- - [ResourceRequirementItemRequests](docs/ResourceRequirementItemRequests.md)
  - [SimpleResourceConfigItem](docs/SimpleResourceConfigItem.md)
  - [StageItem](docs/StageItem.md)
  - [SyncPathItem](docs/SyncPathItem.md)
@@ -228,7 +224,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-
+Authentication schemes defined for the API:
 ### ApiKeyAuth
 
 - **Type**: API key
@@ -237,6 +233,18 @@ Class | Method | HTTP request | Description
 
 Note, each API key must be added to a map of `map[string]APIKey` where the key is: X-Auth-Token and passed in as the auth context for each request.
 
+Example
+
+```golang
+auth := context.WithValue(
+		context.Background(),
+		sw.ContextAPIKeys,
+		map[string]sw.APIKey{
+			"X-Auth-Token": {Key: "API_KEY_STRING"},
+		},
+	)
+r, err := client.Service.Operation(auth, args)
+```
 
 ### JWT
 
@@ -245,6 +253,19 @@ Note, each API key must be added to a map of `map[string]APIKey` where the key i
 - **Location**: HTTP header
 
 Note, each API key must be added to a map of `map[string]APIKey` where the key is: Authorization and passed in as the auth context for each request.
+
+Example
+
+```golang
+auth := context.WithValue(
+		context.Background(),
+		sw.ContextAPIKeys,
+		map[string]sw.APIKey{
+			"Authorization": {Key: "API_KEY_STRING"},
+		},
+	)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

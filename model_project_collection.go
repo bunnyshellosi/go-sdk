@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ProjectCollection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ProjectCollection{}
+
 // ProjectCollection A project holds multiple environments and shared secrets and settings.
 type ProjectCollection struct {
 	// Project identifier.
@@ -46,7 +49,7 @@ func NewProjectCollectionWithDefaults() *ProjectCollection {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ProjectCollection) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *ProjectCollection) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProjectCollection) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -64,7 +67,7 @@ func (o *ProjectCollection) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ProjectCollection) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *ProjectCollection) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ProjectCollection) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *ProjectCollection) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProjectCollection) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -96,7 +99,7 @@ func (o *ProjectCollection) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ProjectCollection) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *ProjectCollection) SetName(v string) {
 
 // GetTotalEnvironments returns the TotalEnvironments field value if set, zero value otherwise.
 func (o *ProjectCollection) GetTotalEnvironments() int32 {
-	if o == nil || o.TotalEnvironments == nil {
+	if o == nil || IsNil(o.TotalEnvironments) {
 		var ret int32
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *ProjectCollection) GetTotalEnvironments() int32 {
 // GetTotalEnvironmentsOk returns a tuple with the TotalEnvironments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProjectCollection) GetTotalEnvironmentsOk() (*int32, bool) {
-	if o == nil || o.TotalEnvironments == nil {
+	if o == nil || IsNil(o.TotalEnvironments) {
 		return nil, false
 	}
 	return o.TotalEnvironments, true
@@ -128,7 +131,7 @@ func (o *ProjectCollection) GetTotalEnvironmentsOk() (*int32, bool) {
 
 // HasTotalEnvironments returns a boolean if a field has been set.
 func (o *ProjectCollection) HasTotalEnvironments() bool {
-	if o != nil && o.TotalEnvironments != nil {
+	if o != nil && !IsNil(o.TotalEnvironments) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *ProjectCollection) SetTotalEnvironments(v int32) {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *ProjectCollection) GetOrganization() string {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *ProjectCollection) GetOrganization() string {
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProjectCollection) GetOrganizationOk() (*string, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization) {
 		return nil, false
 	}
 	return o.Organization, true
@@ -160,7 +163,7 @@ func (o *ProjectCollection) GetOrganizationOk() (*string, bool) {
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *ProjectCollection) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && !IsNil(o.Organization) {
 		return true
 	}
 
@@ -173,20 +176,28 @@ func (o *ProjectCollection) SetOrganization(v string) {
 }
 
 func (o ProjectCollection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.TotalEnvironments != nil {
-		toSerialize["totalEnvironments"] = o.TotalEnvironments
-	}
-	if o.Organization != nil {
-		toSerialize["organization"] = o.Organization
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ProjectCollection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.TotalEnvironments) {
+		toSerialize["totalEnvironments"] = o.TotalEnvironments
+	}
+	if !IsNil(o.Organization) {
+		toSerialize["organization"] = o.Organization
+	}
+	return toSerialize, nil
 }
 
 type NullableProjectCollection struct {

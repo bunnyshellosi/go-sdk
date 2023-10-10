@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// TemplateApiService TemplateApi service
-type TemplateApiService service
+// TemplateAPIService TemplateAPI service
+type TemplateAPIService service
 
 type ApiTemplateDefinitionRequest struct {
 	ctx        context.Context
-	ApiService *TemplateApiService
+	ApiService *TemplateAPIService
 	id         string
 }
 
@@ -42,7 +42,7 @@ View the environment definition.
 	@param id Resource identifier
 	@return ApiTemplateDefinitionRequest
 */
-func (a *TemplateApiService) TemplateDefinition(ctx context.Context, id string) ApiTemplateDefinitionRequest {
+func (a *TemplateAPIService) TemplateDefinition(ctx context.Context, id string) ApiTemplateDefinitionRequest {
 	return ApiTemplateDefinitionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -53,7 +53,7 @@ func (a *TemplateApiService) TemplateDefinition(ctx context.Context, id string) 
 // Execute executes the request
 //
 //	@return map[string]interface{}
-func (a *TemplateApiService) TemplateDefinitionExecute(r ApiTemplateDefinitionRequest) (map[string]interface{}, *http.Response, error) {
+func (a *TemplateAPIService) TemplateDefinitionExecute(r ApiTemplateDefinitionRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -61,13 +61,13 @@ func (a *TemplateApiService) TemplateDefinitionExecute(r ApiTemplateDefinitionRe
 		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateApiService.TemplateDefinition")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.TemplateDefinition")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/templates/{id}/definition"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -93,20 +93,6 @@ func (a *TemplateApiService) TemplateDefinitionExecute(r ApiTemplateDefinitionRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -115,6 +101,20 @@ func (a *TemplateApiService) TemplateDefinitionExecute(r ApiTemplateDefinitionRe
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -147,6 +147,7 @@ func (a *TemplateApiService) TemplateDefinitionExecute(r ApiTemplateDefinitionRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -166,7 +167,7 @@ func (a *TemplateApiService) TemplateDefinitionExecute(r ApiTemplateDefinitionRe
 
 type ApiTemplateListRequest struct {
 	ctx                 context.Context
-	ApiService          *TemplateApiService
+	ApiService          *TemplateAPIService
 	page                *int32
 	organization        *string
 	templatesRepository *string
@@ -216,7 +217,7 @@ List templates matching any selected filters.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiTemplateListRequest
 */
-func (a *TemplateApiService) TemplateList(ctx context.Context) ApiTemplateListRequest {
+func (a *TemplateAPIService) TemplateList(ctx context.Context) ApiTemplateListRequest {
 	return ApiTemplateListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -226,7 +227,7 @@ func (a *TemplateApiService) TemplateList(ctx context.Context) ApiTemplateListRe
 // Execute executes the request
 //
 //	@return PaginatedTemplateCollection
-func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*PaginatedTemplateCollection, *http.Response, error) {
+func (a *TemplateAPIService) TemplateListExecute(r ApiTemplateListRequest) (*PaginatedTemplateCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -234,7 +235,7 @@ func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*Pag
 		localVarReturnValue *PaginatedTemplateCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateApiService.TemplateList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.TemplateList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -246,19 +247,22 @@ func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*Pag
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	} else {
+		var defaultValue int32 = 1
+		r.page = &defaultValue
 	}
 	if r.organization != nil {
-		localVarQueryParams.Add("organization", parameterToString(*r.organization, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
 	}
 	if r.templatesRepository != nil {
-		localVarQueryParams.Add("templatesRepository", parameterToString(*r.templatesRepository, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "templatesRepository", r.templatesRepository, "")
 	}
 	if r.source != nil {
-		localVarQueryParams.Add("source", parameterToString(*r.source, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "source", r.source, "")
 	}
 	if r.search != nil {
-		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -280,20 +284,6 @@ func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*Pag
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -302,6 +292,20 @@ func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*Pag
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -334,6 +338,7 @@ func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*Pag
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -353,7 +358,7 @@ func (a *TemplateApiService) TemplateListExecute(r ApiTemplateListRequest) (*Pag
 
 type ApiTemplateValidateRequest struct {
 	ctx                    context.Context
-	ApiService             *TemplateApiService
+	ApiService             *TemplateAPIService
 	templateValidateAction *TemplateValidateAction
 }
 
@@ -375,7 +380,7 @@ Validates a given template from an external source.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiTemplateValidateRequest
 */
-func (a *TemplateApiService) TemplateValidate(ctx context.Context) ApiTemplateValidateRequest {
+func (a *TemplateAPIService) TemplateValidate(ctx context.Context) ApiTemplateValidateRequest {
 	return ApiTemplateValidateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -385,7 +390,7 @@ func (a *TemplateApiService) TemplateValidate(ctx context.Context) ApiTemplateVa
 // Execute executes the request
 //
 //	@return TemplateCollection
-func (a *TemplateApiService) TemplateValidateExecute(r ApiTemplateValidateRequest) (*TemplateCollection, *http.Response, error) {
+func (a *TemplateAPIService) TemplateValidateExecute(r ApiTemplateValidateRequest) (*TemplateCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -393,7 +398,7 @@ func (a *TemplateApiService) TemplateValidateExecute(r ApiTemplateValidateReques
 		localVarReturnValue *TemplateCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateApiService.TemplateValidate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.TemplateValidate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -429,20 +434,6 @@ func (a *TemplateApiService) TemplateValidateExecute(r ApiTemplateValidateReques
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -451,6 +442,20 @@ func (a *TemplateApiService) TemplateValidateExecute(r ApiTemplateValidateReques
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -483,6 +488,7 @@ func (a *TemplateApiService) TemplateValidateExecute(r ApiTemplateValidateReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -502,7 +508,7 @@ func (a *TemplateApiService) TemplateValidateExecute(r ApiTemplateValidateReques
 
 type ApiTemplateViewRequest struct {
 	ctx        context.Context
-	ApiService *TemplateApiService
+	ApiService *TemplateAPIService
 	id         string
 }
 
@@ -519,7 +525,7 @@ View a specific template.
 	@param id Resource identifier
 	@return ApiTemplateViewRequest
 */
-func (a *TemplateApiService) TemplateView(ctx context.Context, id string) ApiTemplateViewRequest {
+func (a *TemplateAPIService) TemplateView(ctx context.Context, id string) ApiTemplateViewRequest {
 	return ApiTemplateViewRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -530,7 +536,7 @@ func (a *TemplateApiService) TemplateView(ctx context.Context, id string) ApiTem
 // Execute executes the request
 //
 //	@return TemplateItem
-func (a *TemplateApiService) TemplateViewExecute(r ApiTemplateViewRequest) (*TemplateItem, *http.Response, error) {
+func (a *TemplateAPIService) TemplateViewExecute(r ApiTemplateViewRequest) (*TemplateItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -538,13 +544,13 @@ func (a *TemplateApiService) TemplateViewExecute(r ApiTemplateViewRequest) (*Tem
 		localVarReturnValue *TemplateItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateApiService.TemplateView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.TemplateView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/templates/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -570,20 +576,6 @@ func (a *TemplateApiService) TemplateViewExecute(r ApiTemplateViewRequest) (*Tem
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["JWT"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -592,6 +584,20 @@ func (a *TemplateApiService) TemplateViewExecute(r ApiTemplateViewRequest) (*Tem
 					key = apiKey.Key
 				}
 				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
 			}
 		}
 	}
@@ -624,6 +630,7 @@ func (a *TemplateApiService) TemplateViewExecute(r ApiTemplateViewRequest) (*Tem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

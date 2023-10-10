@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ValidateSourceGit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ValidateSourceGit{}
+
 // ValidateSourceGit struct for ValidateSourceGit
 type ValidateSourceGit struct {
 	Type               *string `json:"type,omitempty"`
@@ -52,7 +55,7 @@ func NewValidateSourceGitWithDefaults() *ValidateSourceGit {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *ValidateSourceGit) GetType() string {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -62,7 +65,7 @@ func (o *ValidateSourceGit) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ValidateSourceGit) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -70,7 +73,7 @@ func (o *ValidateSourceGit) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *ValidateSourceGit) HasType() bool {
-	if o != nil && o.Type != nil {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -180,7 +183,7 @@ func (o *ValidateSourceGit) SetOrganizationId(v string) {
 
 // GetValidateComponents returns the ValidateComponents field value if set, zero value otherwise.
 func (o *ValidateSourceGit) GetValidateComponents() bool {
-	if o == nil || o.ValidateComponents == nil {
+	if o == nil || IsNil(o.ValidateComponents) {
 		var ret bool
 		return ret
 	}
@@ -190,7 +193,7 @@ func (o *ValidateSourceGit) GetValidateComponents() bool {
 // GetValidateComponentsOk returns a tuple with the ValidateComponents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ValidateSourceGit) GetValidateComponentsOk() (*bool, bool) {
-	if o == nil || o.ValidateComponents == nil {
+	if o == nil || IsNil(o.ValidateComponents) {
 		return nil, false
 	}
 	return o.ValidateComponents, true
@@ -198,7 +201,7 @@ func (o *ValidateSourceGit) GetValidateComponentsOk() (*bool, bool) {
 
 // HasValidateComponents returns a boolean if a field has been set.
 func (o *ValidateSourceGit) HasValidateComponents() bool {
-	if o != nil && o.ValidateComponents != nil {
+	if o != nil && !IsNil(o.ValidateComponents) {
 		return true
 	}
 
@@ -211,26 +214,26 @@ func (o *ValidateSourceGit) SetValidateComponents(v bool) {
 }
 
 func (o ValidateSourceGit) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["url"] = o.Url
-	}
-	if true {
-		toSerialize["ref"] = o.Ref
-	}
-	if true {
-		toSerialize["dirPath"] = o.DirPath
-	}
-	if true {
-		toSerialize["organizationId"] = o.OrganizationId
-	}
-	if o.ValidateComponents != nil {
-		toSerialize["validateComponents"] = o.ValidateComponents
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ValidateSourceGit) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	toSerialize["url"] = o.Url
+	toSerialize["ref"] = o.Ref
+	toSerialize["dirPath"] = o.DirPath
+	toSerialize["organizationId"] = o.OrganizationId
+	if !IsNil(o.ValidateComponents) {
+		toSerialize["validateComponents"] = o.ValidateComponents
+	}
+	return toSerialize, nil
 }
 
 type NullableValidateSourceGit struct {

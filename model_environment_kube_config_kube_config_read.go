@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the EnvironmentKubeConfigKubeConfigRead type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentKubeConfigKubeConfigRead{}
+
 // EnvironmentKubeConfigKubeConfigRead An environment holds a collection of buildable and deployable components.
 type EnvironmentKubeConfigKubeConfigRead struct {
 	ApiVersion     *string                        `json:"apiVersion,omitempty"`
@@ -53,7 +56,7 @@ func NewEnvironmentKubeConfigKubeConfigReadWithDefaults() *EnvironmentKubeConfig
 
 // GetApiVersion returns the ApiVersion field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetApiVersion() string {
-	if o == nil || o.ApiVersion == nil {
+	if o == nil || IsNil(o.ApiVersion) {
 		var ret string
 		return ret
 	}
@@ -63,7 +66,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetApiVersion() string {
 // GetApiVersionOk returns a tuple with the ApiVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetApiVersionOk() (*string, bool) {
-	if o == nil || o.ApiVersion == nil {
+	if o == nil || IsNil(o.ApiVersion) {
 		return nil, false
 	}
 	return o.ApiVersion, true
@@ -71,7 +74,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetApiVersionOk() (*string, bool) 
 
 // HasApiVersion returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasApiVersion() bool {
-	if o != nil && o.ApiVersion != nil {
+	if o != nil && !IsNil(o.ApiVersion) {
 		return true
 	}
 
@@ -85,7 +88,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetApiVersion(v string) {
 
 // GetKind returns the Kind field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetKind() string {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		var ret string
 		return ret
 	}
@@ -95,7 +98,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetKind() string {
 // GetKindOk returns a tuple with the Kind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetKindOk() (*string, bool) {
-	if o == nil || o.Kind == nil {
+	if o == nil || IsNil(o.Kind) {
 		return nil, false
 	}
 	return o.Kind, true
@@ -103,7 +106,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetKindOk() (*string, bool) {
 
 // HasKind returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasKind() bool {
-	if o != nil && o.Kind != nil {
+	if o != nil && !IsNil(o.Kind) {
 		return true
 	}
 
@@ -117,7 +120,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetKind(v string) {
 
 // GetPreferences returns the Preferences field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetPreferences() map[string]interface{} {
-	if o == nil || o.Preferences == nil {
+	if o == nil || IsNil(o.Preferences) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -127,15 +130,15 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetPreferences() map[string]interf
 // GetPreferencesOk returns a tuple with the Preferences field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetPreferencesOk() (map[string]interface{}, bool) {
-	if o == nil || o.Preferences == nil {
-		return nil, false
+	if o == nil || IsNil(o.Preferences) {
+		return map[string]interface{}{}, false
 	}
 	return o.Preferences, true
 }
 
 // HasPreferences returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasPreferences() bool {
-	if o != nil && o.Preferences != nil {
+	if o != nil && !IsNil(o.Preferences) {
 		return true
 	}
 
@@ -149,7 +152,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetPreferences(v map[string]interf
 
 // GetClusters returns the Clusters field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetClusters() []ClusterWrapperKubeConfigRead {
-	if o == nil || o.Clusters == nil {
+	if o == nil || IsNil(o.Clusters) {
 		var ret []ClusterWrapperKubeConfigRead
 		return ret
 	}
@@ -159,7 +162,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetClusters() []ClusterWrapperKube
 // GetClustersOk returns a tuple with the Clusters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetClustersOk() ([]ClusterWrapperKubeConfigRead, bool) {
-	if o == nil || o.Clusters == nil {
+	if o == nil || IsNil(o.Clusters) {
 		return nil, false
 	}
 	return o.Clusters, true
@@ -167,7 +170,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetClustersOk() ([]ClusterWrapperK
 
 // HasClusters returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasClusters() bool {
-	if o != nil && o.Clusters != nil {
+	if o != nil && !IsNil(o.Clusters) {
 		return true
 	}
 
@@ -181,7 +184,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetClusters(v []ClusterWrapperKube
 
 // GetUsers returns the Users field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetUsers() []UserWrapperKubeConfigRead {
-	if o == nil || o.Users == nil {
+	if o == nil || IsNil(o.Users) {
 		var ret []UserWrapperKubeConfigRead
 		return ret
 	}
@@ -191,7 +194,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetUsers() []UserWrapperKubeConfig
 // GetUsersOk returns a tuple with the Users field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetUsersOk() ([]UserWrapperKubeConfigRead, bool) {
-	if o == nil || o.Users == nil {
+	if o == nil || IsNil(o.Users) {
 		return nil, false
 	}
 	return o.Users, true
@@ -199,7 +202,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetUsersOk() ([]UserWrapperKubeCon
 
 // HasUsers returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasUsers() bool {
-	if o != nil && o.Users != nil {
+	if o != nil && !IsNil(o.Users) {
 		return true
 	}
 
@@ -213,7 +216,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetUsers(v []UserWrapperKubeConfig
 
 // GetContexts returns the Contexts field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetContexts() []ContextWrapperKubeConfigRead {
-	if o == nil || o.Contexts == nil {
+	if o == nil || IsNil(o.Contexts) {
 		var ret []ContextWrapperKubeConfigRead
 		return ret
 	}
@@ -223,7 +226,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetContexts() []ContextWrapperKube
 // GetContextsOk returns a tuple with the Contexts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetContextsOk() ([]ContextWrapperKubeConfigRead, bool) {
-	if o == nil || o.Contexts == nil {
+	if o == nil || IsNil(o.Contexts) {
 		return nil, false
 	}
 	return o.Contexts, true
@@ -231,7 +234,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetContextsOk() ([]ContextWrapperK
 
 // HasContexts returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasContexts() bool {
-	if o != nil && o.Contexts != nil {
+	if o != nil && !IsNil(o.Contexts) {
 		return true
 	}
 
@@ -245,7 +248,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetContexts(v []ContextWrapperKube
 
 // GetCurrentContext returns the CurrentContext field value if set, zero value otherwise.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetCurrentContext() string {
-	if o == nil || o.CurrentContext == nil {
+	if o == nil || IsNil(o.CurrentContext) {
 		var ret string
 		return ret
 	}
@@ -255,7 +258,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetCurrentContext() string {
 // GetCurrentContextOk returns a tuple with the CurrentContext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetCurrentContextOk() (*string, bool) {
-	if o == nil || o.CurrentContext == nil {
+	if o == nil || IsNil(o.CurrentContext) {
 		return nil, false
 	}
 	return o.CurrentContext, true
@@ -263,7 +266,7 @@ func (o *EnvironmentKubeConfigKubeConfigRead) GetCurrentContextOk() (*string, bo
 
 // HasCurrentContext returns a boolean if a field has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) HasCurrentContext() bool {
-	if o != nil && o.CurrentContext != nil {
+	if o != nil && !IsNil(o.CurrentContext) {
 		return true
 	}
 
@@ -276,29 +279,37 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetCurrentContext(v string) {
 }
 
 func (o EnvironmentKubeConfigKubeConfigRead) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.ApiVersion != nil {
-		toSerialize["apiVersion"] = o.ApiVersion
-	}
-	if o.Kind != nil {
-		toSerialize["kind"] = o.Kind
-	}
-	if o.Preferences != nil {
-		toSerialize["preferences"] = o.Preferences
-	}
-	if o.Clusters != nil {
-		toSerialize["clusters"] = o.Clusters
-	}
-	if o.Users != nil {
-		toSerialize["users"] = o.Users
-	}
-	if o.Contexts != nil {
-		toSerialize["contexts"] = o.Contexts
-	}
-	if o.CurrentContext != nil {
-		toSerialize["current-context"] = o.CurrentContext
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EnvironmentKubeConfigKubeConfigRead) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApiVersion) {
+		toSerialize["apiVersion"] = o.ApiVersion
+	}
+	if !IsNil(o.Kind) {
+		toSerialize["kind"] = o.Kind
+	}
+	if !IsNil(o.Preferences) {
+		toSerialize["preferences"] = o.Preferences
+	}
+	if !IsNil(o.Clusters) {
+		toSerialize["clusters"] = o.Clusters
+	}
+	if !IsNil(o.Users) {
+		toSerialize["users"] = o.Users
+	}
+	if !IsNil(o.Contexts) {
+		toSerialize["contexts"] = o.Contexts
+	}
+	if !IsNil(o.CurrentContext) {
+		toSerialize["current-context"] = o.CurrentContext
+	}
+	return toSerialize, nil
 }
 
 type NullableEnvironmentKubeConfigKubeConfigRead struct {

@@ -15,10 +15,13 @@ import (
 	"encoding/json"
 )
 
+// checks if the ResourceRequirementItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourceRequirementItem{}
+
 // ResourceRequirementItem struct for ResourceRequirementItem
 type ResourceRequirementItem struct {
-	Requests NullableResourceRequirementItemRequests `json:"requests,omitempty"`
-	Limits   NullableResourceRequirementItemLimits   `json:"limits,omitempty"`
+	Requests NullableResourceListItem `json:"requests,omitempty"`
+	Limits   NullableResourceListItem `json:"limits,omitempty"`
 }
 
 // NewResourceRequirementItem instantiates a new ResourceRequirementItem object
@@ -39,9 +42,9 @@ func NewResourceRequirementItemWithDefaults() *ResourceRequirementItem {
 }
 
 // GetRequests returns the Requests field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ResourceRequirementItem) GetRequests() ResourceRequirementItemRequests {
-	if o == nil || o.Requests.Get() == nil {
-		var ret ResourceRequirementItemRequests
+func (o *ResourceRequirementItem) GetRequests() ResourceListItem {
+	if o == nil || IsNil(o.Requests.Get()) {
+		var ret ResourceListItem
 		return ret
 	}
 	return *o.Requests.Get()
@@ -50,7 +53,7 @@ func (o *ResourceRequirementItem) GetRequests() ResourceRequirementItemRequests 
 // GetRequestsOk returns a tuple with the Requests field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ResourceRequirementItem) GetRequestsOk() (*ResourceRequirementItemRequests, bool) {
+func (o *ResourceRequirementItem) GetRequestsOk() (*ResourceListItem, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,8 +69,8 @@ func (o *ResourceRequirementItem) HasRequests() bool {
 	return false
 }
 
-// SetRequests gets a reference to the given NullableResourceRequirementItemRequests and assigns it to the Requests field.
-func (o *ResourceRequirementItem) SetRequests(v ResourceRequirementItemRequests) {
+// SetRequests gets a reference to the given NullableResourceListItem and assigns it to the Requests field.
+func (o *ResourceRequirementItem) SetRequests(v ResourceListItem) {
 	o.Requests.Set(&v)
 }
 
@@ -82,9 +85,9 @@ func (o *ResourceRequirementItem) UnsetRequests() {
 }
 
 // GetLimits returns the Limits field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ResourceRequirementItem) GetLimits() ResourceRequirementItemLimits {
-	if o == nil || o.Limits.Get() == nil {
-		var ret ResourceRequirementItemLimits
+func (o *ResourceRequirementItem) GetLimits() ResourceListItem {
+	if o == nil || IsNil(o.Limits.Get()) {
+		var ret ResourceListItem
 		return ret
 	}
 	return *o.Limits.Get()
@@ -93,7 +96,7 @@ func (o *ResourceRequirementItem) GetLimits() ResourceRequirementItemLimits {
 // GetLimitsOk returns a tuple with the Limits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ResourceRequirementItem) GetLimitsOk() (*ResourceRequirementItemLimits, bool) {
+func (o *ResourceRequirementItem) GetLimitsOk() (*ResourceListItem, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -109,8 +112,8 @@ func (o *ResourceRequirementItem) HasLimits() bool {
 	return false
 }
 
-// SetLimits gets a reference to the given NullableResourceRequirementItemLimits and assigns it to the Limits field.
-func (o *ResourceRequirementItem) SetLimits(v ResourceRequirementItemLimits) {
+// SetLimits gets a reference to the given NullableResourceListItem and assigns it to the Limits field.
+func (o *ResourceRequirementItem) SetLimits(v ResourceListItem) {
 	o.Limits.Set(&v)
 }
 
@@ -125,6 +128,14 @@ func (o *ResourceRequirementItem) UnsetLimits() {
 }
 
 func (o ResourceRequirementItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ResourceRequirementItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Requests.IsSet() {
 		toSerialize["requests"] = o.Requests.Get()
@@ -132,7 +143,7 @@ func (o ResourceRequirementItem) MarshalJSON() ([]byte, error) {
 	if o.Limits.IsSet() {
 		toSerialize["limits"] = o.Limits.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableResourceRequirementItem struct {

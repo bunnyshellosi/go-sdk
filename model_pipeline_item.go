@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the PipelineItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PipelineItem{}
+
 // PipelineItem A pipeline.
 type PipelineItem struct {
 	// Pipeline identifier.
@@ -52,7 +55,7 @@ func NewPipelineItemWithDefaults() *PipelineItem {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *PipelineItem) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -62,7 +65,7 @@ func (o *PipelineItem) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PipelineItem) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -70,7 +73,7 @@ func (o *PipelineItem) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *PipelineItem) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -84,7 +87,7 @@ func (o *PipelineItem) SetId(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *PipelineItem) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -94,7 +97,7 @@ func (o *PipelineItem) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PipelineItem) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -102,7 +105,7 @@ func (o *PipelineItem) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *PipelineItem) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -116,7 +119,7 @@ func (o *PipelineItem) SetDescription(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *PipelineItem) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -126,7 +129,7 @@ func (o *PipelineItem) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PipelineItem) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -134,7 +137,7 @@ func (o *PipelineItem) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *PipelineItem) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -148,7 +151,7 @@ func (o *PipelineItem) SetStatus(v string) {
 
 // GetStages returns the Stages field value if set, zero value otherwise.
 func (o *PipelineItem) GetStages() []StageItem {
-	if o == nil || o.Stages == nil {
+	if o == nil || IsNil(o.Stages) {
 		var ret []StageItem
 		return ret
 	}
@@ -158,7 +161,7 @@ func (o *PipelineItem) GetStages() []StageItem {
 // GetStagesOk returns a tuple with the Stages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PipelineItem) GetStagesOk() ([]StageItem, bool) {
-	if o == nil || o.Stages == nil {
+	if o == nil || IsNil(o.Stages) {
 		return nil, false
 	}
 	return o.Stages, true
@@ -166,7 +169,7 @@ func (o *PipelineItem) GetStagesOk() ([]StageItem, bool) {
 
 // HasStages returns a boolean if a field has been set.
 func (o *PipelineItem) HasStages() bool {
-	if o != nil && o.Stages != nil {
+	if o != nil && !IsNil(o.Stages) {
 		return true
 	}
 
@@ -180,7 +183,7 @@ func (o *PipelineItem) SetStages(v []StageItem) {
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PipelineItem) GetEnvironment() string {
-	if o == nil || o.Environment.Get() == nil {
+	if o == nil || IsNil(o.Environment.Get()) {
 		var ret string
 		return ret
 	}
@@ -223,7 +226,7 @@ func (o *PipelineItem) UnsetEnvironment() {
 
 // GetEvent returns the Event field value if set, zero value otherwise.
 func (o *PipelineItem) GetEvent() string {
-	if o == nil || o.Event == nil {
+	if o == nil || IsNil(o.Event) {
 		var ret string
 		return ret
 	}
@@ -233,7 +236,7 @@ func (o *PipelineItem) GetEvent() string {
 // GetEventOk returns a tuple with the Event field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PipelineItem) GetEventOk() (*string, bool) {
-	if o == nil || o.Event == nil {
+	if o == nil || IsNil(o.Event) {
 		return nil, false
 	}
 	return o.Event, true
@@ -241,7 +244,7 @@ func (o *PipelineItem) GetEventOk() (*string, bool) {
 
 // HasEvent returns a boolean if a field has been set.
 func (o *PipelineItem) HasEvent() bool {
-	if o != nil && o.Event != nil {
+	if o != nil && !IsNil(o.Event) {
 		return true
 	}
 
@@ -255,7 +258,7 @@ func (o *PipelineItem) SetEvent(v string) {
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *PipelineItem) GetOrganization() string {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization) {
 		var ret string
 		return ret
 	}
@@ -265,7 +268,7 @@ func (o *PipelineItem) GetOrganization() string {
 // GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PipelineItem) GetOrganizationOk() (*string, bool) {
-	if o == nil || o.Organization == nil {
+	if o == nil || IsNil(o.Organization) {
 		return nil, false
 	}
 	return o.Organization, true
@@ -273,7 +276,7 @@ func (o *PipelineItem) GetOrganizationOk() (*string, bool) {
 
 // HasOrganization returns a boolean if a field has been set.
 func (o *PipelineItem) HasOrganization() bool {
-	if o != nil && o.Organization != nil {
+	if o != nil && !IsNil(o.Organization) {
 		return true
 	}
 
@@ -286,29 +289,37 @@ func (o *PipelineItem) SetOrganization(v string) {
 }
 
 func (o PipelineItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PipelineItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.Status != nil {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if o.Stages != nil {
+	if !IsNil(o.Stages) {
 		toSerialize["stages"] = o.Stages
 	}
 	if o.Environment.IsSet() {
 		toSerialize["environment"] = o.Environment.Get()
 	}
-	if o.Event != nil {
+	if !IsNil(o.Event) {
 		toSerialize["event"] = o.Event
 	}
-	if o.Organization != nil {
+	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePipelineItem struct {
