@@ -20,65 +20,63 @@ import (
 	"strings"
 )
 
-// PipelineAPIService PipelineAPI service
-type PipelineAPIService service
+// WorkflowAPIService WorkflowAPI service
+type WorkflowAPIService service
 
-type ApiPipelineListRequest struct {
+type ApiWorkflowListRequest struct {
 	ctx          context.Context
-	ApiService   *PipelineAPIService
+	ApiService   *WorkflowAPIService
 	page         *int32
-	environment  *string
 	event        *string
+	environment  *string
 	organization *string
 	status       *string
 }
 
 // The collection page number
-func (r ApiPipelineListRequest) Page(page int32) ApiPipelineListRequest {
+func (r ApiWorkflowListRequest) Page(page int32) ApiWorkflowListRequest {
 	r.page = &page
 	return r
 }
 
-// Filter by environment
-func (r ApiPipelineListRequest) Environment(environment string) ApiPipelineListRequest {
-	r.environment = &environment
-	return r
-}
-
 // Filter by event
-func (r ApiPipelineListRequest) Event(event string) ApiPipelineListRequest {
+func (r ApiWorkflowListRequest) Event(event string) ApiWorkflowListRequest {
 	r.event = &event
 	return r
 }
 
+// Filter by environment
+func (r ApiWorkflowListRequest) Environment(environment string) ApiWorkflowListRequest {
+	r.environment = &environment
+	return r
+}
+
 // Filter by organization
-func (r ApiPipelineListRequest) Organization(organization string) ApiPipelineListRequest {
+func (r ApiWorkflowListRequest) Organization(organization string) ApiWorkflowListRequest {
 	r.organization = &organization
 	return r
 }
 
 // Filter by status
-func (r ApiPipelineListRequest) Status(status string) ApiPipelineListRequest {
+func (r ApiWorkflowListRequest) Status(status string) ApiWorkflowListRequest {
 	r.status = &status
 	return r
 }
 
-func (r ApiPipelineListRequest) Execute() (*PaginatedPipelineCollection, *http.Response, error) {
-	return r.ApiService.PipelineListExecute(r)
+func (r ApiWorkflowListRequest) Execute() (*PaginatedWorkflowCollection, *http.Response, error) {
+	return r.ApiService.WorkflowListExecute(r)
 }
 
 /*
-PipelineList List pipelines matching any selected filters.
+WorkflowList List workflows matching any selected filters.
 
-List pipelines matching any selected filters.
+List workflows matching any selected filters.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiPipelineListRequest
-
-Deprecated
+	@return ApiWorkflowListRequest
 */
-func (a *PipelineAPIService) PipelineList(ctx context.Context) ApiPipelineListRequest {
-	return ApiPipelineListRequest{
+func (a *WorkflowAPIService) WorkflowList(ctx context.Context) ApiWorkflowListRequest {
+	return ApiWorkflowListRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -86,23 +84,21 @@ func (a *PipelineAPIService) PipelineList(ctx context.Context) ApiPipelineListRe
 
 // Execute executes the request
 //
-//	@return PaginatedPipelineCollection
-//
-// Deprecated
-func (a *PipelineAPIService) PipelineListExecute(r ApiPipelineListRequest) (*PaginatedPipelineCollection, *http.Response, error) {
+//	@return PaginatedWorkflowCollection
+func (a *WorkflowAPIService) WorkflowListExecute(r ApiWorkflowListRequest) (*PaginatedWorkflowCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PaginatedPipelineCollection
+		localVarReturnValue *PaginatedWorkflowCollection
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PipelineAPIService.PipelineList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowAPIService.WorkflowList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/pipelines"
+	localVarPath := localBasePath + "/v1/workflows"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -114,11 +110,11 @@ func (a *PipelineAPIService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
-	if r.environment != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
-	}
 	if r.event != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "event", r.event, "")
+	}
+	if r.environment != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.organization != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
@@ -218,29 +214,27 @@ func (a *PipelineAPIService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPipelineViewRequest struct {
+type ApiWorkflowViewRequest struct {
 	ctx        context.Context
-	ApiService *PipelineAPIService
+	ApiService *WorkflowAPIService
 	id         string
 }
 
-func (r ApiPipelineViewRequest) Execute() (*PipelineItem, *http.Response, error) {
-	return r.ApiService.PipelineViewExecute(r)
+func (r ApiWorkflowViewRequest) Execute() (*WorkflowItem, *http.Response, error) {
+	return r.ApiService.WorkflowViewExecute(r)
 }
 
 /*
-PipelineView View a specific Pipeline.
+WorkflowView View a specific Workflow.
 
-View a specific Pipeline.
+View a specific Workflow.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Resource identifier
-	@return ApiPipelineViewRequest
-
-Deprecated
+	@return ApiWorkflowViewRequest
 */
-func (a *PipelineAPIService) PipelineView(ctx context.Context, id string) ApiPipelineViewRequest {
-	return ApiPipelineViewRequest{
+func (a *WorkflowAPIService) WorkflowView(ctx context.Context, id string) ApiWorkflowViewRequest {
+	return ApiWorkflowViewRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -249,23 +243,21 @@ func (a *PipelineAPIService) PipelineView(ctx context.Context, id string) ApiPip
 
 // Execute executes the request
 //
-//	@return PipelineItem
-//
-// Deprecated
-func (a *PipelineAPIService) PipelineViewExecute(r ApiPipelineViewRequest) (*PipelineItem, *http.Response, error) {
+//	@return WorkflowItem
+func (a *WorkflowAPIService) WorkflowViewExecute(r ApiWorkflowViewRequest) (*WorkflowItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PipelineItem
+		localVarReturnValue *WorkflowItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PipelineAPIService.PipelineView")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WorkflowAPIService.WorkflowView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/pipelines/{id}"
+	localVarPath := localBasePath + "/v1/workflows/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

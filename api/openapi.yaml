@@ -39,6 +39,8 @@ tags:
   name: template
 - description: Templates_repository Resource
   name: templates_repository
+- description: Workflow Resource
+  name: workflow
 paths:
   /v1/components:
     get:
@@ -1175,9 +1177,10 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: {}
-        description: No Request Body
-        required: false
+            schema:
+              $ref: '#/components/schemas/environment.PartialDeployAction'
+        description: The new environment resource
+        required: true
       responses:
         "200":
           content:
@@ -1298,9 +1301,10 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: {}
-        description: No Request Body
-        required: false
+            schema:
+              $ref: '#/components/schemas/environment.PartialStartAction'
+        description: The new environment resource
+        required: true
       responses:
         "200":
           content:
@@ -1342,9 +1346,10 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: {}
-        description: No Request Body
-        required: false
+            schema:
+              $ref: '#/components/schemas/environment.PartialAction'
+        description: The new environment resource
+        required: true
       responses:
         "200":
           content:
@@ -1701,7 +1706,7 @@ paths:
       - organization
   /v1/pipelines:
     get:
-      deprecated: false
+      deprecated: true
       description: List pipelines matching any selected filters.
       operationId: PipelineList
       parameters:
@@ -1754,17 +1759,20 @@ paths:
         allowReserved: false
         deprecated: false
         description: Filter by status
-        example: success
+        example: queued
         explode: false
         in: query
         name: status
         required: false
         schema:
           enum:
-          - success
-          - failed
+          - queued
           - in_progress
-          - pending
+          - success
+          - failing
+          - failed
+          - aborting
+          - aborted
           type: string
         style: form
       responses:
@@ -1785,7 +1793,7 @@ paths:
       - pipeline
   /v1/pipelines/{id}:
     get:
-      deprecated: false
+      deprecated: true
       description: View a specific Pipeline.
       operationId: PipelineView
       parameters:
@@ -2187,6 +2195,127 @@ paths:
       summary: View a specific templates repository.
       tags:
       - templates_repository
+  /v1/workflows:
+    get:
+      deprecated: false
+      description: List workflows matching any selected filters.
+      operationId: WorkflowList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by event
+        explode: false
+        in: query
+        name: event
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by status
+        example: queued
+        explode: false
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - queued
+          - in_progress
+          - success
+          - failing
+          - failed
+          - aborting
+          - aborted
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-workflow-collection'
+          description: workflow collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List workflows matching any selected filters.
+      tags:
+      - workflow
+  /v1/workflows/{id}:
+    get:
+      deprecated: false
+      description: View a specific Workflow.
+      operationId: WorkflowView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/workflow-item'
+          description: workflow resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific Workflow.
+      tags:
+      - workflow
 components:
   examples: {}
   headers: {}
@@ -3009,6 +3138,42 @@ components:
         current-context:
           type: string
       type: object
+    environment.PartialAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        isPartial:
+          type: boolean
+        components:
+          items:
+            type: string
+          type: array
+      type: object
+    environment.PartialDeployAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        includedDependencies:
+          default: none
+          example: none
+          type: string
+        isPartial:
+          type: boolean
+        components:
+          items:
+            type: string
+          type: array
+      type: object
+    environment.PartialStartAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        withDependencies:
+          type: boolean
+        isPartial:
+          type: boolean
+        components:
+          items:
+            type: string
+          type: array
+      type: object
     environment_variable-collection:
       description: An environment variable used during bunnyshell workflows.
       properties:
@@ -3455,6 +3620,23 @@ components:
         _embedded:
           $ref: '#/components/schemas/embedded_templates_repository_collection'
       type: object
+    paginated-workflow-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_workflow_collection'
+      type: object
     paginated_itemsPerPage:
       format: int32
       type: integer
@@ -3495,6 +3677,7 @@ components:
       format: int32
       type: integer
     pipeline-collection:
+      deprecated: true
       description: A pipeline.
       properties:
         id:
@@ -3524,6 +3707,7 @@ components:
           type: string
       type: object
     pipeline-item:
+      deprecated: true
       description: A pipeline.
       properties:
         id:
@@ -3776,6 +3960,90 @@ components:
           readOnly: true
           type: string
       type: object
+    workflow-collection:
+      description: A workflow.
+      properties:
+        id:
+          description: Workflow identifier.
+          readOnly: true
+          type: string
+        description:
+          description: Workflow description.
+          readOnly: true
+          type: string
+        status:
+          description: Workflow status.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        event:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+        duration:
+          description: Workflow duration in seconds.
+          nullable: true
+          readOnly: true
+          type: integer
+        jobsCount:
+          description: Number of jobs.
+          readOnly: true
+          type: integer
+        completedJobsCount:
+          description: Number of completed jobs.
+          readOnly: true
+          type: integer
+      type: object
+    workflow-item:
+      description: A workflow.
+      properties:
+        id:
+          description: Workflow identifier.
+          readOnly: true
+          type: string
+        description:
+          description: Workflow description.
+          readOnly: true
+          type: string
+        status:
+          description: Workflow status.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          nullable: true
+          readOnly: true
+          type: string
+        event:
+          description: Event identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+        duration:
+          description: Workflow duration in seconds.
+          nullable: true
+          readOnly: true
+          type: integer
+        jobsCount:
+          description: Number of jobs.
+          readOnly: true
+          type: integer
+        completedJobsCount:
+          description: Number of completed jobs.
+          readOnly: true
+          type: integer
+      type: object
     ContainerConfig_item_profile:
       description: A profile config or a profile name for local usage with rdev.yaml
       oneOf:
@@ -3912,6 +4180,14 @@ components:
             $ref: '#/components/schemas/templates_repository-collection'
           type: array
       title: embedded-templates_repository-collection
+      type: object
+    embedded_workflow_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/workflow-collection'
+          type: array
+      title: embedded-workflow-collection
       type: object
     template_ValidateAction_source:
       oneOf:

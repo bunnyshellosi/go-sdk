@@ -14,6 +14,7 @@ api_pipeline.go
 api_project.go
 api_template.go
 api_templates_repository.go
+api_workflow.go
 client.go
 configuration.go
 docs/ClusterKubeConfigRead.md
@@ -48,6 +49,7 @@ docs/EmbeddedPipelineCollection.md
 docs/EmbeddedProjectCollection.md
 docs/EmbeddedTemplateCollection.md
 docs/EmbeddedTemplatesRepositoryCollection.md
+docs/EmbeddedWorkflowCollection.md
 docs/EnvironmentAPI.md
 docs/EnvironmentCloneAction.md
 docs/EnvironmentCollection.md
@@ -61,6 +63,9 @@ docs/EnvironmentEditSettings.md
 docs/EnvironmentEditSettingsEdit.md
 docs/EnvironmentItem.md
 docs/EnvironmentKubeConfigKubeConfigRead.md
+docs/EnvironmentPartialAction.md
+docs/EnvironmentPartialDeployAction.md
+docs/EnvironmentPartialStartAction.md
 docs/EnvironmentVariableAPI.md
 docs/EnvironmentVariableCollection.md
 docs/EnvironmentVariableEdit.md
@@ -97,6 +102,7 @@ docs/PaginatedPipelineCollection.md
 docs/PaginatedProjectCollection.md
 docs/PaginatedTemplateCollection.md
 docs/PaginatedTemplatesRepositoryCollection.md
+docs/PaginatedWorkflowCollection.md
 docs/PipelineAPI.md
 docs/PipelineCollection.md
 docs/PipelineItem.md
@@ -124,6 +130,9 @@ docs/UserKubeConfigRead.md
 docs/UserWrapperKubeConfigRead.md
 docs/ValidateSourceGit.md
 docs/ValidateSourceString.md
+docs/WorkflowAPI.md
+docs/WorkflowCollection.md
+docs/WorkflowItem.md
 git_push.sh
 go.mod
 go.sum
@@ -156,6 +165,7 @@ model_embedded_pipeline_collection.go
 model_embedded_project_collection.go
 model_embedded_template_collection.go
 model_embedded_templates_repository_collection.go
+model_embedded_workflow_collection.go
 model_environment_clone_action.go
 model_environment_collection.go
 model_environment_create_action.go
@@ -168,6 +178,9 @@ model_environment_edit_settings.go
 model_environment_edit_settings_edit.go
 model_environment_item.go
 model_environment_kube_config_kube_config_read.go
+model_environment_partial_action.go
+model_environment_partial_deploy_action.go
+model_environment_partial_start_action.go
 model_environment_variable_collection.go
 model_environment_variable_edit.go
 model_environment_variable_item.go
@@ -200,6 +213,7 @@ model_paginated_pipeline_collection.go
 model_paginated_project_collection.go
 model_paginated_template_collection.go
 model_paginated_templates_repository_collection.go
+model_paginated_workflow_collection.go
 model_pipeline_collection.go
 model_pipeline_item.go
 model_primary.go
@@ -223,17 +237,8 @@ model_user_kube_config_read.go
 model_user_wrapper_kube_config_read.go
 model_validate_source_git.go
 model_validate_source_string.go
+model_workflow_collection.go
+model_workflow_item.go
 response.go
-test/api_component_endpoint_test.go
-test/api_component_git_test.go
-test/api_component_test.go
-test/api_environment_test.go
-test/api_environment_variable_test.go
-test/api_event_test.go
-test/api_kubernetes_integration_test.go
-test/api_organization_test.go
-test/api_pipeline_test.go
-test/api_project_test.go
-test/api_template_test.go
-test/api_templates_repository_test.go
+test/api_workflow_test.go
 utils.go

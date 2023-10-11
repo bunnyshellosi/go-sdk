@@ -1,19 +1,19 @@
-# \PipelineAPI
+# \WorkflowAPI
 
 All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PipelineList**](PipelineAPI.md#PipelineList) | **Get** /v1/pipelines | List pipelines matching any selected filters.
-[**PipelineView**](PipelineAPI.md#PipelineView) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
+[**WorkflowList**](WorkflowAPI.md#WorkflowList) | **Get** /v1/workflows | List workflows matching any selected filters.
+[**WorkflowView**](WorkflowAPI.md#WorkflowView) | **Get** /v1/workflows/{id} | View a specific Workflow.
 
 
 
-## PipelineList
+## WorkflowList
 
-> PaginatedPipelineCollection PipelineList(ctx).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
+> PaginatedWorkflowCollection WorkflowList(ctx).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).Execute()
 
-List pipelines matching any selected filters.
+List workflows matching any selected filters.
 
 
 
@@ -31,20 +31,20 @@ import (
 
 func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
-    environment := "environment_example" // string | Filter by environment (optional)
     event := "event_example" // string | Filter by event (optional)
+    environment := "environment_example" // string | Filter by environment (optional)
     organization := "organization_example" // string | Filter by organization (optional)
     status := "queued" // string | Filter by status (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PipelineAPI.PipelineList(context.Background()).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
+    resp, r, err := apiClient.WorkflowAPI.WorkflowList(context.Background()).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PipelineAPI.PipelineList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowAPI.WorkflowList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PipelineList`: PaginatedPipelineCollection
-    fmt.Fprintf(os.Stdout, "Response from `PipelineAPI.PipelineList`: %v\n", resp)
+    // response from `WorkflowList`: PaginatedWorkflowCollection
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowAPI.WorkflowList`: %v\n", resp)
 }
 ```
 
@@ -54,20 +54,20 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPipelineListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiWorkflowListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | The collection page number | [default to 1]
- **environment** | **string** | Filter by environment | 
  **event** | **string** | Filter by event | 
+ **environment** | **string** | Filter by environment | 
  **organization** | **string** | Filter by organization | 
  **status** | **string** | Filter by status | 
 
 ### Return type
 
-[**PaginatedPipelineCollection**](PaginatedPipelineCollection.md)
+[**PaginatedWorkflowCollection**](PaginatedWorkflowCollection.md)
 
 ### Authorization
 
@@ -83,11 +83,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PipelineView
+## WorkflowView
 
-> PipelineItem PipelineView(ctx, id).Execute()
+> WorkflowItem WorkflowView(ctx, id).Execute()
 
-View a specific Pipeline.
+View a specific Workflow.
 
 
 
@@ -108,13 +108,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PipelineAPI.PipelineView(context.Background(), id).Execute()
+    resp, r, err := apiClient.WorkflowAPI.WorkflowView(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PipelineAPI.PipelineView``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `WorkflowAPI.WorkflowView``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PipelineView`: PipelineItem
-    fmt.Fprintf(os.Stdout, "Response from `PipelineAPI.PipelineView`: %v\n", resp)
+    // response from `WorkflowView`: WorkflowItem
+    fmt.Fprintf(os.Stdout, "Response from `WorkflowAPI.WorkflowView`: %v\n", resp)
 }
 ```
 
@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPipelineViewRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiWorkflowViewRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PipelineItem**](PipelineItem.md)
+[**WorkflowItem**](WorkflowItem.md)
 
 ### Authorization
 
