@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentDeploy
 
-> EventItem EnvironmentDeploy(ctx, id).Body(body).Execute()
+> EventItem EnvironmentDeploy(ctx, id).EnvironmentPartialDeployAction(environmentPartialDeployAction).Execute()
 
 Deploy an environment.
 
@@ -322,11 +322,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    body := interface{}(987) // interface{} | No Request Body (optional)
+    environmentPartialDeployAction := *openapiclient.NewEnvironmentPartialDeployAction() // EnvironmentPartialDeployAction | The new environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentAPI.EnvironmentDeploy(context.Background(), id).Body(body).Execute()
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentDeploy(context.Background(), id).EnvironmentPartialDeployAction(environmentPartialDeployAction).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentDeploy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -352,7 +352,7 @@ Other parameters are passed through a pointer to a apiEnvironmentDeployRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | **interface{}** | No Request Body | 
+ **environmentPartialDeployAction** | [**EnvironmentPartialDeployAction**](EnvironmentPartialDeployAction.md) | The new environment resource | 
 
 ### Return type
 
@@ -742,7 +742,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentStart
 
-> EventItem EnvironmentStart(ctx, id).Body(body).Execute()
+> EventItem EnvironmentStart(ctx, id).EnvironmentPartialStartAction(environmentPartialStartAction).Execute()
 
 Start an environment.
 
@@ -762,11 +762,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    body := interface{}(987) // interface{} | No Request Body (optional)
+    environmentPartialStartAction := *openapiclient.NewEnvironmentPartialStartAction() // EnvironmentPartialStartAction | The new environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentAPI.EnvironmentStart(context.Background(), id).Body(body).Execute()
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentStart(context.Background(), id).EnvironmentPartialStartAction(environmentPartialStartAction).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentStart``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -792,7 +792,7 @@ Other parameters are passed through a pointer to a apiEnvironmentStartRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | **interface{}** | No Request Body | 
+ **environmentPartialStartAction** | [**EnvironmentPartialStartAction**](EnvironmentPartialStartAction.md) | The new environment resource | 
 
 ### Return type
 
@@ -814,7 +814,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentStop
 
-> EventItem EnvironmentStop(ctx, id).Body(body).Execute()
+> EventItem EnvironmentStop(ctx, id).EnvironmentPartialAction(environmentPartialAction).Execute()
 
 Stop an environment.
 
@@ -834,11 +834,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    body := interface{}(987) // interface{} | No Request Body (optional)
+    environmentPartialAction := *openapiclient.NewEnvironmentPartialAction() // EnvironmentPartialAction | The new environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentAPI.EnvironmentStop(context.Background(), id).Body(body).Execute()
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentStop(context.Background(), id).EnvironmentPartialAction(environmentPartialAction).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentStop``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -864,7 +864,7 @@ Other parameters are passed through a pointer to a apiEnvironmentStopRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | **interface{}** | No Request Body | 
+ **environmentPartialAction** | [**EnvironmentPartialAction**](EnvironmentPartialAction.md) | The new environment resource | 
 
 ### Return type
 

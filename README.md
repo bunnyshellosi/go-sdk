@@ -119,6 +119,8 @@ Class | Method | HTTP request | Description
 *TemplateAPI* | [**TemplateView**](docs/TemplateAPI.md#templateview) | **Get** /v1/templates/{id} | View a specific template.
 *TemplatesRepositoryAPI* | [**TemplatesRepositoryList**](docs/TemplatesRepositoryAPI.md#templatesrepositorylist) | **Get** /v1/templates_repositories | List templates repositories matching any selected filters.
 *TemplatesRepositoryAPI* | [**TemplatesRepositoryView**](docs/TemplatesRepositoryAPI.md#templatesrepositoryview) | **Get** /v1/templates_repositories/{id} | View a specific templates repository.
+*WorkflowAPI* | [**WorkflowList**](docs/WorkflowAPI.md#workflowlist) | **Get** /v1/workflows | List workflows matching any selected filters.
+*WorkflowAPI* | [**WorkflowView**](docs/WorkflowAPI.md#workflowview) | **Get** /v1/workflows/{id} | View a specific Workflow.
 
 
 ## Documentation For Models
@@ -152,6 +154,7 @@ Class | Method | HTTP request | Description
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
  - [EmbeddedTemplateCollection](docs/EmbeddedTemplateCollection.md)
  - [EmbeddedTemplatesRepositoryCollection](docs/EmbeddedTemplatesRepositoryCollection.md)
+ - [EmbeddedWorkflowCollection](docs/EmbeddedWorkflowCollection.md)
  - [EnvironmentCloneAction](docs/EnvironmentCloneAction.md)
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentCreateAction](docs/EnvironmentCreateAction.md)
@@ -164,6 +167,9 @@ Class | Method | HTTP request | Description
  - [EnvironmentEditSettingsEdit](docs/EnvironmentEditSettingsEdit.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
  - [EnvironmentKubeConfigKubeConfigRead](docs/EnvironmentKubeConfigKubeConfigRead.md)
+ - [EnvironmentPartialAction](docs/EnvironmentPartialAction.md)
+ - [EnvironmentPartialDeployAction](docs/EnvironmentPartialDeployAction.md)
+ - [EnvironmentPartialStartAction](docs/EnvironmentPartialStartAction.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
  - [EnvironmentVariableEdit](docs/EnvironmentVariableEdit.md)
  - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
@@ -196,6 +202,7 @@ Class | Method | HTTP request | Description
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
  - [PaginatedTemplateCollection](docs/PaginatedTemplateCollection.md)
  - [PaginatedTemplatesRepositoryCollection](docs/PaginatedTemplatesRepositoryCollection.md)
+ - [PaginatedWorkflowCollection](docs/PaginatedWorkflowCollection.md)
  - [PipelineCollection](docs/PipelineCollection.md)
  - [PipelineItem](docs/PipelineItem.md)
  - [Primary](docs/Primary.md)
@@ -219,6 +226,8 @@ Class | Method | HTTP request | Description
  - [UserWrapperKubeConfigRead](docs/UserWrapperKubeConfigRead.md)
  - [ValidateSourceGit](docs/ValidateSourceGit.md)
  - [ValidateSourceString](docs/ValidateSourceString.md)
+ - [WorkflowCollection](docs/WorkflowCollection.md)
+ - [WorkflowItem](docs/WorkflowItem.md)
 
 
 ## Documentation For Authorization

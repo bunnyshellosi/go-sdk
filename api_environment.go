@@ -621,15 +621,15 @@ func (a *EnvironmentAPIService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 }
 
 type ApiEnvironmentDeployRequest struct {
-	ctx        context.Context
-	ApiService *EnvironmentAPIService
-	id         string
-	body       *interface{}
+	ctx                            context.Context
+	ApiService                     *EnvironmentAPIService
+	id                             string
+	environmentPartialDeployAction *EnvironmentPartialDeployAction
 }
 
-// No Request Body
-func (r ApiEnvironmentDeployRequest) Body(body interface{}) ApiEnvironmentDeployRequest {
-	r.body = &body
+// The new environment resource
+func (r ApiEnvironmentDeployRequest) EnvironmentPartialDeployAction(environmentPartialDeployAction EnvironmentPartialDeployAction) ApiEnvironmentDeployRequest {
+	r.environmentPartialDeployAction = &environmentPartialDeployAction
 	return r
 }
 
@@ -676,6 +676,9 @@ func (a *EnvironmentAPIService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.environmentPartialDeployAction == nil {
+		return localVarReturnValue, nil, reportError("environmentPartialDeployAction is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -695,7 +698,7 @@ func (a *EnvironmentAPIService) EnvironmentDeployExecute(r ApiEnvironmentDeployR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.environmentPartialDeployAction
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1607,15 +1610,15 @@ func (a *EnvironmentAPIService) EnvironmentListExecute(r ApiEnvironmentListReque
 }
 
 type ApiEnvironmentStartRequest struct {
-	ctx        context.Context
-	ApiService *EnvironmentAPIService
-	id         string
-	body       *interface{}
+	ctx                           context.Context
+	ApiService                    *EnvironmentAPIService
+	id                            string
+	environmentPartialStartAction *EnvironmentPartialStartAction
 }
 
-// No Request Body
-func (r ApiEnvironmentStartRequest) Body(body interface{}) ApiEnvironmentStartRequest {
-	r.body = &body
+// The new environment resource
+func (r ApiEnvironmentStartRequest) EnvironmentPartialStartAction(environmentPartialStartAction EnvironmentPartialStartAction) ApiEnvironmentStartRequest {
+	r.environmentPartialStartAction = &environmentPartialStartAction
 	return r
 }
 
@@ -1662,6 +1665,9 @@ func (a *EnvironmentAPIService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.environmentPartialStartAction == nil {
+		return localVarReturnValue, nil, reportError("environmentPartialStartAction is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1681,7 +1687,7 @@ func (a *EnvironmentAPIService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.environmentPartialStartAction
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1758,15 +1764,15 @@ func (a *EnvironmentAPIService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 }
 
 type ApiEnvironmentStopRequest struct {
-	ctx        context.Context
-	ApiService *EnvironmentAPIService
-	id         string
-	body       *interface{}
+	ctx                      context.Context
+	ApiService               *EnvironmentAPIService
+	id                       string
+	environmentPartialAction *EnvironmentPartialAction
 }
 
-// No Request Body
-func (r ApiEnvironmentStopRequest) Body(body interface{}) ApiEnvironmentStopRequest {
-	r.body = &body
+// The new environment resource
+func (r ApiEnvironmentStopRequest) EnvironmentPartialAction(environmentPartialAction EnvironmentPartialAction) ApiEnvironmentStopRequest {
+	r.environmentPartialAction = &environmentPartialAction
 	return r
 }
 
@@ -1813,6 +1819,9 @@ func (a *EnvironmentAPIService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.environmentPartialAction == nil {
+		return localVarReturnValue, nil, reportError("environmentPartialAction is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1832,7 +1841,7 @@ func (a *EnvironmentAPIService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.environmentPartialAction
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
