@@ -586,6 +586,12 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 		if err == nil {
 			bodyBuf.Write(bs)
 		}
+	} else if yamlCheck.MatchString(contentType) {
+		var bs []byte
+		bs, err = yaml.Marshal(body)
+		if err == nil {
+			bodyBuf.Write(bs)
+		}
 	}
 
 	if err != nil {
