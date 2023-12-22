@@ -1,0 +1,97 @@
+# EnvironmentVariableEditAction
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Value** | **NullableString** |  | 
+**IsSecret** | Pointer to **NullableBool** |  | [optional] 
+
+## Methods
+
+### NewEnvironmentVariableEditAction
+
+`func NewEnvironmentVariableEditAction(value NullableString, ) *EnvironmentVariableEditAction`
+
+NewEnvironmentVariableEditAction instantiates a new EnvironmentVariableEditAction object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewEnvironmentVariableEditActionWithDefaults
+
+`func NewEnvironmentVariableEditActionWithDefaults() *EnvironmentVariableEditAction`
+
+NewEnvironmentVariableEditActionWithDefaults instantiates a new EnvironmentVariableEditAction object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetValue
+
+`func (o *EnvironmentVariableEditAction) GetValue() string`
+
+GetValue returns the Value field if non-nil, zero value otherwise.
+
+### GetValueOk
+
+`func (o *EnvironmentVariableEditAction) GetValueOk() (*string, bool)`
+
+GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValue
+
+`func (o *EnvironmentVariableEditAction) SetValue(v string)`
+
+SetValue sets Value field to given value.
+
+
+### SetValueNil
+
+`func (o *EnvironmentVariableEditAction) SetValueNil(b bool)`
+
+ SetValueNil sets the value for Value to be an explicit nil
+
+### UnsetValue
+`func (o *EnvironmentVariableEditAction) UnsetValue()`
+
+UnsetValue ensures that no value is present for Value, not even an explicit nil
+### GetIsSecret
+
+`func (o *EnvironmentVariableEditAction) GetIsSecret() bool`
+
+GetIsSecret returns the IsSecret field if non-nil, zero value otherwise.
+
+### GetIsSecretOk
+
+`func (o *EnvironmentVariableEditAction) GetIsSecretOk() (*bool, bool)`
+
+GetIsSecretOk returns a tuple with the IsSecret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecret
+
+`func (o *EnvironmentVariableEditAction) SetIsSecret(v bool)`
+
+SetIsSecret sets IsSecret field to given value.
+
+### HasIsSecret
+
+`func (o *EnvironmentVariableEditAction) HasIsSecret() bool`
+
+HasIsSecret returns a boolean if a field has been set.
+
+### SetIsSecretNil
+
+`func (o *EnvironmentVariableEditAction) SetIsSecretNil(b bool)`
+
+ SetIsSecretNil sets the value for IsSecret to be an explicit nil
+
+### UnsetIsSecret
+`func (o *EnvironmentVariableEditAction) UnsetIsSecret()`
+
+UnsetIsSecret ensures that no value is present for IsSecret, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Labels** | Pointer to **map[string]string** | Environment labels. | [optional] [readonly] 
 **Name** | Pointer to **string** | Project name. | [optional] [readonly] 
 **TotalEnvironments** | Pointer to **int32** | Environment identifier. | [optional] [readonly] 
+**BuildSettings** | Pointer to [**NullableBuildSettingsItem**](BuildSettingsItem.md) |  | [optional] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
 
 ## Methods
@@ -129,6 +130,41 @@ SetTotalEnvironments sets TotalEnvironments field to given value.
 
 HasTotalEnvironments returns a boolean if a field has been set.
 
+### GetBuildSettings
+
+`func (o *ProjectItem) GetBuildSettings() BuildSettingsItem`
+
+GetBuildSettings returns the BuildSettings field if non-nil, zero value otherwise.
+
+### GetBuildSettingsOk
+
+`func (o *ProjectItem) GetBuildSettingsOk() (*BuildSettingsItem, bool)`
+
+GetBuildSettingsOk returns a tuple with the BuildSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuildSettings
+
+`func (o *ProjectItem) SetBuildSettings(v BuildSettingsItem)`
+
+SetBuildSettings sets BuildSettings field to given value.
+
+### HasBuildSettings
+
+`func (o *ProjectItem) HasBuildSettings() bool`
+
+HasBuildSettings returns a boolean if a field has been set.
+
+### SetBuildSettingsNil
+
+`func (o *ProjectItem) SetBuildSettingsNil(b bool)`
+
+ SetBuildSettingsNil sets the value for BuildSettings to be an explicit nil
+
+### UnsetBuildSettings
+`func (o *ProjectItem) UnsetBuildSettings()`
+
+UnsetBuildSettings ensures that no value is present for BuildSettings, not even an explicit nil
 ### GetOrganization
 
 `func (o *ProjectItem) GetOrganization() string`

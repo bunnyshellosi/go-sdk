@@ -20,16 +20,17 @@ var _ MappedNullable = &UserKubeConfigRead{}
 
 // UserKubeConfigRead struct for UserKubeConfigRead
 type UserKubeConfigRead struct {
-	Token string `json:"token"`
+	Token                 *string `json:"token,omitempty"`
+	ClientCertificateData *string `json:"client-certificate-data,omitempty"`
+	ClientKeyData         *string `json:"client-key-data,omitempty"`
 }
 
 // NewUserKubeConfigRead instantiates a new UserKubeConfigRead object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserKubeConfigRead(token string) *UserKubeConfigRead {
+func NewUserKubeConfigRead() *UserKubeConfigRead {
 	this := UserKubeConfigRead{}
-	this.Token = token
 	return &this
 }
 
@@ -41,28 +42,100 @@ func NewUserKubeConfigReadWithDefaults() *UserKubeConfigRead {
 	return &this
 }
 
-// GetToken returns the Token field value
+// GetToken returns the Token field value if set, zero value otherwise.
 func (o *UserKubeConfigRead) GetToken() string {
-	if o == nil {
+	if o == nil || IsNil(o.Token) {
 		var ret string
 		return ret
 	}
-
-	return o.Token
+	return *o.Token
 }
 
-// GetTokenOk returns a tuple with the Token field value
+// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserKubeConfigRead) GetTokenOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Token) {
 		return nil, false
 	}
-	return &o.Token, true
+	return o.Token, true
 }
 
-// SetToken sets field value
+// HasToken returns a boolean if a field has been set.
+func (o *UserKubeConfigRead) HasToken() bool {
+	if o != nil && !IsNil(o.Token) {
+		return true
+	}
+
+	return false
+}
+
+// SetToken gets a reference to the given string and assigns it to the Token field.
 func (o *UserKubeConfigRead) SetToken(v string) {
-	o.Token = v
+	o.Token = &v
+}
+
+// GetClientCertificateData returns the ClientCertificateData field value if set, zero value otherwise.
+func (o *UserKubeConfigRead) GetClientCertificateData() string {
+	if o == nil || IsNil(o.ClientCertificateData) {
+		var ret string
+		return ret
+	}
+	return *o.ClientCertificateData
+}
+
+// GetClientCertificateDataOk returns a tuple with the ClientCertificateData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserKubeConfigRead) GetClientCertificateDataOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientCertificateData) {
+		return nil, false
+	}
+	return o.ClientCertificateData, true
+}
+
+// HasClientCertificateData returns a boolean if a field has been set.
+func (o *UserKubeConfigRead) HasClientCertificateData() bool {
+	if o != nil && !IsNil(o.ClientCertificateData) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientCertificateData gets a reference to the given string and assigns it to the ClientCertificateData field.
+func (o *UserKubeConfigRead) SetClientCertificateData(v string) {
+	o.ClientCertificateData = &v
+}
+
+// GetClientKeyData returns the ClientKeyData field value if set, zero value otherwise.
+func (o *UserKubeConfigRead) GetClientKeyData() string {
+	if o == nil || IsNil(o.ClientKeyData) {
+		var ret string
+		return ret
+	}
+	return *o.ClientKeyData
+}
+
+// GetClientKeyDataOk returns a tuple with the ClientKeyData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserKubeConfigRead) GetClientKeyDataOk() (*string, bool) {
+	if o == nil || IsNil(o.ClientKeyData) {
+		return nil, false
+	}
+	return o.ClientKeyData, true
+}
+
+// HasClientKeyData returns a boolean if a field has been set.
+func (o *UserKubeConfigRead) HasClientKeyData() bool {
+	if o != nil && !IsNil(o.ClientKeyData) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientKeyData gets a reference to the given string and assigns it to the ClientKeyData field.
+func (o *UserKubeConfigRead) SetClientKeyData(v string) {
+	o.ClientKeyData = &v
 }
 
 func (o UserKubeConfigRead) MarshalJSON() ([]byte, error) {
@@ -75,7 +148,15 @@ func (o UserKubeConfigRead) MarshalJSON() ([]byte, error) {
 
 func (o UserKubeConfigRead) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["token"] = o.Token
+	if !IsNil(o.Token) {
+		toSerialize["token"] = o.Token
+	}
+	if !IsNil(o.ClientCertificateData) {
+		toSerialize["client-certificate-data"] = o.ClientCertificateData
+	}
+	if !IsNil(o.ClientKeyData) {
+		toSerialize["client-key-data"] = o.ClientKeyData
+	}
 	return toSerialize, nil
 }
 

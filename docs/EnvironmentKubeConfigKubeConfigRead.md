@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ApiVersion** | Pointer to **string** |  | [optional] [default to "v1"]
 **Kind** | Pointer to **string** |  | [optional] [default to "Config"]
 **Preferences** | Pointer to **map[string]interface{}** |  | [optional] 
-**Clusters** | Pointer to [**[]ClusterWrapperKubeConfigRead**](ClusterWrapperKubeConfigRead.md) |  | [optional] 
-**Users** | Pointer to [**[]UserWrapperKubeConfigRead**](UserWrapperKubeConfigRead.md) |  | [optional] 
+**Clusters** | [**[]ClusterWrapperKubeConfigRead**](ClusterWrapperKubeConfigRead.md) |  | 
+**Users** | [**[]UserWrapperKubeConfigRead**](UserWrapperKubeConfigRead.md) |  | 
 **Contexts** | Pointer to [**[]ContextWrapperKubeConfigRead**](ContextWrapperKubeConfigRead.md) |  | [optional] 
 **CurrentContext** | Pointer to **string** |  | [optional] 
 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewEnvironmentKubeConfigKubeConfigRead
 
-`func NewEnvironmentKubeConfigKubeConfigRead() *EnvironmentKubeConfigKubeConfigRead`
+`func NewEnvironmentKubeConfigKubeConfigRead(clusters []ClusterWrapperKubeConfigRead, users []UserWrapperKubeConfigRead, ) *EnvironmentKubeConfigKubeConfigRead`
 
 NewEnvironmentKubeConfigKubeConfigRead instantiates a new EnvironmentKubeConfigKubeConfigRead object
 This constructor will assign default values to properties that have it defined,
@@ -125,11 +125,6 @@ and a boolean to check if the value has been set.
 
 SetClusters sets Clusters field to given value.
 
-### HasClusters
-
-`func (o *EnvironmentKubeConfigKubeConfigRead) HasClusters() bool`
-
-HasClusters returns a boolean if a field has been set.
 
 ### GetUsers
 
@@ -150,11 +145,6 @@ and a boolean to check if the value has been set.
 
 SetUsers sets Users field to given value.
 
-### HasUsers
-
-`func (o *EnvironmentKubeConfigKubeConfigRead) HasUsers() bool`
-
-HasUsers returns a boolean if a field has been set.
 
 ### GetContexts
 

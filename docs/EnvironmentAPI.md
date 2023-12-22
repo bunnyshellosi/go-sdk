@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**EnvironmentDefinition**](EnvironmentAPI.md#EnvironmentDefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 [**EnvironmentDelete**](EnvironmentAPI.md#EnvironmentDelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 [**EnvironmentDeploy**](EnvironmentAPI.md#EnvironmentDeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+[**EnvironmentEditBuildSettings**](EnvironmentAPI.md#EnvironmentEditBuildSettings) | **Patch** /v1/environments/{id}/build-settings | Edit the build settings of an environment.
 [**EnvironmentEditComponents**](EnvironmentAPI.md#EnvironmentEditComponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
 [**EnvironmentEditConfiguration**](EnvironmentAPI.md#EnvironmentEditConfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
 [**EnvironmentEditSettings**](EnvironmentAPI.md#EnvironmentEditSettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
@@ -357,6 +358,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EventItem**](EventItem.md)
+
+### Authorization
+
+[JWT](../README.md#JWT), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EnvironmentEditBuildSettings
+
+> EnvironmentItem EnvironmentEditBuildSettings(ctx, id).EnvironmentEditBuildSettingsAction(environmentEditBuildSettingsAction).Execute()
+
+Edit the build settings of an environment.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "bunnyshell.com/sdk"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    environmentEditBuildSettingsAction := *openapiclient.NewEnvironmentEditBuildSettingsAction("RegistryIntegration_example", "KubernetesIntegration_example", "Cpu_example", NullableInt32(123)) // EnvironmentEditBuildSettingsAction | The updated environment resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentEditBuildSettings(context.Background(), id).EnvironmentEditBuildSettingsAction(environmentEditBuildSettingsAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentEditBuildSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentEditBuildSettings`: EnvironmentItem
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentAPI.EnvironmentEditBuildSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentEditBuildSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **environmentEditBuildSettingsAction** | [**EnvironmentEditBuildSettingsAction**](EnvironmentEditBuildSettingsAction.md) | The updated environment resource | 
+
+### Return type
+
+[**EnvironmentItem**](EnvironmentItem.md)
 
 ### Authorization
 

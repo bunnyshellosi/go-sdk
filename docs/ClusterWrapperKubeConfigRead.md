@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | 
-**Cluster** | Pointer to [**ClusterKubeConfigRead**](ClusterKubeConfigRead.md) |  | [optional] 
+**Cluster** | [**ClusterKubeConfigRead**](ClusterKubeConfigRead.md) |  | 
 
 ## Methods
 
 ### NewClusterWrapperKubeConfigRead
 
-`func NewClusterWrapperKubeConfigRead(name string, ) *ClusterWrapperKubeConfigRead`
+`func NewClusterWrapperKubeConfigRead(name string, cluster ClusterKubeConfigRead, ) *ClusterWrapperKubeConfigRead`
 
 NewClusterWrapperKubeConfigRead instantiates a new ClusterWrapperKubeConfigRead object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetCluster sets Cluster field to given value.
 
-### HasCluster
-
-`func (o *ClusterWrapperKubeConfigRead) HasCluster() bool`
-
-HasCluster returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

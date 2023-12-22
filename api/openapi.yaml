@@ -33,8 +33,12 @@ tags:
   name: organization
 - description: Pipeline Resource
   name: pipeline
+- description: Project_variable Resource
+  name: project_variable
 - description: Project Resource
   name: project
+- description: Registry_integration Resource
+  name: registry_integration
 - description: Template Resource
   name: template
 - description: Templates_repository Resource
@@ -637,7 +641,74 @@ paths:
       summary: List environment variables matching any selected filters.
       tags:
       - environment_variable
+    post:
+      deprecated: false
+      description: Create a specific environment variable.
+      operationId: Environment_variableCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environment_variable.CreateAction'
+        description: The new environment_variable resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment_variable-item'
+          description: environment_variable resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Create a specific environment variable.
+      tags:
+      - environment_variable
   /v1/environment_variables/{id}:
+    delete:
+      deprecated: false
+      description: Delete a specific environment variable.
+      operationId: Environment_variableDelete
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "204":
+          description: environment_variable resource deleted
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Delete a specific environment variable.
+      tags:
+      - environment_variable
     get:
       deprecated: false
       description: View a specific environment variable.
@@ -690,7 +761,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment_variable.Edit'
+              $ref: '#/components/schemas/environment_variable.EditAction'
         description: The updated environment_variable resource
         required: true
       responses:
@@ -943,6 +1014,51 @@ paths:
                 $ref: '#/components/schemas/problem.generic'
           description: Request Error
       summary: View a specific environment.
+      tags:
+      - environment
+  /v1/environments/{id}/build-settings:
+    patch:
+      deprecated: false
+      description: Edit the build settings of an environment.
+      operationId: EnvironmentEdit_build_settings
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environment.EditBuildSettingsAction'
+        description: The updated environment resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environment-item'
+          description: environment resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit the build settings of an environment.
       tags:
       - environment
   /v1/environments/{id}/clone:
@@ -1725,10 +1841,10 @@ paths:
       - allowEmptyValue: false
         allowReserved: false
         deprecated: false
-        description: Filter by environment
+        description: Filter by event
         explode: false
         in: query
-        name: environment
+        name: event
         required: false
         schema:
           type: string
@@ -1736,10 +1852,10 @@ paths:
       - allowEmptyValue: false
         allowReserved: false
         deprecated: false
-        description: Filter by event
+        description: Filter by environment
         explode: false
         in: query
-        name: event
+        name: environment
         required: false
         schema:
           type: string
@@ -1825,6 +1941,218 @@ paths:
       summary: View a specific Pipeline.
       tags:
       - pipeline
+  /v1/project_variables:
+    get:
+      deprecated: false
+      description: List project variables matching any selected filters.
+      operationId: Project_variableList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by name
+        explode: false
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by project
+        explode: false
+        in: query
+        name: project
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-project_variable-collection'
+          description: project_variable collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List project variables matching any selected filters.
+      tags:
+      - project_variable
+    post:
+      deprecated: false
+      description: Create a specific project variable.
+      operationId: Project_variableCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project_variable.CreateAction'
+        description: The new project_variable resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project_variable-item'
+          description: project_variable resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Create a specific project variable.
+      tags:
+      - project_variable
+  /v1/project_variables/{id}:
+    delete:
+      deprecated: false
+      description: Delete a specific project variable.
+      operationId: Project_variableDelete
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "204":
+          description: project_variable resource deleted
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Delete a specific project variable.
+      tags:
+      - project_variable
+    get:
+      deprecated: false
+      description: View a specific project variable.
+      operationId: Project_variableView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project_variable-item'
+          description: project_variable resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific project variable.
+      tags:
+      - project_variable
+    patch:
+      deprecated: false
+      description: Edit a specific project variable.
+      operationId: Project_variableEdit
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project_variable.EditAction'
+        description: The updated project_variable resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project_variable-item'
+          description: project_variable resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit a specific project variable.
+      tags:
+      - project_variable
   /v1/projects:
     get:
       deprecated: false
@@ -1894,7 +2222,74 @@ paths:
       summary: List projects matching any selected filters.
       tags:
       - project
+    post:
+      deprecated: false
+      description: Creates new project.
+      operationId: ProjectCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project.CreateAction'
+        description: The new project resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project-item'
+          description: project resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Creates new project.
+      tags:
+      - project
   /v1/projects/{id}:
+    delete:
+      deprecated: false
+      description: Delete a specific project.
+      operationId: ProjectDelete
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "204":
+          description: project resource deleted
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Delete a specific project.
+      tags:
+      - project
     get:
       deprecated: false
       description: View a specific project.
@@ -1928,6 +2323,175 @@ paths:
       summary: View a specific project.
       tags:
       - project
+  /v1/projects/{id}/build-settings:
+    patch:
+      deprecated: false
+      description: Edit the build settings of a project.
+      operationId: ProjectEdit_build_settings
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project.EditBuildSettingsAction'
+        description: The updated project resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project-item'
+          description: project resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit the build settings of a project.
+      tags:
+      - project
+  /v1/projects/{id}/settings:
+    patch:
+      deprecated: false
+      description: Edit a project.
+      operationId: ProjectEdit_settings
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project.EditSettingsAction'
+        description: The updated project resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/project-item'
+          description: project resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit a project.
+      tags:
+      - project
+  /v1/registry_integrations:
+    get:
+      deprecated: false
+      description: List Registry integrations matching any selected filters.
+      operationId: Registry_integrationList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-registry_integration-collection'
+          description: registry_integration collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List Registry integrations matching any selected filters.
+      tags:
+      - registry_integration
+  /v1/registry_integrations/{id}:
+    get:
+      deprecated: false
+      description: View a specific Registry integration.
+      operationId: Registry_integrationView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/registry_integration-item'
+          description: registry_integration resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific Registry integration.
+      tags:
+      - registry_integration
   /v1/templates:
     get:
       deprecated: false
@@ -2325,6 +2889,39 @@ components:
   schemas:
     ArrayObject-kube-config.read:
       type: object
+    BuildSettings-item:
+      properties:
+        useManagedRegistry:
+          description: Use the managed container registry.
+          type: boolean
+        registryIntegration:
+          description: The Container Registry used for the built images.
+          nullable: true
+          type: string
+        useManagedCluster:
+          description: Use the managed builds Cluster.
+          type: boolean
+        kubernetesIntegration:
+          description: The Kubernetes integration cluster used for the image builds.
+          nullable: true
+          type: string
+        cpu:
+          description: The CPU allocated for the build runner.
+          nullable: true
+          type: string
+        memory:
+          description: The memory allocated for the build runner.
+          nullable: true
+          type: integer
+        lastStatus:
+          description: The latest status of the build settings.
+          nullable: true
+          type: string
+        lastError:
+          description: The latest status of the build settings.
+          nullable: true
+          type: string
+      type: object
     Cluster-kube-config.read:
       properties:
         certificate-authority-data:
@@ -2342,6 +2939,7 @@ components:
         cluster:
           $ref: '#/components/schemas/Cluster-kube-config.read'
       required:
+      - cluster
       - name
       type: object
     ContainerConfig-item:
@@ -2359,7 +2957,6 @@ components:
           type: string
       required:
       - cluster
-      - namespace
       - user
       type: object
     ContextWrapper-kube-config.read:
@@ -2494,6 +3091,9 @@ components:
           default: primary
           example: primary
           type: string
+        autoDeployEphemeral:
+          nullable: true
+          type: boolean
         createEphemeralOnPrCreate:
           nullable: true
           type: boolean
@@ -2503,6 +3103,8 @@ components:
         ephemeralKubernetesIntegration:
           nullable: true
           type: string
+      required:
+      - ephemeralKubernetesIntegration
       type: object
     Profile-item:
       properties:
@@ -2626,8 +3228,10 @@ components:
       properties:
         token:
           type: string
-      required:
-      - token
+        client-certificate-data:
+          type: string
+        client-key-data:
+          type: string
       type: object
     UserWrapper-kube-config.read:
       properties:
@@ -2637,6 +3241,7 @@ components:
           $ref: '#/components/schemas/User-kube-config.read'
       required:
       - name
+      - user
       type: object
     ValidateSourceGit:
       properties:
@@ -2978,6 +3583,24 @@ components:
           nullable: true
           readOnly: true
           type: string
+        ephemeralKubernetesIntegration:
+          description: Kubernetes integration identifier for the ephemeral auto deploy
+            cluster.
+          nullable: true
+          readOnly: true
+          type: string
+        hasEphemeralAutoDeploy:
+          description: Environment ephemeral auto deploy status.
+          readOnly: true
+          type: boolean
+        hasEphemeralCreateOnPr:
+          description: Environment ephemeral create-on-PR status.
+          readOnly: true
+          type: boolean
+        hasEphemeralDestroyOnPrClose:
+          description: Environment ephemeral destroy-on-PR close status.
+          readOnly: true
+          type: boolean
       type: object
     environment-item:
       description: An environment holds a collection of buildable and deployable components.
@@ -3016,6 +3639,8 @@ components:
           description: Environment cluster status.
           readOnly: true
           type: string
+        buildSettings:
+          $ref: '#/components/schemas/BuildSettings-item'
         project:
           description: Project identifier.
           readOnly: true
@@ -3025,6 +3650,24 @@ components:
           nullable: true
           readOnly: true
           type: string
+        ephemeralKubernetesIntegration:
+          description: Kubernetes integration identifier for the ephemeral auto deploy
+            cluster.
+          nullable: true
+          readOnly: true
+          type: string
+        hasEphemeralAutoDeploy:
+          description: Environment ephemeral auto deploy status.
+          readOnly: true
+          type: boolean
+        hasEphemeralCreateOnPr:
+          description: Environment ephemeral create-on-PR status.
+          readOnly: true
+          type: boolean
+        hasEphemeralDestroyOnPrClose:
+          description: Environment ephemeral destroy-on-PR close status.
+          readOnly: true
+          type: boolean
       type: object
     environment.CloneAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -3055,6 +3698,8 @@ components:
           type: boolean
         destroyEphemeralOnPrClose:
           type: boolean
+        autoDeployEphemeral:
+          type: boolean
         kubernetesIntegration:
           nullable: true
           type: string
@@ -3068,6 +3713,36 @@ components:
       required:
       - name
       - project
+      type: object
+    environment.EditBuildSettingsAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        useManagedRegistry:
+          nullable: true
+          type: boolean
+        registryIntegration:
+          nullable: true
+          type: string
+        useManagedCluster:
+          nullable: true
+          type: boolean
+        kubernetesIntegration:
+          nullable: true
+          type: string
+        cpu:
+          description: K8s supports decimal values with step 0.001 That's why we are
+            using decimal.
+          nullable: true
+          type: string
+        memory:
+          description: expressed in Mi
+          nullable: true
+          type: integer
+      required:
+      - cpu
+      - kubernetesIntegration
+      - memory
+      - registryIntegration
       type: object
     environment.EditComponentsAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -3137,6 +3812,9 @@ components:
           type: array
         current-context:
           type: string
+      required:
+      - clusters
+      - users
       type: object
     environment.PartialAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -3175,31 +3853,7 @@ components:
           type: array
       type: object
     environment_variable-collection:
-      description: An environment variable used during bunnyshell workflows.
-      properties:
-        id:
-          description: Environment variable identifier.
-          readOnly: true
-          type: string
-        name:
-          description: Environment variable name.
-          readOnly: true
-          type: string
-        secret:
-          description: Environment variable marked as secret.
-          readOnly: true
-          type: boolean
-        environment:
-          description: Environment identifier.
-          readOnly: true
-          type: string
-        organization:
-          description: Organization identifier.
-          readOnly: true
-          type: string
-      type: object
-    environment_variable-item:
-      description: An environment variable used during bunnyshell workflows.
+      description: An environment variable used during Bunnyshell workflows.
       properties:
         id:
           description: Environment variable identifier.
@@ -3227,13 +3881,63 @@ components:
           readOnly: true
           type: string
       type: object
-    environment_variable.Edit:
-      description: An environment variable used during bunnyshell workflows.
+    environment_variable-item:
+      description: An environment variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Environment variable identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Environment variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Environment variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Environment variable marked as secret.
+          readOnly: true
+          type: boolean
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    environment_variable.CreateAction:
+      description: An environment variable used during Bunnyshell workflows.
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        isSecret:
+          nullable: true
+          type: boolean
+        environment:
+          type: string
+      required:
+      - environment
+      - name
+      - value
+      type: object
+    environment_variable.EditAction:
+      description: An environment variable used during Bunnyshell workflows.
       properties:
         value:
-          maxLength: 255
           nullable: true
           type: string
+        isSecret:
+          nullable: true
+          type: boolean
+      required:
+      - value
       type: object
     event-collection:
       description: "An event represents an operation on an environment, integration\
@@ -3586,6 +4290,40 @@ components:
         _embedded:
           $ref: '#/components/schemas/embedded_project_collection'
       type: object
+    paginated-project_variable-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_project_variable_collection'
+      type: object
+    paginated-registry_integration-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_registry_integration_collection'
+      type: object
     paginated-template-collection:
       description: Paginated result
       properties:
@@ -3650,21 +4388,13 @@ components:
         self:
           $ref: '#/components/schemas/paginated_link'
         first:
-          allOf:
-          - $ref: '#/components/schemas/paginated_link'
-          nullable: true
+          $ref: '#/components/schemas/paginated_link'
         prev:
-          allOf:
-          - $ref: '#/components/schemas/paginated_link'
-          nullable: true
+          $ref: '#/components/schemas/paginated_link'
         next:
-          allOf:
-          - $ref: '#/components/schemas/paginated_link'
-          nullable: true
+          $ref: '#/components/schemas/paginated_link'
         last:
-          allOf:
-          - $ref: '#/components/schemas/paginated_link'
-          nullable: true
+          $ref: '#/components/schemas/paginated_link'
         item:
           items:
             $ref: '#/components/schemas/paginated_link'
@@ -3804,6 +4534,205 @@ components:
           description: Environment identifier.
           readOnly: true
           type: integer
+        buildSettings:
+          $ref: '#/components/schemas/BuildSettings-item'
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    project.CreateAction:
+      description: A project holds multiple environments and shared secrets and settings.
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        organization:
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - name
+      - organization
+      type: object
+    project.EditBuildSettingsAction:
+      description: A project holds multiple environments and shared secrets and settings.
+      properties:
+        useManagedRegistry:
+          nullable: true
+          type: boolean
+        registryIntegration:
+          nullable: true
+          type: string
+        useManagedCluster:
+          nullable: true
+          type: boolean
+        kubernetesIntegration:
+          nullable: true
+          type: string
+        cpu:
+          description: K8s supports decimal values with step 0.001 That's why we are
+            using decimal.
+          nullable: true
+          type: string
+        memory:
+          description: expressed in Mi
+          nullable: true
+          type: integer
+      required:
+      - cpu
+      - kubernetesIntegration
+      - memory
+      - registryIntegration
+      type: object
+    project.EditSettingsAction:
+      description: A project holds multiple environments and shared secrets and settings.
+      properties:
+        name:
+          maxLength: 255
+          nullable: true
+          type: string
+        labels:
+          $ref: '#/components/schemas/Edit'
+      required:
+      - name
+      type: object
+    project_variable-collection:
+      description: A project variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Project variable identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Project variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Project variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Project variable marked as secret.
+          readOnly: true
+          type: boolean
+        project:
+          description: Project identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    project_variable-item:
+      description: A project variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Project variable identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Project variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Project variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Project variable marked as secret.
+          readOnly: true
+          type: boolean
+        project:
+          description: Project identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    project_variable.CreateAction:
+      description: A project variable used during Bunnyshell workflows.
+      properties:
+        name:
+          type: string
+        value:
+          maxLength: 255
+          type: string
+        isSecret:
+          nullable: true
+          type: boolean
+        project:
+          type: string
+      required:
+      - name
+      - project
+      - value
+      type: object
+    project_variable.EditAction:
+      description: A project variable used during Bunnyshell workflows.
+      properties:
+        value:
+          maxLength: 255
+          nullable: true
+          type: string
+        isSecret:
+          nullable: true
+          type: boolean
+      required:
+      - value
+      type: object
+    registry_integration-collection:
+      description: A Registry integration stores connection information for a Container
+        registry.
+      properties:
+        id:
+          description: Registry integration identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Registry integration name.
+          readOnly: true
+          type: string
+        providerName:
+          description: Registry integration provider.
+          readOnly: true
+          type: string
+        status:
+          description: Registry integration status.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    registry_integration-item:
+      description: A Registry integration stores connection information for a Container
+        registry.
+      properties:
+        id:
+          description: Registry integration identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Registry integration name.
+          readOnly: true
+          type: string
+        providerName:
+          description: Registry integration provider.
+          readOnly: true
+          type: string
+        status:
+          description: Registry integration status.
+          readOnly: true
+          type: string
         organization:
           description: Organization identifier.
           readOnly: true
@@ -4164,6 +5093,22 @@ components:
             $ref: '#/components/schemas/project-collection'
           type: array
       title: embedded-project-collection
+      type: object
+    embedded_project_variable_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/project_variable-collection'
+          type: array
+      title: embedded-project_variable-collection
+      type: object
+    embedded_registry_integration_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/registry_integration-collection'
+          type: array
+      title: embedded-registry_integration-collection
       type: object
     embedded_template_collection:
       properties:

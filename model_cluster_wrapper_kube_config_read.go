@@ -20,17 +20,18 @@ var _ MappedNullable = &ClusterWrapperKubeConfigRead{}
 
 // ClusterWrapperKubeConfigRead struct for ClusterWrapperKubeConfigRead
 type ClusterWrapperKubeConfigRead struct {
-	Name    string                 `json:"name"`
-	Cluster *ClusterKubeConfigRead `json:"cluster,omitempty"`
+	Name    string                `json:"name"`
+	Cluster ClusterKubeConfigRead `json:"cluster"`
 }
 
 // NewClusterWrapperKubeConfigRead instantiates a new ClusterWrapperKubeConfigRead object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterWrapperKubeConfigRead(name string) *ClusterWrapperKubeConfigRead {
+func NewClusterWrapperKubeConfigRead(name string, cluster ClusterKubeConfigRead) *ClusterWrapperKubeConfigRead {
 	this := ClusterWrapperKubeConfigRead{}
 	this.Name = name
+	this.Cluster = cluster
 	return &this
 }
 
@@ -66,36 +67,28 @@ func (o *ClusterWrapperKubeConfigRead) SetName(v string) {
 	o.Name = v
 }
 
-// GetCluster returns the Cluster field value if set, zero value otherwise.
+// GetCluster returns the Cluster field value
 func (o *ClusterWrapperKubeConfigRead) GetCluster() ClusterKubeConfigRead {
-	if o == nil || IsNil(o.Cluster) {
+	if o == nil {
 		var ret ClusterKubeConfigRead
 		return ret
 	}
-	return *o.Cluster
+
+	return o.Cluster
 }
 
-// GetClusterOk returns a tuple with the Cluster field value if set, nil otherwise
+// GetClusterOk returns a tuple with the Cluster field value
 // and a boolean to check if the value has been set.
 func (o *ClusterWrapperKubeConfigRead) GetClusterOk() (*ClusterKubeConfigRead, bool) {
-	if o == nil || IsNil(o.Cluster) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cluster, true
+	return &o.Cluster, true
 }
 
-// HasCluster returns a boolean if a field has been set.
-func (o *ClusterWrapperKubeConfigRead) HasCluster() bool {
-	if o != nil && !IsNil(o.Cluster) {
-		return true
-	}
-
-	return false
-}
-
-// SetCluster gets a reference to the given ClusterKubeConfigRead and assigns it to the Cluster field.
+// SetCluster sets field value
 func (o *ClusterWrapperKubeConfigRead) SetCluster(v ClusterKubeConfigRead) {
-	o.Cluster = &v
+	o.Cluster = v
 }
 
 func (o ClusterWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
@@ -109,9 +102,7 @@ func (o ClusterWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
 func (o ClusterWrapperKubeConfigRead) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Cluster) {
-		toSerialize["cluster"] = o.Cluster
-	}
+	toSerialize["cluster"] = o.Cluster
 	return toSerialize, nil
 }
 

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | 
-**User** | Pointer to [**UserKubeConfigRead**](UserKubeConfigRead.md) |  | [optional] 
+**User** | [**UserKubeConfigRead**](UserKubeConfigRead.md) |  | 
 
 ## Methods
 
 ### NewUserWrapperKubeConfigRead
 
-`func NewUserWrapperKubeConfigRead(name string, ) *UserWrapperKubeConfigRead`
+`func NewUserWrapperKubeConfigRead(name string, user UserKubeConfigRead, ) *UserWrapperKubeConfigRead`
 
 NewUserWrapperKubeConfigRead instantiates a new UserWrapperKubeConfigRead object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetUser sets User field to given value.
 
-### HasUser
-
-`func (o *UserWrapperKubeConfigRead) HasUser() bool`
-
-HasUser returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

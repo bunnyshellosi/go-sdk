@@ -12,8 +12,13 @@ Name | Type | Description | Notes
 **TotalComponents** | Pointer to **int32** | Service component identifier | [optional] [readonly] 
 **OperationStatus** | Pointer to **string** | Environment operation status. | [optional] [readonly] 
 **ClusterStatus** | Pointer to **string** | Environment cluster status. | [optional] [readonly] 
+**BuildSettings** | Pointer to [**NullableBuildSettingsItem**](BuildSettingsItem.md) |  | [optional] 
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
 **KubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier. | [optional] [readonly] 
+**EphemeralKubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier for the ephemeral auto deploy cluster. | [optional] [readonly] 
+**HasEphemeralAutoDeploy** | Pointer to **bool** | Environment ephemeral auto deploy status. | [optional] [readonly] 
+**HasEphemeralCreateOnPr** | Pointer to **bool** | Environment ephemeral create-on-PR status. | [optional] [readonly] 
+**HasEphemeralDestroyOnPrClose** | Pointer to **bool** | Environment ephemeral destroy-on-PR close status. | [optional] [readonly] 
 
 ## Methods
 
@@ -234,6 +239,41 @@ SetClusterStatus sets ClusterStatus field to given value.
 
 HasClusterStatus returns a boolean if a field has been set.
 
+### GetBuildSettings
+
+`func (o *EnvironmentItem) GetBuildSettings() BuildSettingsItem`
+
+GetBuildSettings returns the BuildSettings field if non-nil, zero value otherwise.
+
+### GetBuildSettingsOk
+
+`func (o *EnvironmentItem) GetBuildSettingsOk() (*BuildSettingsItem, bool)`
+
+GetBuildSettingsOk returns a tuple with the BuildSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuildSettings
+
+`func (o *EnvironmentItem) SetBuildSettings(v BuildSettingsItem)`
+
+SetBuildSettings sets BuildSettings field to given value.
+
+### HasBuildSettings
+
+`func (o *EnvironmentItem) HasBuildSettings() bool`
+
+HasBuildSettings returns a boolean if a field has been set.
+
+### SetBuildSettingsNil
+
+`func (o *EnvironmentItem) SetBuildSettingsNil(b bool)`
+
+ SetBuildSettingsNil sets the value for BuildSettings to be an explicit nil
+
+### UnsetBuildSettings
+`func (o *EnvironmentItem) UnsetBuildSettings()`
+
+UnsetBuildSettings ensures that no value is present for BuildSettings, not even an explicit nil
 ### GetProject
 
 `func (o *EnvironmentItem) GetProject() string`
@@ -294,6 +334,116 @@ HasKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentItem) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetEphemeralKubernetesIntegration
+
+`func (o *EnvironmentItem) GetEphemeralKubernetesIntegration() string`
+
+GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field if non-nil, zero value otherwise.
+
+### GetEphemeralKubernetesIntegrationOk
+
+`func (o *EnvironmentItem) GetEphemeralKubernetesIntegrationOk() (*string, bool)`
+
+GetEphemeralKubernetesIntegrationOk returns a tuple with the EphemeralKubernetesIntegration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralKubernetesIntegration
+
+`func (o *EnvironmentItem) SetEphemeralKubernetesIntegration(v string)`
+
+SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to given value.
+
+### HasEphemeralKubernetesIntegration
+
+`func (o *EnvironmentItem) HasEphemeralKubernetesIntegration() bool`
+
+HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
+
+### SetEphemeralKubernetesIntegrationNil
+
+`func (o *EnvironmentItem) SetEphemeralKubernetesIntegrationNil(b bool)`
+
+ SetEphemeralKubernetesIntegrationNil sets the value for EphemeralKubernetesIntegration to be an explicit nil
+
+### UnsetEphemeralKubernetesIntegration
+`func (o *EnvironmentItem) UnsetEphemeralKubernetesIntegration()`
+
+UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetHasEphemeralAutoDeploy
+
+`func (o *EnvironmentItem) GetHasEphemeralAutoDeploy() bool`
+
+GetHasEphemeralAutoDeploy returns the HasEphemeralAutoDeploy field if non-nil, zero value otherwise.
+
+### GetHasEphemeralAutoDeployOk
+
+`func (o *EnvironmentItem) GetHasEphemeralAutoDeployOk() (*bool, bool)`
+
+GetHasEphemeralAutoDeployOk returns a tuple with the HasEphemeralAutoDeploy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasEphemeralAutoDeploy
+
+`func (o *EnvironmentItem) SetHasEphemeralAutoDeploy(v bool)`
+
+SetHasEphemeralAutoDeploy sets HasEphemeralAutoDeploy field to given value.
+
+### HasHasEphemeralAutoDeploy
+
+`func (o *EnvironmentItem) HasHasEphemeralAutoDeploy() bool`
+
+HasHasEphemeralAutoDeploy returns a boolean if a field has been set.
+
+### GetHasEphemeralCreateOnPr
+
+`func (o *EnvironmentItem) GetHasEphemeralCreateOnPr() bool`
+
+GetHasEphemeralCreateOnPr returns the HasEphemeralCreateOnPr field if non-nil, zero value otherwise.
+
+### GetHasEphemeralCreateOnPrOk
+
+`func (o *EnvironmentItem) GetHasEphemeralCreateOnPrOk() (*bool, bool)`
+
+GetHasEphemeralCreateOnPrOk returns a tuple with the HasEphemeralCreateOnPr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasEphemeralCreateOnPr
+
+`func (o *EnvironmentItem) SetHasEphemeralCreateOnPr(v bool)`
+
+SetHasEphemeralCreateOnPr sets HasEphemeralCreateOnPr field to given value.
+
+### HasHasEphemeralCreateOnPr
+
+`func (o *EnvironmentItem) HasHasEphemeralCreateOnPr() bool`
+
+HasHasEphemeralCreateOnPr returns a boolean if a field has been set.
+
+### GetHasEphemeralDestroyOnPrClose
+
+`func (o *EnvironmentItem) GetHasEphemeralDestroyOnPrClose() bool`
+
+GetHasEphemeralDestroyOnPrClose returns the HasEphemeralDestroyOnPrClose field if non-nil, zero value otherwise.
+
+### GetHasEphemeralDestroyOnPrCloseOk
+
+`func (o *EnvironmentItem) GetHasEphemeralDestroyOnPrCloseOk() (*bool, bool)`
+
+GetHasEphemeralDestroyOnPrCloseOk returns a tuple with the HasEphemeralDestroyOnPrClose field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasEphemeralDestroyOnPrClose
+
+`func (o *EnvironmentItem) SetHasEphemeralDestroyOnPrClose(v bool)`
+
+SetHasEphemeralDestroyOnPrClose sets HasEphemeralDestroyOnPrClose field to given value.
+
+### HasHasEphemeralDestroyOnPrClose
+
+`func (o *EnvironmentItem) HasHasEphemeralDestroyOnPrClose() bool`
+
+HasHasEphemeralDestroyOnPrClose returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

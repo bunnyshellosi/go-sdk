@@ -35,11 +35,20 @@ type EnvironmentItem struct {
 	// Environment operation status.
 	OperationStatus *string `json:"operationStatus,omitempty"`
 	// Environment cluster status.
-	ClusterStatus *string `json:"clusterStatus,omitempty"`
+	ClusterStatus *string                   `json:"clusterStatus,omitempty"`
+	BuildSettings NullableBuildSettingsItem `json:"buildSettings,omitempty"`
 	// Project identifier.
 	Project *string `json:"project,omitempty"`
 	// Kubernetes integration identifier.
 	KubernetesIntegration NullableString `json:"kubernetesIntegration,omitempty"`
+	// Kubernetes integration identifier for the ephemeral auto deploy cluster.
+	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration,omitempty"`
+	// Environment ephemeral auto deploy status.
+	HasEphemeralAutoDeploy *bool `json:"hasEphemeralAutoDeploy,omitempty"`
+	// Environment ephemeral create-on-PR status.
+	HasEphemeralCreateOnPr *bool `json:"hasEphemeralCreateOnPr,omitempty"`
+	// Environment ephemeral destroy-on-PR close status.
+	HasEphemeralDestroyOnPrClose *bool `json:"hasEphemeralDestroyOnPrClose,omitempty"`
 }
 
 // NewEnvironmentItem instantiates a new EnvironmentItem object
@@ -315,6 +324,49 @@ func (o *EnvironmentItem) SetClusterStatus(v string) {
 	o.ClusterStatus = &v
 }
 
+// GetBuildSettings returns the BuildSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetBuildSettings() BuildSettingsItem {
+	if o == nil || IsNil(o.BuildSettings.Get()) {
+		var ret BuildSettingsItem
+		return ret
+	}
+	return *o.BuildSettings.Get()
+}
+
+// GetBuildSettingsOk returns a tuple with the BuildSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetBuildSettingsOk() (*BuildSettingsItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuildSettings.Get(), o.BuildSettings.IsSet()
+}
+
+// HasBuildSettings returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasBuildSettings() bool {
+	if o != nil && o.BuildSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuildSettings gets a reference to the given NullableBuildSettingsItem and assigns it to the BuildSettings field.
+func (o *EnvironmentItem) SetBuildSettings(v BuildSettingsItem) {
+	o.BuildSettings.Set(&v)
+}
+
+// SetBuildSettingsNil sets the value for BuildSettings to be an explicit nil
+func (o *EnvironmentItem) SetBuildSettingsNil() {
+	o.BuildSettings.Set(nil)
+}
+
+// UnsetBuildSettings ensures that no value is present for BuildSettings, not even an explicit nil
+func (o *EnvironmentItem) UnsetBuildSettings() {
+	o.BuildSettings.Unset()
+}
+
 // GetProject returns the Project field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetProject() string {
 	if o == nil || IsNil(o.Project) {
@@ -390,6 +442,145 @@ func (o *EnvironmentItem) UnsetKubernetesIntegration() {
 	o.KubernetesIntegration.Unset()
 }
 
+// GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetEphemeralKubernetesIntegration() string {
+	if o == nil || IsNil(o.EphemeralKubernetesIntegration.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EphemeralKubernetesIntegration.Get()
+}
+
+// GetEphemeralKubernetesIntegrationOk returns a tuple with the EphemeralKubernetesIntegration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetEphemeralKubernetesIntegrationOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EphemeralKubernetesIntegration.Get(), o.EphemeralKubernetesIntegration.IsSet()
+}
+
+// HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasEphemeralKubernetesIntegration() bool {
+	if o != nil && o.EphemeralKubernetesIntegration.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEphemeralKubernetesIntegration gets a reference to the given NullableString and assigns it to the EphemeralKubernetesIntegration field.
+func (o *EnvironmentItem) SetEphemeralKubernetesIntegration(v string) {
+	o.EphemeralKubernetesIntegration.Set(&v)
+}
+
+// SetEphemeralKubernetesIntegrationNil sets the value for EphemeralKubernetesIntegration to be an explicit nil
+func (o *EnvironmentItem) SetEphemeralKubernetesIntegrationNil() {
+	o.EphemeralKubernetesIntegration.Set(nil)
+}
+
+// UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+func (o *EnvironmentItem) UnsetEphemeralKubernetesIntegration() {
+	o.EphemeralKubernetesIntegration.Unset()
+}
+
+// GetHasEphemeralAutoDeploy returns the HasEphemeralAutoDeploy field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetHasEphemeralAutoDeploy() bool {
+	if o == nil || IsNil(o.HasEphemeralAutoDeploy) {
+		var ret bool
+		return ret
+	}
+	return *o.HasEphemeralAutoDeploy
+}
+
+// GetHasEphemeralAutoDeployOk returns a tuple with the HasEphemeralAutoDeploy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetHasEphemeralAutoDeployOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasEphemeralAutoDeploy) {
+		return nil, false
+	}
+	return o.HasEphemeralAutoDeploy, true
+}
+
+// HasHasEphemeralAutoDeploy returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasHasEphemeralAutoDeploy() bool {
+	if o != nil && !IsNil(o.HasEphemeralAutoDeploy) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasEphemeralAutoDeploy gets a reference to the given bool and assigns it to the HasEphemeralAutoDeploy field.
+func (o *EnvironmentItem) SetHasEphemeralAutoDeploy(v bool) {
+	o.HasEphemeralAutoDeploy = &v
+}
+
+// GetHasEphemeralCreateOnPr returns the HasEphemeralCreateOnPr field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetHasEphemeralCreateOnPr() bool {
+	if o == nil || IsNil(o.HasEphemeralCreateOnPr) {
+		var ret bool
+		return ret
+	}
+	return *o.HasEphemeralCreateOnPr
+}
+
+// GetHasEphemeralCreateOnPrOk returns a tuple with the HasEphemeralCreateOnPr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetHasEphemeralCreateOnPrOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasEphemeralCreateOnPr) {
+		return nil, false
+	}
+	return o.HasEphemeralCreateOnPr, true
+}
+
+// HasHasEphemeralCreateOnPr returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasHasEphemeralCreateOnPr() bool {
+	if o != nil && !IsNil(o.HasEphemeralCreateOnPr) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasEphemeralCreateOnPr gets a reference to the given bool and assigns it to the HasEphemeralCreateOnPr field.
+func (o *EnvironmentItem) SetHasEphemeralCreateOnPr(v bool) {
+	o.HasEphemeralCreateOnPr = &v
+}
+
+// GetHasEphemeralDestroyOnPrClose returns the HasEphemeralDestroyOnPrClose field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetHasEphemeralDestroyOnPrClose() bool {
+	if o == nil || IsNil(o.HasEphemeralDestroyOnPrClose) {
+		var ret bool
+		return ret
+	}
+	return *o.HasEphemeralDestroyOnPrClose
+}
+
+// GetHasEphemeralDestroyOnPrCloseOk returns a tuple with the HasEphemeralDestroyOnPrClose field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetHasEphemeralDestroyOnPrCloseOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasEphemeralDestroyOnPrClose) {
+		return nil, false
+	}
+	return o.HasEphemeralDestroyOnPrClose, true
+}
+
+// HasHasEphemeralDestroyOnPrClose returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasHasEphemeralDestroyOnPrClose() bool {
+	if o != nil && !IsNil(o.HasEphemeralDestroyOnPrClose) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasEphemeralDestroyOnPrClose gets a reference to the given bool and assigns it to the HasEphemeralDestroyOnPrClose field.
+func (o *EnvironmentItem) SetHasEphemeralDestroyOnPrClose(v bool) {
+	o.HasEphemeralDestroyOnPrClose = &v
+}
+
 func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -424,11 +615,26 @@ func (o EnvironmentItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClusterStatus) {
 		toSerialize["clusterStatus"] = o.ClusterStatus
 	}
+	if o.BuildSettings.IsSet() {
+		toSerialize["buildSettings"] = o.BuildSettings.Get()
+	}
 	if !IsNil(o.Project) {
 		toSerialize["project"] = o.Project
 	}
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
+	}
+	if o.EphemeralKubernetesIntegration.IsSet() {
+		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
+	}
+	if !IsNil(o.HasEphemeralAutoDeploy) {
+		toSerialize["hasEphemeralAutoDeploy"] = o.HasEphemeralAutoDeploy
+	}
+	if !IsNil(o.HasEphemeralCreateOnPr) {
+		toSerialize["hasEphemeralCreateOnPr"] = o.HasEphemeralCreateOnPr
+	}
+	if !IsNil(o.HasEphemeralDestroyOnPrClose) {
+		toSerialize["hasEphemeralDestroyOnPrClose"] = o.HasEphemeralDestroyOnPrClose
 	}
 	return toSerialize, nil
 }

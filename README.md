@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
 *EnvironmentAPI* | [**EnvironmentDefinition**](docs/EnvironmentAPI.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
 *EnvironmentAPI* | [**EnvironmentDelete**](docs/EnvironmentAPI.md#environmentdelete) | **Post** /v1/environments/{id}/delete | Delete a specific environment.
 *EnvironmentAPI* | [**EnvironmentDeploy**](docs/EnvironmentAPI.md#environmentdeploy) | **Post** /v1/environments/{id}/deploy | Deploy an environment.
+*EnvironmentAPI* | [**EnvironmentEditBuildSettings**](docs/EnvironmentAPI.md#environmenteditbuildsettings) | **Patch** /v1/environments/{id}/build-settings | Edit the build settings of an environment.
 *EnvironmentAPI* | [**EnvironmentEditComponents**](docs/EnvironmentAPI.md#environmenteditcomponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
 *EnvironmentAPI* | [**EnvironmentEditConfiguration**](docs/EnvironmentAPI.md#environmenteditconfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
 *EnvironmentAPI* | [**EnvironmentEditSettings**](docs/EnvironmentAPI.md#environmenteditsettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
@@ -100,6 +101,8 @@ Class | Method | HTTP request | Description
 *EnvironmentAPI* | [**EnvironmentStart**](docs/EnvironmentAPI.md#environmentstart) | **Post** /v1/environments/{id}/start | Start an environment.
 *EnvironmentAPI* | [**EnvironmentStop**](docs/EnvironmentAPI.md#environmentstop) | **Post** /v1/environments/{id}/stop | Stop an environment.
 *EnvironmentAPI* | [**EnvironmentView**](docs/EnvironmentAPI.md#environmentview) | **Get** /v1/environments/{id} | View a specific environment.
+*EnvironmentVariableAPI* | [**EnvironmentVariableCreate**](docs/EnvironmentVariableAPI.md#environmentvariablecreate) | **Post** /v1/environment_variables | Create a specific environment variable.
+*EnvironmentVariableAPI* | [**EnvironmentVariableDelete**](docs/EnvironmentVariableAPI.md#environmentvariabledelete) | **Delete** /v1/environment_variables/{id} | Delete a specific environment variable.
 *EnvironmentVariableAPI* | [**EnvironmentVariableEdit**](docs/EnvironmentVariableAPI.md#environmentvariableedit) | **Patch** /v1/environment_variables/{id} | Edit a specific environment variable.
 *EnvironmentVariableAPI* | [**EnvironmentVariableList**](docs/EnvironmentVariableAPI.md#environmentvariablelist) | **Get** /v1/environment_variables | List environment variables matching any selected filters.
 *EnvironmentVariableAPI* | [**EnvironmentVariableView**](docs/EnvironmentVariableAPI.md#environmentvariableview) | **Get** /v1/environment_variables/{id} | View a specific environment variable.
@@ -111,8 +114,19 @@ Class | Method | HTTP request | Description
 *OrganizationAPI* | [**OrganizationView**](docs/OrganizationAPI.md#organizationview) | **Get** /v1/organizations/{id} | View a specific organization.
 *PipelineAPI* | [**PipelineList**](docs/PipelineAPI.md#pipelinelist) | **Get** /v1/pipelines | List pipelines matching any selected filters.
 *PipelineAPI* | [**PipelineView**](docs/PipelineAPI.md#pipelineview) | **Get** /v1/pipelines/{id} | View a specific Pipeline.
+*ProjectAPI* | [**ProjectCreate**](docs/ProjectAPI.md#projectcreate) | **Post** /v1/projects | Creates new project.
+*ProjectAPI* | [**ProjectDelete**](docs/ProjectAPI.md#projectdelete) | **Delete** /v1/projects/{id} | Delete a specific project.
+*ProjectAPI* | [**ProjectEditBuildSettings**](docs/ProjectAPI.md#projecteditbuildsettings) | **Patch** /v1/projects/{id}/build-settings | Edit the build settings of a project.
+*ProjectAPI* | [**ProjectEditSettings**](docs/ProjectAPI.md#projecteditsettings) | **Patch** /v1/projects/{id}/settings | Edit a project.
 *ProjectAPI* | [**ProjectList**](docs/ProjectAPI.md#projectlist) | **Get** /v1/projects | List projects matching any selected filters.
 *ProjectAPI* | [**ProjectView**](docs/ProjectAPI.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
+*ProjectVariableAPI* | [**ProjectVariableCreate**](docs/ProjectVariableAPI.md#projectvariablecreate) | **Post** /v1/project_variables | Create a specific project variable.
+*ProjectVariableAPI* | [**ProjectVariableDelete**](docs/ProjectVariableAPI.md#projectvariabledelete) | **Delete** /v1/project_variables/{id} | Delete a specific project variable.
+*ProjectVariableAPI* | [**ProjectVariableEdit**](docs/ProjectVariableAPI.md#projectvariableedit) | **Patch** /v1/project_variables/{id} | Edit a specific project variable.
+*ProjectVariableAPI* | [**ProjectVariableList**](docs/ProjectVariableAPI.md#projectvariablelist) | **Get** /v1/project_variables | List project variables matching any selected filters.
+*ProjectVariableAPI* | [**ProjectVariableView**](docs/ProjectVariableAPI.md#projectvariableview) | **Get** /v1/project_variables/{id} | View a specific project variable.
+*RegistryIntegrationAPI* | [**RegistryIntegrationList**](docs/RegistryIntegrationAPI.md#registryintegrationlist) | **Get** /v1/registry_integrations | List Registry integrations matching any selected filters.
+*RegistryIntegrationAPI* | [**RegistryIntegrationView**](docs/RegistryIntegrationAPI.md#registryintegrationview) | **Get** /v1/registry_integrations/{id} | View a specific Registry integration.
 *TemplateAPI* | [**TemplateDefinition**](docs/TemplateAPI.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
 *TemplateAPI* | [**TemplateList**](docs/TemplateAPI.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
 *TemplateAPI* | [**TemplateValidate**](docs/TemplateAPI.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
@@ -125,6 +139,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [BuildSettingsItem](docs/BuildSettingsItem.md)
  - [ClusterKubeConfigRead](docs/ClusterKubeConfigRead.md)
  - [ClusterWrapperKubeConfigRead](docs/ClusterWrapperKubeConfigRead.md)
  - [ComponentCollection](docs/ComponentCollection.md)
@@ -152,6 +167,8 @@ Class | Method | HTTP request | Description
  - [EmbeddedOrganizationCollection](docs/EmbeddedOrganizationCollection.md)
  - [EmbeddedPipelineCollection](docs/EmbeddedPipelineCollection.md)
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
+ - [EmbeddedProjectVariableCollection](docs/EmbeddedProjectVariableCollection.md)
+ - [EmbeddedRegistryIntegrationCollection](docs/EmbeddedRegistryIntegrationCollection.md)
  - [EmbeddedTemplateCollection](docs/EmbeddedTemplateCollection.md)
  - [EmbeddedTemplatesRepositoryCollection](docs/EmbeddedTemplatesRepositoryCollection.md)
  - [EmbeddedWorkflowCollection](docs/EmbeddedWorkflowCollection.md)
@@ -159,6 +176,7 @@ Class | Method | HTTP request | Description
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentCreateAction](docs/EnvironmentCreateAction.md)
  - [EnvironmentCreateActionGenesis](docs/EnvironmentCreateActionGenesis.md)
+ - [EnvironmentEditBuildSettingsAction](docs/EnvironmentEditBuildSettingsAction.md)
  - [EnvironmentEditComponentsAction](docs/EnvironmentEditComponentsAction.md)
  - [EnvironmentEditComponentsActionFilter](docs/EnvironmentEditComponentsActionFilter.md)
  - [EnvironmentEditConfiguration](docs/EnvironmentEditConfiguration.md)
@@ -171,7 +189,8 @@ Class | Method | HTTP request | Description
  - [EnvironmentPartialDeployAction](docs/EnvironmentPartialDeployAction.md)
  - [EnvironmentPartialStartAction](docs/EnvironmentPartialStartAction.md)
  - [EnvironmentVariableCollection](docs/EnvironmentVariableCollection.md)
- - [EnvironmentVariableEdit](docs/EnvironmentVariableEdit.md)
+ - [EnvironmentVariableCreateAction](docs/EnvironmentVariableCreateAction.md)
+ - [EnvironmentVariableEditAction](docs/EnvironmentVariableEditAction.md)
  - [EnvironmentVariableItem](docs/EnvironmentVariableItem.md)
  - [Ephemeral](docs/Ephemeral.md)
  - [EventCollection](docs/EventCollection.md)
@@ -200,6 +219,8 @@ Class | Method | HTTP request | Description
  - [PaginatedOrganizationCollection](docs/PaginatedOrganizationCollection.md)
  - [PaginatedPipelineCollection](docs/PaginatedPipelineCollection.md)
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
+ - [PaginatedProjectVariableCollection](docs/PaginatedProjectVariableCollection.md)
+ - [PaginatedRegistryIntegrationCollection](docs/PaginatedRegistryIntegrationCollection.md)
  - [PaginatedTemplateCollection](docs/PaginatedTemplateCollection.md)
  - [PaginatedTemplatesRepositoryCollection](docs/PaginatedTemplatesRepositoryCollection.md)
  - [PaginatedWorkflowCollection](docs/PaginatedWorkflowCollection.md)
@@ -210,7 +231,16 @@ Class | Method | HTTP request | Description
  - [ProblemViolation](docs/ProblemViolation.md)
  - [ProfileItem](docs/ProfileItem.md)
  - [ProjectCollection](docs/ProjectCollection.md)
+ - [ProjectCreateAction](docs/ProjectCreateAction.md)
+ - [ProjectEditBuildSettingsAction](docs/ProjectEditBuildSettingsAction.md)
+ - [ProjectEditSettingsAction](docs/ProjectEditSettingsAction.md)
  - [ProjectItem](docs/ProjectItem.md)
+ - [ProjectVariableCollection](docs/ProjectVariableCollection.md)
+ - [ProjectVariableCreateAction](docs/ProjectVariableCreateAction.md)
+ - [ProjectVariableEditAction](docs/ProjectVariableEditAction.md)
+ - [ProjectVariableItem](docs/ProjectVariableItem.md)
+ - [RegistryIntegrationCollection](docs/RegistryIntegrationCollection.md)
+ - [RegistryIntegrationItem](docs/RegistryIntegrationItem.md)
  - [ResourceListItem](docs/ResourceListItem.md)
  - [ResourceRequirementItem](docs/ResourceRequirementItem.md)
  - [SimpleResourceConfigItem](docs/SimpleResourceConfigItem.md)
