@@ -23,8 +23,8 @@ type EnvironmentKubeConfigKubeConfigRead struct {
 	ApiVersion     *string                        `json:"apiVersion,omitempty"`
 	Kind           *string                        `json:"kind,omitempty"`
 	Preferences    map[string]interface{}         `json:"preferences,omitempty"`
-	Clusters       []ClusterWrapperKubeConfigRead `json:"clusters,omitempty"`
-	Users          []UserWrapperKubeConfigRead    `json:"users,omitempty"`
+	Clusters       []ClusterWrapperKubeConfigRead `json:"clusters"`
+	Users          []UserWrapperKubeConfigRead    `json:"users"`
 	Contexts       []ContextWrapperKubeConfigRead `json:"contexts,omitempty"`
 	CurrentContext *string                        `json:"current-context,omitempty"`
 }
@@ -33,12 +33,14 @@ type EnvironmentKubeConfigKubeConfigRead struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentKubeConfigKubeConfigRead() *EnvironmentKubeConfigKubeConfigRead {
+func NewEnvironmentKubeConfigKubeConfigRead(clusters []ClusterWrapperKubeConfigRead, users []UserWrapperKubeConfigRead) *EnvironmentKubeConfigKubeConfigRead {
 	this := EnvironmentKubeConfigKubeConfigRead{}
 	var apiVersion string = "v1"
 	this.ApiVersion = &apiVersion
 	var kind string = "Config"
 	this.Kind = &kind
+	this.Clusters = clusters
+	this.Users = users
 	return &this
 }
 
@@ -150,66 +152,50 @@ func (o *EnvironmentKubeConfigKubeConfigRead) SetPreferences(v map[string]interf
 	o.Preferences = v
 }
 
-// GetClusters returns the Clusters field value if set, zero value otherwise.
+// GetClusters returns the Clusters field value
 func (o *EnvironmentKubeConfigKubeConfigRead) GetClusters() []ClusterWrapperKubeConfigRead {
-	if o == nil || IsNil(o.Clusters) {
+	if o == nil {
 		var ret []ClusterWrapperKubeConfigRead
 		return ret
 	}
+
 	return o.Clusters
 }
 
-// GetClustersOk returns a tuple with the Clusters field value if set, nil otherwise
+// GetClustersOk returns a tuple with the Clusters field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetClustersOk() ([]ClusterWrapperKubeConfigRead, bool) {
-	if o == nil || IsNil(o.Clusters) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Clusters, true
 }
 
-// HasClusters returns a boolean if a field has been set.
-func (o *EnvironmentKubeConfigKubeConfigRead) HasClusters() bool {
-	if o != nil && !IsNil(o.Clusters) {
-		return true
-	}
-
-	return false
-}
-
-// SetClusters gets a reference to the given []ClusterWrapperKubeConfigRead and assigns it to the Clusters field.
+// SetClusters sets field value
 func (o *EnvironmentKubeConfigKubeConfigRead) SetClusters(v []ClusterWrapperKubeConfigRead) {
 	o.Clusters = v
 }
 
-// GetUsers returns the Users field value if set, zero value otherwise.
+// GetUsers returns the Users field value
 func (o *EnvironmentKubeConfigKubeConfigRead) GetUsers() []UserWrapperKubeConfigRead {
-	if o == nil || IsNil(o.Users) {
+	if o == nil {
 		var ret []UserWrapperKubeConfigRead
 		return ret
 	}
+
 	return o.Users
 }
 
-// GetUsersOk returns a tuple with the Users field value if set, nil otherwise
+// GetUsersOk returns a tuple with the Users field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentKubeConfigKubeConfigRead) GetUsersOk() ([]UserWrapperKubeConfigRead, bool) {
-	if o == nil || IsNil(o.Users) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Users, true
 }
 
-// HasUsers returns a boolean if a field has been set.
-func (o *EnvironmentKubeConfigKubeConfigRead) HasUsers() bool {
-	if o != nil && !IsNil(o.Users) {
-		return true
-	}
-
-	return false
-}
-
-// SetUsers gets a reference to the given []UserWrapperKubeConfigRead and assigns it to the Users field.
+// SetUsers sets field value
 func (o *EnvironmentKubeConfigKubeConfigRead) SetUsers(v []UserWrapperKubeConfigRead) {
 	o.Users = v
 }
@@ -297,12 +283,8 @@ func (o EnvironmentKubeConfigKubeConfigRead) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Preferences) {
 		toSerialize["preferences"] = o.Preferences
 	}
-	if !IsNil(o.Clusters) {
-		toSerialize["clusters"] = o.Clusters
-	}
-	if !IsNil(o.Users) {
-		toSerialize["users"] = o.Users
-	}
+	toSerialize["clusters"] = o.Clusters
+	toSerialize["users"] = o.Users
 	if !IsNil(o.Contexts) {
 		toSerialize["contexts"] = o.Contexts
 	}

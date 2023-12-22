@@ -27,7 +27,8 @@ type ProjectItem struct {
 	// Project name.
 	Name *string `json:"name,omitempty"`
 	// Environment identifier.
-	TotalEnvironments *int32 `json:"totalEnvironments,omitempty"`
+	TotalEnvironments *int32                    `json:"totalEnvironments,omitempty"`
+	BuildSettings     NullableBuildSettingsItem `json:"buildSettings,omitempty"`
 	// Organization identifier.
 	Organization *string `json:"organization,omitempty"`
 }
@@ -177,6 +178,49 @@ func (o *ProjectItem) SetTotalEnvironments(v int32) {
 	o.TotalEnvironments = &v
 }
 
+// GetBuildSettings returns the BuildSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProjectItem) GetBuildSettings() BuildSettingsItem {
+	if o == nil || IsNil(o.BuildSettings.Get()) {
+		var ret BuildSettingsItem
+		return ret
+	}
+	return *o.BuildSettings.Get()
+}
+
+// GetBuildSettingsOk returns a tuple with the BuildSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProjectItem) GetBuildSettingsOk() (*BuildSettingsItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuildSettings.Get(), o.BuildSettings.IsSet()
+}
+
+// HasBuildSettings returns a boolean if a field has been set.
+func (o *ProjectItem) HasBuildSettings() bool {
+	if o != nil && o.BuildSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuildSettings gets a reference to the given NullableBuildSettingsItem and assigns it to the BuildSettings field.
+func (o *ProjectItem) SetBuildSettings(v BuildSettingsItem) {
+	o.BuildSettings.Set(&v)
+}
+
+// SetBuildSettingsNil sets the value for BuildSettings to be an explicit nil
+func (o *ProjectItem) SetBuildSettingsNil() {
+	o.BuildSettings.Set(nil)
+}
+
+// UnsetBuildSettings ensures that no value is present for BuildSettings, not even an explicit nil
+func (o *ProjectItem) UnsetBuildSettings() {
+	o.BuildSettings.Unset()
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *ProjectItem) GetOrganization() string {
 	if o == nil || IsNil(o.Organization) {
@@ -230,6 +274,9 @@ func (o ProjectItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TotalEnvironments) {
 		toSerialize["totalEnvironments"] = o.TotalEnvironments
+	}
+	if o.BuildSettings.IsSet() {
+		toSerialize["buildSettings"] = o.BuildSettings.Get()
 	}
 	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization

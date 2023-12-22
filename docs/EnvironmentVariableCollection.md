@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Environment variable identifier. | [optional] [readonly] 
 **Name** | Pointer to **string** | Environment variable name. | [optional] [readonly] 
+**Value** | Pointer to **NullableString** | Environment variable value. | [optional] [readonly] 
 **Secret** | Pointer to **bool** | Environment variable marked as secret. | [optional] [readonly] 
 **Environment** | Pointer to **string** | Environment identifier. | [optional] [readonly] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
@@ -79,6 +80,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetValue
+
+`func (o *EnvironmentVariableCollection) GetValue() string`
+
+GetValue returns the Value field if non-nil, zero value otherwise.
+
+### GetValueOk
+
+`func (o *EnvironmentVariableCollection) GetValueOk() (*string, bool)`
+
+GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValue
+
+`func (o *EnvironmentVariableCollection) SetValue(v string)`
+
+SetValue sets Value field to given value.
+
+### HasValue
+
+`func (o *EnvironmentVariableCollection) HasValue() bool`
+
+HasValue returns a boolean if a field has been set.
+
+### SetValueNil
+
+`func (o *EnvironmentVariableCollection) SetValueNil(b bool)`
+
+ SetValueNil sets the value for Value to be an explicit nil
+
+### UnsetValue
+`func (o *EnvironmentVariableCollection) UnsetValue()`
+
+UnsetValue ensures that no value is present for Value, not even an explicit nil
 ### GetSecret
 
 `func (o *EnvironmentVariableCollection) GetSecret() bool`

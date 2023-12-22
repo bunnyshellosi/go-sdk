@@ -5,15 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "ephemeral"]
+**AutoDeployEphemeral** | Pointer to **NullableBool** |  | [optional] 
 **CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
-**EphemeralKubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
+**EphemeralKubernetesIntegration** | **NullableString** |  | 
 
 ## Methods
 
 ### NewEnvironmentEditSettingsEdit
 
-`func NewEnvironmentEditSettingsEdit() *EnvironmentEditSettingsEdit`
+`func NewEnvironmentEditSettingsEdit(ephemeralKubernetesIntegration NullableString, ) *EnvironmentEditSettingsEdit`
 
 NewEnvironmentEditSettingsEdit instantiates a new EnvironmentEditSettingsEdit object
 This constructor will assign default values to properties that have it defined,
@@ -53,6 +54,41 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
+### GetAutoDeployEphemeral
+
+`func (o *EnvironmentEditSettingsEdit) GetAutoDeployEphemeral() bool`
+
+GetAutoDeployEphemeral returns the AutoDeployEphemeral field if non-nil, zero value otherwise.
+
+### GetAutoDeployEphemeralOk
+
+`func (o *EnvironmentEditSettingsEdit) GetAutoDeployEphemeralOk() (*bool, bool)`
+
+GetAutoDeployEphemeralOk returns a tuple with the AutoDeployEphemeral field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoDeployEphemeral
+
+`func (o *EnvironmentEditSettingsEdit) SetAutoDeployEphemeral(v bool)`
+
+SetAutoDeployEphemeral sets AutoDeployEphemeral field to given value.
+
+### HasAutoDeployEphemeral
+
+`func (o *EnvironmentEditSettingsEdit) HasAutoDeployEphemeral() bool`
+
+HasAutoDeployEphemeral returns a boolean if a field has been set.
+
+### SetAutoDeployEphemeralNil
+
+`func (o *EnvironmentEditSettingsEdit) SetAutoDeployEphemeralNil(b bool)`
+
+ SetAutoDeployEphemeralNil sets the value for AutoDeployEphemeral to be an explicit nil
+
+### UnsetAutoDeployEphemeral
+`func (o *EnvironmentEditSettingsEdit) UnsetAutoDeployEphemeral()`
+
+UnsetAutoDeployEphemeral ensures that no value is present for AutoDeployEphemeral, not even an explicit nil
 ### GetCreateEphemeralOnPrCreate
 
 `func (o *EnvironmentEditSettingsEdit) GetCreateEphemeralOnPrCreate() bool`
@@ -142,11 +178,6 @@ and a boolean to check if the value has been set.
 
 SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to given value.
 
-### HasEphemeralKubernetesIntegration
-
-`func (o *EnvironmentEditSettingsEdit) HasEphemeralKubernetesIntegration() bool`
-
-HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
 
 ### SetEphemeralKubernetesIntegrationNil
 

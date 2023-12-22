@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## PipelineList
 
-> PaginatedPipelineCollection PipelineList(ctx).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
+> PaginatedPipelineCollection PipelineList(ctx).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).Execute()
 
 List pipelines matching any selected filters.
 
@@ -31,14 +31,14 @@ import (
 
 func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
-    environment := "environment_example" // string | Filter by environment (optional)
     event := "event_example" // string | Filter by event (optional)
+    environment := "environment_example" // string | Filter by environment (optional)
     organization := "organization_example" // string | Filter by organization (optional)
     status := "queued" // string | Filter by status (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PipelineAPI.PipelineList(context.Background()).Page(page).Environment(environment).Event(event).Organization(organization).Status(status).Execute()
+    resp, r, err := apiClient.PipelineAPI.PipelineList(context.Background()).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PipelineAPI.PipelineList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,8 +60,8 @@ Other parameters are passed through a pointer to a apiPipelineListRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | The collection page number | [default to 1]
- **environment** | **string** | Filter by environment | 
  **event** | **string** | Filter by event | 
+ **environment** | **string** | Filter by environment | 
  **organization** | **string** | Filter by organization | 
  **status** | **string** | Filter by status | 
 

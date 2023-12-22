@@ -73,6 +73,10 @@ type APIClient struct {
 
 	ProjectAPI *ProjectAPIService
 
+	ProjectVariableAPI *ProjectVariableAPIService
+
+	RegistryIntegrationAPI *RegistryIntegrationAPIService
+
 	TemplateAPI *TemplateAPIService
 
 	TemplatesRepositoryAPI *TemplatesRepositoryAPIService
@@ -106,6 +110,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OrganizationAPI = (*OrganizationAPIService)(&c.common)
 	c.PipelineAPI = (*PipelineAPIService)(&c.common)
 	c.ProjectAPI = (*ProjectAPIService)(&c.common)
+	c.ProjectVariableAPI = (*ProjectVariableAPIService)(&c.common)
+	c.RegistryIntegrationAPI = (*RegistryIntegrationAPIService)(&c.common)
 	c.TemplateAPI = (*TemplateAPIService)(&c.common)
 	c.TemplatesRepositoryAPI = (*TemplatesRepositoryAPIService)(&c.common)
 	c.WorkflowAPI = (*WorkflowAPIService)(&c.common)

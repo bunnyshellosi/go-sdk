@@ -27,8 +27,8 @@ type ApiPipelineListRequest struct {
 	ctx          context.Context
 	ApiService   *PipelineAPIService
 	page         *int32
-	environment  *string
 	event        *string
+	environment  *string
 	organization *string
 	status       *string
 }
@@ -39,15 +39,15 @@ func (r ApiPipelineListRequest) Page(page int32) ApiPipelineListRequest {
 	return r
 }
 
-// Filter by environment
-func (r ApiPipelineListRequest) Environment(environment string) ApiPipelineListRequest {
-	r.environment = &environment
-	return r
-}
-
 // Filter by event
 func (r ApiPipelineListRequest) Event(event string) ApiPipelineListRequest {
 	r.event = &event
+	return r
+}
+
+// Filter by environment
+func (r ApiPipelineListRequest) Environment(environment string) ApiPipelineListRequest {
+	r.environment = &environment
 	return r
 }
 
@@ -114,11 +114,11 @@ func (a *PipelineAPIService) PipelineListExecute(r ApiPipelineListRequest) (*Pag
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
-	if r.environment != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
-	}
 	if r.event != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "event", r.event, "")
+	}
+	if r.environment != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
 	if r.organization != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")

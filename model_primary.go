@@ -21,19 +21,21 @@ var _ MappedNullable = &Primary{}
 // Primary struct for Primary
 type Primary struct {
 	Type                           *string        `json:"type,omitempty"`
+	AutoDeployEphemeral            NullableBool   `json:"autoDeployEphemeral,omitempty"`
 	CreateEphemeralOnPrCreate      NullableBool   `json:"createEphemeralOnPrCreate,omitempty"`
 	DestroyEphemeralOnPrClose      NullableBool   `json:"destroyEphemeralOnPrClose,omitempty"`
-	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration,omitempty"`
+	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration"`
 }
 
 // NewPrimary instantiates a new Primary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrimary() *Primary {
+func NewPrimary(ephemeralKubernetesIntegration NullableString) *Primary {
 	this := Primary{}
 	var type_ string = "primary"
 	this.Type = &type_
+	this.EphemeralKubernetesIntegration = ephemeralKubernetesIntegration
 	return &this
 }
 
@@ -77,6 +79,49 @@ func (o *Primary) HasType() bool {
 // SetType gets a reference to the given string and assigns it to the Type field.
 func (o *Primary) SetType(v string) {
 	o.Type = &v
+}
+
+// GetAutoDeployEphemeral returns the AutoDeployEphemeral field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Primary) GetAutoDeployEphemeral() bool {
+	if o == nil || IsNil(o.AutoDeployEphemeral.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.AutoDeployEphemeral.Get()
+}
+
+// GetAutoDeployEphemeralOk returns a tuple with the AutoDeployEphemeral field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Primary) GetAutoDeployEphemeralOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AutoDeployEphemeral.Get(), o.AutoDeployEphemeral.IsSet()
+}
+
+// HasAutoDeployEphemeral returns a boolean if a field has been set.
+func (o *Primary) HasAutoDeployEphemeral() bool {
+	if o != nil && o.AutoDeployEphemeral.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoDeployEphemeral gets a reference to the given NullableBool and assigns it to the AutoDeployEphemeral field.
+func (o *Primary) SetAutoDeployEphemeral(v bool) {
+	o.AutoDeployEphemeral.Set(&v)
+}
+
+// SetAutoDeployEphemeralNil sets the value for AutoDeployEphemeral to be an explicit nil
+func (o *Primary) SetAutoDeployEphemeralNil() {
+	o.AutoDeployEphemeral.Set(nil)
+}
+
+// UnsetAutoDeployEphemeral ensures that no value is present for AutoDeployEphemeral, not even an explicit nil
+func (o *Primary) UnsetAutoDeployEphemeral() {
+	o.AutoDeployEphemeral.Unset()
 }
 
 // GetCreateEphemeralOnPrCreate returns the CreateEphemeralOnPrCreate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -165,16 +210,18 @@ func (o *Primary) UnsetDestroyEphemeralOnPrClose() {
 	o.DestroyEphemeralOnPrClose.Unset()
 }
 
-// GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *Primary) GetEphemeralKubernetesIntegration() string {
-	if o == nil || IsNil(o.EphemeralKubernetesIntegration.Get()) {
+	if o == nil || o.EphemeralKubernetesIntegration.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.EphemeralKubernetesIntegration.Get()
 }
 
-// GetEphemeralKubernetesIntegrationOk returns a tuple with the EphemeralKubernetesIntegration field value if set, nil otherwise
+// GetEphemeralKubernetesIntegrationOk returns a tuple with the EphemeralKubernetesIntegration field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Primary) GetEphemeralKubernetesIntegrationOk() (*string, bool) {
@@ -184,28 +231,9 @@ func (o *Primary) GetEphemeralKubernetesIntegrationOk() (*string, bool) {
 	return o.EphemeralKubernetesIntegration.Get(), o.EphemeralKubernetesIntegration.IsSet()
 }
 
-// HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
-func (o *Primary) HasEphemeralKubernetesIntegration() bool {
-	if o != nil && o.EphemeralKubernetesIntegration.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEphemeralKubernetesIntegration gets a reference to the given NullableString and assigns it to the EphemeralKubernetesIntegration field.
+// SetEphemeralKubernetesIntegration sets field value
 func (o *Primary) SetEphemeralKubernetesIntegration(v string) {
 	o.EphemeralKubernetesIntegration.Set(&v)
-}
-
-// SetEphemeralKubernetesIntegrationNil sets the value for EphemeralKubernetesIntegration to be an explicit nil
-func (o *Primary) SetEphemeralKubernetesIntegrationNil() {
-	o.EphemeralKubernetesIntegration.Set(nil)
-}
-
-// UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
-func (o *Primary) UnsetEphemeralKubernetesIntegration() {
-	o.EphemeralKubernetesIntegration.Unset()
 }
 
 func (o Primary) MarshalJSON() ([]byte, error) {
@@ -221,15 +249,16 @@ func (o Primary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+	if o.AutoDeployEphemeral.IsSet() {
+		toSerialize["autoDeployEphemeral"] = o.AutoDeployEphemeral.Get()
+	}
 	if o.CreateEphemeralOnPrCreate.IsSet() {
 		toSerialize["createEphemeralOnPrCreate"] = o.CreateEphemeralOnPrCreate.Get()
 	}
 	if o.DestroyEphemeralOnPrClose.IsSet() {
 		toSerialize["destroyEphemeralOnPrClose"] = o.DestroyEphemeralOnPrClose.Get()
 	}
-	if o.EphemeralKubernetesIntegration.IsSet() {
-		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
-	}
+	toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
 	return toSerialize, nil
 }
 

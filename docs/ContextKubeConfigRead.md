@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cluster** | **string** |  | 
-**Namespace** | **string** |  | 
+**Namespace** | Pointer to **string** |  | [optional] 
 **User** | **string** |  | 
 
 ## Methods
 
 ### NewContextKubeConfigRead
 
-`func NewContextKubeConfigRead(cluster string, namespace string, user string, ) *ContextKubeConfigRead`
+`func NewContextKubeConfigRead(cluster string, user string, ) *ContextKubeConfigRead`
 
 NewContextKubeConfigRead instantiates a new ContextKubeConfigRead object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +66,11 @@ and a boolean to check if the value has been set.
 
 SetNamespace sets Namespace field to given value.
 
+### HasNamespace
+
+`func (o *ContextKubeConfigRead) HasNamespace() bool`
+
+HasNamespace returns a boolean if a field has been set.
 
 ### GetUser
 

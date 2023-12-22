@@ -20,19 +20,18 @@ var _ MappedNullable = &ContextKubeConfigRead{}
 
 // ContextKubeConfigRead struct for ContextKubeConfigRead
 type ContextKubeConfigRead struct {
-	Cluster   string `json:"cluster"`
-	Namespace string `json:"namespace"`
-	User      string `json:"user"`
+	Cluster   string  `json:"cluster"`
+	Namespace *string `json:"namespace,omitempty"`
+	User      string  `json:"user"`
 }
 
 // NewContextKubeConfigRead instantiates a new ContextKubeConfigRead object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContextKubeConfigRead(cluster string, namespace string, user string) *ContextKubeConfigRead {
+func NewContextKubeConfigRead(cluster string, user string) *ContextKubeConfigRead {
 	this := ContextKubeConfigRead{}
 	this.Cluster = cluster
-	this.Namespace = namespace
 	this.User = user
 	return &this
 }
@@ -69,28 +68,36 @@ func (o *ContextKubeConfigRead) SetCluster(v string) {
 	o.Cluster = v
 }
 
-// GetNamespace returns the Namespace field value
+// GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *ContextKubeConfigRead) GetNamespace() string {
-	if o == nil {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
-
-	return o.Namespace
+	return *o.Namespace
 }
 
-// GetNamespaceOk returns a tuple with the Namespace field value
+// GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ContextKubeConfigRead) GetNamespaceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
-	return &o.Namespace, true
+	return o.Namespace, true
 }
 
-// SetNamespace sets field value
+// HasNamespace returns a boolean if a field has been set.
+func (o *ContextKubeConfigRead) HasNamespace() bool {
+	if o != nil && !IsNil(o.Namespace) {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespace gets a reference to the given string and assigns it to the Namespace field.
 func (o *ContextKubeConfigRead) SetNamespace(v string) {
-	o.Namespace = v
+	o.Namespace = &v
 }
 
 // GetUser returns the User field value
@@ -128,7 +135,9 @@ func (o ContextKubeConfigRead) MarshalJSON() ([]byte, error) {
 func (o ContextKubeConfigRead) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cluster"] = o.Cluster
-	toSerialize["namespace"] = o.Namespace
+	if !IsNil(o.Namespace) {
+		toSerialize["namespace"] = o.Namespace
+	}
 	toSerialize["user"] = o.User
 	return toSerialize, nil
 }

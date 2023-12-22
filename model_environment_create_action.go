@@ -28,6 +28,7 @@ type EnvironmentCreateAction struct {
 	AutoUpdate                     *bool                           `json:"autoUpdate,omitempty"`
 	CreateEphemeralOnPrCreate      *bool                           `json:"createEphemeralOnPrCreate,omitempty"`
 	DestroyEphemeralOnPrClose      *bool                           `json:"destroyEphemeralOnPrClose,omitempty"`
+	AutoDeployEphemeral            *bool                           `json:"autoDeployEphemeral,omitempty"`
 	KubernetesIntegration          NullableString                  `json:"kubernetesIntegration,omitempty"`
 	EphemeralKubernetesIntegration NullableString                  `json:"ephemeralKubernetesIntegration,omitempty"`
 	Labels                         *map[string]string              `json:"labels,omitempty"`
@@ -292,6 +293,38 @@ func (o *EnvironmentCreateAction) SetDestroyEphemeralOnPrClose(v bool) {
 	o.DestroyEphemeralOnPrClose = &v
 }
 
+// GetAutoDeployEphemeral returns the AutoDeployEphemeral field value if set, zero value otherwise.
+func (o *EnvironmentCreateAction) GetAutoDeployEphemeral() bool {
+	if o == nil || IsNil(o.AutoDeployEphemeral) {
+		var ret bool
+		return ret
+	}
+	return *o.AutoDeployEphemeral
+}
+
+// GetAutoDeployEphemeralOk returns a tuple with the AutoDeployEphemeral field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCreateAction) GetAutoDeployEphemeralOk() (*bool, bool) {
+	if o == nil || IsNil(o.AutoDeployEphemeral) {
+		return nil, false
+	}
+	return o.AutoDeployEphemeral, true
+}
+
+// HasAutoDeployEphemeral returns a boolean if a field has been set.
+func (o *EnvironmentCreateAction) HasAutoDeployEphemeral() bool {
+	if o != nil && !IsNil(o.AutoDeployEphemeral) {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoDeployEphemeral gets a reference to the given bool and assigns it to the AutoDeployEphemeral field.
+func (o *EnvironmentCreateAction) SetAutoDeployEphemeral(v bool) {
+	o.AutoDeployEphemeral = &v
+}
+
 // GetKubernetesIntegration returns the KubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentCreateAction) GetKubernetesIntegration() string {
 	if o == nil || IsNil(o.KubernetesIntegration.Get()) {
@@ -439,6 +472,9 @@ func (o EnvironmentCreateAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DestroyEphemeralOnPrClose) {
 		toSerialize["destroyEphemeralOnPrClose"] = o.DestroyEphemeralOnPrClose
+	}
+	if !IsNil(o.AutoDeployEphemeral) {
+		toSerialize["autoDeployEphemeral"] = o.AutoDeployEphemeral
 	}
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()

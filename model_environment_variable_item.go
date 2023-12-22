@@ -18,7 +18,7 @@ import (
 // checks if the EnvironmentVariableItem type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnvironmentVariableItem{}
 
-// EnvironmentVariableItem An environment variable used during bunnyshell workflows.
+// EnvironmentVariableItem An environment variable used during Bunnyshell workflows.
 type EnvironmentVariableItem struct {
 	// Environment variable identifier.
 	Id *string `json:"id,omitempty"`

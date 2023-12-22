@@ -20,17 +20,18 @@ var _ MappedNullable = &UserWrapperKubeConfigRead{}
 
 // UserWrapperKubeConfigRead struct for UserWrapperKubeConfigRead
 type UserWrapperKubeConfigRead struct {
-	Name string              `json:"name"`
-	User *UserKubeConfigRead `json:"user,omitempty"`
+	Name string             `json:"name"`
+	User UserKubeConfigRead `json:"user"`
 }
 
 // NewUserWrapperKubeConfigRead instantiates a new UserWrapperKubeConfigRead object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserWrapperKubeConfigRead(name string) *UserWrapperKubeConfigRead {
+func NewUserWrapperKubeConfigRead(name string, user UserKubeConfigRead) *UserWrapperKubeConfigRead {
 	this := UserWrapperKubeConfigRead{}
 	this.Name = name
+	this.User = user
 	return &this
 }
 
@@ -66,36 +67,28 @@ func (o *UserWrapperKubeConfigRead) SetName(v string) {
 	o.Name = v
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// GetUser returns the User field value
 func (o *UserWrapperKubeConfigRead) GetUser() UserKubeConfigRead {
-	if o == nil || IsNil(o.User) {
+	if o == nil {
 		var ret UserKubeConfigRead
 		return ret
 	}
-	return *o.User
+
+	return o.User
 }
 
-// GetUserOk returns a tuple with the User field value if set, nil otherwise
+// GetUserOk returns a tuple with the User field value
 // and a boolean to check if the value has been set.
 func (o *UserWrapperKubeConfigRead) GetUserOk() (*UserKubeConfigRead, bool) {
-	if o == nil || IsNil(o.User) {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return &o.User, true
 }
 
-// HasUser returns a boolean if a field has been set.
-func (o *UserWrapperKubeConfigRead) HasUser() bool {
-	if o != nil && !IsNil(o.User) {
-		return true
-	}
-
-	return false
-}
-
-// SetUser gets a reference to the given UserKubeConfigRead and assigns it to the User field.
+// SetUser sets field value
 func (o *UserWrapperKubeConfigRead) SetUser(v UserKubeConfigRead) {
-	o.User = &v
+	o.User = v
 }
 
 func (o UserWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
@@ -109,9 +102,7 @@ func (o UserWrapperKubeConfigRead) MarshalJSON() ([]byte, error) {
 func (o UserWrapperKubeConfigRead) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	if !IsNil(o.User) {
-		toSerialize["user"] = o.User
-	}
+	toSerialize["user"] = o.User
 	return toSerialize, nil
 }
 

@@ -12,11 +12,14 @@ api_kubernetes_integration.go
 api_organization.go
 api_pipeline.go
 api_project.go
+api_project_variable.go
+api_registry_integration.go
 api_template.go
 api_templates_repository.go
 api_workflow.go
 client.go
 configuration.go
+docs/BuildSettingsItem.md
 docs/ClusterKubeConfigRead.md
 docs/ClusterWrapperKubeConfigRead.md
 docs/ComponentAPI.md
@@ -47,6 +50,8 @@ docs/EmbeddedKubernetesIntegrationCollection.md
 docs/EmbeddedOrganizationCollection.md
 docs/EmbeddedPipelineCollection.md
 docs/EmbeddedProjectCollection.md
+docs/EmbeddedProjectVariableCollection.md
+docs/EmbeddedRegistryIntegrationCollection.md
 docs/EmbeddedTemplateCollection.md
 docs/EmbeddedTemplatesRepositoryCollection.md
 docs/EmbeddedWorkflowCollection.md
@@ -55,6 +60,7 @@ docs/EnvironmentCloneAction.md
 docs/EnvironmentCollection.md
 docs/EnvironmentCreateAction.md
 docs/EnvironmentCreateActionGenesis.md
+docs/EnvironmentEditBuildSettingsAction.md
 docs/EnvironmentEditComponentsAction.md
 docs/EnvironmentEditComponentsActionFilter.md
 docs/EnvironmentEditConfiguration.md
@@ -68,7 +74,8 @@ docs/EnvironmentPartialDeployAction.md
 docs/EnvironmentPartialStartAction.md
 docs/EnvironmentVariableAPI.md
 docs/EnvironmentVariableCollection.md
-docs/EnvironmentVariableEdit.md
+docs/EnvironmentVariableCreateAction.md
+docs/EnvironmentVariableEditAction.md
 docs/EnvironmentVariableItem.md
 docs/Ephemeral.md
 docs/EventAPI.md
@@ -100,6 +107,8 @@ docs/PaginatedLinks.md
 docs/PaginatedOrganizationCollection.md
 docs/PaginatedPipelineCollection.md
 docs/PaginatedProjectCollection.md
+docs/PaginatedProjectVariableCollection.md
+docs/PaginatedRegistryIntegrationCollection.md
 docs/PaginatedTemplateCollection.md
 docs/PaginatedTemplatesRepositoryCollection.md
 docs/PaginatedWorkflowCollection.md
@@ -112,7 +121,18 @@ docs/ProblemViolation.md
 docs/ProfileItem.md
 docs/ProjectAPI.md
 docs/ProjectCollection.md
+docs/ProjectCreateAction.md
+docs/ProjectEditBuildSettingsAction.md
+docs/ProjectEditSettingsAction.md
 docs/ProjectItem.md
+docs/ProjectVariableAPI.md
+docs/ProjectVariableCollection.md
+docs/ProjectVariableCreateAction.md
+docs/ProjectVariableEditAction.md
+docs/ProjectVariableItem.md
+docs/RegistryIntegrationAPI.md
+docs/RegistryIntegrationCollection.md
+docs/RegistryIntegrationItem.md
 docs/ResourceListItem.md
 docs/ResourceRequirementItem.md
 docs/SimpleResourceConfigItem.md
@@ -136,6 +156,7 @@ docs/WorkflowItem.md
 git_push.sh
 go.mod
 go.sum
+model_build_settings_item.go
 model_cluster_kube_config_read.go
 model_cluster_wrapper_kube_config_read.go
 model_component_collection.go
@@ -163,6 +184,8 @@ model_embedded_kubernetes_integration_collection.go
 model_embedded_organization_collection.go
 model_embedded_pipeline_collection.go
 model_embedded_project_collection.go
+model_embedded_project_variable_collection.go
+model_embedded_registry_integration_collection.go
 model_embedded_template_collection.go
 model_embedded_templates_repository_collection.go
 model_embedded_workflow_collection.go
@@ -170,6 +193,7 @@ model_environment_clone_action.go
 model_environment_collection.go
 model_environment_create_action.go
 model_environment_create_action_genesis.go
+model_environment_edit_build_settings_action.go
 model_environment_edit_components_action.go
 model_environment_edit_components_action_filter.go
 model_environment_edit_configuration.go
@@ -182,7 +206,8 @@ model_environment_partial_action.go
 model_environment_partial_deploy_action.go
 model_environment_partial_start_action.go
 model_environment_variable_collection.go
-model_environment_variable_edit.go
+model_environment_variable_create_action.go
+model_environment_variable_edit_action.go
 model_environment_variable_item.go
 model_ephemeral.go
 model_event_collection.go
@@ -211,6 +236,8 @@ model_paginated_links.go
 model_paginated_organization_collection.go
 model_paginated_pipeline_collection.go
 model_paginated_project_collection.go
+model_paginated_project_variable_collection.go
+model_paginated_registry_integration_collection.go
 model_paginated_template_collection.go
 model_paginated_templates_repository_collection.go
 model_paginated_workflow_collection.go
@@ -221,7 +248,16 @@ model_problem_generic.go
 model_problem_violation.go
 model_profile_item.go
 model_project_collection.go
+model_project_create_action.go
+model_project_edit_build_settings_action.go
+model_project_edit_settings_action.go
 model_project_item.go
+model_project_variable_collection.go
+model_project_variable_create_action.go
+model_project_variable_edit_action.go
+model_project_variable_item.go
+model_registry_integration_collection.go
+model_registry_integration_item.go
 model_resource_list_item.go
 model_resource_requirement_item.go
 model_simple_resource_config_item.go
@@ -240,4 +276,6 @@ model_validate_source_string.go
 model_workflow_collection.go
 model_workflow_item.go
 response.go
+test/api_project_variable_test.go
+test/api_registry_integration_test.go
 utils.go

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **AutoUpdate** | Pointer to **bool** |  | [optional] 
 **CreateEphemeralOnPrCreate** | Pointer to **bool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **bool** |  | [optional] 
+**AutoDeployEphemeral** | Pointer to **bool** |  | [optional] 
 **KubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
 **Labels** | Pointer to **map[string]string** |  | [optional] 
@@ -224,6 +225,31 @@ SetDestroyEphemeralOnPrClose sets DestroyEphemeralOnPrClose field to given value
 `func (o *EnvironmentCreateAction) HasDestroyEphemeralOnPrClose() bool`
 
 HasDestroyEphemeralOnPrClose returns a boolean if a field has been set.
+
+### GetAutoDeployEphemeral
+
+`func (o *EnvironmentCreateAction) GetAutoDeployEphemeral() bool`
+
+GetAutoDeployEphemeral returns the AutoDeployEphemeral field if non-nil, zero value otherwise.
+
+### GetAutoDeployEphemeralOk
+
+`func (o *EnvironmentCreateAction) GetAutoDeployEphemeralOk() (*bool, bool)`
+
+GetAutoDeployEphemeralOk returns a tuple with the AutoDeployEphemeral field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoDeployEphemeral
+
+`func (o *EnvironmentCreateAction) SetAutoDeployEphemeral(v bool)`
+
+SetAutoDeployEphemeral sets AutoDeployEphemeral field to given value.
+
+### HasAutoDeployEphemeral
+
+`func (o *EnvironmentCreateAction) HasAutoDeployEphemeral() bool`
+
+HasAutoDeployEphemeral returns a boolean if a field has been set.
 
 ### GetKubernetesIntegration
 
