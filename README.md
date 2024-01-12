@@ -127,6 +127,9 @@ Class | Method | HTTP request | Description
 *ProjectVariableAPI* | [**ProjectVariableView**](docs/ProjectVariableAPI.md#projectvariableview) | **Get** /v1/project_variables/{id} | View a specific project variable.
 *RegistryIntegrationAPI* | [**RegistryIntegrationList**](docs/RegistryIntegrationAPI.md#registryintegrationlist) | **Get** /v1/registry_integrations | List Registry integrations matching any selected filters.
 *RegistryIntegrationAPI* | [**RegistryIntegrationView**](docs/RegistryIntegrationAPI.md#registryintegrationview) | **Get** /v1/registry_integrations/{id} | View a specific Registry integration.
+*SecretAPI* | [**SecretDecrypt**](docs/SecretAPI.md#secretdecrypt) | **Post** /v1/secrets/decrypt | Decrypt a cipher text.
+*SecretAPI* | [**SecretEncrypt**](docs/SecretAPI.md#secretencrypt) | **Post** /v1/secrets/encrypt | Encrypt a plain text.
+*SecretAPI* | [**SecretTranscryptConfiguration**](docs/SecretAPI.md#secrettranscryptconfiguration) | **Post** /v1/secrets/transcrypt-configuration | Encrypt or decrypt secrets from an environment configuration.
 *TemplateAPI* | [**TemplateDefinition**](docs/TemplateAPI.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
 *TemplateAPI* | [**TemplateList**](docs/TemplateAPI.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
 *TemplateAPI* | [**TemplateValidate**](docs/TemplateAPI.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
@@ -243,6 +246,11 @@ Class | Method | HTTP request | Description
  - [RegistryIntegrationItem](docs/RegistryIntegrationItem.md)
  - [ResourceListItem](docs/ResourceListItem.md)
  - [ResourceRequirementItem](docs/ResourceRequirementItem.md)
+ - [SecretDecryptAction](docs/SecretDecryptAction.md)
+ - [SecretDecryptedItem](docs/SecretDecryptedItem.md)
+ - [SecretEncryptAction](docs/SecretEncryptAction.md)
+ - [SecretEncryptedItem](docs/SecretEncryptedItem.md)
+ - [SecretTranscryptConfigurationAction](docs/SecretTranscryptConfigurationAction.md)
  - [SimpleResourceConfigItem](docs/SimpleResourceConfigItem.md)
  - [StageItem](docs/StageItem.md)
  - [SyncPathItem](docs/SyncPathItem.md)
