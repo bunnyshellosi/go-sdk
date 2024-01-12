@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Stages** | Pointer to [**[]StageItem**](StageItem.md) | Stage identifier. | [optional] [readonly] 
 **Environment** | Pointer to **NullableString** | Environment identifier. | [optional] [readonly] 
 **Event** | Pointer to **string** | Event identifier. | [optional] [readonly] 
+**WebUrl** | Pointer to **string** | Pipeline web URL. | [optional] [readonly] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
 
 ## Methods
@@ -190,6 +191,31 @@ SetEvent sets Event field to given value.
 `func (o *PipelineItem) HasEvent() bool`
 
 HasEvent returns a boolean if a field has been set.
+
+### GetWebUrl
+
+`func (o *PipelineItem) GetWebUrl() string`
+
+GetWebUrl returns the WebUrl field if non-nil, zero value otherwise.
+
+### GetWebUrlOk
+
+`func (o *PipelineItem) GetWebUrlOk() (*string, bool)`
+
+GetWebUrlOk returns a tuple with the WebUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebUrl
+
+`func (o *PipelineItem) SetWebUrl(v string)`
+
+SetWebUrl sets WebUrl field to given value.
+
+### HasWebUrl
+
+`func (o *PipelineItem) HasWebUrl() bool`
+
+HasWebUrl returns a boolean if a field has been set.
 
 ### GetOrganization
 

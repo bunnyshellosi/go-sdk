@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | Pipeline status. | [optional] [readonly] 
 **Environment** | Pointer to **NullableString** | Environment identifier. | [optional] [readonly] 
 **Event** | Pointer to **string** | Event identifier. | [optional] [readonly] 
+**WebUrl** | Pointer to **string** | Pipeline web URL. | [optional] [readonly] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
 
 ## Methods
@@ -164,6 +165,31 @@ SetEvent sets Event field to given value.
 `func (o *PipelineCollection) HasEvent() bool`
 
 HasEvent returns a boolean if a field has been set.
+
+### GetWebUrl
+
+`func (o *PipelineCollection) GetWebUrl() string`
+
+GetWebUrl returns the WebUrl field if non-nil, zero value otherwise.
+
+### GetWebUrlOk
+
+`func (o *PipelineCollection) GetWebUrlOk() (*string, bool)`
+
+GetWebUrlOk returns a tuple with the WebUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebUrl
+
+`func (o *PipelineCollection) SetWebUrl(v string)`
+
+SetWebUrl sets WebUrl field to given value.
+
+### HasWebUrl
+
+`func (o *PipelineCollection) HasWebUrl() bool`
+
+HasWebUrl returns a boolean if a field has been set.
 
 ### GetOrganization
 

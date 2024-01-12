@@ -14,6 +14,7 @@ api_pipeline.go
 api_project.go
 api_project_variable.go
 api_registry_integration.go
+api_secret.go
 api_template.go
 api_templates_repository.go
 api_workflow.go
@@ -135,6 +136,12 @@ docs/RegistryIntegrationCollection.md
 docs/RegistryIntegrationItem.md
 docs/ResourceListItem.md
 docs/ResourceRequirementItem.md
+docs/SecretAPI.md
+docs/SecretDecryptAction.md
+docs/SecretDecryptedItem.md
+docs/SecretEncryptAction.md
+docs/SecretEncryptedItem.md
+docs/SecretTranscryptConfigurationAction.md
 docs/SimpleResourceConfigItem.md
 docs/StageItem.md
 docs/SyncPathItem.md
@@ -260,6 +267,11 @@ model_registry_integration_collection.go
 model_registry_integration_item.go
 model_resource_list_item.go
 model_resource_requirement_item.go
+model_secret_decrypt_action.go
+model_secret_decrypted_item.go
+model_secret_encrypt_action.go
+model_secret_encrypted_item.go
+model_secret_transcrypt_configuration_action.go
 model_simple_resource_config_item.go
 model_stage_item.go
 model_sync_path_item.go
@@ -276,6 +288,5 @@ model_validate_source_string.go
 model_workflow_collection.go
 model_workflow_item.go
 response.go
-test/api_project_variable_test.go
-test/api_registry_integration_test.go
+test/api_secret_test.go
 utils.go

@@ -30,6 +30,8 @@ type PipelineCollection struct {
 	Environment NullableString `json:"environment,omitempty"`
 	// Event identifier.
 	Event *string `json:"event,omitempty"`
+	// Pipeline web URL.
+	WebUrl *string `json:"webUrl,omitempty"`
 	// Organization identifier.
 	Organization *string `json:"organization,omitempty"`
 }
@@ -222,6 +224,38 @@ func (o *PipelineCollection) SetEvent(v string) {
 	o.Event = &v
 }
 
+// GetWebUrl returns the WebUrl field value if set, zero value otherwise.
+func (o *PipelineCollection) GetWebUrl() string {
+	if o == nil || IsNil(o.WebUrl) {
+		var ret string
+		return ret
+	}
+	return *o.WebUrl
+}
+
+// GetWebUrlOk returns a tuple with the WebUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PipelineCollection) GetWebUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.WebUrl) {
+		return nil, false
+	}
+	return o.WebUrl, true
+}
+
+// HasWebUrl returns a boolean if a field has been set.
+func (o *PipelineCollection) HasWebUrl() bool {
+	if o != nil && !IsNil(o.WebUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebUrl gets a reference to the given string and assigns it to the WebUrl field.
+func (o *PipelineCollection) SetWebUrl(v string) {
+	o.WebUrl = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *PipelineCollection) GetOrganization() string {
 	if o == nil || IsNil(o.Organization) {
@@ -278,6 +312,9 @@ func (o PipelineCollection) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Event) {
 		toSerialize["event"] = o.Event
+	}
+	if !IsNil(o.WebUrl) {
+		toSerialize["webUrl"] = o.WebUrl
 	}
 	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization

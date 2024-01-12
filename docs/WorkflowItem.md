@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Duration** | Pointer to **NullableInt32** | Workflow duration in seconds. | [optional] [readonly] 
 **JobsCount** | Pointer to **int32** | Number of jobs. | [optional] [readonly] 
 **CompletedJobsCount** | Pointer to **int32** | Number of completed jobs. | [optional] [readonly] 
+**WebUrl** | Pointer to **string** | Workflow web URL. | [optional] [readonly] 
 
 ## Methods
 
@@ -277,6 +278,31 @@ SetCompletedJobsCount sets CompletedJobsCount field to given value.
 `func (o *WorkflowItem) HasCompletedJobsCount() bool`
 
 HasCompletedJobsCount returns a boolean if a field has been set.
+
+### GetWebUrl
+
+`func (o *WorkflowItem) GetWebUrl() string`
+
+GetWebUrl returns the WebUrl field if non-nil, zero value otherwise.
+
+### GetWebUrlOk
+
+`func (o *WorkflowItem) GetWebUrlOk() (*string, bool)`
+
+GetWebUrlOk returns a tuple with the WebUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebUrl
+
+`func (o *WorkflowItem) SetWebUrl(v string)`
+
+SetWebUrl sets WebUrl field to given value.
+
+### HasWebUrl
+
+`func (o *WorkflowItem) HasWebUrl() bool`
+
+HasWebUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

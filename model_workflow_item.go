@@ -38,6 +38,8 @@ type WorkflowItem struct {
 	JobsCount *int32 `json:"jobsCount,omitempty"`
 	// Number of completed jobs.
 	CompletedJobsCount *int32 `json:"completedJobsCount,omitempty"`
+	// Workflow web URL.
+	WebUrl *string `json:"webUrl,omitempty"`
 }
 
 // NewWorkflowItem instantiates a new WorkflowItem object
@@ -367,6 +369,38 @@ func (o *WorkflowItem) SetCompletedJobsCount(v int32) {
 	o.CompletedJobsCount = &v
 }
 
+// GetWebUrl returns the WebUrl field value if set, zero value otherwise.
+func (o *WorkflowItem) GetWebUrl() string {
+	if o == nil || IsNil(o.WebUrl) {
+		var ret string
+		return ret
+	}
+	return *o.WebUrl
+}
+
+// GetWebUrlOk returns a tuple with the WebUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowItem) GetWebUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.WebUrl) {
+		return nil, false
+	}
+	return o.WebUrl, true
+}
+
+// HasWebUrl returns a boolean if a field has been set.
+func (o *WorkflowItem) HasWebUrl() bool {
+	if o != nil && !IsNil(o.WebUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebUrl gets a reference to the given string and assigns it to the WebUrl field.
+func (o *WorkflowItem) SetWebUrl(v string) {
+	o.WebUrl = &v
+}
+
 func (o WorkflowItem) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -403,6 +437,9 @@ func (o WorkflowItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CompletedJobsCount) {
 		toSerialize["completedJobsCount"] = o.CompletedJobsCount
+	}
+	if !IsNil(o.WebUrl) {
+		toSerialize["webUrl"] = o.WebUrl
 	}
 	return toSerialize, nil
 }

@@ -39,6 +39,8 @@ tags:
   name: project
 - description: Registry_integration Resource
   name: registry_integration
+- description: Secret Resource
+  name: secret
 - description: Template Resource
   name: template
 - description: Templates_repository Resource
@@ -2492,6 +2494,105 @@ paths:
       summary: View a specific Registry integration.
       tags:
       - registry_integration
+  /v1/secrets/decrypt:
+    post:
+      deprecated: false
+      description: Decrypt a cipher text.
+      operationId: SecretDecrypt
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/secret.DecryptAction'
+        description: The new secret resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/secret.Decrypted-item'
+          description: secret resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Decrypt a cipher text.
+      tags:
+      - secret
+  /v1/secrets/encrypt:
+    post:
+      deprecated: false
+      description: Encrypt a plain text.
+      operationId: SecretEncrypt
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/secret.EncryptAction'
+        description: The new secret resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/secret.Encrypted-item'
+          description: secret resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Encrypt a plain text.
+      tags:
+      - secret
+  /v1/secrets/transcrypt-configuration:
+    post:
+      deprecated: false
+      description: Encrypt or decrypt secrets from an environment configuration.
+      operationId: SecretTranscrypt-configuration
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/secret.TranscryptConfigurationAction'
+        description: The new secret resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/x+yaml:
+              schema:
+                $ref: '#/components/schemas/secret.GenericObject'
+          description: secret resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Encrypt or decrypt secrets from an environment configuration.
+      tags:
+      - secret
   /v1/templates:
     get:
       deprecated: false
@@ -4431,6 +4532,10 @@ components:
           description: Event identifier.
           readOnly: true
           type: string
+        webUrl:
+          description: Pipeline web URL.
+          readOnly: true
+          type: string
         organization:
           description: Organization identifier.
           readOnly: true
@@ -4465,6 +4570,10 @@ components:
           type: string
         event:
           description: Event identifier.
+          readOnly: true
+          type: string
+        webUrl:
+          description: Pipeline web URL.
           readOnly: true
           type: string
         organization:
@@ -4738,6 +4847,69 @@ components:
           readOnly: true
           type: string
       type: object
+    secret.DecryptAction:
+      description: A secret is used to encrypt plain texts and decrypt cipher texts.
+      properties:
+        expression:
+          type: string
+        organization:
+          type: string
+      required:
+      - expression
+      - organization
+      type: object
+    secret.Decrypted-item:
+      description: A secret is used to encrypt plain texts and decrypt cipher texts.
+      properties:
+        plainText:
+          description: Plain text.
+          type: string
+        organization:
+          description: Organization identifier.
+          type: string
+      type: object
+    secret.EncryptAction:
+      description: A secret is used to encrypt plain texts and decrypt cipher texts.
+      properties:
+        plainText:
+          type: string
+        organization:
+          type: string
+      required:
+      - organization
+      - plainText
+      type: object
+    secret.Encrypted-item:
+      description: A secret is used to encrypt plain texts and decrypt cipher texts.
+      properties:
+        expression:
+          description: Encrypted expression.
+          type: string
+        organization:
+          description: Organization identifier.
+          type: string
+      type: object
+    secret.GenericObject:
+      description: A secret is used to encrypt plain texts and decrypt cipher texts.
+      type: object
+    secret.TranscryptConfigurationAction:
+      description: A secret is used to encrypt plain texts and decrypt cipher texts.
+      properties:
+        yaml:
+          type: string
+        mode:
+          enum:
+          - obfuscated
+          - exposed
+          - resolved
+          type: string
+        organization:
+          type: string
+      required:
+      - mode
+      - organization
+      - yaml
+      type: object
     template-collection:
       description: A template holds information for generating an environment.
       properties:
@@ -4930,6 +5102,10 @@ components:
           description: Number of completed jobs.
           readOnly: true
           type: integer
+        webUrl:
+          description: Workflow web URL.
+          readOnly: true
+          type: string
       type: object
     workflow-item:
       description: A workflow.
@@ -4972,6 +5148,10 @@ components:
           description: Number of completed jobs.
           readOnly: true
           type: integer
+        webUrl:
+          description: Workflow web URL.
+          readOnly: true
+          type: string
       type: object
     ContainerConfig_item_profile:
       description: A profile config or a profile name for local usage with rdev.yaml
