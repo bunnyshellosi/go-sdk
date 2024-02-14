@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## ComponentList
 
-> PaginatedComponentCollection ComponentList(ctx).Page(page).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
+> PaginatedComponentCollection ComponentList(ctx).Page(page).Name(name).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
 
 List service components matching any selected filters
 
@@ -34,6 +34,7 @@ import (
 
 func main() {
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
+    name := "name_example" // string | Filter by name (optional)
     environment := "environment_example" // string | Filter by environment (optional)
     operationStatus := "draft" // string | Filter by operationStatus (optional)
     clusterStatus := "not_available" // string | Filter by clusterStatus (optional)
@@ -42,7 +43,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentAPI.ComponentList(context.Background()).Page(page).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
+    resp, r, err := apiClient.ComponentAPI.ComponentList(context.Background()).Page(page).Name(name).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentAPI.ComponentList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Other parameters are passed through a pointer to a apiComponentListRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** | The collection page number | [default to 1]
+ **name** | **string** | Filter by name | 
  **environment** | **string** | Filter by environment | 
  **operationStatus** | **string** | Filter by operationStatus | 
  **clusterStatus** | **string** | Filter by clusterStatus | 

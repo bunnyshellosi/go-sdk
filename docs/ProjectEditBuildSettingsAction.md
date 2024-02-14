@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **KubernetesIntegration** | **NullableString** |  | 
 **Cpu** | **NullableString** | K8s supports decimal values with step 0.001 That&#39;s why we are using decimal. | 
 **Memory** | **NullableInt32** | expressed in Mi | 
+**TimeoutSeconds** | **NullableInt32** |  | 
 
 ## Methods
 
 ### NewProjectEditBuildSettingsAction
 
-`func NewProjectEditBuildSettingsAction(registryIntegration NullableString, kubernetesIntegration NullableString, cpu NullableString, memory NullableInt32, ) *ProjectEditBuildSettingsAction`
+`func NewProjectEditBuildSettingsAction(registryIntegration NullableString, kubernetesIntegration NullableString, cpu NullableString, memory NullableInt32, timeoutSeconds NullableInt32, ) *ProjectEditBuildSettingsAction`
 
 NewProjectEditBuildSettingsAction instantiates a new ProjectEditBuildSettingsAction object
 This constructor will assign default values to properties that have it defined,
@@ -220,6 +221,36 @@ SetMemory sets Memory field to given value.
 `func (o *ProjectEditBuildSettingsAction) UnsetMemory()`
 
 UnsetMemory ensures that no value is present for Memory, not even an explicit nil
+### GetTimeoutSeconds
+
+`func (o *ProjectEditBuildSettingsAction) GetTimeoutSeconds() int32`
+
+GetTimeoutSeconds returns the TimeoutSeconds field if non-nil, zero value otherwise.
+
+### GetTimeoutSecondsOk
+
+`func (o *ProjectEditBuildSettingsAction) GetTimeoutSecondsOk() (*int32, bool)`
+
+GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeoutSeconds
+
+`func (o *ProjectEditBuildSettingsAction) SetTimeoutSeconds(v int32)`
+
+SetTimeoutSeconds sets TimeoutSeconds field to given value.
+
+
+### SetTimeoutSecondsNil
+
+`func (o *ProjectEditBuildSettingsAction) SetTimeoutSecondsNil(b bool)`
+
+ SetTimeoutSecondsNil sets the value for TimeoutSeconds to be an explicit nil
+
+### UnsetTimeoutSeconds
+`func (o *ProjectEditBuildSettingsAction) UnsetTimeoutSeconds()`
+
+UnsetTimeoutSeconds ensures that no value is present for TimeoutSeconds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

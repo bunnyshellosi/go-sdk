@@ -27,19 +27,21 @@ type EnvironmentEditBuildSettingsAction struct {
 	// K8s supports decimal values with step 0.001 That's why we are using decimal.
 	Cpu NullableString `json:"cpu"`
 	// expressed in Mi
-	Memory NullableInt32 `json:"memory"`
+	Memory         NullableInt32 `json:"memory"`
+	TimeoutSeconds NullableInt32 `json:"timeoutSeconds"`
 }
 
 // NewEnvironmentEditBuildSettingsAction instantiates a new EnvironmentEditBuildSettingsAction object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentEditBuildSettingsAction(registryIntegration NullableString, kubernetesIntegration NullableString, cpu NullableString, memory NullableInt32) *EnvironmentEditBuildSettingsAction {
+func NewEnvironmentEditBuildSettingsAction(registryIntegration NullableString, kubernetesIntegration NullableString, cpu NullableString, memory NullableInt32, timeoutSeconds NullableInt32) *EnvironmentEditBuildSettingsAction {
 	this := EnvironmentEditBuildSettingsAction{}
 	this.RegistryIntegration = registryIntegration
 	this.KubernetesIntegration = kubernetesIntegration
 	this.Cpu = cpu
 	this.Memory = memory
+	this.TimeoutSeconds = timeoutSeconds
 	return &this
 }
 
@@ -241,6 +243,32 @@ func (o *EnvironmentEditBuildSettingsAction) SetMemory(v int32) {
 	o.Memory.Set(&v)
 }
 
+// GetTimeoutSeconds returns the TimeoutSeconds field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *EnvironmentEditBuildSettingsAction) GetTimeoutSeconds() int32 {
+	if o == nil || o.TimeoutSeconds.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.TimeoutSeconds.Get()
+}
+
+// GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentEditBuildSettingsAction) GetTimeoutSecondsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TimeoutSeconds.Get(), o.TimeoutSeconds.IsSet()
+}
+
+// SetTimeoutSeconds sets field value
+func (o *EnvironmentEditBuildSettingsAction) SetTimeoutSeconds(v int32) {
+	o.TimeoutSeconds.Set(&v)
+}
+
 func (o EnvironmentEditBuildSettingsAction) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -261,6 +289,7 @@ func (o EnvironmentEditBuildSettingsAction) ToMap() (map[string]interface{}, err
 	toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
 	toSerialize["cpu"] = o.Cpu.Get()
 	toSerialize["memory"] = o.Memory.Get()
+	toSerialize["timeoutSeconds"] = o.TimeoutSeconds.Get()
 	return toSerialize, nil
 }
 

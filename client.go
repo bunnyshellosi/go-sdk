@@ -79,6 +79,8 @@ type APIClient struct {
 
 	SecretAPI *SecretAPIService
 
+	ServiceComponentVariableAPI *ServiceComponentVariableAPIService
+
 	TemplateAPI *TemplateAPIService
 
 	TemplatesRepositoryAPI *TemplatesRepositoryAPIService
@@ -115,6 +117,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ProjectVariableAPI = (*ProjectVariableAPIService)(&c.common)
 	c.RegistryIntegrationAPI = (*RegistryIntegrationAPIService)(&c.common)
 	c.SecretAPI = (*SecretAPIService)(&c.common)
+	c.ServiceComponentVariableAPI = (*ServiceComponentVariableAPIService)(&c.common)
 	c.TemplateAPI = (*TemplateAPIService)(&c.common)
 	c.TemplatesRepositoryAPI = (*TemplatesRepositoryAPIService)(&c.common)
 	c.WorkflowAPI = (*WorkflowAPIService)(&c.common)

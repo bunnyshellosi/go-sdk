@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **KubernetesIntegration** | **NullableString** |  | 
 **Cpu** | **NullableString** | K8s supports decimal values with step 0.001 That&#39;s why we are using decimal. | 
 **Memory** | **NullableInt32** | expressed in Mi | 
+**TimeoutSeconds** | **NullableInt32** |  | 
 
 ## Methods
 
 ### NewEnvironmentEditBuildSettingsAction
 
-`func NewEnvironmentEditBuildSettingsAction(registryIntegration NullableString, kubernetesIntegration NullableString, cpu NullableString, memory NullableInt32, ) *EnvironmentEditBuildSettingsAction`
+`func NewEnvironmentEditBuildSettingsAction(registryIntegration NullableString, kubernetesIntegration NullableString, cpu NullableString, memory NullableInt32, timeoutSeconds NullableInt32, ) *EnvironmentEditBuildSettingsAction`
 
 NewEnvironmentEditBuildSettingsAction instantiates a new EnvironmentEditBuildSettingsAction object
 This constructor will assign default values to properties that have it defined,
@@ -220,6 +221,36 @@ SetMemory sets Memory field to given value.
 `func (o *EnvironmentEditBuildSettingsAction) UnsetMemory()`
 
 UnsetMemory ensures that no value is present for Memory, not even an explicit nil
+### GetTimeoutSeconds
+
+`func (o *EnvironmentEditBuildSettingsAction) GetTimeoutSeconds() int32`
+
+GetTimeoutSeconds returns the TimeoutSeconds field if non-nil, zero value otherwise.
+
+### GetTimeoutSecondsOk
+
+`func (o *EnvironmentEditBuildSettingsAction) GetTimeoutSecondsOk() (*int32, bool)`
+
+GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeoutSeconds
+
+`func (o *EnvironmentEditBuildSettingsAction) SetTimeoutSeconds(v int32)`
+
+SetTimeoutSeconds sets TimeoutSeconds field to given value.
+
+
+### SetTimeoutSecondsNil
+
+`func (o *EnvironmentEditBuildSettingsAction) SetTimeoutSecondsNil(b bool)`
+
+ SetTimeoutSecondsNil sets the value for TimeoutSeconds to be an explicit nil
+
+### UnsetTimeoutSeconds
+`func (o *EnvironmentEditBuildSettingsAction) UnsetTimeoutSeconds()`
+
+UnsetTimeoutSeconds ensures that no value is present for TimeoutSeconds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -171,7 +171,7 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    projectEditBuildSettingsAction := *openapiclient.NewProjectEditBuildSettingsAction("RegistryIntegration_example", "KubernetesIntegration_example", "Cpu_example", NullableInt32(123)) // ProjectEditBuildSettingsAction | The updated project resource
+    projectEditBuildSettingsAction := *openapiclient.NewProjectEditBuildSettingsAction("RegistryIntegration_example", "KubernetesIntegration_example", "Cpu_example", NullableInt32(123), NullableInt32(123)) // ProjectEditBuildSettingsAction | The updated project resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

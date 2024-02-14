@@ -41,6 +41,8 @@ tags:
   name: registry_integration
 - description: Secret Resource
   name: secret
+- description: Service_component_variable Resource
+  name: service_component_variable
 - description: Template Resource
   name: template
 - description: Templates_repository Resource
@@ -65,6 +67,17 @@ paths:
         schema:
           default: 1
           type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by name
+        explode: false
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
         style: form
       - allowEmptyValue: false
         allowReserved: false
@@ -2593,6 +2606,251 @@ paths:
       summary: Encrypt or decrypt secrets from an environment configuration.
       tags:
       - secret
+  /v1/service_component_variables:
+    get:
+      deprecated: false
+      description: List component variables matching any selected filters.
+      operationId: Service_component_variableList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by name
+        explode: false
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by serviceComponent
+        explode: false
+        in: query
+        name: serviceComponent
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by serviceComponentName
+        explode: false
+        in: query
+        name: serviceComponentName
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by project
+        explode: false
+        in: query
+        name: project
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-service_component_variable-collection'
+          description: service_component_variable collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List component variables matching any selected filters.
+      tags:
+      - service_component_variable
+    post:
+      deprecated: false
+      description: Create a specific component variable.
+      operationId: Service_component_variableCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/service_component_variable.CreateAction'
+        description: The new service_component_variable resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/service_component_variable-item'
+          description: service_component_variable resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Create a specific component variable.
+      tags:
+      - service_component_variable
+  /v1/service_component_variables/{id}:
+    delete:
+      deprecated: false
+      description: Delete a specific component variable.
+      operationId: Service_component_variableDelete
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "204":
+          description: service_component_variable resource deleted
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Delete a specific component variable.
+      tags:
+      - service_component_variable
+    get:
+      deprecated: false
+      description: View a specific component variable.
+      operationId: Service_component_variableView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/service_component_variable-item'
+          description: service_component_variable resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific component variable.
+      tags:
+      - service_component_variable
+    patch:
+      deprecated: false
+      description: Edit a specific component variable.
+      operationId: Service_component_variableEdit
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/service_component_variable.EditAction'
+        description: The updated service_component_variable resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/service_component_variable-item'
+          description: service_component_variable resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit a specific component variable.
+      tags:
+      - service_component_variable
   /v1/templates:
     get:
       deprecated: false
@@ -3839,11 +4097,15 @@ components:
           description: expressed in Mi
           nullable: true
           type: integer
+        timeoutSeconds:
+          nullable: true
+          type: integer
       required:
       - cpu
       - kubernetesIntegration
       - memory
       - registryIntegration
+      - timeoutSeconds
       type: object
     environment.EditComponentsAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -4425,6 +4687,23 @@ components:
         _embedded:
           $ref: '#/components/schemas/embedded_registry_integration_collection'
       type: object
+    paginated-service_component_variable-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_service_component_variable_collection'
+      type: object
     paginated-template-collection:
       description: Paginated result
       properties:
@@ -4690,11 +4969,15 @@ components:
           description: expressed in Mi
           nullable: true
           type: integer
+        timeoutSeconds:
+          nullable: true
+          type: integer
       required:
       - cpu
       - kubernetesIntegration
       - memory
       - registryIntegration
+      - timeoutSeconds
       type: object
     project.EditSettingsAction:
       description: A project holds multiple environments and shared secrets and settings.
@@ -4772,7 +5055,6 @@ components:
         name:
           type: string
         value:
-          maxLength: 255
           type: string
         isSecret:
           nullable: true
@@ -4788,7 +5070,6 @@ components:
       description: A project variable used during Bunnyshell workflows.
       properties:
         value:
-          maxLength: 255
           nullable: true
           type: string
         isSecret:
@@ -4909,6 +5190,109 @@ components:
       - mode
       - organization
       - yaml
+      type: object
+    service_component_variable-collection:
+      description: A component variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Component variable identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Component variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Component variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Component variable marked as secret.
+          readOnly: true
+          type: boolean
+        serviceComponent:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        project:
+          description: Project identifier.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    service_component_variable-item:
+      description: A component variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Component variable identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Component variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Component variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Component variable marked as secret.
+          readOnly: true
+          type: boolean
+        serviceComponent:
+          description: Service component identifier
+          readOnly: true
+          type: string
+        project:
+          description: Project identifier.
+          readOnly: true
+          type: string
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    service_component_variable.CreateAction:
+      description: A component variable used during Bunnyshell workflows.
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        isSecret:
+          nullable: true
+          type: boolean
+        serviceComponent:
+          type: string
+      required:
+      - name
+      - serviceComponent
+      - value
+      type: object
+    service_component_variable.EditAction:
+      description: A component variable used during Bunnyshell workflows.
+      properties:
+        value:
+          nullable: true
+          type: string
+        isSecret:
+          nullable: true
+          type: boolean
+      required:
+      - value
       type: object
     template-collection:
       description: A template holds information for generating an environment.
@@ -5289,6 +5673,14 @@ components:
             $ref: '#/components/schemas/registry_integration-collection'
           type: array
       title: embedded-registry_integration-collection
+      type: object
+    embedded_service_component_variable_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/service_component_variable-collection'
+          type: array
+      title: embedded-service_component_variable-collection
       type: object
     embedded_template_collection:
       properties:
