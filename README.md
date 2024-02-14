@@ -130,6 +130,11 @@ Class | Method | HTTP request | Description
 *SecretAPI* | [**SecretDecrypt**](docs/SecretAPI.md#secretdecrypt) | **Post** /v1/secrets/decrypt | Decrypt a cipher text.
 *SecretAPI* | [**SecretEncrypt**](docs/SecretAPI.md#secretencrypt) | **Post** /v1/secrets/encrypt | Encrypt a plain text.
 *SecretAPI* | [**SecretTranscryptConfiguration**](docs/SecretAPI.md#secrettranscryptconfiguration) | **Post** /v1/secrets/transcrypt-configuration | Encrypt or decrypt secrets from an environment configuration.
+*ServiceComponentVariableAPI* | [**ServiceComponentVariableCreate**](docs/ServiceComponentVariableAPI.md#servicecomponentvariablecreate) | **Post** /v1/service_component_variables | Create a specific component variable.
+*ServiceComponentVariableAPI* | [**ServiceComponentVariableDelete**](docs/ServiceComponentVariableAPI.md#servicecomponentvariabledelete) | **Delete** /v1/service_component_variables/{id} | Delete a specific component variable.
+*ServiceComponentVariableAPI* | [**ServiceComponentVariableEdit**](docs/ServiceComponentVariableAPI.md#servicecomponentvariableedit) | **Patch** /v1/service_component_variables/{id} | Edit a specific component variable.
+*ServiceComponentVariableAPI* | [**ServiceComponentVariableList**](docs/ServiceComponentVariableAPI.md#servicecomponentvariablelist) | **Get** /v1/service_component_variables | List component variables matching any selected filters.
+*ServiceComponentVariableAPI* | [**ServiceComponentVariableView**](docs/ServiceComponentVariableAPI.md#servicecomponentvariableview) | **Get** /v1/service_component_variables/{id} | View a specific component variable.
 *TemplateAPI* | [**TemplateDefinition**](docs/TemplateAPI.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
 *TemplateAPI* | [**TemplateList**](docs/TemplateAPI.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
 *TemplateAPI* | [**TemplateValidate**](docs/TemplateAPI.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
@@ -172,6 +177,7 @@ Class | Method | HTTP request | Description
  - [EmbeddedProjectCollection](docs/EmbeddedProjectCollection.md)
  - [EmbeddedProjectVariableCollection](docs/EmbeddedProjectVariableCollection.md)
  - [EmbeddedRegistryIntegrationCollection](docs/EmbeddedRegistryIntegrationCollection.md)
+ - [EmbeddedServiceComponentVariableCollection](docs/EmbeddedServiceComponentVariableCollection.md)
  - [EmbeddedTemplateCollection](docs/EmbeddedTemplateCollection.md)
  - [EmbeddedTemplatesRepositoryCollection](docs/EmbeddedTemplatesRepositoryCollection.md)
  - [EmbeddedWorkflowCollection](docs/EmbeddedWorkflowCollection.md)
@@ -224,6 +230,7 @@ Class | Method | HTTP request | Description
  - [PaginatedProjectCollection](docs/PaginatedProjectCollection.md)
  - [PaginatedProjectVariableCollection](docs/PaginatedProjectVariableCollection.md)
  - [PaginatedRegistryIntegrationCollection](docs/PaginatedRegistryIntegrationCollection.md)
+ - [PaginatedServiceComponentVariableCollection](docs/PaginatedServiceComponentVariableCollection.md)
  - [PaginatedTemplateCollection](docs/PaginatedTemplateCollection.md)
  - [PaginatedTemplatesRepositoryCollection](docs/PaginatedTemplatesRepositoryCollection.md)
  - [PaginatedWorkflowCollection](docs/PaginatedWorkflowCollection.md)
@@ -251,6 +258,10 @@ Class | Method | HTTP request | Description
  - [SecretEncryptAction](docs/SecretEncryptAction.md)
  - [SecretEncryptedItem](docs/SecretEncryptedItem.md)
  - [SecretTranscryptConfigurationAction](docs/SecretTranscryptConfigurationAction.md)
+ - [ServiceComponentVariableCollection](docs/ServiceComponentVariableCollection.md)
+ - [ServiceComponentVariableCreateAction](docs/ServiceComponentVariableCreateAction.md)
+ - [ServiceComponentVariableEditAction](docs/ServiceComponentVariableEditAction.md)
+ - [ServiceComponentVariableItem](docs/ServiceComponentVariableItem.md)
  - [SimpleResourceConfigItem](docs/SimpleResourceConfigItem.md)
  - [StageItem](docs/StageItem.md)
  - [SyncPathItem](docs/SyncPathItem.md)
