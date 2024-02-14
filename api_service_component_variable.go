@@ -20,77 +20,35 @@ import (
 	"strings"
 )
 
-// ComponentAPIService ComponentAPI service
-type ComponentAPIService service
+// ServiceComponentVariableAPIService ServiceComponentVariableAPI service
+type ServiceComponentVariableAPIService service
 
-type ApiComponentListRequest struct {
-	ctx             context.Context
-	ApiService      *ComponentAPIService
-	page            *int32
-	name            *string
-	environment     *string
-	operationStatus *string
-	clusterStatus   *string
-	organization    *string
-	project         *string
+type ApiServiceComponentVariableCreateRequest struct {
+	ctx                                  context.Context
+	ApiService                           *ServiceComponentVariableAPIService
+	serviceComponentVariableCreateAction *ServiceComponentVariableCreateAction
 }
 
-// The collection page number
-func (r ApiComponentListRequest) Page(page int32) ApiComponentListRequest {
-	r.page = &page
+// The new service_component_variable resource
+func (r ApiServiceComponentVariableCreateRequest) ServiceComponentVariableCreateAction(serviceComponentVariableCreateAction ServiceComponentVariableCreateAction) ApiServiceComponentVariableCreateRequest {
+	r.serviceComponentVariableCreateAction = &serviceComponentVariableCreateAction
 	return r
 }
 
-// Filter by name
-func (r ApiComponentListRequest) Name(name string) ApiComponentListRequest {
-	r.name = &name
-	return r
-}
-
-// Filter by environment
-func (r ApiComponentListRequest) Environment(environment string) ApiComponentListRequest {
-	r.environment = &environment
-	return r
-}
-
-// Filter by operationStatus
-func (r ApiComponentListRequest) OperationStatus(operationStatus string) ApiComponentListRequest {
-	r.operationStatus = &operationStatus
-	return r
-}
-
-// Filter by clusterStatus
-func (r ApiComponentListRequest) ClusterStatus(clusterStatus string) ApiComponentListRequest {
-	r.clusterStatus = &clusterStatus
-	return r
-}
-
-// Filter by organization
-func (r ApiComponentListRequest) Organization(organization string) ApiComponentListRequest {
-	r.organization = &organization
-	return r
-}
-
-// Filter by project
-func (r ApiComponentListRequest) Project(project string) ApiComponentListRequest {
-	r.project = &project
-	return r
-}
-
-func (r ApiComponentListRequest) Execute() (*PaginatedComponentCollection, *http.Response, error) {
-	return r.ApiService.ComponentListExecute(r)
+func (r ApiServiceComponentVariableCreateRequest) Execute() (*ServiceComponentVariableItem, *http.Response, error) {
+	return r.ApiService.ServiceComponentVariableCreateExecute(r)
 }
 
 /*
-ComponentList List service components matching any selected filters
+ServiceComponentVariableCreate Create a specific component variable.
 
-List service components matching any selected filters
+Create a specific component variable.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiComponentListRequest
+	@return ApiServiceComponentVariableCreateRequest
 */
-func (a *ComponentAPIService) ComponentList(ctx context.Context) ApiComponentListRequest {
-	return ApiComponentListRequest{
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableCreate(ctx context.Context) ApiServiceComponentVariableCreateRequest {
+	return ApiServiceComponentVariableCreateRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -98,21 +56,506 @@ func (a *ComponentAPIService) ComponentList(ctx context.Context) ApiComponentLis
 
 // Execute executes the request
 //
-//	@return PaginatedComponentCollection
-func (a *ComponentAPIService) ComponentListExecute(r ApiComponentListRequest) (*PaginatedComponentCollection, *http.Response, error) {
+//	@return ServiceComponentVariableItem
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableCreateExecute(r ApiServiceComponentVariableCreateRequest) (*ServiceComponentVariableItem, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
+		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PaginatedComponentCollection
+		localVarReturnValue *ServiceComponentVariableItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceComponentVariableAPIService.ServiceComponentVariableCreate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/components"
+	localVarPath := localBasePath + "/v1/service_component_variables"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.serviceComponentVariableCreateAction == nil {
+		return localVarReturnValue, nil, reportError("serviceComponentVariableCreateAction is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.serviceComponentVariableCreateAction
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["JWT"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v ProblemGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiServiceComponentVariableDeleteRequest struct {
+	ctx        context.Context
+	ApiService *ServiceComponentVariableAPIService
+	id         string
+	body       *interface{}
+}
+
+// No Request Body
+func (r ApiServiceComponentVariableDeleteRequest) Body(body interface{}) ApiServiceComponentVariableDeleteRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiServiceComponentVariableDeleteRequest) Execute() (*http.Response, error) {
+	return r.ApiService.ServiceComponentVariableDeleteExecute(r)
+}
+
+/*
+ServiceComponentVariableDelete Delete a specific component variable.
+
+Delete a specific component variable.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Resource identifier
+	@return ApiServiceComponentVariableDeleteRequest
+*/
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableDelete(ctx context.Context, id string) ApiServiceComponentVariableDeleteRequest {
+	return ApiServiceComponentVariableDeleteRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableDeleteExecute(r ApiServiceComponentVariableDeleteRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceComponentVariableAPIService.ServiceComponentVariableDelete")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/service_component_variables/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/problem+json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["JWT"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v ProblemGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiServiceComponentVariableEditRequest struct {
+	ctx                                context.Context
+	ApiService                         *ServiceComponentVariableAPIService
+	id                                 string
+	serviceComponentVariableEditAction *ServiceComponentVariableEditAction
+}
+
+// The updated service_component_variable resource
+func (r ApiServiceComponentVariableEditRequest) ServiceComponentVariableEditAction(serviceComponentVariableEditAction ServiceComponentVariableEditAction) ApiServiceComponentVariableEditRequest {
+	r.serviceComponentVariableEditAction = &serviceComponentVariableEditAction
+	return r
+}
+
+func (r ApiServiceComponentVariableEditRequest) Execute() (*ServiceComponentVariableItem, *http.Response, error) {
+	return r.ApiService.ServiceComponentVariableEditExecute(r)
+}
+
+/*
+ServiceComponentVariableEdit Edit a specific component variable.
+
+Edit a specific component variable.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Resource identifier
+	@return ApiServiceComponentVariableEditRequest
+*/
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableEdit(ctx context.Context, id string) ApiServiceComponentVariableEditRequest {
+	return ApiServiceComponentVariableEditRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ServiceComponentVariableItem
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableEditExecute(r ApiServiceComponentVariableEditRequest) (*ServiceComponentVariableItem, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServiceComponentVariableItem
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceComponentVariableAPIService.ServiceComponentVariableEdit")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/service_component_variables/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.serviceComponentVariableEditAction == nil {
+		return localVarReturnValue, nil, reportError("serviceComponentVariableEditAction is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/hal+json", "application/problem+json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.serviceComponentVariableEditAction
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["JWT"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Authorization"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Auth-Token"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
+			var v ProblemGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiServiceComponentVariableListRequest struct {
+	ctx                  context.Context
+	ApiService           *ServiceComponentVariableAPIService
+	page                 *int32
+	name                 *string
+	serviceComponent     *string
+	serviceComponentName *string
+	environment          *string
+	project              *string
+	organization         *string
+}
+
+// The collection page number
+func (r ApiServiceComponentVariableListRequest) Page(page int32) ApiServiceComponentVariableListRequest {
+	r.page = &page
+	return r
+}
+
+// Filter by name
+func (r ApiServiceComponentVariableListRequest) Name(name string) ApiServiceComponentVariableListRequest {
+	r.name = &name
+	return r
+}
+
+// Filter by serviceComponent
+func (r ApiServiceComponentVariableListRequest) ServiceComponent(serviceComponent string) ApiServiceComponentVariableListRequest {
+	r.serviceComponent = &serviceComponent
+	return r
+}
+
+// Filter by serviceComponentName
+func (r ApiServiceComponentVariableListRequest) ServiceComponentName(serviceComponentName string) ApiServiceComponentVariableListRequest {
+	r.serviceComponentName = &serviceComponentName
+	return r
+}
+
+// Filter by environment
+func (r ApiServiceComponentVariableListRequest) Environment(environment string) ApiServiceComponentVariableListRequest {
+	r.environment = &environment
+	return r
+}
+
+// Filter by project
+func (r ApiServiceComponentVariableListRequest) Project(project string) ApiServiceComponentVariableListRequest {
+	r.project = &project
+	return r
+}
+
+// Filter by organization
+func (r ApiServiceComponentVariableListRequest) Organization(organization string) ApiServiceComponentVariableListRequest {
+	r.organization = &organization
+	return r
+}
+
+func (r ApiServiceComponentVariableListRequest) Execute() (*PaginatedServiceComponentVariableCollection, *http.Response, error) {
+	return r.ApiService.ServiceComponentVariableListExecute(r)
+}
+
+/*
+ServiceComponentVariableList List component variables matching any selected filters.
+
+List component variables matching any selected filters.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiServiceComponentVariableListRequest
+*/
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableList(ctx context.Context) ApiServiceComponentVariableListRequest {
+	return ApiServiceComponentVariableListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return PaginatedServiceComponentVariableCollection
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableListExecute(r ApiServiceComponentVariableListRequest) (*PaginatedServiceComponentVariableCollection, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PaginatedServiceComponentVariableCollection
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceComponentVariableAPIService.ServiceComponentVariableList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/service_component_variables"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -127,20 +570,20 @@ func (a *ComponentAPIService) ComponentListExecute(r ApiComponentListRequest) (*
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
 	}
+	if r.serviceComponent != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "serviceComponent", r.serviceComponent, "")
+	}
+	if r.serviceComponentName != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "serviceComponentName", r.serviceComponentName, "")
+	}
 	if r.environment != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "environment", r.environment, "")
 	}
-	if r.operationStatus != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "operationStatus", r.operationStatus, "")
-	}
-	if r.clusterStatus != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "clusterStatus", r.clusterStatus, "")
+	if r.project != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")
 	}
 	if r.organization != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
-	}
-	if r.project != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -234,27 +677,27 @@ func (a *ComponentAPIService) ComponentListExecute(r ApiComponentListRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiComponentRemoteDevConfigRequest struct {
+type ApiServiceComponentVariableViewRequest struct {
 	ctx        context.Context
-	ApiService *ComponentAPIService
+	ApiService *ServiceComponentVariableAPIService
 	id         string
 }
 
-func (r ApiComponentRemoteDevConfigRequest) Execute() (*ComponentConfigItem, *http.Response, error) {
-	return r.ApiService.ComponentRemoteDevConfigExecute(r)
+func (r ApiServiceComponentVariableViewRequest) Execute() (*ServiceComponentVariableItem, *http.Response, error) {
+	return r.ApiService.ServiceComponentVariableViewExecute(r)
 }
 
 /*
-ComponentRemoteDevConfig Get remote dev config
+ServiceComponentVariableView View a specific component variable.
 
-Get remote dev config
+View a specific component variable.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Resource identifier
-	@return ApiComponentRemoteDevConfigRequest
+	@return ApiServiceComponentVariableViewRequest
 */
-func (a *ComponentAPIService) ComponentRemoteDevConfig(ctx context.Context, id string) ApiComponentRemoteDevConfigRequest {
-	return ApiComponentRemoteDevConfigRequest{
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableView(ctx context.Context, id string) ApiServiceComponentVariableViewRequest {
+	return ApiServiceComponentVariableViewRequest{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -263,456 +706,21 @@ func (a *ComponentAPIService) ComponentRemoteDevConfig(ctx context.Context, id s
 
 // Execute executes the request
 //
-//	@return ComponentConfigItem
-func (a *ComponentAPIService) ComponentRemoteDevConfigExecute(r ApiComponentRemoteDevConfigRequest) (*ComponentConfigItem, *http.Response, error) {
+//	@return ServiceComponentVariableItem
+func (a *ServiceComponentVariableAPIService) ServiceComponentVariableViewExecute(r ApiServiceComponentVariableViewRequest) (*ServiceComponentVariableItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ComponentConfigItem
+		localVarReturnValue *ServiceComponentVariableItem
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentRemoteDevConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServiceComponentVariableAPIService.ServiceComponentVariableView")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/components/{id}/remotedev/config"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/problem+json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["JWT"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
-			var v ProblemGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiComponentRemoteDevProfileRequest struct {
-	ctx        context.Context
-	ApiService *ComponentAPIService
-	id         string
-	body       *interface{}
-}
-
-// No Request Body
-func (r ApiComponentRemoteDevProfileRequest) Body(body interface{}) ApiComponentRemoteDevProfileRequest {
-	r.body = &body
-	return r
-}
-
-func (r ApiComponentRemoteDevProfileRequest) Execute() (*ComponentProfileItem, *http.Response, error) {
-	return r.ApiService.ComponentRemoteDevProfileExecute(r)
-}
-
-/*
-ComponentRemoteDevProfile Parse, validate and interpolate the provided remoteDevProfile
-
-Parse, validate and interpolate the provided remoteDevProfile
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Resource identifier
-	@return ApiComponentRemoteDevProfileRequest
-*/
-func (a *ComponentAPIService) ComponentRemoteDevProfile(ctx context.Context, id string) ApiComponentRemoteDevProfileRequest {
-	return ApiComponentRemoteDevProfileRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return ComponentProfileItem
-func (a *ComponentAPIService) ComponentRemoteDevProfileExecute(r ApiComponentRemoteDevProfileRequest) (*ComponentProfileItem, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ComponentProfileItem
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentRemoteDevProfile")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/components/{id}/remotedev/profile"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/x+yaml"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/problem+json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.body
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["JWT"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
-			var v ProblemGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiComponentResourcesRequest struct {
-	ctx        context.Context
-	ApiService *ComponentAPIService
-	id         string
-}
-
-func (r ApiComponentResourcesRequest) Execute() ([]ComponentResourceItem, *http.Response, error) {
-	return r.ApiService.ComponentResourcesExecute(r)
-}
-
-/*
-ComponentResources Get kubernetes resources
-
-Get kubernetes resources
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Resource identifier
-	@return ApiComponentResourcesRequest
-*/
-func (a *ComponentAPIService) ComponentResources(ctx context.Context, id string) ApiComponentResourcesRequest {
-	return ApiComponentResourcesRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return []ComponentResourceItem
-func (a *ComponentAPIService) ComponentResourcesExecute(r ApiComponentResourcesRequest) ([]ComponentResourceItem, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []ComponentResourceItem
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentResources")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/components/{id}/resources"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/problem+json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["JWT"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Authorization"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Auth-Token"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode >= 400 && localVarHTTPResponse.StatusCode < 500 {
-			var v ProblemGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiComponentViewRequest struct {
-	ctx        context.Context
-	ApiService *ComponentAPIService
-	id         string
-}
-
-func (r ApiComponentViewRequest) Execute() (*ComponentItem, *http.Response, error) {
-	return r.ApiService.ComponentViewExecute(r)
-}
-
-/*
-ComponentView View a specific service component
-
-View a specific service component
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Resource identifier
-	@return ApiComponentViewRequest
-*/
-func (a *ComponentAPIService) ComponentView(ctx context.Context, id string) ApiComponentViewRequest {
-	return ApiComponentViewRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return ComponentItem
-func (a *ComponentAPIService) ComponentViewExecute(r ApiComponentViewRequest) (*ComponentItem, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ComponentItem
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComponentAPIService.ComponentView")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/components/{id}"
+	localVarPath := localBasePath + "/v1/service_component_variables/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
