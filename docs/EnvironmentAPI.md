@@ -395,7 +395,7 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    environmentEditBuildSettingsAction := *openapiclient.NewEnvironmentEditBuildSettingsAction("RegistryIntegration_example", "KubernetesIntegration_example", "Cpu_example", NullableInt32(123)) // EnvironmentEditBuildSettingsAction | The updated environment resource
+    environmentEditBuildSettingsAction := *openapiclient.NewEnvironmentEditBuildSettingsAction("RegistryIntegration_example", "KubernetesIntegration_example", "Cpu_example", NullableInt32(123), NullableInt32(123)) // EnvironmentEditBuildSettingsAction | The updated environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

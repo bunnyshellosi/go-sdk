@@ -15,6 +15,7 @@ api_project.go
 api_project_variable.go
 api_registry_integration.go
 api_secret.go
+api_service_component_variable.go
 api_template.go
 api_templates_repository.go
 api_workflow.go
@@ -53,6 +54,7 @@ docs/EmbeddedPipelineCollection.md
 docs/EmbeddedProjectCollection.md
 docs/EmbeddedProjectVariableCollection.md
 docs/EmbeddedRegistryIntegrationCollection.md
+docs/EmbeddedServiceComponentVariableCollection.md
 docs/EmbeddedTemplateCollection.md
 docs/EmbeddedTemplatesRepositoryCollection.md
 docs/EmbeddedWorkflowCollection.md
@@ -110,6 +112,7 @@ docs/PaginatedPipelineCollection.md
 docs/PaginatedProjectCollection.md
 docs/PaginatedProjectVariableCollection.md
 docs/PaginatedRegistryIntegrationCollection.md
+docs/PaginatedServiceComponentVariableCollection.md
 docs/PaginatedTemplateCollection.md
 docs/PaginatedTemplatesRepositoryCollection.md
 docs/PaginatedWorkflowCollection.md
@@ -142,6 +145,11 @@ docs/SecretDecryptedItem.md
 docs/SecretEncryptAction.md
 docs/SecretEncryptedItem.md
 docs/SecretTranscryptConfigurationAction.md
+docs/ServiceComponentVariableAPI.md
+docs/ServiceComponentVariableCollection.md
+docs/ServiceComponentVariableCreateAction.md
+docs/ServiceComponentVariableEditAction.md
+docs/ServiceComponentVariableItem.md
 docs/SimpleResourceConfigItem.md
 docs/StageItem.md
 docs/SyncPathItem.md
@@ -193,6 +201,7 @@ model_embedded_pipeline_collection.go
 model_embedded_project_collection.go
 model_embedded_project_variable_collection.go
 model_embedded_registry_integration_collection.go
+model_embedded_service_component_variable_collection.go
 model_embedded_template_collection.go
 model_embedded_templates_repository_collection.go
 model_embedded_workflow_collection.go
@@ -245,6 +254,7 @@ model_paginated_pipeline_collection.go
 model_paginated_project_collection.go
 model_paginated_project_variable_collection.go
 model_paginated_registry_integration_collection.go
+model_paginated_service_component_variable_collection.go
 model_paginated_template_collection.go
 model_paginated_templates_repository_collection.go
 model_paginated_workflow_collection.go
@@ -272,6 +282,10 @@ model_secret_decrypted_item.go
 model_secret_encrypt_action.go
 model_secret_encrypted_item.go
 model_secret_transcrypt_configuration_action.go
+model_service_component_variable_collection.go
+model_service_component_variable_create_action.go
+model_service_component_variable_edit_action.go
+model_service_component_variable_item.go
 model_simple_resource_config_item.go
 model_stage_item.go
 model_sync_path_item.go
@@ -288,5 +302,5 @@ model_validate_source_string.go
 model_workflow_collection.go
 model_workflow_item.go
 response.go
-test/api_secret_test.go
+test/api_service_component_variable_test.go
 utils.go
