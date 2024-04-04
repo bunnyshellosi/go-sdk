@@ -57,7 +57,7 @@ func (dst *EnvironmentCreateActionGenesis) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into FromGit
-	err = newStrictDecoder(data).Decode(&dst.FromGit)
+	err = json.Unmarshal(data, &dst.FromGit)
 	if err == nil {
 		jsonFromGit, _ := json.Marshal(dst.FromGit)
 		if string(jsonFromGit) == "{}" { // empty struct
@@ -70,7 +70,7 @@ func (dst *EnvironmentCreateActionGenesis) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FromGitSpec
-	err = newStrictDecoder(data).Decode(&dst.FromGitSpec)
+	err = json.Unmarshal(data, &dst.FromGitSpec)
 	if err == nil {
 		jsonFromGitSpec, _ := json.Marshal(dst.FromGitSpec)
 		if string(jsonFromGitSpec) == "{}" { // empty struct
@@ -83,7 +83,7 @@ func (dst *EnvironmentCreateActionGenesis) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FromString
-	err = newStrictDecoder(data).Decode(&dst.FromString)
+	err = json.Unmarshal(data, &dst.FromString)
 	if err == nil {
 		jsonFromString, _ := json.Marshal(dst.FromString)
 		if string(jsonFromString) == "{}" { // empty struct
@@ -96,7 +96,7 @@ func (dst *EnvironmentCreateActionGenesis) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FromTemplate
-	err = newStrictDecoder(data).Decode(&dst.FromTemplate)
+	err = json.Unmarshal(data, &dst.FromTemplate)
 	if err == nil {
 		jsonFromTemplate, _ := json.Marshal(dst.FromTemplate)
 		if string(jsonFromTemplate) == "{}" { // empty struct
