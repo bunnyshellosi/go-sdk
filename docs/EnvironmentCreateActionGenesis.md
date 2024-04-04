@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **YamlPath** | Pointer to **string** |  | [optional] 
 **Spec** | Pointer to **string** |  | [optional] 
 **Yaml** | Pointer to **string** |  | [optional] 
+**Variables** | Pointer to [**map[string]FromTemplateVariablesValue**](FromTemplateVariablesValue.md) |  | [optional] 
 **Template** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetYaml sets Yaml field to given value.
 `func (o *EnvironmentCreateActionGenesis) HasYaml() bool`
 
 HasYaml returns a boolean if a field has been set.
+
+### GetVariables
+
+`func (o *EnvironmentCreateActionGenesis) GetVariables() map[string]FromTemplateVariablesValue`
+
+GetVariables returns the Variables field if non-nil, zero value otherwise.
+
+### GetVariablesOk
+
+`func (o *EnvironmentCreateActionGenesis) GetVariablesOk() (*map[string]FromTemplateVariablesValue, bool)`
+
+GetVariablesOk returns a tuple with the Variables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVariables
+
+`func (o *EnvironmentCreateActionGenesis) SetVariables(v map[string]FromTemplateVariablesValue)`
+
+SetVariables sets Variables field to given value.
+
+### HasVariables
+
+`func (o *EnvironmentCreateActionGenesis) HasVariables() bool`
+
+HasVariables returns a boolean if a field has been set.
 
 ### GetTemplate
 

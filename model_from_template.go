@@ -20,8 +20,9 @@ var _ MappedNullable = &FromTemplate{}
 
 // FromTemplate struct for FromTemplate
 type FromTemplate struct {
-	Type     *string `json:"type,omitempty"`
-	Template *string `json:"template,omitempty"`
+	Type      *string                                `json:"type,omitempty"`
+	Variables *map[string]FromTemplateVariablesValue `json:"variables,omitempty"`
+	Template  *string                                `json:"template,omitempty"`
 }
 
 // NewFromTemplate instantiates a new FromTemplate object
@@ -77,6 +78,38 @@ func (o *FromTemplate) SetType(v string) {
 	o.Type = &v
 }
 
+// GetVariables returns the Variables field value if set, zero value otherwise.
+func (o *FromTemplate) GetVariables() map[string]FromTemplateVariablesValue {
+	if o == nil || IsNil(o.Variables) {
+		var ret map[string]FromTemplateVariablesValue
+		return ret
+	}
+	return *o.Variables
+}
+
+// GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FromTemplate) GetVariablesOk() (*map[string]FromTemplateVariablesValue, bool) {
+	if o == nil || IsNil(o.Variables) {
+		return nil, false
+	}
+	return o.Variables, true
+}
+
+// HasVariables returns a boolean if a field has been set.
+func (o *FromTemplate) HasVariables() bool {
+	if o != nil && !IsNil(o.Variables) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariables gets a reference to the given map[string]FromTemplateVariablesValue and assigns it to the Variables field.
+func (o *FromTemplate) SetVariables(v map[string]FromTemplateVariablesValue) {
+	o.Variables = &v
+}
+
 // GetTemplate returns the Template field value if set, zero value otherwise.
 func (o *FromTemplate) GetTemplate() string {
 	if o == nil || IsNil(o.Template) {
@@ -121,6 +154,9 @@ func (o FromTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.Variables) {
+		toSerialize["variables"] = o.Variables
 	}
 	if !IsNil(o.Template) {
 		toSerialize["template"] = o.Template

@@ -3248,6 +3248,28 @@ components:
   schemas:
     ArrayObject-kube-config.read:
       type: object
+    BooleanType-item:
+      properties:
+        defaultValue:
+          $ref: '#/components/schemas/BooleanValue-item'
+        name:
+          description: A variable used within the template.
+          type: string
+        description:
+          description: The variable description
+          type: string
+        type:
+          readOnly: true
+          type: string
+      type: object
+    BooleanValue-item:
+      properties:
+        value:
+          type: boolean
+        type:
+          readOnly: true
+          type: string
+      type: object
     BuildSettings-item:
       properties:
         useManagedRegistry:
@@ -3341,6 +3363,25 @@ components:
           example: merge
           type: string
       type: object
+    EnumType-item:
+      properties:
+        defaultValue:
+          $ref: '#/components/schemas/EnumType_item_defaultValue'
+        values:
+          description: The available values for the enum.
+          items:
+            $ref: '#/components/schemas/EnumType_item_values_inner'
+          type: array
+        name:
+          description: A variable used within the template.
+          type: string
+        description:
+          description: The variable description
+          type: string
+        type:
+          readOnly: true
+          type: string
+      type: object
     Ephemeral:
       properties:
         type:
@@ -3395,6 +3436,28 @@ components:
           nullable: true
           type: string
       type: object
+    FloatType-item:
+      properties:
+        defaultValue:
+          $ref: '#/components/schemas/FloatValue-item'
+        name:
+          description: A variable used within the template.
+          type: string
+        description:
+          description: The variable description
+          type: string
+        type:
+          readOnly: true
+          type: string
+      type: object
+    FloatValue-item:
+      properties:
+        value:
+          type: number
+        type:
+          readOnly: true
+          type: string
+      type: object
     FromGit:
       properties:
         type:
@@ -3432,6 +3495,10 @@ components:
           default: template
           example: template
           type: string
+        variables:
+          additionalProperties:
+            $ref: '#/components/schemas/FromTemplate_variables_value'
+          type: object
         template:
           type: string
       type: object
@@ -3442,6 +3509,28 @@ components:
           type: string
         branch:
           nullable: true
+          type: string
+      type: object
+    IntegerType-item:
+      properties:
+        defaultValue:
+          $ref: '#/components/schemas/IntegerValue-item'
+        name:
+          description: A variable used within the template.
+          type: string
+        description:
+          description: The variable description
+          type: string
+        type:
+          readOnly: true
+          type: string
+      type: object
+    IntegerValue-item:
+      properties:
+        value:
+          type: integer
+        type:
+          readOnly: true
           type: string
       type: object
     Primary:
@@ -3565,6 +3654,28 @@ components:
           type: integer
         pipeline:
           description: Event identifier.
+          readOnly: true
+          type: string
+      type: object
+    StringType-item:
+      properties:
+        defaultValue:
+          $ref: '#/components/schemas/StringValue-item'
+        name:
+          description: A variable used within the template.
+          type: string
+        description:
+          description: The variable description
+          type: string
+        type:
+          readOnly: true
+          type: string
+      type: object
+    StringValue-item:
+      properties:
+        value:
+          type: string
+        type:
           readOnly: true
           type: string
       type: object
@@ -5365,6 +5476,12 @@ components:
             type: string
           readOnly: true
           type: array
+        variablesSchema:
+          description: Template variables.
+          items:
+            $ref: '#/components/schemas/template_item_variablesSchema_inner'
+          readOnly: true
+          type: array
         organization:
           description: Organization identifier.
           nullable: true
@@ -5543,6 +5660,51 @@ components:
       - $ref: '#/components/schemas/Profile-item'
       - type: string
       readOnly: true
+    EnumType_item_defaultValue:
+      description: The default value used if none is provided.
+      discriminator:
+        mapping:
+          bool: '#/components/schemas/BooleanValue-item'
+          int: '#/components/schemas/IntegerValue-item'
+          float: '#/components/schemas/FloatValue-item'
+          string: '#/components/schemas/StringValue-item'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/BooleanValue-item'
+      - $ref: '#/components/schemas/IntegerValue-item'
+      - $ref: '#/components/schemas/FloatValue-item'
+      - $ref: '#/components/schemas/StringValue-item'
+      properties:
+        type:
+          description: Discriminator property
+          type: string
+      required:
+      - type
+    EnumType_item_values_inner:
+      discriminator:
+        mapping:
+          bool: '#/components/schemas/BooleanValue-item'
+          int: '#/components/schemas/IntegerValue-item'
+          float: '#/components/schemas/FloatValue-item'
+          string: '#/components/schemas/StringValue-item'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/BooleanValue-item'
+      - $ref: '#/components/schemas/IntegerValue-item'
+      - $ref: '#/components/schemas/FloatValue-item'
+      - $ref: '#/components/schemas/StringValue-item'
+      properties:
+        type:
+          description: Discriminator property
+          type: string
+      required:
+      - type
+    FromTemplate_variables_value:
+      oneOf:
+      - type: boolean
+      - type: integer
+      - type: number
+      - type: string
     component_Config_item_config:
       description: A list of container configs.
       oneOf:
@@ -5706,6 +5868,27 @@ components:
           type: array
       title: embedded-workflow-collection
       type: object
+    template_item_variablesSchema_inner:
+      discriminator:
+        mapping:
+          bool: '#/components/schemas/BooleanType-item'
+          int: '#/components/schemas/IntegerType-item'
+          float: '#/components/schemas/FloatType-item'
+          string: '#/components/schemas/StringType-item'
+          enum: '#/components/schemas/EnumType-item'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/BooleanType-item'
+      - $ref: '#/components/schemas/IntegerType-item'
+      - $ref: '#/components/schemas/FloatType-item'
+      - $ref: '#/components/schemas/StringType-item'
+      - $ref: '#/components/schemas/EnumType-item'
+      properties:
+        type:
+          description: Discriminator property
+          type: string
+      required:
+      - type
     template_ValidateAction_source:
       oneOf:
       - $ref: '#/components/schemas/ValidateSourceGit'

@@ -32,6 +32,8 @@ type TemplateItem struct {
 	ShortDescription NullableString `json:"shortDescription,omitempty"`
 	// Template tags.
 	Tags []string `json:"tags,omitempty"`
+	// Template variables.
+	VariablesSchema []TemplateItemVariablesSchemaInner `json:"variablesSchema,omitempty"`
 	// Organization identifier.
 	Organization NullableString `json:"organization,omitempty"`
 	// Templates repository identifier.
@@ -258,6 +260,38 @@ func (o *TemplateItem) SetTags(v []string) {
 	o.Tags = v
 }
 
+// GetVariablesSchema returns the VariablesSchema field value if set, zero value otherwise.
+func (o *TemplateItem) GetVariablesSchema() []TemplateItemVariablesSchemaInner {
+	if o == nil || IsNil(o.VariablesSchema) {
+		var ret []TemplateItemVariablesSchemaInner
+		return ret
+	}
+	return o.VariablesSchema
+}
+
+// GetVariablesSchemaOk returns a tuple with the VariablesSchema field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TemplateItem) GetVariablesSchemaOk() ([]TemplateItemVariablesSchemaInner, bool) {
+	if o == nil || IsNil(o.VariablesSchema) {
+		return nil, false
+	}
+	return o.VariablesSchema, true
+}
+
+// HasVariablesSchema returns a boolean if a field has been set.
+func (o *TemplateItem) HasVariablesSchema() bool {
+	if o != nil && !IsNil(o.VariablesSchema) {
+		return true
+	}
+
+	return false
+}
+
+// SetVariablesSchema gets a reference to the given []TemplateItemVariablesSchemaInner and assigns it to the VariablesSchema field.
+func (o *TemplateItem) SetVariablesSchema(v []TemplateItemVariablesSchemaInner) {
+	o.VariablesSchema = v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TemplateItem) GetOrganization() string {
 	if o == nil || IsNil(o.Organization.Get()) {
@@ -371,6 +405,9 @@ func (o TemplateItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
+	}
+	if !IsNil(o.VariablesSchema) {
+		toSerialize["variablesSchema"] = o.VariablesSchema
 	}
 	if o.Organization.IsSet() {
 		toSerialize["organization"] = o.Organization.Get()

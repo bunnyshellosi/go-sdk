@@ -41,7 +41,7 @@ func (dst *ContainerConfigItemProfile) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ProfileItem
-	err = newStrictDecoder(data).Decode(&dst.ProfileItem)
+	err = json.Unmarshal(data, &dst.ProfileItem)
 	if err == nil {
 		jsonProfileItem, _ := json.Marshal(dst.ProfileItem)
 		if string(jsonProfileItem) == "{}" { // empty struct
@@ -54,7 +54,7 @@ func (dst *ContainerConfigItemProfile) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into String
-	err = newStrictDecoder(data).Decode(&dst.String)
+	err = json.Unmarshal(data, &dst.String)
 	if err == nil {
 		jsonString, _ := json.Marshal(dst.String)
 		if string(jsonString) == "{}" { // empty struct

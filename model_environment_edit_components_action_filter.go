@@ -41,7 +41,7 @@ func (dst *EnvironmentEditComponentsActionFilter) UnmarshalJSON(data []byte) err
 	var err error
 	match := 0
 	// try to unmarshal data into FilterGit
-	err = newStrictDecoder(data).Decode(&dst.FilterGit)
+	err = json.Unmarshal(data, &dst.FilterGit)
 	if err == nil {
 		jsonFilterGit, _ := json.Marshal(dst.FilterGit)
 		if string(jsonFilterGit) == "{}" { // empty struct
@@ -54,7 +54,7 @@ func (dst *EnvironmentEditComponentsActionFilter) UnmarshalJSON(data []byte) err
 	}
 
 	// try to unmarshal data into FilterName
-	err = newStrictDecoder(data).Decode(&dst.FilterName)
+	err = json.Unmarshal(data, &dst.FilterName)
 	if err == nil {
 		jsonFilterName, _ := json.Marshal(dst.FilterName)
 		if string(jsonFilterName) == "{}" { // empty struct

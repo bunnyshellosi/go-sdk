@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "template"]
+**Variables** | Pointer to [**map[string]FromTemplateVariablesValue**](FromTemplateVariablesValue.md) |  | [optional] 
 **Template** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetType sets Type field to given value.
 `func (o *FromTemplate) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetVariables
+
+`func (o *FromTemplate) GetVariables() map[string]FromTemplateVariablesValue`
+
+GetVariables returns the Variables field if non-nil, zero value otherwise.
+
+### GetVariablesOk
+
+`func (o *FromTemplate) GetVariablesOk() (*map[string]FromTemplateVariablesValue, bool)`
+
+GetVariablesOk returns a tuple with the Variables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVariables
+
+`func (o *FromTemplate) SetVariables(v map[string]FromTemplateVariablesValue)`
+
+SetVariables sets Variables field to given value.
+
+### HasVariables
+
+`func (o *FromTemplate) HasVariables() bool`
+
+HasVariables returns a boolean if a field has been set.
 
 ### GetTemplate
 

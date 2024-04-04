@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **GitSha** | Pointer to **string** | Template git repository SHA. | [optional] [readonly] 
 **ShortDescription** | Pointer to **NullableString** | Template short description. | [optional] [readonly] 
 **Tags** | Pointer to **[]string** | Template tags. | [optional] [readonly] 
+**VariablesSchema** | Pointer to [**[]TemplateItemVariablesSchemaInner**](TemplateItemVariablesSchemaInner.md) | Template variables. | [optional] [readonly] 
 **Organization** | Pointer to **NullableString** | Organization identifier. | [optional] [readonly] 
 **TemplatesRepository** | Pointer to **NullableString** | Templates repository identifier. | [optional] [readonly] 
 
@@ -191,6 +192,31 @@ SetTags sets Tags field to given value.
 `func (o *TemplateItem) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
+
+### GetVariablesSchema
+
+`func (o *TemplateItem) GetVariablesSchema() []TemplateItemVariablesSchemaInner`
+
+GetVariablesSchema returns the VariablesSchema field if non-nil, zero value otherwise.
+
+### GetVariablesSchemaOk
+
+`func (o *TemplateItem) GetVariablesSchemaOk() (*[]TemplateItemVariablesSchemaInner, bool)`
+
+GetVariablesSchemaOk returns a tuple with the VariablesSchema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVariablesSchema
+
+`func (o *TemplateItem) SetVariablesSchema(v []TemplateItemVariablesSchemaInner)`
+
+SetVariablesSchema sets VariablesSchema field to given value.
+
+### HasVariablesSchema
+
+`func (o *TemplateItem) HasVariablesSchema() bool`
+
+HasVariablesSchema returns a boolean if a field has been set.
 
 ### GetOrganization
 

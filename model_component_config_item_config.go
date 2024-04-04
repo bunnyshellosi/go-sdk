@@ -41,7 +41,7 @@ func (dst *ComponentConfigItemConfig) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ArrayOfExtendedResourceConfigItem
-	err = newStrictDecoder(data).Decode(&dst.ArrayOfExtendedResourceConfigItem)
+	err = json.Unmarshal(data, &dst.ArrayOfExtendedResourceConfigItem)
 	if err == nil {
 		jsonArrayOfExtendedResourceConfigItem, _ := json.Marshal(dst.ArrayOfExtendedResourceConfigItem)
 		if string(jsonArrayOfExtendedResourceConfigItem) == "{}" { // empty struct
@@ -54,7 +54,7 @@ func (dst *ComponentConfigItemConfig) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ArrayOfSimpleResourceConfigItem
-	err = newStrictDecoder(data).Decode(&dst.ArrayOfSimpleResourceConfigItem)
+	err = json.Unmarshal(data, &dst.ArrayOfSimpleResourceConfigItem)
 	if err == nil {
 		jsonArrayOfSimpleResourceConfigItem, _ := json.Marshal(dst.ArrayOfSimpleResourceConfigItem)
 		if string(jsonArrayOfSimpleResourceConfigItem) == "{}" { // empty struct
