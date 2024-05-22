@@ -43,6 +43,8 @@ type EnvironmentItem struct {
 	KubernetesIntegration NullableString `json:"kubernetesIntegration,omitempty"`
 	// Kubernetes integration identifier for the ephemeral auto deploy cluster.
 	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration,omitempty"`
+	// Environment termination protection.
+	HasTerminationProtection *bool `json:"hasTerminationProtection,omitempty"`
 	// Environment ephemeral auto deploy status.
 	HasEphemeralAutoDeploy *bool `json:"hasEphemeralAutoDeploy,omitempty"`
 	// Environment ephemeral create-on-PR status.
@@ -485,6 +487,38 @@ func (o *EnvironmentItem) UnsetEphemeralKubernetesIntegration() {
 	o.EphemeralKubernetesIntegration.Unset()
 }
 
+// GetHasTerminationProtection returns the HasTerminationProtection field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetHasTerminationProtection() bool {
+	if o == nil || IsNil(o.HasTerminationProtection) {
+		var ret bool
+		return ret
+	}
+	return *o.HasTerminationProtection
+}
+
+// GetHasTerminationProtectionOk returns a tuple with the HasTerminationProtection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetHasTerminationProtectionOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasTerminationProtection) {
+		return nil, false
+	}
+	return o.HasTerminationProtection, true
+}
+
+// HasHasTerminationProtection returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasHasTerminationProtection() bool {
+	if o != nil && !IsNil(o.HasTerminationProtection) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasTerminationProtection gets a reference to the given bool and assigns it to the HasTerminationProtection field.
+func (o *EnvironmentItem) SetHasTerminationProtection(v bool) {
+	o.HasTerminationProtection = &v
+}
+
 // GetHasEphemeralAutoDeploy returns the HasEphemeralAutoDeploy field value if set, zero value otherwise.
 func (o *EnvironmentItem) GetHasEphemeralAutoDeploy() bool {
 	if o == nil || IsNil(o.HasEphemeralAutoDeploy) {
@@ -626,6 +660,9 @@ func (o EnvironmentItem) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EphemeralKubernetesIntegration.IsSet() {
 		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
+	}
+	if !IsNil(o.HasTerminationProtection) {
+		toSerialize["hasTerminationProtection"] = o.HasTerminationProtection
 	}
 	if !IsNil(o.HasEphemeralAutoDeploy) {
 		toSerialize["hasEphemeralAutoDeploy"] = o.HasEphemeralAutoDeploy
