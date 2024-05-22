@@ -26,6 +26,7 @@ type EnvironmentCreateAction struct {
 	Type                           *string                         `json:"type,omitempty"`
 	RemoteDevelopmentAllowed       *bool                           `json:"remoteDevelopmentAllowed,omitempty"`
 	AutoUpdate                     *bool                           `json:"autoUpdate,omitempty"`
+	TerminationProtection          *bool                           `json:"terminationProtection,omitempty"`
 	CreateEphemeralOnPrCreate      *bool                           `json:"createEphemeralOnPrCreate,omitempty"`
 	DestroyEphemeralOnPrClose      *bool                           `json:"destroyEphemeralOnPrClose,omitempty"`
 	AutoDeployEphemeral            *bool                           `json:"autoDeployEphemeral,omitempty"`
@@ -227,6 +228,38 @@ func (o *EnvironmentCreateAction) HasAutoUpdate() bool {
 // SetAutoUpdate gets a reference to the given bool and assigns it to the AutoUpdate field.
 func (o *EnvironmentCreateAction) SetAutoUpdate(v bool) {
 	o.AutoUpdate = &v
+}
+
+// GetTerminationProtection returns the TerminationProtection field value if set, zero value otherwise.
+func (o *EnvironmentCreateAction) GetTerminationProtection() bool {
+	if o == nil || IsNil(o.TerminationProtection) {
+		var ret bool
+		return ret
+	}
+	return *o.TerminationProtection
+}
+
+// GetTerminationProtectionOk returns a tuple with the TerminationProtection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCreateAction) GetTerminationProtectionOk() (*bool, bool) {
+	if o == nil || IsNil(o.TerminationProtection) {
+		return nil, false
+	}
+	return o.TerminationProtection, true
+}
+
+// HasTerminationProtection returns a boolean if a field has been set.
+func (o *EnvironmentCreateAction) HasTerminationProtection() bool {
+	if o != nil && !IsNil(o.TerminationProtection) {
+		return true
+	}
+
+	return false
+}
+
+// SetTerminationProtection gets a reference to the given bool and assigns it to the TerminationProtection field.
+func (o *EnvironmentCreateAction) SetTerminationProtection(v bool) {
+	o.TerminationProtection = &v
 }
 
 // GetCreateEphemeralOnPrCreate returns the CreateEphemeralOnPrCreate field value if set, zero value otherwise.
@@ -466,6 +499,9 @@ func (o EnvironmentCreateAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AutoUpdate) {
 		toSerialize["autoUpdate"] = o.AutoUpdate
+	}
+	if !IsNil(o.TerminationProtection) {
+		toSerialize["terminationProtection"] = o.TerminationProtection
 	}
 	if !IsNil(o.CreateEphemeralOnPrCreate) {
 		toSerialize["createEphemeralOnPrCreate"] = o.CreateEphemeralOnPrCreate

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** |  | [optional] 
 **RemoteDevelopmentAllowed** | Pointer to **bool** |  | [optional] 
 **AutoUpdate** | Pointer to **bool** |  | [optional] 
+**TerminationProtection** | Pointer to **bool** |  | [optional] 
 **CreateEphemeralOnPrCreate** | Pointer to **bool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **bool** |  | [optional] 
 **AutoDeployEphemeral** | Pointer to **bool** |  | [optional] 
@@ -175,6 +176,31 @@ SetAutoUpdate sets AutoUpdate field to given value.
 `func (o *EnvironmentCreateAction) HasAutoUpdate() bool`
 
 HasAutoUpdate returns a boolean if a field has been set.
+
+### GetTerminationProtection
+
+`func (o *EnvironmentCreateAction) GetTerminationProtection() bool`
+
+GetTerminationProtection returns the TerminationProtection field if non-nil, zero value otherwise.
+
+### GetTerminationProtectionOk
+
+`func (o *EnvironmentCreateAction) GetTerminationProtectionOk() (*bool, bool)`
+
+GetTerminationProtectionOk returns a tuple with the TerminationProtection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTerminationProtection
+
+`func (o *EnvironmentCreateAction) SetTerminationProtection(v bool)`
+
+SetTerminationProtection sets TerminationProtection field to given value.
+
+### HasTerminationProtection
+
+`func (o *EnvironmentCreateAction) HasTerminationProtection() bool`
+
+HasTerminationProtection returns a boolean if a field has been set.
 
 ### GetCreateEphemeralOnPrCreate
 
