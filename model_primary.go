@@ -22,6 +22,7 @@ var _ MappedNullable = &Primary{}
 type Primary struct {
 	Type                           *string        `json:"type,omitempty"`
 	AutoDeployEphemeral            NullableBool   `json:"autoDeployEphemeral,omitempty"`
+	TerminationProtection          NullableBool   `json:"terminationProtection,omitempty"`
 	CreateEphemeralOnPrCreate      NullableBool   `json:"createEphemeralOnPrCreate,omitempty"`
 	DestroyEphemeralOnPrClose      NullableBool   `json:"destroyEphemeralOnPrClose,omitempty"`
 	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration"`
@@ -122,6 +123,49 @@ func (o *Primary) SetAutoDeployEphemeralNil() {
 // UnsetAutoDeployEphemeral ensures that no value is present for AutoDeployEphemeral, not even an explicit nil
 func (o *Primary) UnsetAutoDeployEphemeral() {
 	o.AutoDeployEphemeral.Unset()
+}
+
+// GetTerminationProtection returns the TerminationProtection field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Primary) GetTerminationProtection() bool {
+	if o == nil || IsNil(o.TerminationProtection.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.TerminationProtection.Get()
+}
+
+// GetTerminationProtectionOk returns a tuple with the TerminationProtection field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Primary) GetTerminationProtectionOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TerminationProtection.Get(), o.TerminationProtection.IsSet()
+}
+
+// HasTerminationProtection returns a boolean if a field has been set.
+func (o *Primary) HasTerminationProtection() bool {
+	if o != nil && o.TerminationProtection.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTerminationProtection gets a reference to the given NullableBool and assigns it to the TerminationProtection field.
+func (o *Primary) SetTerminationProtection(v bool) {
+	o.TerminationProtection.Set(&v)
+}
+
+// SetTerminationProtectionNil sets the value for TerminationProtection to be an explicit nil
+func (o *Primary) SetTerminationProtectionNil() {
+	o.TerminationProtection.Set(nil)
+}
+
+// UnsetTerminationProtection ensures that no value is present for TerminationProtection, not even an explicit nil
+func (o *Primary) UnsetTerminationProtection() {
+	o.TerminationProtection.Unset()
 }
 
 // GetCreateEphemeralOnPrCreate returns the CreateEphemeralOnPrCreate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -251,6 +295,9 @@ func (o Primary) ToMap() (map[string]interface{}, error) {
 	}
 	if o.AutoDeployEphemeral.IsSet() {
 		toSerialize["autoDeployEphemeral"] = o.AutoDeployEphemeral.Get()
+	}
+	if o.TerminationProtection.IsSet() {
+		toSerialize["terminationProtection"] = o.TerminationProtection.Get()
 	}
 	if o.CreateEphemeralOnPrCreate.IsSet() {
 		toSerialize["createEphemeralOnPrCreate"] = o.CreateEphemeralOnPrCreate.Get()

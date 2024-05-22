@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "primary"]
 **AutoDeployEphemeral** | Pointer to **NullableBool** |  | [optional] 
+**TerminationProtection** | Pointer to **NullableBool** |  | [optional] 
 **CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
 **EphemeralKubernetesIntegration** | **NullableString** |  | 
@@ -89,6 +90,41 @@ HasAutoDeployEphemeral returns a boolean if a field has been set.
 `func (o *Primary) UnsetAutoDeployEphemeral()`
 
 UnsetAutoDeployEphemeral ensures that no value is present for AutoDeployEphemeral, not even an explicit nil
+### GetTerminationProtection
+
+`func (o *Primary) GetTerminationProtection() bool`
+
+GetTerminationProtection returns the TerminationProtection field if non-nil, zero value otherwise.
+
+### GetTerminationProtectionOk
+
+`func (o *Primary) GetTerminationProtectionOk() (*bool, bool)`
+
+GetTerminationProtectionOk returns a tuple with the TerminationProtection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTerminationProtection
+
+`func (o *Primary) SetTerminationProtection(v bool)`
+
+SetTerminationProtection sets TerminationProtection field to given value.
+
+### HasTerminationProtection
+
+`func (o *Primary) HasTerminationProtection() bool`
+
+HasTerminationProtection returns a boolean if a field has been set.
+
+### SetTerminationProtectionNil
+
+`func (o *Primary) SetTerminationProtectionNil(b bool)`
+
+ SetTerminationProtectionNil sets the value for TerminationProtection to be an explicit nil
+
+### UnsetTerminationProtection
+`func (o *Primary) UnsetTerminationProtection()`
+
+UnsetTerminationProtection ensures that no value is present for TerminationProtection, not even an explicit nil
 ### GetCreateEphemeralOnPrCreate
 
 `func (o *Primary) GetCreateEphemeralOnPrCreate() bool`

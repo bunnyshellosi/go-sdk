@@ -1693,6 +1693,7 @@ paths:
           - connected
           - disconnected
           - detached
+          - locked
           type: string
         style: form
       - allowEmptyValue: false
@@ -3540,6 +3541,9 @@ components:
           example: primary
           type: string
         autoDeployEphemeral:
+          nullable: true
+          type: boolean
+        terminationProtection:
           nullable: true
           type: boolean
         createEphemeralOnPrCreate:
