@@ -4168,6 +4168,8 @@ components:
           type: boolean
         autoUpdate:
           type: boolean
+        terminationProtection:
+          type: boolean
         createEphemeralOnPrCreate:
           type: boolean
         destroyEphemeralOnPrClose:
