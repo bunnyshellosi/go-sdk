@@ -4063,6 +4063,10 @@ components:
           nullable: true
           readOnly: true
           type: string
+        hasTerminationProtection:
+          description: Environment termination protection.
+          readOnly: true
+          type: boolean
         hasEphemeralAutoDeploy:
           description: Environment ephemeral auto deploy status.
           readOnly: true
@@ -4130,6 +4134,10 @@ components:
           nullable: true
           readOnly: true
           type: string
+        hasTerminationProtection:
+          description: Environment termination protection.
+          readOnly: true
+          type: boolean
         hasEphemeralAutoDeploy:
           description: Environment ephemeral auto deploy status.
           readOnly: true

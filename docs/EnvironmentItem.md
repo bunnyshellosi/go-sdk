@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
 **KubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier. | [optional] [readonly] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier for the ephemeral auto deploy cluster. | [optional] [readonly] 
+**HasTerminationProtection** | Pointer to **bool** | Environment termination protection. | [optional] [readonly] 
 **HasEphemeralAutoDeploy** | Pointer to **bool** | Environment ephemeral auto deploy status. | [optional] [readonly] 
 **HasEphemeralCreateOnPr** | Pointer to **bool** | Environment ephemeral create-on-PR status. | [optional] [readonly] 
 **HasEphemeralDestroyOnPrClose** | Pointer to **bool** | Environment ephemeral destroy-on-PR close status. | [optional] [readonly] 
@@ -369,6 +370,31 @@ HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentItem) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetHasTerminationProtection
+
+`func (o *EnvironmentItem) GetHasTerminationProtection() bool`
+
+GetHasTerminationProtection returns the HasTerminationProtection field if non-nil, zero value otherwise.
+
+### GetHasTerminationProtectionOk
+
+`func (o *EnvironmentItem) GetHasTerminationProtectionOk() (*bool, bool)`
+
+GetHasTerminationProtectionOk returns a tuple with the HasTerminationProtection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasTerminationProtection
+
+`func (o *EnvironmentItem) SetHasTerminationProtection(v bool)`
+
+SetHasTerminationProtection sets HasTerminationProtection field to given value.
+
+### HasHasTerminationProtection
+
+`func (o *EnvironmentItem) HasHasTerminationProtection() bool`
+
+HasHasTerminationProtection returns a boolean if a field has been set.
+
 ### GetHasEphemeralAutoDeploy
 
 `func (o *EnvironmentItem) GetHasEphemeralAutoDeploy() bool`
