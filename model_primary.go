@@ -20,12 +20,13 @@ var _ MappedNullable = &Primary{}
 
 // Primary struct for Primary
 type Primary struct {
-	Type                           *string        `json:"type,omitempty"`
-	AutoDeployEphemeral            NullableBool   `json:"autoDeployEphemeral,omitempty"`
-	TerminationProtection          NullableBool   `json:"terminationProtection,omitempty"`
-	CreateEphemeralOnPrCreate      NullableBool   `json:"createEphemeralOnPrCreate,omitempty"`
-	DestroyEphemeralOnPrClose      NullableBool   `json:"destroyEphemeralOnPrClose,omitempty"`
-	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration"`
+	Type                           *string                    `json:"type,omitempty"`
+	AutoDeployEphemeral            NullableBool               `json:"autoDeployEphemeral,omitempty"`
+	TerminationProtection          NullableBool               `json:"terminationProtection,omitempty"`
+	CreateEphemeralOnPrCreate      NullableBool               `json:"createEphemeralOnPrCreate,omitempty"`
+	DestroyEphemeralOnPrClose      NullableBool               `json:"destroyEphemeralOnPrClose,omitempty"`
+	EphemeralKubernetesIntegration NullableString             `json:"ephemeralKubernetesIntegration"`
+	PrimaryOptions                 NullableEditPrimaryOptions `json:"primaryOptions,omitempty"`
 }
 
 // NewPrimary instantiates a new Primary object
@@ -280,6 +281,49 @@ func (o *Primary) SetEphemeralKubernetesIntegration(v string) {
 	o.EphemeralKubernetesIntegration.Set(&v)
 }
 
+// GetPrimaryOptions returns the PrimaryOptions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Primary) GetPrimaryOptions() EditPrimaryOptions {
+	if o == nil || IsNil(o.PrimaryOptions.Get()) {
+		var ret EditPrimaryOptions
+		return ret
+	}
+	return *o.PrimaryOptions.Get()
+}
+
+// GetPrimaryOptionsOk returns a tuple with the PrimaryOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Primary) GetPrimaryOptionsOk() (*EditPrimaryOptions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PrimaryOptions.Get(), o.PrimaryOptions.IsSet()
+}
+
+// HasPrimaryOptions returns a boolean if a field has been set.
+func (o *Primary) HasPrimaryOptions() bool {
+	if o != nil && o.PrimaryOptions.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPrimaryOptions gets a reference to the given NullableEditPrimaryOptions and assigns it to the PrimaryOptions field.
+func (o *Primary) SetPrimaryOptions(v EditPrimaryOptions) {
+	o.PrimaryOptions.Set(&v)
+}
+
+// SetPrimaryOptionsNil sets the value for PrimaryOptions to be an explicit nil
+func (o *Primary) SetPrimaryOptionsNil() {
+	o.PrimaryOptions.Set(nil)
+}
+
+// UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
+func (o *Primary) UnsetPrimaryOptions() {
+	o.PrimaryOptions.Unset()
+}
+
 func (o Primary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -306,6 +350,9 @@ func (o Primary) ToMap() (map[string]interface{}, error) {
 		toSerialize["destroyEphemeralOnPrClose"] = o.DestroyEphemeralOnPrClose.Get()
 	}
 	toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
+	if o.PrimaryOptions.IsSet() {
+		toSerialize["primaryOptions"] = o.PrimaryOptions.Get()
+	}
 	return toSerialize, nil
 }
 

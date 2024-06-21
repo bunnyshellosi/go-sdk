@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
 **EphemeralKubernetesIntegration** | **NullableString** |  | 
+**PrimaryOptions** | Pointer to [**NullableEditPrimaryOptions**](EditPrimaryOptions.md) |  | [optional] 
 
 ## Methods
 
@@ -225,6 +226,41 @@ SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to g
 `func (o *EnvironmentEditSettingsEdit) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetPrimaryOptions
+
+`func (o *EnvironmentEditSettingsEdit) GetPrimaryOptions() EditPrimaryOptions`
+
+GetPrimaryOptions returns the PrimaryOptions field if non-nil, zero value otherwise.
+
+### GetPrimaryOptionsOk
+
+`func (o *EnvironmentEditSettingsEdit) GetPrimaryOptionsOk() (*EditPrimaryOptions, bool)`
+
+GetPrimaryOptionsOk returns a tuple with the PrimaryOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrimaryOptions
+
+`func (o *EnvironmentEditSettingsEdit) SetPrimaryOptions(v EditPrimaryOptions)`
+
+SetPrimaryOptions sets PrimaryOptions field to given value.
+
+### HasPrimaryOptions
+
+`func (o *EnvironmentEditSettingsEdit) HasPrimaryOptions() bool`
+
+HasPrimaryOptions returns a boolean if a field has been set.
+
+### SetPrimaryOptionsNil
+
+`func (o *EnvironmentEditSettingsEdit) SetPrimaryOptionsNil(b bool)`
+
+ SetPrimaryOptionsNil sets the value for PrimaryOptions to be an explicit nil
+
+### UnsetPrimaryOptions
+`func (o *EnvironmentEditSettingsEdit) UnsetPrimaryOptions()`
+
+UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
