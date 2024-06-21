@@ -26,7 +26,7 @@ type Primary struct {
 	CreateEphemeralOnPrCreate      NullableBool               `json:"createEphemeralOnPrCreate,omitempty"`
 	DestroyEphemeralOnPrClose      NullableBool               `json:"destroyEphemeralOnPrClose,omitempty"`
 	EphemeralKubernetesIntegration NullableString             `json:"ephemeralKubernetesIntegration"`
-	PrimaryOptions                 NullableEditPrimaryOptions `json:"primaryOptions,omitempty"`
+	PrimaryOptions                 NullablePrimaryOptionsEdit `json:"primaryOptions,omitempty"`
 }
 
 // NewPrimary instantiates a new Primary object
@@ -282,9 +282,9 @@ func (o *Primary) SetEphemeralKubernetesIntegration(v string) {
 }
 
 // GetPrimaryOptions returns the PrimaryOptions field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Primary) GetPrimaryOptions() EditPrimaryOptions {
+func (o *Primary) GetPrimaryOptions() PrimaryOptionsEdit {
 	if o == nil || IsNil(o.PrimaryOptions.Get()) {
-		var ret EditPrimaryOptions
+		var ret PrimaryOptionsEdit
 		return ret
 	}
 	return *o.PrimaryOptions.Get()
@@ -293,7 +293,7 @@ func (o *Primary) GetPrimaryOptions() EditPrimaryOptions {
 // GetPrimaryOptionsOk returns a tuple with the PrimaryOptions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Primary) GetPrimaryOptionsOk() (*EditPrimaryOptions, bool) {
+func (o *Primary) GetPrimaryOptionsOk() (*PrimaryOptionsEdit, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -309,8 +309,8 @@ func (o *Primary) HasPrimaryOptions() bool {
 	return false
 }
 
-// SetPrimaryOptions gets a reference to the given NullableEditPrimaryOptions and assigns it to the PrimaryOptions field.
-func (o *Primary) SetPrimaryOptions(v EditPrimaryOptions) {
+// SetPrimaryOptions gets a reference to the given NullablePrimaryOptionsEdit and assigns it to the PrimaryOptions field.
+func (o *Primary) SetPrimaryOptions(v PrimaryOptionsEdit) {
 	o.PrimaryOptions.Set(&v)
 }
 
