@@ -44,7 +44,6 @@ docs/ContainerConfigItemProfile.md
 docs/ContextKubeConfigRead.md
 docs/ContextWrapperKubeConfigRead.md
 docs/Edit.md
-docs/EditPrimaryOptions.md
 docs/EmbeddedComponentCollection.md
 docs/EmbeddedComponentEndpointCollection.md
 docs/EmbeddedComponentGitCollection.md
@@ -132,6 +131,7 @@ docs/PipelineCollection.md
 docs/PipelineItem.md
 docs/Primary.md
 docs/PrimaryOptionsCreate.md
+docs/PrimaryOptionsEdit.md
 docs/ProblemGeneric.md
 docs/ProblemViolation.md
 docs/ProfileItem.md
@@ -206,7 +206,6 @@ model_container_config_item_profile.go
 model_context_kube_config_read.go
 model_context_wrapper_kube_config_read.go
 model_edit.go
-model_edit_primary_options.go
 model_embedded_component_collection.go
 model_embedded_component_endpoint_collection.go
 model_embedded_component_git_collection.go
@@ -288,6 +287,7 @@ model_pipeline_collection.go
 model_pipeline_item.go
 model_primary.go
 model_primary_options_create.go
+model_primary_options_edit.go
 model_problem_generic.go
 model_problem_violation.go
 model_profile_item.go
