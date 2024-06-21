@@ -3364,6 +3364,15 @@ components:
           example: merge
           type: string
       type: object
+    EditPrimaryOptions:
+      properties:
+        whitelistEnabled:
+          nullable: true
+          type: boolean
+        branchWhitelist:
+          nullable: true
+          type: string
+      type: object
     EnumType-item:
       properties:
         defaultValue:
@@ -3555,8 +3564,18 @@ components:
         ephemeralKubernetesIntegration:
           nullable: true
           type: string
+        primaryOptions:
+          $ref: '#/components/schemas/EditPrimaryOptions'
       required:
       - ephemeralKubernetesIntegration
+      type: object
+    PrimaryOptionsCreate:
+      properties:
+        whitelistEnabled:
+          type: boolean
+        branchWhitelist:
+          nullable: true
+          type: string
       type: object
     Profile-item:
       properties:
@@ -4194,6 +4213,8 @@ components:
           additionalProperties:
             type: string
           type: object
+        primaryOptions:
+          $ref: '#/components/schemas/PrimaryOptionsCreate'
       required:
       - name
       - project

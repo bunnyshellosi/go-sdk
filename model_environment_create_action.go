@@ -33,6 +33,7 @@ type EnvironmentCreateAction struct {
 	KubernetesIntegration          NullableString                  `json:"kubernetesIntegration,omitempty"`
 	EphemeralKubernetesIntegration NullableString                  `json:"ephemeralKubernetesIntegration,omitempty"`
 	Labels                         *map[string]string              `json:"labels,omitempty"`
+	PrimaryOptions                 NullablePrimaryOptionsCreate    `json:"primaryOptions,omitempty"`
 }
 
 // NewEnvironmentCreateAction instantiates a new EnvironmentCreateAction object
@@ -476,6 +477,49 @@ func (o *EnvironmentCreateAction) SetLabels(v map[string]string) {
 	o.Labels = &v
 }
 
+// GetPrimaryOptions returns the PrimaryOptions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentCreateAction) GetPrimaryOptions() PrimaryOptionsCreate {
+	if o == nil || IsNil(o.PrimaryOptions.Get()) {
+		var ret PrimaryOptionsCreate
+		return ret
+	}
+	return *o.PrimaryOptions.Get()
+}
+
+// GetPrimaryOptionsOk returns a tuple with the PrimaryOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentCreateAction) GetPrimaryOptionsOk() (*PrimaryOptionsCreate, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PrimaryOptions.Get(), o.PrimaryOptions.IsSet()
+}
+
+// HasPrimaryOptions returns a boolean if a field has been set.
+func (o *EnvironmentCreateAction) HasPrimaryOptions() bool {
+	if o != nil && o.PrimaryOptions.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPrimaryOptions gets a reference to the given NullablePrimaryOptionsCreate and assigns it to the PrimaryOptions field.
+func (o *EnvironmentCreateAction) SetPrimaryOptions(v PrimaryOptionsCreate) {
+	o.PrimaryOptions.Set(&v)
+}
+
+// SetPrimaryOptionsNil sets the value for PrimaryOptions to be an explicit nil
+func (o *EnvironmentCreateAction) SetPrimaryOptionsNil() {
+	o.PrimaryOptions.Set(nil)
+}
+
+// UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
+func (o *EnvironmentCreateAction) UnsetPrimaryOptions() {
+	o.PrimaryOptions.Unset()
+}
+
 func (o EnvironmentCreateAction) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -520,6 +564,9 @@ func (o EnvironmentCreateAction) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
+	}
+	if o.PrimaryOptions.IsSet() {
+		toSerialize["primaryOptions"] = o.PrimaryOptions.Get()
 	}
 	return toSerialize, nil
 }

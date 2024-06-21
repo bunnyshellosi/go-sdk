@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **KubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
 **Labels** | Pointer to **map[string]string** |  | [optional] 
+**PrimaryOptions** | Pointer to [**NullablePrimaryOptionsCreate**](PrimaryOptionsCreate.md) |  | [optional] 
 
 ## Methods
 
@@ -372,6 +373,41 @@ SetLabels sets Labels field to given value.
 
 HasLabels returns a boolean if a field has been set.
 
+### GetPrimaryOptions
+
+`func (o *EnvironmentCreateAction) GetPrimaryOptions() PrimaryOptionsCreate`
+
+GetPrimaryOptions returns the PrimaryOptions field if non-nil, zero value otherwise.
+
+### GetPrimaryOptionsOk
+
+`func (o *EnvironmentCreateAction) GetPrimaryOptionsOk() (*PrimaryOptionsCreate, bool)`
+
+GetPrimaryOptionsOk returns a tuple with the PrimaryOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrimaryOptions
+
+`func (o *EnvironmentCreateAction) SetPrimaryOptions(v PrimaryOptionsCreate)`
+
+SetPrimaryOptions sets PrimaryOptions field to given value.
+
+### HasPrimaryOptions
+
+`func (o *EnvironmentCreateAction) HasPrimaryOptions() bool`
+
+HasPrimaryOptions returns a boolean if a field has been set.
+
+### SetPrimaryOptionsNil
+
+`func (o *EnvironmentCreateAction) SetPrimaryOptionsNil(b bool)`
+
+ SetPrimaryOptionsNil sets the value for PrimaryOptions to be an explicit nil
+
+### UnsetPrimaryOptions
+`func (o *EnvironmentCreateAction) UnsetPrimaryOptions()`
+
+UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
