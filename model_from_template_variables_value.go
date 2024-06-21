@@ -57,7 +57,7 @@ func (dst *FromTemplateVariablesValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into Bool
-	err = json.Unmarshal(data, &dst.Bool)
+	err = newStrictDecoder(data).Decode(&dst.Bool)
 	if err == nil {
 		jsonBool, _ := json.Marshal(dst.Bool)
 		if string(jsonBool) == "{}" { // empty struct
@@ -70,7 +70,7 @@ func (dst *FromTemplateVariablesValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into Float32
-	err = json.Unmarshal(data, &dst.Float32)
+	err = newStrictDecoder(data).Decode(&dst.Float32)
 	if err == nil {
 		jsonFloat32, _ := json.Marshal(dst.Float32)
 		if string(jsonFloat32) == "{}" { // empty struct
@@ -83,7 +83,7 @@ func (dst *FromTemplateVariablesValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into Int32
-	err = json.Unmarshal(data, &dst.Int32)
+	err = newStrictDecoder(data).Decode(&dst.Int32)
 	if err == nil {
 		jsonInt32, _ := json.Marshal(dst.Int32)
 		if string(jsonInt32) == "{}" { // empty struct
@@ -96,7 +96,7 @@ func (dst *FromTemplateVariablesValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into String
-	err = json.Unmarshal(data, &dst.String)
+	err = newStrictDecoder(data).Decode(&dst.String)
 	if err == nil {
 		jsonString, _ := json.Marshal(dst.String)
 		if string(jsonString) == "{}" { // empty struct
