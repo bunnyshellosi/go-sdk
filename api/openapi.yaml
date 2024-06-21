@@ -3364,15 +3364,6 @@ components:
           example: merge
           type: string
       type: object
-    EditPrimaryOptions:
-      properties:
-        whitelistEnabled:
-          nullable: true
-          type: boolean
-        branchWhitelist:
-          nullable: true
-          type: string
-      type: object
     EnumType-item:
       properties:
         defaultValue:
@@ -3565,13 +3556,22 @@ components:
           nullable: true
           type: string
         primaryOptions:
-          $ref: '#/components/schemas/EditPrimaryOptions'
+          $ref: '#/components/schemas/PrimaryOptionsEdit'
       required:
       - ephemeralKubernetesIntegration
       type: object
     PrimaryOptionsCreate:
       properties:
         whitelistEnabled:
+          type: boolean
+        branchWhitelist:
+          nullable: true
+          type: string
+      type: object
+    PrimaryOptionsEdit:
+      properties:
+        whitelistEnabled:
+          nullable: true
           type: boolean
         branchWhitelist:
           nullable: true
@@ -4098,6 +4098,15 @@ components:
           description: Environment ephemeral destroy-on-PR close status.
           readOnly: true
           type: boolean
+        hasEphemeralBranchWhitelist:
+          description: Environment ephemeral branch whitelist status.
+          readOnly: true
+          type: boolean
+        ephemeralBranchWhitelistRegex:
+          description: Environment ephemeral branch whitelist regex.
+          nullable: true
+          readOnly: true
+          type: string
       type: object
     environment-item:
       description: An environment holds a collection of buildable and deployable components.
@@ -4169,6 +4178,15 @@ components:
           description: Environment ephemeral destroy-on-PR close status.
           readOnly: true
           type: boolean
+        hasEphemeralBranchWhitelist:
+          description: Environment ephemeral branch whitelist status.
+          readOnly: true
+          type: boolean
+        ephemeralBranchWhitelistRegex:
+          description: Environment ephemeral branch whitelist regex.
+          nullable: true
+          readOnly: true
+          type: string
       type: object
     environment.CloneAction:
       description: An environment holds a collection of buildable and deployable components.

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
 **EphemeralKubernetesIntegration** | **NullableString** |  | 
-**PrimaryOptions** | Pointer to [**NullableEditPrimaryOptions**](EditPrimaryOptions.md) |  | [optional] 
+**PrimaryOptions** | Pointer to [**NullablePrimaryOptionsEdit**](PrimaryOptionsEdit.md) |  | [optional] 
 
 ## Methods
 
@@ -228,20 +228,20 @@ SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to g
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
 ### GetPrimaryOptions
 
-`func (o *EnvironmentEditSettingsEdit) GetPrimaryOptions() EditPrimaryOptions`
+`func (o *EnvironmentEditSettingsEdit) GetPrimaryOptions() PrimaryOptionsEdit`
 
 GetPrimaryOptions returns the PrimaryOptions field if non-nil, zero value otherwise.
 
 ### GetPrimaryOptionsOk
 
-`func (o *EnvironmentEditSettingsEdit) GetPrimaryOptionsOk() (*EditPrimaryOptions, bool)`
+`func (o *EnvironmentEditSettingsEdit) GetPrimaryOptionsOk() (*PrimaryOptionsEdit, bool)`
 
 GetPrimaryOptionsOk returns a tuple with the PrimaryOptions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrimaryOptions
 
-`func (o *EnvironmentEditSettingsEdit) SetPrimaryOptions(v EditPrimaryOptions)`
+`func (o *EnvironmentEditSettingsEdit) SetPrimaryOptions(v PrimaryOptionsEdit)`
 
 SetPrimaryOptions sets PrimaryOptions field to given value.
 

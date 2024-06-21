@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **HasEphemeralAutoDeploy** | Pointer to **bool** | Environment ephemeral auto deploy status. | [optional] [readonly] 
 **HasEphemeralCreateOnPr** | Pointer to **bool** | Environment ephemeral create-on-PR status. | [optional] [readonly] 
 **HasEphemeralDestroyOnPrClose** | Pointer to **bool** | Environment ephemeral destroy-on-PR close status. | [optional] [readonly] 
+**HasEphemeralBranchWhitelist** | Pointer to **bool** | Environment ephemeral branch whitelist status. | [optional] [readonly] 
+**EphemeralBranchWhitelistRegex** | Pointer to **NullableString** | Environment ephemeral branch whitelist regex. | [optional] [readonly] 
 
 ## Methods
 
@@ -382,6 +384,66 @@ SetHasEphemeralDestroyOnPrClose sets HasEphemeralDestroyOnPrClose field to given
 
 HasHasEphemeralDestroyOnPrClose returns a boolean if a field has been set.
 
+### GetHasEphemeralBranchWhitelist
+
+`func (o *EnvironmentCollection) GetHasEphemeralBranchWhitelist() bool`
+
+GetHasEphemeralBranchWhitelist returns the HasEphemeralBranchWhitelist field if non-nil, zero value otherwise.
+
+### GetHasEphemeralBranchWhitelistOk
+
+`func (o *EnvironmentCollection) GetHasEphemeralBranchWhitelistOk() (*bool, bool)`
+
+GetHasEphemeralBranchWhitelistOk returns a tuple with the HasEphemeralBranchWhitelist field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasEphemeralBranchWhitelist
+
+`func (o *EnvironmentCollection) SetHasEphemeralBranchWhitelist(v bool)`
+
+SetHasEphemeralBranchWhitelist sets HasEphemeralBranchWhitelist field to given value.
+
+### HasHasEphemeralBranchWhitelist
+
+`func (o *EnvironmentCollection) HasHasEphemeralBranchWhitelist() bool`
+
+HasHasEphemeralBranchWhitelist returns a boolean if a field has been set.
+
+### GetEphemeralBranchWhitelistRegex
+
+`func (o *EnvironmentCollection) GetEphemeralBranchWhitelistRegex() string`
+
+GetEphemeralBranchWhitelistRegex returns the EphemeralBranchWhitelistRegex field if non-nil, zero value otherwise.
+
+### GetEphemeralBranchWhitelistRegexOk
+
+`func (o *EnvironmentCollection) GetEphemeralBranchWhitelistRegexOk() (*string, bool)`
+
+GetEphemeralBranchWhitelistRegexOk returns a tuple with the EphemeralBranchWhitelistRegex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralBranchWhitelistRegex
+
+`func (o *EnvironmentCollection) SetEphemeralBranchWhitelistRegex(v string)`
+
+SetEphemeralBranchWhitelistRegex sets EphemeralBranchWhitelistRegex field to given value.
+
+### HasEphemeralBranchWhitelistRegex
+
+`func (o *EnvironmentCollection) HasEphemeralBranchWhitelistRegex() bool`
+
+HasEphemeralBranchWhitelistRegex returns a boolean if a field has been set.
+
+### SetEphemeralBranchWhitelistRegexNil
+
+`func (o *EnvironmentCollection) SetEphemeralBranchWhitelistRegexNil(b bool)`
+
+ SetEphemeralBranchWhitelistRegexNil sets the value for EphemeralBranchWhitelistRegex to be an explicit nil
+
+### UnsetEphemeralBranchWhitelistRegex
+`func (o *EnvironmentCollection) UnsetEphemeralBranchWhitelistRegex()`
+
+UnsetEphemeralBranchWhitelistRegex ensures that no value is present for EphemeralBranchWhitelistRegex, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

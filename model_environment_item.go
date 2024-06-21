@@ -51,6 +51,10 @@ type EnvironmentItem struct {
 	HasEphemeralCreateOnPr *bool `json:"hasEphemeralCreateOnPr,omitempty"`
 	// Environment ephemeral destroy-on-PR close status.
 	HasEphemeralDestroyOnPrClose *bool `json:"hasEphemeralDestroyOnPrClose,omitempty"`
+	// Environment ephemeral branch whitelist status.
+	HasEphemeralBranchWhitelist *bool `json:"hasEphemeralBranchWhitelist,omitempty"`
+	// Environment ephemeral branch whitelist regex.
+	EphemeralBranchWhitelistRegex NullableString `json:"ephemeralBranchWhitelistRegex,omitempty"`
 }
 
 // NewEnvironmentItem instantiates a new EnvironmentItem object
@@ -615,6 +619,81 @@ func (o *EnvironmentItem) SetHasEphemeralDestroyOnPrClose(v bool) {
 	o.HasEphemeralDestroyOnPrClose = &v
 }
 
+// GetHasEphemeralBranchWhitelist returns the HasEphemeralBranchWhitelist field value if set, zero value otherwise.
+func (o *EnvironmentItem) GetHasEphemeralBranchWhitelist() bool {
+	if o == nil || IsNil(o.HasEphemeralBranchWhitelist) {
+		var ret bool
+		return ret
+	}
+	return *o.HasEphemeralBranchWhitelist
+}
+
+// GetHasEphemeralBranchWhitelistOk returns a tuple with the HasEphemeralBranchWhitelist field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentItem) GetHasEphemeralBranchWhitelistOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasEphemeralBranchWhitelist) {
+		return nil, false
+	}
+	return o.HasEphemeralBranchWhitelist, true
+}
+
+// HasHasEphemeralBranchWhitelist returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasHasEphemeralBranchWhitelist() bool {
+	if o != nil && !IsNil(o.HasEphemeralBranchWhitelist) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasEphemeralBranchWhitelist gets a reference to the given bool and assigns it to the HasEphemeralBranchWhitelist field.
+func (o *EnvironmentItem) SetHasEphemeralBranchWhitelist(v bool) {
+	o.HasEphemeralBranchWhitelist = &v
+}
+
+// GetEphemeralBranchWhitelistRegex returns the EphemeralBranchWhitelistRegex field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetEphemeralBranchWhitelistRegex() string {
+	if o == nil || IsNil(o.EphemeralBranchWhitelistRegex.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EphemeralBranchWhitelistRegex.Get()
+}
+
+// GetEphemeralBranchWhitelistRegexOk returns a tuple with the EphemeralBranchWhitelistRegex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetEphemeralBranchWhitelistRegexOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EphemeralBranchWhitelistRegex.Get(), o.EphemeralBranchWhitelistRegex.IsSet()
+}
+
+// HasEphemeralBranchWhitelistRegex returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasEphemeralBranchWhitelistRegex() bool {
+	if o != nil && o.EphemeralBranchWhitelistRegex.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEphemeralBranchWhitelistRegex gets a reference to the given NullableString and assigns it to the EphemeralBranchWhitelistRegex field.
+func (o *EnvironmentItem) SetEphemeralBranchWhitelistRegex(v string) {
+	o.EphemeralBranchWhitelistRegex.Set(&v)
+}
+
+// SetEphemeralBranchWhitelistRegexNil sets the value for EphemeralBranchWhitelistRegex to be an explicit nil
+func (o *EnvironmentItem) SetEphemeralBranchWhitelistRegexNil() {
+	o.EphemeralBranchWhitelistRegex.Set(nil)
+}
+
+// UnsetEphemeralBranchWhitelistRegex ensures that no value is present for EphemeralBranchWhitelistRegex, not even an explicit nil
+func (o *EnvironmentItem) UnsetEphemeralBranchWhitelistRegex() {
+	o.EphemeralBranchWhitelistRegex.Unset()
+}
+
 func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -672,6 +751,12 @@ func (o EnvironmentItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HasEphemeralDestroyOnPrClose) {
 		toSerialize["hasEphemeralDestroyOnPrClose"] = o.HasEphemeralDestroyOnPrClose
+	}
+	if !IsNil(o.HasEphemeralBranchWhitelist) {
+		toSerialize["hasEphemeralBranchWhitelist"] = o.HasEphemeralBranchWhitelist
+	}
+	if o.EphemeralBranchWhitelistRegex.IsSet() {
+		toSerialize["ephemeralBranchWhitelistRegex"] = o.EphemeralBranchWhitelistRegex.Get()
 	}
 	return toSerialize, nil
 }
