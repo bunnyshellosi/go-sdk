@@ -41,7 +41,7 @@ func (dst *EnvironmentEditSettingsEdit) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into Ephemeral
-	err = json.Unmarshal(data, &dst.Ephemeral)
+	err = newStrictDecoder(data).Decode(&dst.Ephemeral)
 	if err == nil {
 		jsonEphemeral, _ := json.Marshal(dst.Ephemeral)
 		if string(jsonEphemeral) == "{}" { // empty struct
@@ -54,7 +54,7 @@ func (dst *EnvironmentEditSettingsEdit) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into Primary
-	err = json.Unmarshal(data, &dst.Primary)
+	err = newStrictDecoder(data).Decode(&dst.Primary)
 	if err == nil {
 		jsonPrimary, _ := json.Marshal(dst.Primary)
 		if string(jsonPrimary) == "{}" { // empty struct

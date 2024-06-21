@@ -41,7 +41,7 @@ func (dst *TemplateValidateActionSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ValidateSourceGit
-	err = json.Unmarshal(data, &dst.ValidateSourceGit)
+	err = newStrictDecoder(data).Decode(&dst.ValidateSourceGit)
 	if err == nil {
 		jsonValidateSourceGit, _ := json.Marshal(dst.ValidateSourceGit)
 		if string(jsonValidateSourceGit) == "{}" { // empty struct
@@ -54,7 +54,7 @@ func (dst *TemplateValidateActionSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ValidateSourceString
-	err = json.Unmarshal(data, &dst.ValidateSourceString)
+	err = newStrictDecoder(data).Decode(&dst.ValidateSourceString)
 	if err == nil {
 		jsonValidateSourceString, _ := json.Marshal(dst.ValidateSourceString)
 		if string(jsonValidateSourceString) == "{}" { // empty struct
