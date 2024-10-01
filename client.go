@@ -59,6 +59,8 @@ type APIClient struct {
 
 	ComponentGitAPI *ComponentGitAPIService
 
+	EnvironItemAPI *EnvironItemAPIService
+
 	EnvironmentAPI *EnvironmentAPIService
 
 	EnvironmentVariableAPI *EnvironmentVariableAPIService
@@ -107,6 +109,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ComponentAPI = (*ComponentAPIService)(&c.common)
 	c.ComponentEndpointAPI = (*ComponentEndpointAPIService)(&c.common)
 	c.ComponentGitAPI = (*ComponentGitAPIService)(&c.common)
+	c.EnvironItemAPI = (*EnvironItemAPIService)(&c.common)
 	c.EnvironmentAPI = (*EnvironmentAPIService)(&c.common)
 	c.EnvironmentVariableAPI = (*EnvironmentVariableAPIService)(&c.common)
 	c.EventAPI = (*EventAPIService)(&c.common)
