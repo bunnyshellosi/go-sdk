@@ -5,6 +5,7 @@ api/openapi.yaml
 api_component.go
 api_component_endpoint.go
 api_component_git.go
+api_environ_item.go
 api_environment.go
 api_environment_variable.go
 api_event.go
@@ -47,6 +48,7 @@ docs/Edit.md
 docs/EmbeddedComponentCollection.md
 docs/EmbeddedComponentEndpointCollection.md
 docs/EmbeddedComponentGitCollection.md
+docs/EmbeddedEnvironItemCollection.md
 docs/EmbeddedEnvironmentCollection.md
 docs/EmbeddedEnvironmentVariableCollection.md
 docs/EmbeddedEventCollection.md
@@ -63,6 +65,11 @@ docs/EmbeddedWorkflowCollection.md
 docs/EnumTypeItem.md
 docs/EnumTypeItemDefaultValue.md
 docs/EnumTypeItemValuesInner.md
+docs/EnvironItemAPI.md
+docs/EnvironItemCollection.md
+docs/EnvironItemCreateAction.md
+docs/EnvironItemEditAction.md
+docs/EnvironItemItem.md
 docs/EnvironmentAPI.md
 docs/EnvironmentCloneAction.md
 docs/EnvironmentCollection.md
@@ -111,6 +118,7 @@ docs/OrganizationItem.md
 docs/PaginatedComponentCollection.md
 docs/PaginatedComponentEndpointCollection.md
 docs/PaginatedComponentGitCollection.md
+docs/PaginatedEnvironItemCollection.md
 docs/PaginatedEnvironmentCollection.md
 docs/PaginatedEnvironmentVariableCollection.md
 docs/PaginatedEventCollection.md
@@ -209,6 +217,7 @@ model_edit.go
 model_embedded_component_collection.go
 model_embedded_component_endpoint_collection.go
 model_embedded_component_git_collection.go
+model_embedded_environ_item_collection.go
 model_embedded_environment_collection.go
 model_embedded_environment_variable_collection.go
 model_embedded_event_collection.go
@@ -225,6 +234,10 @@ model_embedded_workflow_collection.go
 model_enum_type_item.go
 model_enum_type_item_default_value.go
 model_enum_type_item_values_inner.go
+model_environ_item_collection.go
+model_environ_item_create_action.go
+model_environ_item_edit_action.go
+model_environ_item_item.go
 model_environment_clone_action.go
 model_environment_collection.go
 model_environment_create_action.go
@@ -268,6 +281,7 @@ model_organization_item.go
 model_paginated_component_collection.go
 model_paginated_component_endpoint_collection.go
 model_paginated_component_git_collection.go
+model_paginated_environ_item_collection.go
 model_paginated_environment_collection.go
 model_paginated_environment_variable_collection.go
 model_paginated_event_collection.go
@@ -332,4 +346,5 @@ model_validate_source_string.go
 model_workflow_collection.go
 model_workflow_item.go
 response.go
+test/api_environ_item_test.go
 utils.go

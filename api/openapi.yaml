@@ -21,6 +21,8 @@ tags:
   name: componentEndpoint
 - description: ComponentGit Resource
   name: componentGit
+- description: Environ_item Resource
+  name: environ_item
 - description: Environment_variable Resource
   name: environment_variable
 - description: Environment Resource
@@ -589,6 +591,229 @@ paths:
       summary: Get kubernetes resources
       tags:
       - component
+  /v1/environ_items:
+    get:
+      deprecated: false
+      description: List environment variables matching any selected filters.
+      operationId: Environ_itemList
+      parameters:
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by name
+        explode: false
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by groupName
+        explode: false
+        in: query
+        name: groupName
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by environment
+        explode: false
+        in: query
+        name: environment
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by organization
+        explode: false
+        in: query
+        name: organization
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/paginated-environ_item-collection'
+          description: environ_item collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: List environment variables matching any selected filters.
+      tags:
+      - environ_item
+    post:
+      deprecated: false
+      description: Create a specific environment variable.
+      operationId: Environ_itemCreate
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environ_item.CreateAction'
+        description: The new environ_item resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environ_item-item'
+          description: environ_item resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Create a specific environment variable.
+      tags:
+      - environ_item
+  /v1/environ_items/{id}:
+    delete:
+      deprecated: false
+      description: Delete a specific environment variable.
+      operationId: Environ_itemDelete
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "204":
+          description: environ_item resource deleted
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Delete a specific environment variable.
+      tags:
+      - environ_item
+    get:
+      deprecated: false
+      description: View a specific environment variable.
+      operationId: Environ_itemView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environ_item-item'
+          description: environ_item resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: View a specific environment variable.
+      tags:
+      - environ_item
+    patch:
+      deprecated: false
+      description: Edit a specific environment variable.
+      operationId: Environ_itemEdit
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/environ_item.EditAction'
+        description: The updated environ_item resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/environ_item-item'
+          description: environ_item resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/problem.generic'
+          description: Request Error
+      summary: Edit a specific environment variable.
+      tags:
+      - environ_item
   /v1/environment_variables:
     get:
       deprecated: false
@@ -4040,6 +4265,101 @@ components:
           readOnly: true
           type: string
       type: object
+    environ_item-collection:
+      description: An environment variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Environment variable identifier.
+          readOnly: true
+          type: string
+        groupName:
+          description: Environ group name.
+          readOnly: true
+          type: string
+        name:
+          description: Environment variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Environment variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Environment variable marked as secret.
+          readOnly: true
+          type: boolean
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    environ_item-item:
+      description: An environment variable used during Bunnyshell workflows.
+      properties:
+        id:
+          description: Environment variable identifier.
+          readOnly: true
+          type: string
+        groupName:
+          description: Environ group name.
+          readOnly: true
+          type: string
+        name:
+          description: Environment variable name.
+          readOnly: true
+          type: string
+        value:
+          description: Environment variable value.
+          nullable: true
+          readOnly: true
+          type: string
+        secret:
+          description: Environment variable marked as secret.
+          readOnly: true
+          type: boolean
+        environment:
+          description: Environment identifier.
+          readOnly: true
+          type: string
+        organization:
+          description: Organization identifier.
+          readOnly: true
+          type: string
+      type: object
+    environ_item.CreateAction:
+      description: An environment variable used during Bunnyshell workflows.
+      properties:
+        groupName:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+        isSecret:
+          type: boolean
+        environment:
+          type: string
+      required:
+      - environment
+      - groupName
+      - name
+      - value
+      type: object
+    environ_item.EditAction:
+      description: An environment variable used during Bunnyshell workflows.
+      properties:
+        value:
+          nullable: true
+          type: string
+        isSecret:
+          nullable: true
+          type: boolean
+      type: object
     environment-collection:
       description: An environment holds a collection of buildable and deployable components.
       properties:
@@ -4697,6 +5017,23 @@ components:
           type: integer
         _embedded:
           $ref: '#/components/schemas/embedded_componentGit_collection'
+      type: object
+    paginated-environ_item-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: '#/components/schemas/paginated_links'
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: '#/components/schemas/embedded_environ_item_collection'
       type: object
     paginated-environment-collection:
       description: Paginated result
@@ -5816,6 +6153,14 @@ components:
             $ref: '#/components/schemas/componentGit-collection'
           type: array
       title: embedded-componentGit-collection
+      type: object
+    embedded_environ_item_collection:
+      properties:
+        item:
+          items:
+            $ref: '#/components/schemas/environ_item-collection'
+          type: array
+      title: embedded-environ_item-collection
       type: object
     embedded_environment_collection:
       properties:
