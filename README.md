@@ -87,6 +87,11 @@ Class | Method | HTTP request | Description
 *ComponentEndpointAPI* | [**ComponentEndpointView**](docs/ComponentEndpointAPI.md#componentendpointview) | **Get** /v1/components/{id}/endpoint | View endpoints for a specific service component
 *ComponentGitAPI* | [**ComponentGitList**](docs/ComponentGitAPI.md#componentgitlist) | **Get** /v1/components/gitinfo | List git info for service components matching any selected filters
 *ComponentGitAPI* | [**ComponentGitView**](docs/ComponentGitAPI.md#componentgitview) | **Get** /v1/components/{id}/gitinfo | View git info for a specific service component
+*EnvironItemAPI* | [**EnvironItemCreate**](docs/EnvironItemAPI.md#environitemcreate) | **Post** /v1/environ_items | Create a specific environment variable.
+*EnvironItemAPI* | [**EnvironItemDelete**](docs/EnvironItemAPI.md#environitemdelete) | **Delete** /v1/environ_items/{id} | Delete a specific environment variable.
+*EnvironItemAPI* | [**EnvironItemEdit**](docs/EnvironItemAPI.md#environitemedit) | **Patch** /v1/environ_items/{id} | Edit a specific environment variable.
+*EnvironItemAPI* | [**EnvironItemList**](docs/EnvironItemAPI.md#environitemlist) | **Get** /v1/environ_items | List environment variables matching any selected filters.
+*EnvironItemAPI* | [**EnvironItemView**](docs/EnvironItemAPI.md#environitemview) | **Get** /v1/environ_items/{id} | View a specific environment variable.
 *EnvironmentAPI* | [**EnvironmentClone**](docs/EnvironmentAPI.md#environmentclone) | **Post** /v1/environments/{id}/clone | Clone an environment.
 *EnvironmentAPI* | [**EnvironmentCreate**](docs/EnvironmentAPI.md#environmentcreate) | **Post** /v1/environments | Creates a new environment.
 *EnvironmentAPI* | [**EnvironmentDefinition**](docs/EnvironmentAPI.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
@@ -170,6 +175,7 @@ Class | Method | HTTP request | Description
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
  - [EmbeddedComponentEndpointCollection](docs/EmbeddedComponentEndpointCollection.md)
  - [EmbeddedComponentGitCollection](docs/EmbeddedComponentGitCollection.md)
+ - [EmbeddedEnvironItemCollection](docs/EmbeddedEnvironItemCollection.md)
  - [EmbeddedEnvironmentCollection](docs/EmbeddedEnvironmentCollection.md)
  - [EmbeddedEnvironmentVariableCollection](docs/EmbeddedEnvironmentVariableCollection.md)
  - [EmbeddedEventCollection](docs/EmbeddedEventCollection.md)
@@ -186,6 +192,10 @@ Class | Method | HTTP request | Description
  - [EnumTypeItem](docs/EnumTypeItem.md)
  - [EnumTypeItemDefaultValue](docs/EnumTypeItemDefaultValue.md)
  - [EnumTypeItemValuesInner](docs/EnumTypeItemValuesInner.md)
+ - [EnvironItemCollection](docs/EnvironItemCollection.md)
+ - [EnvironItemCreateAction](docs/EnvironItemCreateAction.md)
+ - [EnvironItemEditAction](docs/EnvironItemEditAction.md)
+ - [EnvironItemItem](docs/EnvironItemItem.md)
  - [EnvironmentCloneAction](docs/EnvironmentCloneAction.md)
  - [EnvironmentCollection](docs/EnvironmentCollection.md)
  - [EnvironmentCreateAction](docs/EnvironmentCreateAction.md)
@@ -229,6 +239,7 @@ Class | Method | HTTP request | Description
  - [PaginatedComponentCollection](docs/PaginatedComponentCollection.md)
  - [PaginatedComponentEndpointCollection](docs/PaginatedComponentEndpointCollection.md)
  - [PaginatedComponentGitCollection](docs/PaginatedComponentGitCollection.md)
+ - [PaginatedEnvironItemCollection](docs/PaginatedEnvironItemCollection.md)
  - [PaginatedEnvironmentCollection](docs/PaginatedEnvironmentCollection.md)
  - [PaginatedEnvironmentVariableCollection](docs/PaginatedEnvironmentVariableCollection.md)
  - [PaginatedEventCollection](docs/PaginatedEventCollection.md)
