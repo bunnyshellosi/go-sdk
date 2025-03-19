@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## ComponentList
 
-> PaginatedComponentCollection ComponentList(ctx).Page(page).Name(name).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
+> PaginatedComponentCollection ComponentList(ctx).Page(page).Name(name).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).GitRepository(gitRepository).GitBranch(gitBranch).Execute()
 
 List service components matching any selected filters
 
@@ -40,10 +40,12 @@ func main() {
     clusterStatus := "not_available" // string | Filter by clusterStatus (optional)
     organization := "organization_example" // string | Filter by organization (optional)
     project := "project_example" // string | Filter by project (optional)
+    gitRepository := "gitRepository_example" // string | Filter by gitRepository (optional)
+    gitBranch := "gitBranch_example" // string | Filter by gitBranch (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ComponentAPI.ComponentList(context.Background()).Page(page).Name(name).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).Execute()
+    resp, r, err := apiClient.ComponentAPI.ComponentList(context.Background()).Page(page).Name(name).Environment(environment).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Organization(organization).Project(project).GitRepository(gitRepository).GitBranch(gitBranch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComponentAPI.ComponentList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -71,6 +73,8 @@ Name | Type | Description  | Notes
  **clusterStatus** | **string** | Filter by clusterStatus | 
  **organization** | **string** | Filter by organization | 
  **project** | **string** | Filter by project | 
+ **gitRepository** | **string** | Filter by gitRepository | 
+ **gitBranch** | **string** | Filter by gitBranch | 
 
 ### Return type
 

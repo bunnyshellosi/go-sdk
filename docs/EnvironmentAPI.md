@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentList
 
-> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Search(search).Project(project).Labels(labels).Execute()
+> PaginatedEnvironmentCollection EnvironmentList(ctx).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Search(search).ComponentGitRepository(componentGitRepository).ComponentGitBranch(componentGitBranch).Project(project).Labels(labels).Execute()
 
 List environments matching any selected filters.
 
@@ -759,12 +759,14 @@ func main() {
     operationStatus := "draft" // string | Filter by operationStatus (optional)
     clusterStatus := "running_ok" // string | Filter by clusterStatus (optional)
     search := "search_example" // string | Filter by search (optional)
+    componentGitRepository := "componentGitRepository_example" // string | Filter by componentGitRepository (optional)
+    componentGitBranch := "componentGitBranch_example" // string | Filter by componentGitBranch (optional)
     project := "project_example" // string | Filter by project (optional)
     labels := map[string]string{"key": map[string]string{"key": "Inner_example"}} // map[string]string | Filter by label key-value pair. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentAPI.EnvironmentList(context.Background()).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Search(search).Project(project).Labels(labels).Execute()
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentList(context.Background()).Page(page).Organization(organization).KubernetesIntegration(kubernetesIntegration).Type_(type_).OperationStatus(operationStatus).ClusterStatus(clusterStatus).Search(search).ComponentGitRepository(componentGitRepository).ComponentGitBranch(componentGitBranch).Project(project).Labels(labels).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -792,6 +794,8 @@ Name | Type | Description  | Notes
  **operationStatus** | **string** | Filter by operationStatus | 
  **clusterStatus** | **string** | Filter by clusterStatus | 
  **search** | **string** | Filter by search | 
+ **componentGitRepository** | **string** | Filter by componentGitRepository | 
+ **componentGitBranch** | **string** | Filter by componentGitBranch | 
  **project** | **string** | Filter by project | 
  **labels** | **map[string]map[string]string** | Filter by label key-value pair. | 
 

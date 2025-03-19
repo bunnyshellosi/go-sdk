@@ -28,6 +28,8 @@ type BuildSettingsItem struct {
 	UseManagedCluster *bool `json:"useManagedCluster,omitempty"`
 	// The Kubernetes integration cluster used for the image builds.
 	KubernetesIntegration NullableString `json:"kubernetesIntegration,omitempty"`
+	// Either Kaniko or BuildKit.
+	BuildEngine NullableString `json:"buildEngine,omitempty"`
 	// The CPU allocated for the build runner.
 	Cpu NullableString `json:"cpu,omitempty"`
 	// The memory allocated for the build runner.
@@ -203,6 +205,49 @@ func (o *BuildSettingsItem) SetKubernetesIntegrationNil() {
 // UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
 func (o *BuildSettingsItem) UnsetKubernetesIntegration() {
 	o.KubernetesIntegration.Unset()
+}
+
+// GetBuildEngine returns the BuildEngine field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BuildSettingsItem) GetBuildEngine() string {
+	if o == nil || IsNil(o.BuildEngine.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BuildEngine.Get()
+}
+
+// GetBuildEngineOk returns a tuple with the BuildEngine field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BuildSettingsItem) GetBuildEngineOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuildEngine.Get(), o.BuildEngine.IsSet()
+}
+
+// HasBuildEngine returns a boolean if a field has been set.
+func (o *BuildSettingsItem) HasBuildEngine() bool {
+	if o != nil && o.BuildEngine.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuildEngine gets a reference to the given NullableString and assigns it to the BuildEngine field.
+func (o *BuildSettingsItem) SetBuildEngine(v string) {
+	o.BuildEngine.Set(&v)
+}
+
+// SetBuildEngineNil sets the value for BuildEngine to be an explicit nil
+func (o *BuildSettingsItem) SetBuildEngineNil() {
+	o.BuildEngine.Set(nil)
+}
+
+// UnsetBuildEngine ensures that no value is present for BuildEngine, not even an explicit nil
+func (o *BuildSettingsItem) UnsetBuildEngine() {
+	o.BuildEngine.Unset()
 }
 
 // GetCpu returns the Cpu field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -398,6 +443,9 @@ func (o BuildSettingsItem) ToMap() (map[string]interface{}, error) {
 	}
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
+	}
+	if o.BuildEngine.IsSet() {
+		toSerialize["buildEngine"] = o.BuildEngine.Get()
 	}
 	if o.Cpu.IsSet() {
 		toSerialize["cpu"] = o.Cpu.Get()

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **RegistryIntegration** | Pointer to **NullableString** | The Container Registry used for the built images. | [optional] 
 **UseManagedCluster** | Pointer to **bool** | Use the managed builds Cluster. | [optional] 
 **KubernetesIntegration** | Pointer to **NullableString** | The Kubernetes integration cluster used for the image builds. | [optional] 
+**BuildEngine** | Pointer to **NullableString** | Either Kaniko or BuildKit. | [optional] 
 **Cpu** | Pointer to **NullableString** | The CPU allocated for the build runner. | [optional] 
 **Memory** | Pointer to **NullableInt32** | The memory allocated for the build runner. | [optional] 
 **LastStatus** | Pointer to **NullableString** | The latest status of the build settings. | [optional] 
@@ -152,6 +153,41 @@ HasKubernetesIntegration returns a boolean if a field has been set.
 `func (o *BuildSettingsItem) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetBuildEngine
+
+`func (o *BuildSettingsItem) GetBuildEngine() string`
+
+GetBuildEngine returns the BuildEngine field if non-nil, zero value otherwise.
+
+### GetBuildEngineOk
+
+`func (o *BuildSettingsItem) GetBuildEngineOk() (*string, bool)`
+
+GetBuildEngineOk returns a tuple with the BuildEngine field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuildEngine
+
+`func (o *BuildSettingsItem) SetBuildEngine(v string)`
+
+SetBuildEngine sets BuildEngine field to given value.
+
+### HasBuildEngine
+
+`func (o *BuildSettingsItem) HasBuildEngine() bool`
+
+HasBuildEngine returns a boolean if a field has been set.
+
+### SetBuildEngineNil
+
+`func (o *BuildSettingsItem) SetBuildEngineNil(b bool)`
+
+ SetBuildEngineNil sets the value for BuildEngine to be an explicit nil
+
+### UnsetBuildEngine
+`func (o *BuildSettingsItem) UnsetBuildEngine()`
+
+UnsetBuildEngine ensures that no value is present for BuildEngine, not even an explicit nil
 ### GetCpu
 
 `func (o *BuildSettingsItem) GetCpu() string`
