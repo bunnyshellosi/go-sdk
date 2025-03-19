@@ -33,6 +33,8 @@ type ApiComponentListRequest struct {
 	clusterStatus   *string
 	organization    *string
 	project         *string
+	gitRepository   *string
+	gitBranch       *string
 }
 
 // The collection page number
@@ -74,6 +76,18 @@ func (r ApiComponentListRequest) Organization(organization string) ApiComponentL
 // Filter by project
 func (r ApiComponentListRequest) Project(project string) ApiComponentListRequest {
 	r.project = &project
+	return r
+}
+
+// Filter by gitRepository
+func (r ApiComponentListRequest) GitRepository(gitRepository string) ApiComponentListRequest {
+	r.gitRepository = &gitRepository
+	return r
+}
+
+// Filter by gitBranch
+func (r ApiComponentListRequest) GitBranch(gitBranch string) ApiComponentListRequest {
+	r.gitBranch = &gitBranch
 	return r
 }
 
@@ -141,6 +155,12 @@ func (a *ComponentAPIService) ComponentListExecute(r ApiComponentListRequest) (*
 	}
 	if r.project != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")
+	}
+	if r.gitRepository != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "gitRepository", r.gitRepository, "")
+	}
+	if r.gitBranch != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "gitBranch", r.gitBranch, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

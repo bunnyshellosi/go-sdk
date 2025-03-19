@@ -181,6 +181,28 @@ paths:
         schema:
           type: string
         style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by gitRepository
+        explode: false
+        in: query
+        name: gitRepository
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by gitBranch
+        explode: false
+        in: query
+        name: gitBranch
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1153,6 +1175,28 @@ paths:
       - allowEmptyValue: false
         allowReserved: false
         deprecated: false
+        description: Filter by componentGitRepository
+        explode: false
+        in: query
+        name: componentGitRepository
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by componentGitBranch
+        explode: false
+        in: query
+        name: componentGitBranch
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
         description: Filter by project
         explode: false
         in: query
@@ -1761,6 +1805,7 @@ paths:
           - env_create_ephemeral
           - env_clone
           - env_deploy
+          - env_undeploy
           - env_delete
           - env_delete_ephemeral
           - env_start_manual
@@ -3512,6 +3557,10 @@ components:
           description: The Kubernetes integration cluster used for the image builds.
           nullable: true
           type: string
+        buildEngine:
+          description: Either Kaniko or BuildKit.
+          nullable: true
+          type: string
         cpu:
           description: The CPU allocated for the build runner.
           nullable: true
@@ -4572,6 +4621,9 @@ components:
         kubernetesIntegration:
           nullable: true
           type: string
+        buildEngine:
+          nullable: true
+          type: string
         cpu:
           description: K8s supports decimal values with step 0.001 That's why we are
             using decimal.
@@ -4584,6 +4636,11 @@ components:
         timeoutSeconds:
           nullable: true
           type: integer
+        namespaceCustomLabels:
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - cpu
       - kubernetesIntegration
@@ -5461,6 +5518,9 @@ components:
         kubernetesIntegration:
           nullable: true
           type: string
+        buildEngine:
+          nullable: true
+          type: string
         cpu:
           description: K8s supports decimal values with step 0.001 That's why we are
             using decimal.
@@ -5473,6 +5533,11 @@ components:
         timeoutSeconds:
           nullable: true
           type: integer
+        namespaceCustomLabels:
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - cpu
       - kubernetesIntegration

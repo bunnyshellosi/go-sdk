@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 **RegistryIntegration** | **NullableString** |  | 
 **UseManagedCluster** | Pointer to **NullableBool** |  | [optional] 
 **KubernetesIntegration** | **NullableString** |  | 
+**BuildEngine** | Pointer to **NullableString** |  | [optional] 
 **Cpu** | **NullableString** | K8s supports decimal values with step 0.001 That&#39;s why we are using decimal. | 
 **Memory** | **NullableInt32** | expressed in Mi | 
 **TimeoutSeconds** | **NullableInt32** |  | 
+**NamespaceCustomLabels** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
@@ -161,6 +163,41 @@ SetKubernetesIntegration sets KubernetesIntegration field to given value.
 `func (o *EnvironmentEditBuildSettingsAction) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetBuildEngine
+
+`func (o *EnvironmentEditBuildSettingsAction) GetBuildEngine() string`
+
+GetBuildEngine returns the BuildEngine field if non-nil, zero value otherwise.
+
+### GetBuildEngineOk
+
+`func (o *EnvironmentEditBuildSettingsAction) GetBuildEngineOk() (*string, bool)`
+
+GetBuildEngineOk returns a tuple with the BuildEngine field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuildEngine
+
+`func (o *EnvironmentEditBuildSettingsAction) SetBuildEngine(v string)`
+
+SetBuildEngine sets BuildEngine field to given value.
+
+### HasBuildEngine
+
+`func (o *EnvironmentEditBuildSettingsAction) HasBuildEngine() bool`
+
+HasBuildEngine returns a boolean if a field has been set.
+
+### SetBuildEngineNil
+
+`func (o *EnvironmentEditBuildSettingsAction) SetBuildEngineNil(b bool)`
+
+ SetBuildEngineNil sets the value for BuildEngine to be an explicit nil
+
+### UnsetBuildEngine
+`func (o *EnvironmentEditBuildSettingsAction) UnsetBuildEngine()`
+
+UnsetBuildEngine ensures that no value is present for BuildEngine, not even an explicit nil
 ### GetCpu
 
 `func (o *EnvironmentEditBuildSettingsAction) GetCpu() string`
@@ -251,6 +288,41 @@ SetTimeoutSeconds sets TimeoutSeconds field to given value.
 `func (o *EnvironmentEditBuildSettingsAction) UnsetTimeoutSeconds()`
 
 UnsetTimeoutSeconds ensures that no value is present for TimeoutSeconds, not even an explicit nil
+### GetNamespaceCustomLabels
+
+`func (o *EnvironmentEditBuildSettingsAction) GetNamespaceCustomLabels() []string`
+
+GetNamespaceCustomLabels returns the NamespaceCustomLabels field if non-nil, zero value otherwise.
+
+### GetNamespaceCustomLabelsOk
+
+`func (o *EnvironmentEditBuildSettingsAction) GetNamespaceCustomLabelsOk() (*[]string, bool)`
+
+GetNamespaceCustomLabelsOk returns a tuple with the NamespaceCustomLabels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNamespaceCustomLabels
+
+`func (o *EnvironmentEditBuildSettingsAction) SetNamespaceCustomLabels(v []string)`
+
+SetNamespaceCustomLabels sets NamespaceCustomLabels field to given value.
+
+### HasNamespaceCustomLabels
+
+`func (o *EnvironmentEditBuildSettingsAction) HasNamespaceCustomLabels() bool`
+
+HasNamespaceCustomLabels returns a boolean if a field has been set.
+
+### SetNamespaceCustomLabelsNil
+
+`func (o *EnvironmentEditBuildSettingsAction) SetNamespaceCustomLabelsNil(b bool)`
+
+ SetNamespaceCustomLabelsNil sets the value for NamespaceCustomLabels to be an explicit nil
+
+### UnsetNamespaceCustomLabels
+`func (o *EnvironmentEditBuildSettingsAction) UnsetNamespaceCustomLabels()`
+
+UnsetNamespaceCustomLabels ensures that no value is present for NamespaceCustomLabels, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

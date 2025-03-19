@@ -1533,17 +1533,19 @@ func (a *EnvironmentAPIService) EnvironmentKubeConfigExecute(r ApiEnvironmentKub
 }
 
 type ApiEnvironmentListRequest struct {
-	ctx                   context.Context
-	ApiService            *EnvironmentAPIService
-	page                  *int32
-	organization          *string
-	kubernetesIntegration *string
-	type_                 *string
-	operationStatus       *string
-	clusterStatus         *string
-	search                *string
-	project               *string
-	labels                *map[string]string
+	ctx                    context.Context
+	ApiService             *EnvironmentAPIService
+	page                   *int32
+	organization           *string
+	kubernetesIntegration  *string
+	type_                  *string
+	operationStatus        *string
+	clusterStatus          *string
+	search                 *string
+	componentGitRepository *string
+	componentGitBranch     *string
+	project                *string
+	labels                 *map[string]string
 }
 
 // The collection page number
@@ -1585,6 +1587,18 @@ func (r ApiEnvironmentListRequest) ClusterStatus(clusterStatus string) ApiEnviro
 // Filter by search
 func (r ApiEnvironmentListRequest) Search(search string) ApiEnvironmentListRequest {
 	r.search = &search
+	return r
+}
+
+// Filter by componentGitRepository
+func (r ApiEnvironmentListRequest) ComponentGitRepository(componentGitRepository string) ApiEnvironmentListRequest {
+	r.componentGitRepository = &componentGitRepository
+	return r
+}
+
+// Filter by componentGitBranch
+func (r ApiEnvironmentListRequest) ComponentGitBranch(componentGitBranch string) ApiEnvironmentListRequest {
+	r.componentGitBranch = &componentGitBranch
 	return r
 }
 
@@ -1664,6 +1678,12 @@ func (a *EnvironmentAPIService) EnvironmentListExecute(r ApiEnvironmentListReque
 	}
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	}
+	if r.componentGitRepository != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "componentGitRepository", r.componentGitRepository, "")
+	}
+	if r.componentGitBranch != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "componentGitBranch", r.componentGitBranch, "")
 	}
 	if r.project != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "project", r.project, "")

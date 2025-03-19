@@ -24,11 +24,13 @@ type ProjectEditBuildSettingsAction struct {
 	RegistryIntegration   NullableString `json:"registryIntegration"`
 	UseManagedCluster     NullableBool   `json:"useManagedCluster,omitempty"`
 	KubernetesIntegration NullableString `json:"kubernetesIntegration"`
+	BuildEngine           NullableString `json:"buildEngine,omitempty"`
 	// K8s supports decimal values with step 0.001 That's why we are using decimal.
 	Cpu NullableString `json:"cpu"`
 	// expressed in Mi
-	Memory         NullableInt32 `json:"memory"`
-	TimeoutSeconds NullableInt32 `json:"timeoutSeconds"`
+	Memory                NullableInt32 `json:"memory"`
+	TimeoutSeconds        NullableInt32 `json:"timeoutSeconds"`
+	NamespaceCustomLabels []string      `json:"namespaceCustomLabels,omitempty"`
 }
 
 // NewProjectEditBuildSettingsAction instantiates a new ProjectEditBuildSettingsAction object
@@ -191,6 +193,49 @@ func (o *ProjectEditBuildSettingsAction) SetKubernetesIntegration(v string) {
 	o.KubernetesIntegration.Set(&v)
 }
 
+// GetBuildEngine returns the BuildEngine field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProjectEditBuildSettingsAction) GetBuildEngine() string {
+	if o == nil || IsNil(o.BuildEngine.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.BuildEngine.Get()
+}
+
+// GetBuildEngineOk returns a tuple with the BuildEngine field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProjectEditBuildSettingsAction) GetBuildEngineOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.BuildEngine.Get(), o.BuildEngine.IsSet()
+}
+
+// HasBuildEngine returns a boolean if a field has been set.
+func (o *ProjectEditBuildSettingsAction) HasBuildEngine() bool {
+	if o != nil && o.BuildEngine.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuildEngine gets a reference to the given NullableString and assigns it to the BuildEngine field.
+func (o *ProjectEditBuildSettingsAction) SetBuildEngine(v string) {
+	o.BuildEngine.Set(&v)
+}
+
+// SetBuildEngineNil sets the value for BuildEngine to be an explicit nil
+func (o *ProjectEditBuildSettingsAction) SetBuildEngineNil() {
+	o.BuildEngine.Set(nil)
+}
+
+// UnsetBuildEngine ensures that no value is present for BuildEngine, not even an explicit nil
+func (o *ProjectEditBuildSettingsAction) UnsetBuildEngine() {
+	o.BuildEngine.Unset()
+}
+
 // GetCpu returns the Cpu field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *ProjectEditBuildSettingsAction) GetCpu() string {
@@ -269,6 +314,39 @@ func (o *ProjectEditBuildSettingsAction) SetTimeoutSeconds(v int32) {
 	o.TimeoutSeconds.Set(&v)
 }
 
+// GetNamespaceCustomLabels returns the NamespaceCustomLabels field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProjectEditBuildSettingsAction) GetNamespaceCustomLabels() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.NamespaceCustomLabels
+}
+
+// GetNamespaceCustomLabelsOk returns a tuple with the NamespaceCustomLabels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProjectEditBuildSettingsAction) GetNamespaceCustomLabelsOk() ([]string, bool) {
+	if o == nil || IsNil(o.NamespaceCustomLabels) {
+		return nil, false
+	}
+	return o.NamespaceCustomLabels, true
+}
+
+// HasNamespaceCustomLabels returns a boolean if a field has been set.
+func (o *ProjectEditBuildSettingsAction) HasNamespaceCustomLabels() bool {
+	if o != nil && IsNil(o.NamespaceCustomLabels) {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespaceCustomLabels gets a reference to the given []string and assigns it to the NamespaceCustomLabels field.
+func (o *ProjectEditBuildSettingsAction) SetNamespaceCustomLabels(v []string) {
+	o.NamespaceCustomLabels = v
+}
+
 func (o ProjectEditBuildSettingsAction) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -287,9 +365,15 @@ func (o ProjectEditBuildSettingsAction) ToMap() (map[string]interface{}, error) 
 		toSerialize["useManagedCluster"] = o.UseManagedCluster.Get()
 	}
 	toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
+	if o.BuildEngine.IsSet() {
+		toSerialize["buildEngine"] = o.BuildEngine.Get()
+	}
 	toSerialize["cpu"] = o.Cpu.Get()
 	toSerialize["memory"] = o.Memory.Get()
 	toSerialize["timeoutSeconds"] = o.TimeoutSeconds.Get()
+	if o.NamespaceCustomLabels != nil {
+		toSerialize["namespaceCustomLabels"] = o.NamespaceCustomLabels
+	}
 	return toSerialize, nil
 }
 
