@@ -28,6 +28,8 @@ type EnvironmentCollection struct {
 	Name *string `json:"name,omitempty"`
 	// Environment k8s namespace.
 	Namespace *string `json:"namespace,omitempty"`
+	// Environment url handle.
+	UrlHandle *string `json:"urlHandle,omitempty"`
 	// Environment operation status.
 	OperationStatus *string `json:"operationStatus,omitempty"`
 	// Environment cluster status.
@@ -195,6 +197,38 @@ func (o *EnvironmentCollection) HasNamespace() bool {
 // SetNamespace gets a reference to the given string and assigns it to the Namespace field.
 func (o *EnvironmentCollection) SetNamespace(v string) {
 	o.Namespace = &v
+}
+
+// GetUrlHandle returns the UrlHandle field value if set, zero value otherwise.
+func (o *EnvironmentCollection) GetUrlHandle() string {
+	if o == nil || IsNil(o.UrlHandle) {
+		var ret string
+		return ret
+	}
+	return *o.UrlHandle
+}
+
+// GetUrlHandleOk returns a tuple with the UrlHandle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCollection) GetUrlHandleOk() (*string, bool) {
+	if o == nil || IsNil(o.UrlHandle) {
+		return nil, false
+	}
+	return o.UrlHandle, true
+}
+
+// HasUrlHandle returns a boolean if a field has been set.
+func (o *EnvironmentCollection) HasUrlHandle() bool {
+	if o != nil && !IsNil(o.UrlHandle) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrlHandle gets a reference to the given string and assigns it to the UrlHandle field.
+func (o *EnvironmentCollection) SetUrlHandle(v string) {
+	o.UrlHandle = &v
 }
 
 // GetOperationStatus returns the OperationStatus field value if set, zero value otherwise.
@@ -603,6 +637,9 @@ func (o EnvironmentCollection) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
+	}
+	if !IsNil(o.UrlHandle) {
+		toSerialize["urlHandle"] = o.UrlHandle
 	}
 	if !IsNil(o.OperationStatus) {
 		toSerialize["operationStatus"] = o.OperationStatus

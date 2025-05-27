@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | Environment type: primary or ephemeral. | [optional] [readonly] 
 **Name** | Pointer to **string** | Environment name. | [optional] [readonly] 
 **Namespace** | Pointer to **string** | Environment k8s namespace. | [optional] [readonly] 
+**UrlHandle** | Pointer to **string** | Environment url handle. | [optional] [readonly] 
 **TotalComponents** | Pointer to **int32** | Service component identifier | [optional] [readonly] 
 **OperationStatus** | Pointer to **string** | Environment operation status. | [optional] [readonly] 
 **ClusterStatus** | Pointer to **string** | Environment cluster status. | [optional] [readonly] 
@@ -166,6 +167,31 @@ SetNamespace sets Namespace field to given value.
 `func (o *EnvironmentItem) HasNamespace() bool`
 
 HasNamespace returns a boolean if a field has been set.
+
+### GetUrlHandle
+
+`func (o *EnvironmentItem) GetUrlHandle() string`
+
+GetUrlHandle returns the UrlHandle field if non-nil, zero value otherwise.
+
+### GetUrlHandleOk
+
+`func (o *EnvironmentItem) GetUrlHandleOk() (*string, bool)`
+
+GetUrlHandleOk returns a tuple with the UrlHandle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUrlHandle
+
+`func (o *EnvironmentItem) SetUrlHandle(v string)`
+
+SetUrlHandle sets UrlHandle field to given value.
+
+### HasUrlHandle
+
+`func (o *EnvironmentItem) HasUrlHandle() bool`
+
+HasUrlHandle returns a boolean if a field has been set.
 
 ### GetTotalComponents
 

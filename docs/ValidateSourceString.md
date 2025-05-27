@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** |  | [optional] [default to "string"]
 **BunnyshellYaml** | **string** |  | 
 **TemplateYaml** | **string** |  | 
+**ValidateAllowExtraFields** | Pointer to **bool** |  | [optional] 
 **ValidateComponents** | Pointer to **bool** |  | [optional] 
 **ValidateForOrganizationId** | Pointer to **NullableString** |  | [optional] 
 
@@ -93,6 +94,31 @@ and a boolean to check if the value has been set.
 
 SetTemplateYaml sets TemplateYaml field to given value.
 
+
+### GetValidateAllowExtraFields
+
+`func (o *ValidateSourceString) GetValidateAllowExtraFields() bool`
+
+GetValidateAllowExtraFields returns the ValidateAllowExtraFields field if non-nil, zero value otherwise.
+
+### GetValidateAllowExtraFieldsOk
+
+`func (o *ValidateSourceString) GetValidateAllowExtraFieldsOk() (*bool, bool)`
+
+GetValidateAllowExtraFieldsOk returns a tuple with the ValidateAllowExtraFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateAllowExtraFields
+
+`func (o *ValidateSourceString) SetValidateAllowExtraFields(v bool)`
+
+SetValidateAllowExtraFields sets ValidateAllowExtraFields field to given value.
+
+### HasValidateAllowExtraFields
+
+`func (o *ValidateSourceString) HasValidateAllowExtraFields() bool`
+
+HasValidateAllowExtraFields returns a boolean if a field has been set.
 
 ### GetValidateComponents
 

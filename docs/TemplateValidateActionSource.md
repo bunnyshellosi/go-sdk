@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Ref** | **string** |  | 
 **DirPath** | **string** |  | 
 **OrganizationId** | **string** |  | 
+**ValidateAllowExtraFields** | Pointer to **bool** |  | [optional] 
 **ValidateComponents** | Pointer to **bool** |  | [optional] 
 **BunnyshellYaml** | **string** |  | 
 **TemplateYaml** | **string** |  | 
@@ -137,6 +138,31 @@ and a boolean to check if the value has been set.
 
 SetOrganizationId sets OrganizationId field to given value.
 
+
+### GetValidateAllowExtraFields
+
+`func (o *TemplateValidateActionSource) GetValidateAllowExtraFields() bool`
+
+GetValidateAllowExtraFields returns the ValidateAllowExtraFields field if non-nil, zero value otherwise.
+
+### GetValidateAllowExtraFieldsOk
+
+`func (o *TemplateValidateActionSource) GetValidateAllowExtraFieldsOk() (*bool, bool)`
+
+GetValidateAllowExtraFieldsOk returns a tuple with the ValidateAllowExtraFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateAllowExtraFields
+
+`func (o *TemplateValidateActionSource) SetValidateAllowExtraFields(v bool)`
+
+SetValidateAllowExtraFields sets ValidateAllowExtraFields field to given value.
+
+### HasValidateAllowExtraFields
+
+`func (o *TemplateValidateActionSource) HasValidateAllowExtraFields() bool`
+
+HasValidateAllowExtraFields returns a boolean if a field has been set.
 
 ### GetValidateComponents
 

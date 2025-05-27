@@ -23,6 +23,7 @@ type ValidateSourceString struct {
 	Type                      *string        `json:"type,omitempty"`
 	BunnyshellYaml            string         `json:"bunnyshellYaml"`
 	TemplateYaml              string         `json:"templateYaml"`
+	ValidateAllowExtraFields  *bool          `json:"validateAllowExtraFields,omitempty"`
 	ValidateComponents        *bool          `json:"validateComponents,omitempty"`
 	ValidateForOrganizationId NullableString `json:"validateForOrganizationId,omitempty"`
 }
@@ -130,6 +131,38 @@ func (o *ValidateSourceString) SetTemplateYaml(v string) {
 	o.TemplateYaml = v
 }
 
+// GetValidateAllowExtraFields returns the ValidateAllowExtraFields field value if set, zero value otherwise.
+func (o *ValidateSourceString) GetValidateAllowExtraFields() bool {
+	if o == nil || IsNil(o.ValidateAllowExtraFields) {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateAllowExtraFields
+}
+
+// GetValidateAllowExtraFieldsOk returns a tuple with the ValidateAllowExtraFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSourceString) GetValidateAllowExtraFieldsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ValidateAllowExtraFields) {
+		return nil, false
+	}
+	return o.ValidateAllowExtraFields, true
+}
+
+// HasValidateAllowExtraFields returns a boolean if a field has been set.
+func (o *ValidateSourceString) HasValidateAllowExtraFields() bool {
+	if o != nil && !IsNil(o.ValidateAllowExtraFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateAllowExtraFields gets a reference to the given bool and assigns it to the ValidateAllowExtraFields field.
+func (o *ValidateSourceString) SetValidateAllowExtraFields(v bool) {
+	o.ValidateAllowExtraFields = &v
+}
+
 // GetValidateComponents returns the ValidateComponents field value if set, zero value otherwise.
 func (o *ValidateSourceString) GetValidateComponents() bool {
 	if o == nil || IsNil(o.ValidateComponents) {
@@ -220,6 +253,9 @@ func (o ValidateSourceString) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["bunnyshellYaml"] = o.BunnyshellYaml
 	toSerialize["templateYaml"] = o.TemplateYaml
+	if !IsNil(o.ValidateAllowExtraFields) {
+		toSerialize["validateAllowExtraFields"] = o.ValidateAllowExtraFields
+	}
 	if !IsNil(o.ValidateComponents) {
 		toSerialize["validateComponents"] = o.ValidateComponents
 	}
