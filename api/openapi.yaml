@@ -1803,6 +1803,8 @@ paths:
           enum:
           - env_create
           - env_create_ephemeral
+          - env_create_ephemeral_feature_branch
+          - env_follow_feature_branch_ephemeral
           - env_clone
           - env_deploy
           - env_undeploy
