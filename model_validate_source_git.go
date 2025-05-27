@@ -20,12 +20,13 @@ var _ MappedNullable = &ValidateSourceGit{}
 
 // ValidateSourceGit struct for ValidateSourceGit
 type ValidateSourceGit struct {
-	Type               *string `json:"type,omitempty"`
-	Url                string  `json:"url"`
-	Ref                string  `json:"ref"`
-	DirPath            string  `json:"dirPath"`
-	OrganizationId     string  `json:"organizationId"`
-	ValidateComponents *bool   `json:"validateComponents,omitempty"`
+	Type                     *string `json:"type,omitempty"`
+	Url                      string  `json:"url"`
+	Ref                      string  `json:"ref"`
+	DirPath                  string  `json:"dirPath"`
+	OrganizationId           string  `json:"organizationId"`
+	ValidateAllowExtraFields *bool   `json:"validateAllowExtraFields,omitempty"`
+	ValidateComponents       *bool   `json:"validateComponents,omitempty"`
 }
 
 // NewValidateSourceGit instantiates a new ValidateSourceGit object
@@ -181,6 +182,38 @@ func (o *ValidateSourceGit) SetOrganizationId(v string) {
 	o.OrganizationId = v
 }
 
+// GetValidateAllowExtraFields returns the ValidateAllowExtraFields field value if set, zero value otherwise.
+func (o *ValidateSourceGit) GetValidateAllowExtraFields() bool {
+	if o == nil || IsNil(o.ValidateAllowExtraFields) {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateAllowExtraFields
+}
+
+// GetValidateAllowExtraFieldsOk returns a tuple with the ValidateAllowExtraFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ValidateSourceGit) GetValidateAllowExtraFieldsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ValidateAllowExtraFields) {
+		return nil, false
+	}
+	return o.ValidateAllowExtraFields, true
+}
+
+// HasValidateAllowExtraFields returns a boolean if a field has been set.
+func (o *ValidateSourceGit) HasValidateAllowExtraFields() bool {
+	if o != nil && !IsNil(o.ValidateAllowExtraFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateAllowExtraFields gets a reference to the given bool and assigns it to the ValidateAllowExtraFields field.
+func (o *ValidateSourceGit) SetValidateAllowExtraFields(v bool) {
+	o.ValidateAllowExtraFields = &v
+}
+
 // GetValidateComponents returns the ValidateComponents field value if set, zero value otherwise.
 func (o *ValidateSourceGit) GetValidateComponents() bool {
 	if o == nil || IsNil(o.ValidateComponents) {
@@ -230,6 +263,9 @@ func (o ValidateSourceGit) ToMap() (map[string]interface{}, error) {
 	toSerialize["ref"] = o.Ref
 	toSerialize["dirPath"] = o.DirPath
 	toSerialize["organizationId"] = o.OrganizationId
+	if !IsNil(o.ValidateAllowExtraFields) {
+		toSerialize["validateAllowExtraFields"] = o.ValidateAllowExtraFields
+	}
 	if !IsNil(o.ValidateComponents) {
 		toSerialize["validateComponents"] = o.ValidateComponents
 	}

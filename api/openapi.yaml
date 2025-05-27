@@ -1803,6 +1803,8 @@ paths:
           enum:
           - env_create
           - env_create_ephemeral
+          - env_create_ephemeral_feature_branch
+          - env_follow_feature_branch_ephemeral
           - env_clone
           - env_deploy
           - env_undeploy
@@ -4029,6 +4031,8 @@ components:
           type: string
         organizationId:
           type: string
+        validateAllowExtraFields:
+          type: boolean
         validateComponents:
           type: boolean
       required:
@@ -4047,6 +4051,8 @@ components:
           type: string
         templateYaml:
           type: string
+        validateAllowExtraFields:
+          type: boolean
         validateComponents:
           type: boolean
         validateForOrganizationId:
@@ -4428,6 +4434,10 @@ components:
           description: Environment k8s namespace.
           readOnly: true
           type: string
+        urlHandle:
+          description: Environment url handle.
+          readOnly: true
+          type: string
         operationStatus:
           description: Environment operation status.
           readOnly: true
@@ -4500,6 +4510,10 @@ components:
           type: string
         namespace:
           description: Environment k8s namespace.
+          readOnly: true
+          type: string
+        urlHandle:
+          description: Environment url handle.
           readOnly: true
           type: string
         totalComponents:
