@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IncludedDependencies** | Pointer to **string** |  | [optional] [default to "none"]
+**QueueIfSomethingInProgress** | Pointer to **bool** |  | [optional] 
 **IsPartial** | Pointer to **bool** |  | [optional] 
 **Components** | Pointer to **[]string** |  | [optional] 
 
@@ -51,6 +52,31 @@ SetIncludedDependencies sets IncludedDependencies field to given value.
 `func (o *EnvironmentPartialDeployAction) HasIncludedDependencies() bool`
 
 HasIncludedDependencies returns a boolean if a field has been set.
+
+### GetQueueIfSomethingInProgress
+
+`func (o *EnvironmentPartialDeployAction) GetQueueIfSomethingInProgress() bool`
+
+GetQueueIfSomethingInProgress returns the QueueIfSomethingInProgress field if non-nil, zero value otherwise.
+
+### GetQueueIfSomethingInProgressOk
+
+`func (o *EnvironmentPartialDeployAction) GetQueueIfSomethingInProgressOk() (*bool, bool)`
+
+GetQueueIfSomethingInProgressOk returns a tuple with the QueueIfSomethingInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueueIfSomethingInProgress
+
+`func (o *EnvironmentPartialDeployAction) SetQueueIfSomethingInProgress(v bool)`
+
+SetQueueIfSomethingInProgress sets QueueIfSomethingInProgress field to given value.
+
+### HasQueueIfSomethingInProgress
+
+`func (o *EnvironmentPartialDeployAction) HasQueueIfSomethingInProgress() bool`
+
+HasQueueIfSomethingInProgress returns a boolean if a field has been set.
 
 ### GetIsPartial
 

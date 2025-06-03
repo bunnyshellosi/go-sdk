@@ -42,6 +42,10 @@ type EnvironmentCollection struct {
 	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration,omitempty"`
 	// Environment termination protection.
 	HasTerminationProtection *bool `json:"hasTerminationProtection,omitempty"`
+	// Environment auto update.
+	HasAutoUpdate *bool `json:"hasAutoUpdate,omitempty"`
+	// Environment remote development allowed.
+	HasRemoteDevelopmentAllowed *bool `json:"hasRemoteDevelopmentAllowed,omitempty"`
 	// Environment ephemeral auto deploy status.
 	HasEphemeralAutoDeploy *bool `json:"hasEphemeralAutoDeploy,omitempty"`
 	// Environment ephemeral create-on-PR status.
@@ -445,6 +449,70 @@ func (o *EnvironmentCollection) SetHasTerminationProtection(v bool) {
 	o.HasTerminationProtection = &v
 }
 
+// GetHasAutoUpdate returns the HasAutoUpdate field value if set, zero value otherwise.
+func (o *EnvironmentCollection) GetHasAutoUpdate() bool {
+	if o == nil || IsNil(o.HasAutoUpdate) {
+		var ret bool
+		return ret
+	}
+	return *o.HasAutoUpdate
+}
+
+// GetHasAutoUpdateOk returns a tuple with the HasAutoUpdate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCollection) GetHasAutoUpdateOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasAutoUpdate) {
+		return nil, false
+	}
+	return o.HasAutoUpdate, true
+}
+
+// HasHasAutoUpdate returns a boolean if a field has been set.
+func (o *EnvironmentCollection) HasHasAutoUpdate() bool {
+	if o != nil && !IsNil(o.HasAutoUpdate) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasAutoUpdate gets a reference to the given bool and assigns it to the HasAutoUpdate field.
+func (o *EnvironmentCollection) SetHasAutoUpdate(v bool) {
+	o.HasAutoUpdate = &v
+}
+
+// GetHasRemoteDevelopmentAllowed returns the HasRemoteDevelopmentAllowed field value if set, zero value otherwise.
+func (o *EnvironmentCollection) GetHasRemoteDevelopmentAllowed() bool {
+	if o == nil || IsNil(o.HasRemoteDevelopmentAllowed) {
+		var ret bool
+		return ret
+	}
+	return *o.HasRemoteDevelopmentAllowed
+}
+
+// GetHasRemoteDevelopmentAllowedOk returns a tuple with the HasRemoteDevelopmentAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentCollection) GetHasRemoteDevelopmentAllowedOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasRemoteDevelopmentAllowed) {
+		return nil, false
+	}
+	return o.HasRemoteDevelopmentAllowed, true
+}
+
+// HasHasRemoteDevelopmentAllowed returns a boolean if a field has been set.
+func (o *EnvironmentCollection) HasHasRemoteDevelopmentAllowed() bool {
+	if o != nil && !IsNil(o.HasRemoteDevelopmentAllowed) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasRemoteDevelopmentAllowed gets a reference to the given bool and assigns it to the HasRemoteDevelopmentAllowed field.
+func (o *EnvironmentCollection) SetHasRemoteDevelopmentAllowed(v bool) {
+	o.HasRemoteDevelopmentAllowed = &v
+}
+
 // GetHasEphemeralAutoDeploy returns the HasEphemeralAutoDeploy field value if set, zero value otherwise.
 func (o *EnvironmentCollection) GetHasEphemeralAutoDeploy() bool {
 	if o == nil || IsNil(o.HasEphemeralAutoDeploy) {
@@ -658,6 +726,12 @@ func (o EnvironmentCollection) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HasTerminationProtection) {
 		toSerialize["hasTerminationProtection"] = o.HasTerminationProtection
+	}
+	if !IsNil(o.HasAutoUpdate) {
+		toSerialize["hasAutoUpdate"] = o.HasAutoUpdate
+	}
+	if !IsNil(o.HasRemoteDevelopmentAllowed) {
+		toSerialize["hasRemoteDevelopmentAllowed"] = o.HasRemoteDevelopmentAllowed
 	}
 	if !IsNil(o.HasEphemeralAutoDeploy) {
 		toSerialize["hasEphemeralAutoDeploy"] = o.HasEphemeralAutoDeploy
