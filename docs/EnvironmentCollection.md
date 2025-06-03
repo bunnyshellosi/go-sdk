@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **KubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier. | [optional] [readonly] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier for the ephemeral auto deploy cluster. | [optional] [readonly] 
 **HasTerminationProtection** | Pointer to **bool** | Environment termination protection. | [optional] [readonly] 
+**HasAutoUpdate** | Pointer to **bool** | Environment auto update. | [optional] [readonly] 
+**HasRemoteDevelopmentAllowed** | Pointer to **bool** | Environment remote development allowed. | [optional] [readonly] 
 **HasEphemeralAutoDeploy** | Pointer to **bool** | Environment ephemeral auto deploy status. | [optional] [readonly] 
 **HasEphemeralCreateOnPr** | Pointer to **bool** | Environment ephemeral create-on-PR status. | [optional] [readonly] 
 **HasEphemeralDestroyOnPrClose** | Pointer to **bool** | Environment ephemeral destroy-on-PR close status. | [optional] [readonly] 
@@ -334,6 +336,56 @@ SetHasTerminationProtection sets HasTerminationProtection field to given value.
 `func (o *EnvironmentCollection) HasHasTerminationProtection() bool`
 
 HasHasTerminationProtection returns a boolean if a field has been set.
+
+### GetHasAutoUpdate
+
+`func (o *EnvironmentCollection) GetHasAutoUpdate() bool`
+
+GetHasAutoUpdate returns the HasAutoUpdate field if non-nil, zero value otherwise.
+
+### GetHasAutoUpdateOk
+
+`func (o *EnvironmentCollection) GetHasAutoUpdateOk() (*bool, bool)`
+
+GetHasAutoUpdateOk returns a tuple with the HasAutoUpdate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasAutoUpdate
+
+`func (o *EnvironmentCollection) SetHasAutoUpdate(v bool)`
+
+SetHasAutoUpdate sets HasAutoUpdate field to given value.
+
+### HasHasAutoUpdate
+
+`func (o *EnvironmentCollection) HasHasAutoUpdate() bool`
+
+HasHasAutoUpdate returns a boolean if a field has been set.
+
+### GetHasRemoteDevelopmentAllowed
+
+`func (o *EnvironmentCollection) GetHasRemoteDevelopmentAllowed() bool`
+
+GetHasRemoteDevelopmentAllowed returns the HasRemoteDevelopmentAllowed field if non-nil, zero value otherwise.
+
+### GetHasRemoteDevelopmentAllowedOk
+
+`func (o *EnvironmentCollection) GetHasRemoteDevelopmentAllowedOk() (*bool, bool)`
+
+GetHasRemoteDevelopmentAllowedOk returns a tuple with the HasRemoteDevelopmentAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasRemoteDevelopmentAllowed
+
+`func (o *EnvironmentCollection) SetHasRemoteDevelopmentAllowed(v bool)`
+
+SetHasRemoteDevelopmentAllowed sets HasRemoteDevelopmentAllowed field to given value.
+
+### HasHasRemoteDevelopmentAllowed
+
+`func (o *EnvironmentCollection) HasHasRemoteDevelopmentAllowed() bool`
+
+HasHasRemoteDevelopmentAllowed returns a boolean if a field has been set.
 
 ### GetHasEphemeralAutoDeploy
 

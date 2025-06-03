@@ -2171,6 +2171,7 @@ paths:
         schema:
           enum:
           - queued
+          - throttled
           - in_progress
           - success
           - failing
@@ -3454,6 +3455,7 @@ paths:
         schema:
           enum:
           - queued
+          - throttled
           - in_progress
           - success
           - failing
@@ -4465,6 +4467,14 @@ components:
           description: Environment termination protection.
           readOnly: true
           type: boolean
+        hasAutoUpdate:
+          description: Environment auto update.
+          readOnly: true
+          type: boolean
+        hasRemoteDevelopmentAllowed:
+          description: Environment remote development allowed.
+          readOnly: true
+          type: boolean
         hasEphemeralAutoDeploy:
           description: Environment ephemeral auto deploy status.
           readOnly: true
@@ -4547,6 +4557,14 @@ components:
           type: string
         hasTerminationProtection:
           description: Environment termination protection.
+          readOnly: true
+          type: boolean
+        hasAutoUpdate:
+          description: Environment auto update.
+          readOnly: true
+          type: boolean
+        hasRemoteDevelopmentAllowed:
+          description: Environment remote development allowed.
           readOnly: true
           type: boolean
         hasEphemeralAutoDeploy:
@@ -4751,6 +4769,8 @@ components:
           default: none
           example: none
           type: string
+        queueIfSomethingInProgress:
+          type: boolean
         isPartial:
           type: boolean
         components:

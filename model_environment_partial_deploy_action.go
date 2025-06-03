@@ -20,9 +20,10 @@ var _ MappedNullable = &EnvironmentPartialDeployAction{}
 
 // EnvironmentPartialDeployAction An environment holds a collection of buildable and deployable components.
 type EnvironmentPartialDeployAction struct {
-	IncludedDependencies *string  `json:"includedDependencies,omitempty"`
-	IsPartial            *bool    `json:"isPartial,omitempty"`
-	Components           []string `json:"components,omitempty"`
+	IncludedDependencies       *string  `json:"includedDependencies,omitempty"`
+	QueueIfSomethingInProgress *bool    `json:"queueIfSomethingInProgress,omitempty"`
+	IsPartial                  *bool    `json:"isPartial,omitempty"`
+	Components                 []string `json:"components,omitempty"`
 }
 
 // NewEnvironmentPartialDeployAction instantiates a new EnvironmentPartialDeployAction object
@@ -76,6 +77,38 @@ func (o *EnvironmentPartialDeployAction) HasIncludedDependencies() bool {
 // SetIncludedDependencies gets a reference to the given string and assigns it to the IncludedDependencies field.
 func (o *EnvironmentPartialDeployAction) SetIncludedDependencies(v string) {
 	o.IncludedDependencies = &v
+}
+
+// GetQueueIfSomethingInProgress returns the QueueIfSomethingInProgress field value if set, zero value otherwise.
+func (o *EnvironmentPartialDeployAction) GetQueueIfSomethingInProgress() bool {
+	if o == nil || IsNil(o.QueueIfSomethingInProgress) {
+		var ret bool
+		return ret
+	}
+	return *o.QueueIfSomethingInProgress
+}
+
+// GetQueueIfSomethingInProgressOk returns a tuple with the QueueIfSomethingInProgress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnvironmentPartialDeployAction) GetQueueIfSomethingInProgressOk() (*bool, bool) {
+	if o == nil || IsNil(o.QueueIfSomethingInProgress) {
+		return nil, false
+	}
+	return o.QueueIfSomethingInProgress, true
+}
+
+// HasQueueIfSomethingInProgress returns a boolean if a field has been set.
+func (o *EnvironmentPartialDeployAction) HasQueueIfSomethingInProgress() bool {
+	if o != nil && !IsNil(o.QueueIfSomethingInProgress) {
+		return true
+	}
+
+	return false
+}
+
+// SetQueueIfSomethingInProgress gets a reference to the given bool and assigns it to the QueueIfSomethingInProgress field.
+func (o *EnvironmentPartialDeployAction) SetQueueIfSomethingInProgress(v bool) {
+	o.QueueIfSomethingInProgress = &v
 }
 
 // GetIsPartial returns the IsPartial field value if set, zero value otherwise.
@@ -154,6 +187,9 @@ func (o EnvironmentPartialDeployAction) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.IncludedDependencies) {
 		toSerialize["includedDependencies"] = o.IncludedDependencies
+	}
+	if !IsNil(o.QueueIfSomethingInProgress) {
+		toSerialize["queueIfSomethingInProgress"] = o.QueueIfSomethingInProgress
 	}
 	if !IsNil(o.IsPartial) {
 		toSerialize["isPartial"] = o.IsPartial
