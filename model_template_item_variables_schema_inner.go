@@ -70,66 +70,6 @@ func (dst *TemplateItemVariablesSchemaInner) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
 	}
 
-	// check if the discriminator value is 'BooleanType-item'
-	if jsonDict["type"] == "BooleanType-item" {
-		// try to unmarshal JSON data into BooleanTypeItem
-		err = json.Unmarshal(data, &dst.BooleanTypeItem)
-		if err == nil {
-			return nil // data stored in dst.BooleanTypeItem, return on the first match
-		} else {
-			dst.BooleanTypeItem = nil
-			return fmt.Errorf("failed to unmarshal TemplateItemVariablesSchemaInner as BooleanTypeItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'EnumType-item'
-	if jsonDict["type"] == "EnumType-item" {
-		// try to unmarshal JSON data into EnumTypeItem
-		err = json.Unmarshal(data, &dst.EnumTypeItem)
-		if err == nil {
-			return nil // data stored in dst.EnumTypeItem, return on the first match
-		} else {
-			dst.EnumTypeItem = nil
-			return fmt.Errorf("failed to unmarshal TemplateItemVariablesSchemaInner as EnumTypeItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'FloatType-item'
-	if jsonDict["type"] == "FloatType-item" {
-		// try to unmarshal JSON data into FloatTypeItem
-		err = json.Unmarshal(data, &dst.FloatTypeItem)
-		if err == nil {
-			return nil // data stored in dst.FloatTypeItem, return on the first match
-		} else {
-			dst.FloatTypeItem = nil
-			return fmt.Errorf("failed to unmarshal TemplateItemVariablesSchemaInner as FloatTypeItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntegerType-item'
-	if jsonDict["type"] == "IntegerType-item" {
-		// try to unmarshal JSON data into IntegerTypeItem
-		err = json.Unmarshal(data, &dst.IntegerTypeItem)
-		if err == nil {
-			return nil // data stored in dst.IntegerTypeItem, return on the first match
-		} else {
-			dst.IntegerTypeItem = nil
-			return fmt.Errorf("failed to unmarshal TemplateItemVariablesSchemaInner as IntegerTypeItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'StringType-item'
-	if jsonDict["type"] == "StringType-item" {
-		// try to unmarshal JSON data into StringTypeItem
-		err = json.Unmarshal(data, &dst.StringTypeItem)
-		if err == nil {
-			return nil // data stored in dst.StringTypeItem, return on the first match
-		} else {
-			dst.StringTypeItem = nil
-			return fmt.Errorf("failed to unmarshal TemplateItemVariablesSchemaInner as StringTypeItem: %s", err.Error())
-		}
-	}
-
 	// check if the discriminator value is 'bool'
 	if jsonDict["type"] == "bool" {
 		// try to unmarshal JSON data into BooleanTypeItem

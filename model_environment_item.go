@@ -43,8 +43,12 @@ type EnvironmentItem struct {
 	Project *string `json:"project,omitempty"`
 	// Kubernetes integration identifier.
 	KubernetesIntegration NullableString `json:"kubernetesIntegration,omitempty"`
+	// Kubernetes integration managed hosting region.
+	HostingRegion NullableString `json:"hostingRegion,omitempty"`
 	// Kubernetes integration identifier for the ephemeral auto deploy cluster.
 	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration,omitempty"`
+	// Hosting Region for the ephemeral auto deploy cluster.
+	EphemeralHostingRegion NullableString `json:"ephemeralHostingRegion,omitempty"`
 	// Environment termination protection.
 	HasTerminationProtection *bool `json:"hasTerminationProtection,omitempty"`
 	// Environment auto update.
@@ -60,7 +64,8 @@ type EnvironmentItem struct {
 	// Environment ephemeral branch whitelist status.
 	HasEphemeralBranchWhitelist *bool `json:"hasEphemeralBranchWhitelist,omitempty"`
 	// Environment ephemeral branch whitelist regex.
-	EphemeralBranchWhitelistRegex NullableString `json:"ephemeralBranchWhitelistRegex,omitempty"`
+	EphemeralBranchWhitelistRegex NullableString               `json:"ephemeralBranchWhitelistRegex,omitempty"`
+	TemplateSettings              NullableTemplateSettingsItem `json:"templateSettings,omitempty"`
 }
 
 // NewEnvironmentItem instantiates a new EnvironmentItem object
@@ -486,6 +491,49 @@ func (o *EnvironmentItem) UnsetKubernetesIntegration() {
 	o.KubernetesIntegration.Unset()
 }
 
+// GetHostingRegion returns the HostingRegion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetHostingRegion() string {
+	if o == nil || IsNil(o.HostingRegion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.HostingRegion.Get()
+}
+
+// GetHostingRegionOk returns a tuple with the HostingRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetHostingRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HostingRegion.Get(), o.HostingRegion.IsSet()
+}
+
+// HasHostingRegion returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasHostingRegion() bool {
+	if o != nil && o.HostingRegion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHostingRegion gets a reference to the given NullableString and assigns it to the HostingRegion field.
+func (o *EnvironmentItem) SetHostingRegion(v string) {
+	o.HostingRegion.Set(&v)
+}
+
+// SetHostingRegionNil sets the value for HostingRegion to be an explicit nil
+func (o *EnvironmentItem) SetHostingRegionNil() {
+	o.HostingRegion.Set(nil)
+}
+
+// UnsetHostingRegion ensures that no value is present for HostingRegion, not even an explicit nil
+func (o *EnvironmentItem) UnsetHostingRegion() {
+	o.HostingRegion.Unset()
+}
+
 // GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentItem) GetEphemeralKubernetesIntegration() string {
 	if o == nil || IsNil(o.EphemeralKubernetesIntegration.Get()) {
@@ -527,6 +575,49 @@ func (o *EnvironmentItem) SetEphemeralKubernetesIntegrationNil() {
 // UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
 func (o *EnvironmentItem) UnsetEphemeralKubernetesIntegration() {
 	o.EphemeralKubernetesIntegration.Unset()
+}
+
+// GetEphemeralHostingRegion returns the EphemeralHostingRegion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetEphemeralHostingRegion() string {
+	if o == nil || IsNil(o.EphemeralHostingRegion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EphemeralHostingRegion.Get()
+}
+
+// GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetEphemeralHostingRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EphemeralHostingRegion.Get(), o.EphemeralHostingRegion.IsSet()
+}
+
+// HasEphemeralHostingRegion returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasEphemeralHostingRegion() bool {
+	if o != nil && o.EphemeralHostingRegion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEphemeralHostingRegion gets a reference to the given NullableString and assigns it to the EphemeralHostingRegion field.
+func (o *EnvironmentItem) SetEphemeralHostingRegion(v string) {
+	o.EphemeralHostingRegion.Set(&v)
+}
+
+// SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+func (o *EnvironmentItem) SetEphemeralHostingRegionNil() {
+	o.EphemeralHostingRegion.Set(nil)
+}
+
+// UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
+func (o *EnvironmentItem) UnsetEphemeralHostingRegion() {
+	o.EphemeralHostingRegion.Unset()
 }
 
 // GetHasTerminationProtection returns the HasTerminationProtection field value if set, zero value otherwise.
@@ -796,6 +887,49 @@ func (o *EnvironmentItem) UnsetEphemeralBranchWhitelistRegex() {
 	o.EphemeralBranchWhitelistRegex.Unset()
 }
 
+// GetTemplateSettings returns the TemplateSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentItem) GetTemplateSettings() TemplateSettingsItem {
+	if o == nil || IsNil(o.TemplateSettings.Get()) {
+		var ret TemplateSettingsItem
+		return ret
+	}
+	return *o.TemplateSettings.Get()
+}
+
+// GetTemplateSettingsOk returns a tuple with the TemplateSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentItem) GetTemplateSettingsOk() (*TemplateSettingsItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TemplateSettings.Get(), o.TemplateSettings.IsSet()
+}
+
+// HasTemplateSettings returns a boolean if a field has been set.
+func (o *EnvironmentItem) HasTemplateSettings() bool {
+	if o != nil && o.TemplateSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSettings gets a reference to the given NullableTemplateSettingsItem and assigns it to the TemplateSettings field.
+func (o *EnvironmentItem) SetTemplateSettings(v TemplateSettingsItem) {
+	o.TemplateSettings.Set(&v)
+}
+
+// SetTemplateSettingsNil sets the value for TemplateSettings to be an explicit nil
+func (o *EnvironmentItem) SetTemplateSettingsNil() {
+	o.TemplateSettings.Set(nil)
+}
+
+// UnsetTemplateSettings ensures that no value is present for TemplateSettings, not even an explicit nil
+func (o *EnvironmentItem) UnsetTemplateSettings() {
+	o.TemplateSettings.Unset()
+}
+
 func (o EnvironmentItem) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -842,8 +976,14 @@ func (o EnvironmentItem) ToMap() (map[string]interface{}, error) {
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
 	}
+	if o.HostingRegion.IsSet() {
+		toSerialize["hostingRegion"] = o.HostingRegion.Get()
+	}
 	if o.EphemeralKubernetesIntegration.IsSet() {
 		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
+	}
+	if o.EphemeralHostingRegion.IsSet() {
+		toSerialize["ephemeralHostingRegion"] = o.EphemeralHostingRegion.Get()
 	}
 	if !IsNil(o.HasTerminationProtection) {
 		toSerialize["hasTerminationProtection"] = o.HasTerminationProtection
@@ -868,6 +1008,9 @@ func (o EnvironmentItem) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EphemeralBranchWhitelistRegex.IsSet() {
 		toSerialize["ephemeralBranchWhitelistRegex"] = o.EphemeralBranchWhitelistRegex.Get()
+	}
+	if o.TemplateSettings.IsSet() {
+		toSerialize["templateSettings"] = o.TemplateSettings.Get()
 	}
 	return toSerialize, nil
 }

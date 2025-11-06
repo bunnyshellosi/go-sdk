@@ -21,6 +21,8 @@ tags:
   name: componentEndpoint
 - description: ComponentGit Resource
   name: componentGit
+- description: Ai_sandbox Resource
+  name: ai_sandbox
 - description: Environ_item Resource
   name: environ_item
 - description: Environment_variable Resource
@@ -45,6 +47,8 @@ tags:
   name: secret
 - description: Service_component_variable Resource
   name: service_component_variable
+- description: Ssh Resource
+  name: ssh
 - description: Template Resource
   name: template
 - description: Templates_repository Resource
@@ -208,13 +212,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-component-collection'
+                $ref: "#/components/schemas/paginated-component-collection"
           description: component collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List service components matching any selected filters
       tags:
@@ -286,13 +290,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-componentEndpoint-collection'
+                $ref: "#/components/schemas/paginated-componentEndpoint-collection"
           description: componentEndpoint collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List endpoints for service components matching any selected filters
       tags:
@@ -386,13 +390,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-componentGit-collection'
+                $ref: "#/components/schemas/paginated-componentGit-collection"
           description: componentGit collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List git info for service components matching any selected filters
       tags:
@@ -418,7 +422,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/component-item'
+                $ref: "#/components/schemas/component-item"
           description: component resource
         "404":
           description: Resource not found
@@ -426,7 +430,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific service component
       tags:
@@ -452,7 +456,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/componentEndpoint-item'
+                $ref: "#/components/schemas/componentEndpoint-item"
           description: componentEndpoint resource
         "404":
           description: Resource not found
@@ -460,7 +464,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View endpoints for a specific service component
       tags:
@@ -486,7 +490,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/componentGit-item'
+                $ref: "#/components/schemas/componentGit-item"
           description: componentGit resource
         "404":
           description: Resource not found
@@ -494,7 +498,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View git info for a specific service component
       tags:
@@ -520,7 +524,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/component.Config-item'
+                $ref: "#/components/schemas/component.Config-item"
           description: component resource
         "404":
           description: Resource not found
@@ -528,7 +532,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Get remote dev config
       tags:
@@ -560,7 +564,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/component.Profile-item'
+                $ref: "#/components/schemas/component.Profile-item"
           description: component resource created
         "400":
           description: Invalid input
@@ -572,7 +576,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: "Parse, validate and interpolate the provided remoteDevProfile"
       tags:
@@ -599,7 +603,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/component.Resource-item'
+                  $ref: "#/components/schemas/component.Resource-item"
                 type: array
           description: component resource
         "404":
@@ -608,11 +612,123 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Get kubernetes resources
       tags:
       - component
+  /v1/components/{id}/ssh/credentials:
+    get:
+      deprecated: false
+      description: Get SSH credentials
+      operationId: ComponentSsh_credentials
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/component.SSHCredentials-item"
+          description: component resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: Get SSH credentials
+      tags:
+      - component
+  /v1/components/{id}/ssh/manage-keys:
+    post:
+      deprecated: false
+      description: Manage SSH keys
+      operationId: ComponentSsh_manage_keys
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/component.ManageKeysAction"
+        description: The new component resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/component.SSHCredentials-item"
+          description: component resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: Manage SSH keys
+      tags:
+      - component
+  /v1/convert/docker-compose:
+    post:
+      deprecated: false
+      description: Convert docker compose to bunnyshell.yaml.
+      operationId: Ai_sandboxConvert_docker_compose
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ai_sandbox.ConvertDockerComposeAction"
+        description: The new ai_sandbox resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ai_sandbox.GenericObject"
+          description: ai_sandbox resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: Convert docker compose to bunnyshell.yaml.
+      tags:
+      - ai_sandbox
   /v1/environ_items:
     get:
       deprecated: false
@@ -680,13 +796,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-environ_item-collection'
+                $ref: "#/components/schemas/paginated-environ_item-collection"
           description: environ_item collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List environment variables matching any selected filters.
       tags:
@@ -700,7 +816,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environ_item.CreateAction'
+              $ref: "#/components/schemas/environ_item.CreateAction"
         description: The new environ_item resource
         required: true
       responses:
@@ -708,7 +824,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environ_item-item'
+                $ref: "#/components/schemas/environ_item-item"
           description: environ_item resource created
         "400":
           description: Invalid input
@@ -718,7 +834,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Create a specific environment variable.
       tags:
@@ -754,7 +870,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Delete a specific environment variable.
       tags:
@@ -779,7 +895,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environ_item-item'
+                $ref: "#/components/schemas/environ_item-item"
           description: environ_item resource
         "404":
           description: Resource not found
@@ -787,7 +903,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific environment variable.
       tags:
@@ -811,7 +927,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environ_item.EditAction'
+              $ref: "#/components/schemas/environ_item.EditAction"
         description: The updated environ_item resource
         required: true
       responses:
@@ -819,7 +935,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environ_item-item'
+                $ref: "#/components/schemas/environ_item-item"
           description: environ_item resource updated
         "400":
           description: Invalid input
@@ -831,7 +947,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit a specific environment variable.
       tags:
@@ -892,13 +1008,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-environment_variable-collection'
+                $ref: "#/components/schemas/paginated-environment_variable-collection"
           description: environment_variable collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List environment variables matching any selected filters.
       tags:
@@ -912,7 +1028,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment_variable.CreateAction'
+              $ref: "#/components/schemas/environment_variable.CreateAction"
         description: The new environment_variable resource
         required: true
       responses:
@@ -920,7 +1036,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment_variable-item'
+                $ref: "#/components/schemas/environment_variable-item"
           description: environment_variable resource created
         "400":
           description: Invalid input
@@ -930,7 +1046,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Create a specific environment variable.
       tags:
@@ -966,7 +1082,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Delete a specific environment variable.
       tags:
@@ -991,7 +1107,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment_variable-item'
+                $ref: "#/components/schemas/environment_variable-item"
           description: environment_variable resource
         "404":
           description: Resource not found
@@ -999,7 +1115,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific environment variable.
       tags:
@@ -1023,7 +1139,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment_variable.EditAction'
+              $ref: "#/components/schemas/environment_variable.EditAction"
         description: The updated environment_variable resource
         required: true
       responses:
@@ -1031,7 +1147,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment_variable-item'
+                $ref: "#/components/schemas/environment_variable-item"
           description: environment_variable resource updated
         "400":
           description: Invalid input
@@ -1043,7 +1159,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit a specific environment variable.
       tags:
@@ -1101,6 +1217,7 @@ paths:
           enum:
           - primary
           - ephemeral
+          - workspace
           type: string
         style: form
       - allowEmptyValue: false
@@ -1223,13 +1340,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-environment-collection'
+                $ref: "#/components/schemas/paginated-environment-collection"
           description: environment collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List environments matching any selected filters.
       tags:
@@ -1243,7 +1360,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.CreateAction'
+              $ref: "#/components/schemas/environment.CreateAction"
         description: The new environment resource
         required: true
       responses:
@@ -1251,7 +1368,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource created
         "400":
           description: Invalid input
@@ -1261,7 +1378,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Creates a new environment.
       tags:
@@ -1287,7 +1404,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource
         "404":
           description: Resource not found
@@ -1295,7 +1412,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific environment.
       tags:
@@ -1320,7 +1437,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.EditBuildSettingsAction'
+              $ref: "#/components/schemas/environment.EditBuildSettingsAction"
         description: The updated environment resource
         required: true
       responses:
@@ -1328,7 +1445,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource updated
         "400":
           description: Invalid input
@@ -1340,7 +1457,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit the build settings of an environment.
       tags:
@@ -1365,7 +1482,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.CloneAction'
+              $ref: "#/components/schemas/environment.CloneAction"
         description: The new environment resource
         required: true
       responses:
@@ -1373,7 +1490,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource created
         "400":
           description: Invalid input
@@ -1385,7 +1502,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Clone an environment.
       tags:
@@ -1410,7 +1527,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.EditComponentsAction'
+              $ref: "#/components/schemas/environment.EditComponentsAction"
         description: The updated environment resource
         required: true
       responses:
@@ -1418,7 +1535,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource updated
         "400":
           description: Invalid input
@@ -1430,7 +1547,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit the components of an environment.
       tags:
@@ -1455,7 +1572,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.EditConfiguration'
+              $ref: "#/components/schemas/environment.EditConfiguration"
         description: The updated environment resource
         required: true
       responses:
@@ -1463,7 +1580,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource updated
         "400":
           description: Invalid input
@@ -1475,7 +1592,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit an environment.
       tags:
@@ -1501,7 +1618,7 @@ paths:
           content:
             application/x+yaml:
               schema:
-                $ref: '#/components/schemas/environment.GenericObject'
+                $ref: "#/components/schemas/environment.GenericObject"
           description: environment resource
         "404":
           description: Resource not found
@@ -1509,7 +1626,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View the bunnyshell manifest for the environment
       tags:
@@ -1541,7 +1658,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/event-item'
+                $ref: "#/components/schemas/event-item"
           description: environment resource created
         "400":
           description: Invalid input
@@ -1553,7 +1670,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Delete a specific environment.
       tags:
@@ -1578,7 +1695,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.PartialDeployAction'
+              $ref: "#/components/schemas/environment.PartialDeployAction"
         description: The new environment resource
         required: true
       responses:
@@ -1586,7 +1703,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/event-item'
+                $ref: "#/components/schemas/event-item"
           description: environment resource created
         "400":
           description: Invalid input
@@ -1598,9 +1715,54 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Deploy an environment.
+      tags:
+      - environment
+  /v1/environments/{id}/deployment-runner-settings:
+    patch:
+      deprecated: false
+      description: Edit the deployment runner settings of an environment.
+      operationId: EnvironmentEdit_drunner_settings
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/environment.EditDeploymentRunnerSettingsAction"
+        description: The updated environment resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/environment-item"
+          description: environment resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: Edit the deployment runner settings of an environment.
       tags:
       - environment
   /v1/environments/{id}/kube-config:
@@ -1624,7 +1786,7 @@ paths:
           content:
             application/x+yaml:
               schema:
-                $ref: '#/components/schemas/environment.KubeConfig-kube-config.read'
+                $ref: "#/components/schemas/environment.KubeConfig-kube-config.read"
           description: environment resource
         "404":
           description: Resource not found
@@ -1632,7 +1794,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Download Kubernetes Config File
       tags:
@@ -1657,7 +1819,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.EditSettings'
+              $ref: "#/components/schemas/environment.EditSettings"
         description: The updated environment resource
         required: true
       responses:
@@ -1665,7 +1827,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/environment-item'
+                $ref: "#/components/schemas/environment-item"
           description: environment resource updated
         "400":
           description: Invalid input
@@ -1677,7 +1839,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit an environment.
       tags:
@@ -1702,7 +1864,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.PartialStartAction'
+              $ref: "#/components/schemas/environment.PartialStartAction"
         description: The new environment resource
         required: true
       responses:
@@ -1710,7 +1872,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/event-item'
+                $ref: "#/components/schemas/event-item"
           description: environment resource created
         "400":
           description: Invalid input
@@ -1722,7 +1884,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Start an environment.
       tags:
@@ -1747,7 +1909,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/environment.PartialAction'
+              $ref: "#/components/schemas/environment.PartialAction"
         description: The new environment resource
         required: true
       responses:
@@ -1755,7 +1917,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/event-item'
+                $ref: "#/components/schemas/event-item"
           description: environment resource created
         "400":
           description: Invalid input
@@ -1767,7 +1929,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Stop an environment.
       tags:
@@ -1865,13 +2027,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-event-collection'
+                $ref: "#/components/schemas/paginated-event-collection"
           description: event collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List events matching any selected filters.
       tags:
@@ -1897,7 +2059,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/event-item'
+                $ref: "#/components/schemas/event-item"
           description: event resource
         "404":
           description: Resource not found
@@ -1905,7 +2067,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific event.
       tags:
@@ -1984,13 +2146,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-kubernetes_integration-collection'
+                $ref: "#/components/schemas/paginated-kubernetes_integration-collection"
           description: kubernetes_integration collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List Kubernetes integrations matching any selected filters.
       tags:
@@ -2016,7 +2178,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/kubernetes_integration-item'
+                $ref: "#/components/schemas/kubernetes_integration-item"
           description: kubernetes_integration resource
         "404":
           description: Resource not found
@@ -2024,7 +2186,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific Kubernetes integration.
       tags:
@@ -2063,13 +2225,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-organization-collection'
+                $ref: "#/components/schemas/paginated-organization-collection"
           description: organization collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List organization matching any selected filters.
       tags:
@@ -2095,7 +2257,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/organization-item'
+                $ref: "#/components/schemas/organization-item"
           description: organization resource
         "404":
           description: Resource not found
@@ -2103,7 +2265,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific organization.
       tags:
@@ -2185,13 +2347,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-pipeline-collection'
+                $ref: "#/components/schemas/paginated-pipeline-collection"
           description: pipeline collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List pipelines matching any selected filters.
       tags:
@@ -2217,7 +2379,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/pipeline-item'
+                $ref: "#/components/schemas/pipeline-item"
           description: pipeline resource
         "404":
           description: Resource not found
@@ -2225,7 +2387,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific Pipeline.
       tags:
@@ -2286,13 +2448,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-project_variable-collection'
+                $ref: "#/components/schemas/paginated-project_variable-collection"
           description: project_variable collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List project variables matching any selected filters.
       tags:
@@ -2306,7 +2468,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/project_variable.CreateAction'
+              $ref: "#/components/schemas/project_variable.CreateAction"
         description: The new project_variable resource
         required: true
       responses:
@@ -2314,7 +2476,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project_variable-item'
+                $ref: "#/components/schemas/project_variable-item"
           description: project_variable resource created
         "400":
           description: Invalid input
@@ -2324,7 +2486,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Create a specific project variable.
       tags:
@@ -2360,7 +2522,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Delete a specific project variable.
       tags:
@@ -2385,7 +2547,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project_variable-item'
+                $ref: "#/components/schemas/project_variable-item"
           description: project_variable resource
         "404":
           description: Resource not found
@@ -2393,7 +2555,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific project variable.
       tags:
@@ -2417,7 +2579,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/project_variable.EditAction'
+              $ref: "#/components/schemas/project_variable.EditAction"
         description: The updated project_variable resource
         required: true
       responses:
@@ -2425,7 +2587,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project_variable-item'
+                $ref: "#/components/schemas/project_variable-item"
           description: project_variable resource updated
         "400":
           description: Invalid input
@@ -2437,7 +2599,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit a specific project variable.
       tags:
@@ -2500,13 +2662,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-project-collection'
+                $ref: "#/components/schemas/paginated-project-collection"
           description: project collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List projects matching any selected filters.
       tags:
@@ -2520,7 +2682,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/project.CreateAction'
+              $ref: "#/components/schemas/project.CreateAction"
         description: The new project resource
         required: true
       responses:
@@ -2528,7 +2690,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project-item'
+                $ref: "#/components/schemas/project-item"
           description: project resource created
         "400":
           description: Invalid input
@@ -2538,7 +2700,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Creates new project.
       tags:
@@ -2574,7 +2736,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Delete a specific project.
       tags:
@@ -2599,7 +2761,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project-item'
+                $ref: "#/components/schemas/project-item"
           description: project resource
         "404":
           description: Resource not found
@@ -2607,7 +2769,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific project.
       tags:
@@ -2632,7 +2794,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/project.EditBuildSettingsAction'
+              $ref: "#/components/schemas/project.EditBuildSettingsAction"
         description: The updated project resource
         required: true
       responses:
@@ -2640,7 +2802,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project-item'
+                $ref: "#/components/schemas/project-item"
           description: project resource updated
         "400":
           description: Invalid input
@@ -2652,9 +2814,54 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit the build settings of a project.
+      tags:
+      - project
+  /v1/projects/{id}/deployment-runner-settings:
+    patch:
+      deprecated: false
+      description: Edit the deploymentRunner settings of a project.
+      operationId: ProjectEdit_drunner_settings
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/project.EditDeploymentRunnerSettingsAction"
+        description: The updated project resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/project-item"
+          description: project resource updated
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: Edit the deploymentRunner settings of a project.
       tags:
       - project
   /v1/projects/{id}/settings:
@@ -2677,7 +2884,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/project.EditSettingsAction'
+              $ref: "#/components/schemas/project.EditSettingsAction"
         description: The updated project resource
         required: true
       responses:
@@ -2685,7 +2892,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/project-item'
+                $ref: "#/components/schemas/project-item"
           description: project resource updated
         "400":
           description: Invalid input
@@ -2697,7 +2904,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit a project.
       tags:
@@ -2736,13 +2943,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-registry_integration-collection'
+                $ref: "#/components/schemas/paginated-registry_integration-collection"
           description: registry_integration collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List Registry integrations matching any selected filters.
       tags:
@@ -2768,7 +2975,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/registry_integration-item'
+                $ref: "#/components/schemas/registry_integration-item"
           description: registry_integration resource
         "404":
           description: Resource not found
@@ -2776,7 +2983,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific Registry integration.
       tags:
@@ -2791,7 +2998,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/secret.DecryptAction'
+              $ref: "#/components/schemas/secret.DecryptAction"
         description: The new secret resource
         required: true
       responses:
@@ -2799,7 +3006,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/secret.Decrypted-item'
+                $ref: "#/components/schemas/secret.Decrypted-item"
           description: secret resource created
         "400":
           description: Invalid input
@@ -2809,7 +3016,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Decrypt a cipher text.
       tags:
@@ -2824,7 +3031,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/secret.EncryptAction'
+              $ref: "#/components/schemas/secret.EncryptAction"
         description: The new secret resource
         required: true
       responses:
@@ -2832,7 +3039,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/secret.Encrypted-item'
+                $ref: "#/components/schemas/secret.Encrypted-item"
           description: secret resource created
         "400":
           description: Invalid input
@@ -2842,7 +3049,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Encrypt a plain text.
       tags:
@@ -2857,7 +3064,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/secret.TranscryptConfigurationAction'
+              $ref: "#/components/schemas/secret.TranscryptConfigurationAction"
         description: The new secret resource
         required: true
       responses:
@@ -2865,7 +3072,7 @@ paths:
           content:
             application/x+yaml:
               schema:
-                $ref: '#/components/schemas/secret.GenericObject'
+                $ref: "#/components/schemas/secret.GenericObject"
           description: secret resource created
         "400":
           description: Invalid input
@@ -2875,7 +3082,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Encrypt or decrypt secrets from an environment configuration.
       tags:
@@ -2969,13 +3176,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-service_component_variable-collection'
+                $ref: "#/components/schemas/paginated-service_component_variable-collection"
           description: service_component_variable collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List component variables matching any selected filters.
       tags:
@@ -2989,7 +3196,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/service_component_variable.CreateAction'
+              $ref: "#/components/schemas/service_component_variable.CreateAction"
         description: The new service_component_variable resource
         required: true
       responses:
@@ -2997,7 +3204,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/service_component_variable-item'
+                $ref: "#/components/schemas/service_component_variable-item"
           description: service_component_variable resource created
         "400":
           description: Invalid input
@@ -3007,7 +3214,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Create a specific component variable.
       tags:
@@ -3043,7 +3250,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Delete a specific component variable.
       tags:
@@ -3068,7 +3275,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/service_component_variable-item'
+                $ref: "#/components/schemas/service_component_variable-item"
           description: service_component_variable resource
         "404":
           description: Resource not found
@@ -3076,7 +3283,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific component variable.
       tags:
@@ -3100,7 +3307,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/service_component_variable.EditAction'
+              $ref: "#/components/schemas/service_component_variable.EditAction"
         description: The updated service_component_variable resource
         required: true
       responses:
@@ -3108,7 +3315,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/service_component_variable-item'
+                $ref: "#/components/schemas/service_component_variable-item"
           description: service_component_variable resource updated
         "400":
           description: Invalid input
@@ -3120,11 +3327,44 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Edit a specific component variable.
       tags:
       - service_component_variable
+  /v1/ssh/credentials:
+    post:
+      deprecated: false
+      description: Get SSH config for given SSH domain.
+      operationId: SshConfig
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ssh.CredentialsAction"
+        description: The new ssh resource
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ssh.SSHCredentials-item"
+          description: ssh resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: Get SSH config for given SSH domain.
+      tags:
+      - ssh
   /v1/templates:
     get:
       deprecated: false
@@ -3201,13 +3441,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-template-collection'
+                $ref: "#/components/schemas/paginated-template-collection"
           description: template collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List templates matching any selected filters.
       tags:
@@ -3222,7 +3462,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/template.ValidateAction'
+              $ref: "#/components/schemas/template.ValidateAction"
         description: The new template resource
         required: true
       responses:
@@ -3230,7 +3470,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/template-collection'
+                $ref: "#/components/schemas/template-collection"
           description: template resource created
         "400":
           description: Invalid input
@@ -3240,7 +3480,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: Validates a given template from an external source.
       tags:
@@ -3266,7 +3506,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/template-item'
+                $ref: "#/components/schemas/template-item"
           description: template resource
         "404":
           description: Resource not found
@@ -3274,7 +3514,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific template.
       tags:
@@ -3300,7 +3540,7 @@ paths:
           content:
             application/x+yaml:
               schema:
-                $ref: '#/components/schemas/template.GenericObject'
+                $ref: "#/components/schemas/template.GenericObject"
           description: template resource
         "404":
           description: Resource not found
@@ -3308,7 +3548,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View the environment definition.
       tags:
@@ -3347,13 +3587,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-templates_repository-collection'
+                $ref: "#/components/schemas/paginated-templates_repository-collection"
           description: templates_repository collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List templates repositories matching any selected filters.
       tags:
@@ -3379,7 +3619,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/templates_repository-item'
+                $ref: "#/components/schemas/templates_repository-item"
           description: templates_repository resource
         "404":
           description: Resource not found
@@ -3387,7 +3627,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific templates repository.
       tags:
@@ -3469,13 +3709,13 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/paginated-workflow-collection'
+                $ref: "#/components/schemas/paginated-workflow-collection"
           description: workflow collection
         "4XX":
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: List workflows matching any selected filters.
       tags:
@@ -3501,7 +3741,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/workflow-item'
+                $ref: "#/components/schemas/workflow-item"
           description: workflow resource
         "404":
           description: Resource not found
@@ -3509,7 +3749,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/problem.generic'
+                $ref: "#/components/schemas/problem.generic"
           description: Request Error
       summary: View a specific Workflow.
       tags:
@@ -3526,7 +3766,7 @@ components:
     BooleanType-item:
       properties:
         defaultValue:
-          $ref: '#/components/schemas/BooleanValue-item'
+          $ref: "#/components/schemas/BooleanValue-item"
         name:
           description: A variable used within the template.
           type: string
@@ -3582,6 +3822,19 @@ components:
           nullable: true
           type: string
       type: object
+    BunnyshellYamlConvertDestinationString:
+      properties:
+        format:
+          default: bunnyshell.yaml
+          example: bunnyshell.yaml
+          type: string
+        type:
+          default: string
+          example: string
+          type: string
+        organizationId:
+          type: string
+      type: object
     Cluster-kube-config.read:
       properties:
         certificate-authority-data:
@@ -3597,15 +3850,37 @@ components:
         name:
           type: string
         cluster:
-          $ref: '#/components/schemas/Cluster-kube-config.read'
+          $ref: "#/components/schemas/Cluster-kube-config.read"
       required:
       - cluster
       - name
       type: object
     ContainerConfig-item:
+      example:
+        profile:
+          portMapping:
+          - portMapping
+          - portMapping
+          requirements:
+            requests:
+              memory: memory
+              cpu: cpu
+            limits:
+              memory: memory
+              cpu: cpu
+          syncPaths:
+          - remotePath: remotePath
+            localPath: localPath
+          - remotePath: remotePath
+            localPath: localPath
+          command:
+          - command
+          - command
+          environ:
+            key: environ
       properties:
         profile:
-          $ref: '#/components/schemas/ContainerConfig_item_profile'
+          $ref: "#/components/schemas/ContainerConfig_item_profile"
       type: object
     Context-kube-config.read:
       properties:
@@ -3624,9 +3899,89 @@ components:
         name:
           type: string
         context:
-          $ref: '#/components/schemas/Context-kube-config.read'
+          $ref: "#/components/schemas/Context-kube-config.read"
       required:
       - name
+      type: object
+    DeploymentRunnerSettings-item:
+      properties:
+        useManagedCluster:
+          description: Use the managed runner Cluster.
+          type: boolean
+        kubernetesIntegration:
+          description: The Kubernetes integration cluster used for the runners.
+          nullable: true
+          type: string
+        cpu:
+          description: The CPU allocated for the runner.
+          nullable: true
+          type: string
+        memory:
+          description: The memory allocated for the runner.
+          nullable: true
+          type: integer
+        timeout:
+          description: The max execution time for the runner.
+          nullable: true
+          type: integer
+        lastStatus:
+          description: The latest status of the deploymentRunner settings.
+          nullable: true
+          type: string
+        lastError:
+          description: The latest status of the deploymentRunner settings.
+          nullable: true
+          type: string
+      type: object
+    DockerComposeConvertSourceGit:
+      properties:
+        format:
+          default: docker-compose.yaml
+          example: docker-compose.yaml
+          type: string
+        dockerComposePath:
+          maxLength: 255
+          type: string
+        type:
+          default: git
+          example: git
+          type: string
+        url:
+          externalDocs:
+            url: http://schema.org/url
+          maxLength: 255
+          type: string
+        ref:
+          maxLength: 255
+          type: string
+        organizationId:
+          type: string
+      required:
+      - dockerComposePath
+      - organizationId
+      - ref
+      - url
+      type: object
+    DockerComposeConvertSourceString:
+      properties:
+        format:
+          default: docker-compose.yaml
+          example: docker-compose.yaml
+          type: string
+        dockerComposeYaml:
+          maxLength: 10485760
+          type: string
+        dotEnvFileContent:
+          maxLength: 10485760
+          type: string
+        type:
+          default: string
+          example: string
+          type: string
+        organizationId:
+          type: string
+      required:
+      - dockerComposeYaml
       type: object
     Edit:
       properties:
@@ -3645,11 +4000,11 @@ components:
     EnumType-item:
       properties:
         defaultValue:
-          $ref: '#/components/schemas/EnumType_item_defaultValue'
+          $ref: "#/components/schemas/EnumType_item_defaultValue"
         values:
           description: The available values for the enum.
           items:
-            $ref: '#/components/schemas/EnumType_item_values_inner'
+            $ref: "#/components/schemas/EnumType_item_values_inner"
           type: array
         name:
           description: A variable used within the template.
@@ -3687,7 +4042,7 @@ components:
           type: string
         containers:
           additionalProperties:
-            $ref: '#/components/schemas/ContainerConfig-item'
+            $ref: "#/components/schemas/ContainerConfig-item"
           description: A list of container configs.
           readOnly: true
           type: object
@@ -3718,7 +4073,7 @@ components:
     FloatType-item:
       properties:
         defaultValue:
-          $ref: '#/components/schemas/FloatValue-item'
+          $ref: "#/components/schemas/FloatValue-item"
         name:
           description: A variable used within the template.
           type: string
@@ -3776,7 +4131,7 @@ components:
           type: string
         variables:
           additionalProperties:
-            $ref: '#/components/schemas/FromTemplate_variables_value'
+            $ref: "#/components/schemas/FromTemplate_variables_value"
           type: object
         template:
           type: string
@@ -3793,7 +4148,7 @@ components:
     IntegerType-item:
       properties:
         defaultValue:
-          $ref: '#/components/schemas/IntegerValue-item'
+          $ref: "#/components/schemas/IntegerValue-item"
         name:
           description: A variable used within the template.
           type: string
@@ -3833,9 +4188,15 @@ components:
         ephemeralKubernetesIntegration:
           nullable: true
           type: string
+        ephemeralHostingRegion:
+          nullable: true
+          type: string
         primaryOptions:
-          $ref: '#/components/schemas/PrimaryOptionsEdit'
+          $ref: "#/components/schemas/PrimaryOptionsEdit"
+        templateSettings:
+          $ref: "#/components/schemas/TemplateSettingsEdit"
       required:
+      - ephemeralHostingRegion
       - ephemeralKubernetesIntegration
       type: object
     PrimaryOptionsCreate:
@@ -3856,6 +4217,27 @@ components:
           type: string
       type: object
     Profile-item:
+      example:
+        portMapping:
+        - portMapping
+        - portMapping
+        requirements:
+          requests:
+            memory: memory
+            cpu: cpu
+          limits:
+            memory: memory
+            cpu: cpu
+        syncPaths:
+        - remotePath: remotePath
+          localPath: localPath
+        - remotePath: remotePath
+          localPath: localPath
+        command:
+        - command
+        - command
+        environ:
+          key: environ
       properties:
         command:
           description: The command to be run when starting the container.
@@ -3878,11 +4260,11 @@ components:
         syncPaths:
           description: The sync paths for the container.
           items:
-            $ref: '#/components/schemas/SyncPath-item'
+            $ref: "#/components/schemas/SyncPath-item"
           readOnly: true
           type: array
         requirements:
-          $ref: '#/components/schemas/ResourceRequirement-item'
+          $ref: "#/components/schemas/ResourceRequirement-item"
       type: object
     ResourceList-item:
       example:
@@ -3910,18 +4292,43 @@ components:
           cpu: cpu
       properties:
         requests:
-          $ref: '#/components/schemas/ResourceList-item'
+          $ref: "#/components/schemas/ResourceList-item"
         limits:
-          $ref: '#/components/schemas/ResourceList-item'
+          $ref: "#/components/schemas/ResourceList-item"
       type: object
     SimpleResourceConfig-item:
+      example:
+        simple: true
+        containers:
+          key:
+            profile:
+              portMapping:
+              - portMapping
+              - portMapping
+              requirements:
+                requests:
+                  memory: memory
+                  cpu: cpu
+                limits:
+                  memory: memory
+                  cpu: cpu
+              syncPaths:
+              - remotePath: remotePath
+                localPath: localPath
+              - remotePath: remotePath
+                localPath: localPath
+              command:
+              - command
+              - command
+              environ:
+                key: environ
       properties:
         simple:
           readOnly: true
           type: boolean
         containers:
           additionalProperties:
-            $ref: '#/components/schemas/ContainerConfig-item'
+            $ref: "#/components/schemas/ContainerConfig-item"
           description: A list of container configs.
           readOnly: true
           type: object
@@ -3961,7 +4368,7 @@ components:
     StringType-item:
       properties:
         defaultValue:
-          $ref: '#/components/schemas/StringValue-item'
+          $ref: "#/components/schemas/StringValue-item"
         name:
           description: A variable used within the template.
           type: string
@@ -3995,6 +4402,37 @@ components:
           readOnly: true
           type: string
       type: object
+    TemplateSettings-item:
+      properties:
+        branchFallbackOnDelete:
+          description: "When a gitBranch is deleted, edit the environment with the\
+            \ branch from Template."
+          nullable: true
+          type: boolean
+        branchFallbackOnDeleteAutoDeploy:
+          description: "When gitBranch is edited with the one from Template, also\
+            \ auto-deploy."
+          nullable: true
+          type: boolean
+      type: object
+    TemplateSettingsCreate:
+      properties:
+        branchFallbackOnDelete:
+          nullable: true
+          type: boolean
+        branchFallbackOnDeleteAutoDeploy:
+          nullable: true
+          type: boolean
+      type: object
+    TemplateSettingsEdit:
+      properties:
+        branchFallbackOnDelete:
+          nullable: true
+          type: boolean
+        branchFallbackOnDeleteAutoDeploy:
+          nullable: true
+          type: boolean
+      type: object
     User-kube-config.read:
       properties:
         token:
@@ -4009,7 +4447,7 @@ components:
         name:
           type: string
         user:
-          $ref: '#/components/schemas/User-kube-config.read'
+          $ref: "#/components/schemas/User-kube-config.read"
       required:
       - name
       - user
@@ -4063,6 +4501,27 @@ components:
       required:
       - bunnyshellYaml
       - templateYaml
+      type: object
+    Workspace:
+      properties:
+        type:
+          default: workspace
+          example: workspace
+          type: string
+        terminationProtection:
+          nullable: true
+          type: boolean
+      type: object
+    ai_sandbox.ConvertDockerComposeAction:
+      description: Various tools for the AI Extension.
+      properties:
+        source:
+          $ref: "#/components/schemas/ai_sandbox_ConvertDockerComposeAction_source"
+        destination:
+          $ref: "#/components/schemas/BunnyshellYamlConvertDestinationString"
+      type: object
+    ai_sandbox.GenericObject:
+      description: Various tools for the AI Extension.
       type: object
     component-collection:
       description: A service component represents either an application or a group
@@ -4124,10 +4583,75 @@ components:
       description: A service component represents either an application or a group
         of applications as a single unit
       example:
-        config: null
+        config:
+        - simple: true
+          containers:
+            key:
+              profile:
+                portMapping:
+                - portMapping
+                - portMapping
+                requirements:
+                  requests:
+                    memory: memory
+                    cpu: cpu
+                  limits:
+                    memory: memory
+                    cpu: cpu
+                syncPaths:
+                - remotePath: remotePath
+                  localPath: localPath
+                - remotePath: remotePath
+                  localPath: localPath
+                command:
+                - command
+                - command
+                environ:
+                  key: environ
+        - simple: true
+          containers:
+            key:
+              profile:
+                portMapping:
+                - portMapping
+                - portMapping
+                requirements:
+                  requests:
+                    memory: memory
+                    cpu: cpu
+                  limits:
+                    memory: memory
+                    cpu: cpu
+                syncPaths:
+                - remotePath: remotePath
+                  localPath: localPath
+                - remotePath: remotePath
+                  localPath: localPath
+                command:
+                - command
+                - command
+                environ:
+                  key: environ
       properties:
         config:
-          $ref: '#/components/schemas/component_Config_item_config'
+          $ref: "#/components/schemas/component_Config_item_config"
+      type: object
+    component.ManageKeysAction:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      properties:
+        operation:
+          type: string
+        sshKeyName:
+          type: string
+        sshKeyValue:
+          nullable: true
+          type: string
+        withVMSync:
+          type: boolean
+      required:
+      - operation
+      - sshKeyName
       type: object
     component.Profile-item:
       description: A service component represents either an application or a group
@@ -4175,11 +4699,11 @@ components:
         syncPaths:
           description: The sync paths for the container.
           items:
-            $ref: '#/components/schemas/SyncPath-item'
+            $ref: "#/components/schemas/SyncPath-item"
           readOnly: true
           type: array
         requirements:
-          $ref: '#/components/schemas/ResourceRequirement-item'
+          $ref: "#/components/schemas/ResourceRequirement-item"
       type: object
     component.Resource-item:
       description: A service component represents either an application or a group
@@ -4198,6 +4722,50 @@ components:
         namespace:
           description: Kubernetes resource namespace.
           nullable: true
+          type: string
+      type: object
+    component.SSHCredentials-item:
+      description: A service component represents either an application or a group
+        of applications as a single unit
+      example:
+        userCanManageSSHKeys: true
+        hostname: hostname
+        environmentId: environmentId
+        componentId: componentId
+        port: 0
+        user: user
+        sshKeyFingerprints:
+          key: sshKeyFingerprints
+      properties:
+        hostname:
+          description: The SSH domain.
+          readOnly: true
+          type: string
+        port:
+          description: The SSH port.
+          readOnly: true
+          type: integer
+        user:
+          description: The SSH username.
+          readOnly: true
+          type: string
+        sshKeyFingerprints:
+          additionalProperties:
+            type: string
+          description: The SSH keys fingerprints.
+          readOnly: true
+          type: object
+        userCanManageSSHKeys:
+          description: If the user can manage SSH keys.
+          readOnly: true
+          type: boolean
+        environmentId:
+          description: The environment identifier.
+          readOnly: true
+          type: string
+        componentId:
+          description: The service component identifier.
+          readOnly: true
           type: string
       type: object
     componentEndpoint-collection:
@@ -4457,9 +5025,19 @@ components:
           nullable: true
           readOnly: true
           type: string
+        hostingRegion:
+          description: Kubernetes integration managed hosting region.
+          nullable: true
+          readOnly: true
+          type: string
         ephemeralKubernetesIntegration:
           description: Kubernetes integration identifier for the ephemeral auto deploy
             cluster.
+          nullable: true
+          readOnly: true
+          type: string
+        ephemeralHostingRegion:
+          description: Hosting Region for the ephemeral auto deploy cluster.
           nullable: true
           readOnly: true
           type: string
@@ -4539,7 +5117,7 @@ components:
           readOnly: true
           type: string
         buildSettings:
-          $ref: '#/components/schemas/BuildSettings-item'
+          $ref: "#/components/schemas/BuildSettings-item"
         project:
           description: Project identifier.
           readOnly: true
@@ -4549,9 +5127,19 @@ components:
           nullable: true
           readOnly: true
           type: string
+        hostingRegion:
+          description: Kubernetes integration managed hosting region.
+          nullable: true
+          readOnly: true
+          type: string
         ephemeralKubernetesIntegration:
           description: Kubernetes integration identifier for the ephemeral auto deploy
             cluster.
+          nullable: true
+          readOnly: true
+          type: string
+        ephemeralHostingRegion:
+          description: Hosting Region for the ephemeral auto deploy cluster.
           nullable: true
           readOnly: true
           type: string
@@ -4588,6 +5176,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        templateSettings:
+          $ref: "#/components/schemas/TemplateSettings-item"
       type: object
     environment.CloneAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -4607,7 +5197,7 @@ components:
         project:
           type: string
         genesis:
-          $ref: '#/components/schemas/environment_CreateAction_genesis'
+          $ref: "#/components/schemas/environment_CreateAction_genesis"
         type:
           type: string
         remoteDevelopmentAllowed:
@@ -4625,7 +5215,13 @@ components:
         kubernetesIntegration:
           nullable: true
           type: string
+        hostingRegion:
+          nullable: true
+          type: string
         ephemeralKubernetesIntegration:
+          nullable: true
+          type: string
+        ephemeralHostingRegion:
           nullable: true
           type: string
         labels:
@@ -4633,7 +5229,9 @@ components:
             type: string
           type: object
         primaryOptions:
-          $ref: '#/components/schemas/PrimaryOptionsCreate'
+          $ref: "#/components/schemas/PrimaryOptionsCreate"
+        templateSettings:
+          $ref: "#/components/schemas/TemplateSettingsCreate"
       required:
       - name
       - project
@@ -4684,9 +5282,9 @@ components:
       description: An environment holds a collection of buildable and deployable components.
       properties:
         filter:
-          $ref: '#/components/schemas/environment_EditComponentsAction_filter'
+          $ref: "#/components/schemas/environment_EditComponentsAction_filter"
         target:
-          $ref: '#/components/schemas/GitInfo'
+          $ref: "#/components/schemas/GitInfo"
       required:
       - filter
       - target
@@ -4695,7 +5293,51 @@ components:
       description: An environment holds a collection of buildable and deployable components.
       properties:
         configuration:
-          $ref: '#/components/schemas/environment_EditConfiguration_configuration'
+          $ref: "#/components/schemas/environment_EditConfiguration_configuration"
+      type: object
+    environment.EditDeploymentRunnerSettingsAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        useManagedCluster:
+          nullable: true
+          type: boolean
+        kubernetesIntegration:
+          nullable: true
+          type: string
+        cpu:
+          description: K8s supports decimal values with step 0.001 That's why we are
+            using decimal.
+          nullable: true
+          type: string
+        memory:
+          description: expressed in Mi
+          nullable: true
+          type: integer
+        timeoutSeconds:
+          nullable: true
+          type: integer
+        namespaceCustomLabels:
+          items:
+            type: string
+          nullable: true
+          type: array
+        realtimeLogs:
+          nullable: true
+          type: string
+        securityNetworkPolicies:
+          nullable: true
+          type: string
+        dnsRecords:
+          nullable: true
+          type: string
+        publicUrls:
+          nullable: true
+          type: string
+      required:
+      - cpu
+      - kubernetesIntegration
+      - memory
+      - timeoutSeconds
       type: object
     environment.EditSettings:
       description: An environment holds a collection of buildable and deployable components.
@@ -4713,10 +5355,16 @@ components:
         kubernetesIntegration:
           nullable: true
           type: string
+        hostingRegion:
+          nullable: true
+          type: string
         edit:
-          $ref: '#/components/schemas/environment_EditSettings_edit'
+          $ref: "#/components/schemas/environment_EditSettings_edit"
         labels:
-          $ref: '#/components/schemas/Edit'
+          $ref: "#/components/schemas/Edit"
+      required:
+      - hostingRegion
+      - kubernetesIntegration
       type: object
     environment.GenericObject:
       description: An environment holds a collection of buildable and deployable components.
@@ -4736,15 +5384,15 @@ components:
           type: object
         clusters:
           items:
-            $ref: '#/components/schemas/ClusterWrapper-kube-config.read'
+            $ref: "#/components/schemas/ClusterWrapper-kube-config.read"
           type: array
         users:
           items:
-            $ref: '#/components/schemas/UserWrapper-kube-config.read'
+            $ref: "#/components/schemas/UserWrapper-kube-config.read"
           type: array
         contexts:
           items:
-            $ref: '#/components/schemas/ContextWrapper-kube-config.read'
+            $ref: "#/components/schemas/ContextWrapper-kube-config.read"
           type: array
         current-context:
           type: string
@@ -5062,7 +5710,7 @@ components:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5073,13 +5721,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_component_collection'
+          $ref: "#/components/schemas/embedded_component_collection"
       type: object
     paginated-componentEndpoint-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5090,13 +5738,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_componentEndpoint_collection'
+          $ref: "#/components/schemas/embedded_componentEndpoint_collection"
       type: object
     paginated-componentGit-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5107,13 +5755,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_componentGit_collection'
+          $ref: "#/components/schemas/embedded_componentGit_collection"
       type: object
     paginated-environ_item-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5124,13 +5772,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_environ_item_collection'
+          $ref: "#/components/schemas/embedded_environ_item_collection"
       type: object
     paginated-environment-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5141,13 +5789,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_environment_collection'
+          $ref: "#/components/schemas/embedded_environment_collection"
       type: object
     paginated-environment_variable-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5158,13 +5806,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_environment_variable_collection'
+          $ref: "#/components/schemas/embedded_environment_variable_collection"
       type: object
     paginated-event-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5175,13 +5823,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_event_collection'
+          $ref: "#/components/schemas/embedded_event_collection"
       type: object
     paginated-kubernetes_integration-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5192,13 +5840,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_kubernetes_integration_collection'
+          $ref: "#/components/schemas/embedded_kubernetes_integration_collection"
       type: object
     paginated-organization-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5209,13 +5857,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_organization_collection'
+          $ref: "#/components/schemas/embedded_organization_collection"
       type: object
     paginated-pipeline-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5226,13 +5874,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_pipeline_collection'
+          $ref: "#/components/schemas/embedded_pipeline_collection"
       type: object
     paginated-project-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5243,13 +5891,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_project_collection'
+          $ref: "#/components/schemas/embedded_project_collection"
       type: object
     paginated-project_variable-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5260,13 +5908,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_project_variable_collection'
+          $ref: "#/components/schemas/embedded_project_variable_collection"
       type: object
     paginated-registry_integration-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5277,13 +5925,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_registry_integration_collection'
+          $ref: "#/components/schemas/embedded_registry_integration_collection"
       type: object
     paginated-service_component_variable-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5294,13 +5942,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_service_component_variable_collection'
+          $ref: "#/components/schemas/embedded_service_component_variable_collection"
       type: object
     paginated-template-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5311,13 +5959,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_template_collection'
+          $ref: "#/components/schemas/embedded_template_collection"
       type: object
     paginated-templates_repository-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5328,13 +5976,13 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_templates_repository_collection'
+          $ref: "#/components/schemas/embedded_templates_repository_collection"
       type: object
     paginated-workflow-collection:
       description: Paginated result
       properties:
         _links:
-          $ref: '#/components/schemas/paginated_links'
+          $ref: "#/components/schemas/paginated_links"
         totalItems:
           format: int32
           type: integer
@@ -5345,7 +5993,7 @@ components:
           format: int32
           type: integer
         _embedded:
-          $ref: '#/components/schemas/embedded_workflow_collection'
+          $ref: "#/components/schemas/embedded_workflow_collection"
       type: object
     paginated_itemsPerPage:
       format: int32
@@ -5358,18 +6006,18 @@ components:
     paginated_links:
       properties:
         self:
-          $ref: '#/components/schemas/paginated_link'
+          $ref: "#/components/schemas/paginated_link"
         first:
-          $ref: '#/components/schemas/paginated_link'
+          $ref: "#/components/schemas/paginated_link"
         prev:
-          $ref: '#/components/schemas/paginated_link'
+          $ref: "#/components/schemas/paginated_link"
         next:
-          $ref: '#/components/schemas/paginated_link'
+          $ref: "#/components/schemas/paginated_link"
         last:
-          $ref: '#/components/schemas/paginated_link'
+          $ref: "#/components/schemas/paginated_link"
         item:
           items:
-            $ref: '#/components/schemas/paginated_link'
+            $ref: "#/components/schemas/paginated_link"
           type: array
       type: object
     paginated_page:
@@ -5431,7 +6079,7 @@ components:
         stages:
           description: Stage identifier.
           items:
-            $ref: '#/components/schemas/Stage-item'
+            $ref: "#/components/schemas/Stage-item"
           readOnly: true
           type: array
         environment:
@@ -5461,7 +6109,7 @@ components:
           type: string
         violations:
           items:
-            $ref: '#/components/schemas/problem.violation'
+            $ref: "#/components/schemas/problem.violation"
           nullable: true
           type: array
       type: object
@@ -5515,7 +6163,9 @@ components:
           readOnly: true
           type: integer
         buildSettings:
-          $ref: '#/components/schemas/BuildSettings-item'
+          $ref: "#/components/schemas/BuildSettings-item"
+        deploymentRunnerSettings:
+          $ref: "#/components/schemas/DeploymentRunnerSettings-item"
         organization:
           description: Organization identifier.
           readOnly: true
@@ -5579,6 +6229,50 @@ components:
       - registryIntegration
       - timeoutSeconds
       type: object
+    project.EditDeploymentRunnerSettingsAction:
+      description: A project holds multiple environments and shared secrets and settings.
+      properties:
+        useManagedCluster:
+          nullable: true
+          type: boolean
+        kubernetesIntegration:
+          nullable: true
+          type: string
+        cpu:
+          description: K8s supports decimal values with step 0.001 That's why we are
+            using decimal.
+          nullable: true
+          type: string
+        memory:
+          description: expressed in Mi
+          nullable: true
+          type: integer
+        timeoutSeconds:
+          nullable: true
+          type: integer
+        namespaceCustomLabels:
+          items:
+            type: string
+          nullable: true
+          type: array
+        realtimeLogs:
+          nullable: true
+          type: string
+        securityNetworkPolicies:
+          nullable: true
+          type: string
+        dnsRecords:
+          nullable: true
+          type: string
+        publicUrls:
+          nullable: true
+          type: string
+      required:
+      - cpu
+      - kubernetesIntegration
+      - memory
+      - timeoutSeconds
+      type: object
     project.EditSettingsAction:
       description: A project holds multiple environments and shared secrets and settings.
       properties:
@@ -5587,7 +6281,7 @@ components:
           nullable: true
           type: string
         labels:
-          $ref: '#/components/schemas/Edit'
+          $ref: "#/components/schemas/Edit"
       required:
       - name
       type: object
@@ -5894,6 +6588,59 @@ components:
       required:
       - value
       type: object
+    ssh.CredentialsAction:
+      description: SSH
+      properties:
+        componentSshHost:
+          type: string
+        withSSHKeysFingerprints:
+          type: boolean
+      required:
+      - componentSshHost
+      type: object
+    ssh.SSHCredentials-item:
+      description: SSH
+      example:
+        userCanManageSSHKeys: true
+        hostname: hostname
+        environmentId: environmentId
+        componentId: componentId
+        port: 0
+        user: user
+        sshKeyFingerprints:
+          key: sshKeyFingerprints
+      properties:
+        hostname:
+          description: The SSH domain.
+          readOnly: true
+          type: string
+        port:
+          description: The SSH port.
+          readOnly: true
+          type: integer
+        user:
+          description: The SSH username.
+          readOnly: true
+          type: string
+        sshKeyFingerprints:
+          additionalProperties:
+            type: string
+          description: The SSH keys fingerprints.
+          readOnly: true
+          type: object
+        userCanManageSSHKeys:
+          description: If the user can manage SSH keys.
+          readOnly: true
+          type: boolean
+        environmentId:
+          description: The environment identifier.
+          readOnly: true
+          type: string
+        componentId:
+          description: The service component identifier.
+          readOnly: true
+          type: string
+      type: object
     template-collection:
       description: A template holds information for generating an environment.
       properties:
@@ -5968,7 +6715,7 @@ components:
         variablesSchema:
           description: Template variables.
           items:
-            $ref: '#/components/schemas/template_item_variablesSchema_inner'
+            $ref: "#/components/schemas/template_item_variablesSchema_inner"
           readOnly: true
           type: array
         organization:
@@ -5989,7 +6736,7 @@ components:
       description: A template holds information for generating an environment.
       properties:
         source:
-          $ref: '#/components/schemas/template_ValidateAction_source'
+          $ref: "#/components/schemas/template_ValidateAction_source"
       type: object
     templates_repository-collection:
       description: A templates repository holds multiple templates.
@@ -6146,23 +6893,23 @@ components:
     ContainerConfig_item_profile:
       description: A profile config or a profile name for local usage with rdev.yaml
       oneOf:
-      - $ref: '#/components/schemas/Profile-item'
+      - $ref: "#/components/schemas/Profile-item"
       - type: string
       readOnly: true
     EnumType_item_defaultValue:
       description: The default value used if none is provided.
       discriminator:
         mapping:
-          bool: '#/components/schemas/BooleanValue-item'
-          int: '#/components/schemas/IntegerValue-item'
-          float: '#/components/schemas/FloatValue-item'
-          string: '#/components/schemas/StringValue-item'
+          bool: "#/components/schemas/BooleanValue-item"
+          int: "#/components/schemas/IntegerValue-item"
+          float: "#/components/schemas/FloatValue-item"
+          string: "#/components/schemas/StringValue-item"
         propertyName: type
       oneOf:
-      - $ref: '#/components/schemas/BooleanValue-item'
-      - $ref: '#/components/schemas/IntegerValue-item'
-      - $ref: '#/components/schemas/FloatValue-item'
-      - $ref: '#/components/schemas/StringValue-item'
+      - $ref: "#/components/schemas/BooleanValue-item"
+      - $ref: "#/components/schemas/IntegerValue-item"
+      - $ref: "#/components/schemas/FloatValue-item"
+      - $ref: "#/components/schemas/StringValue-item"
       properties:
         type:
           description: Discriminator property
@@ -6172,16 +6919,16 @@ components:
     EnumType_item_values_inner:
       discriminator:
         mapping:
-          bool: '#/components/schemas/BooleanValue-item'
-          int: '#/components/schemas/IntegerValue-item'
-          float: '#/components/schemas/FloatValue-item'
-          string: '#/components/schemas/StringValue-item'
+          bool: "#/components/schemas/BooleanValue-item"
+          int: "#/components/schemas/IntegerValue-item"
+          float: "#/components/schemas/FloatValue-item"
+          string: "#/components/schemas/StringValue-item"
         propertyName: type
       oneOf:
-      - $ref: '#/components/schemas/BooleanValue-item'
-      - $ref: '#/components/schemas/IntegerValue-item'
-      - $ref: '#/components/schemas/FloatValue-item'
-      - $ref: '#/components/schemas/StringValue-item'
+      - $ref: "#/components/schemas/BooleanValue-item"
+      - $ref: "#/components/schemas/IntegerValue-item"
+      - $ref: "#/components/schemas/FloatValue-item"
+      - $ref: "#/components/schemas/StringValue-item"
       properties:
         type:
           description: Discriminator property
@@ -6194,46 +6941,51 @@ components:
       - type: integer
       - type: number
       - type: string
+    ai_sandbox_ConvertDockerComposeAction_source:
+      oneOf:
+      - $ref: "#/components/schemas/DockerComposeConvertSourceGit"
+      - $ref: "#/components/schemas/DockerComposeConvertSourceString"
     component_Config_item_config:
       description: A list of container configs.
       oneOf:
       - items:
-          $ref: '#/components/schemas/SimpleResourceConfig-item'
+          $ref: "#/components/schemas/SimpleResourceConfig-item"
         nullable: true
         type: array
       - items:
-          $ref: '#/components/schemas/ExtendedResourceConfig-item'
+          $ref: "#/components/schemas/ExtendedResourceConfig-item"
         nullable: true
         type: array
       readOnly: true
     environment_CreateAction_genesis:
       description: The environment creation method
       oneOf:
-      - $ref: '#/components/schemas/FromGit'
-      - $ref: '#/components/schemas/FromGitSpec'
-      - $ref: '#/components/schemas/FromString'
-      - $ref: '#/components/schemas/FromTemplate'
+      - $ref: "#/components/schemas/FromGit"
+      - $ref: "#/components/schemas/FromGitSpec"
+      - $ref: "#/components/schemas/FromString"
+      - $ref: "#/components/schemas/FromTemplate"
     environment_EditComponentsAction_filter:
       oneOf:
-      - $ref: '#/components/schemas/FilterGit'
-      - $ref: '#/components/schemas/FilterName'
+      - $ref: "#/components/schemas/FilterGit"
+      - $ref: "#/components/schemas/FilterName"
     environment_EditConfiguration_configuration:
       description: The environment update source
       oneOf:
-      - $ref: '#/components/schemas/FromGit'
-      - $ref: '#/components/schemas/FromGitSpec'
-      - $ref: '#/components/schemas/FromString'
-      - $ref: '#/components/schemas/FromTemplate'
+      - $ref: "#/components/schemas/FromGit"
+      - $ref: "#/components/schemas/FromGitSpec"
+      - $ref: "#/components/schemas/FromString"
+      - $ref: "#/components/schemas/FromTemplate"
     environment_EditSettings_edit:
       description: Environment edit by type
       oneOf:
-      - $ref: '#/components/schemas/Primary'
-      - $ref: '#/components/schemas/Ephemeral'
+      - $ref: "#/components/schemas/Primary"
+      - $ref: "#/components/schemas/Ephemeral"
+      - $ref: "#/components/schemas/Workspace"
     embedded_component_collection:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/component-collection'
+            $ref: "#/components/schemas/component-collection"
           type: array
       title: embedded-component-collection
       type: object
@@ -6241,7 +6993,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/componentEndpoint-collection'
+            $ref: "#/components/schemas/componentEndpoint-collection"
           type: array
       title: embedded-componentEndpoint-collection
       type: object
@@ -6249,7 +7001,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/componentGit-collection'
+            $ref: "#/components/schemas/componentGit-collection"
           type: array
       title: embedded-componentGit-collection
       type: object
@@ -6257,7 +7009,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/environ_item-collection'
+            $ref: "#/components/schemas/environ_item-collection"
           type: array
       title: embedded-environ_item-collection
       type: object
@@ -6265,7 +7017,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/environment-collection'
+            $ref: "#/components/schemas/environment-collection"
           type: array
       title: embedded-environment-collection
       type: object
@@ -6273,7 +7025,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/environment_variable-collection'
+            $ref: "#/components/schemas/environment_variable-collection"
           type: array
       title: embedded-environment_variable-collection
       type: object
@@ -6281,7 +7033,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/event-collection'
+            $ref: "#/components/schemas/event-collection"
           type: array
       title: embedded-event-collection
       type: object
@@ -6289,7 +7041,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/kubernetes_integration-collection'
+            $ref: "#/components/schemas/kubernetes_integration-collection"
           type: array
       title: embedded-kubernetes_integration-collection
       type: object
@@ -6297,7 +7049,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/organization-collection'
+            $ref: "#/components/schemas/organization-collection"
           type: array
       title: embedded-organization-collection
       type: object
@@ -6305,7 +7057,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/pipeline-collection'
+            $ref: "#/components/schemas/pipeline-collection"
           type: array
       title: embedded-pipeline-collection
       type: object
@@ -6313,7 +7065,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/project-collection'
+            $ref: "#/components/schemas/project-collection"
           type: array
       title: embedded-project-collection
       type: object
@@ -6321,7 +7073,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/project_variable-collection'
+            $ref: "#/components/schemas/project_variable-collection"
           type: array
       title: embedded-project_variable-collection
       type: object
@@ -6329,7 +7081,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/registry_integration-collection'
+            $ref: "#/components/schemas/registry_integration-collection"
           type: array
       title: embedded-registry_integration-collection
       type: object
@@ -6337,7 +7089,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/service_component_variable-collection'
+            $ref: "#/components/schemas/service_component_variable-collection"
           type: array
       title: embedded-service_component_variable-collection
       type: object
@@ -6345,7 +7097,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/template-collection'
+            $ref: "#/components/schemas/template-collection"
           type: array
       title: embedded-template-collection
       type: object
@@ -6353,7 +7105,7 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/templates_repository-collection'
+            $ref: "#/components/schemas/templates_repository-collection"
           type: array
       title: embedded-templates_repository-collection
       type: object
@@ -6361,25 +7113,25 @@ components:
       properties:
         item:
           items:
-            $ref: '#/components/schemas/workflow-collection'
+            $ref: "#/components/schemas/workflow-collection"
           type: array
       title: embedded-workflow-collection
       type: object
     template_item_variablesSchema_inner:
       discriminator:
         mapping:
-          bool: '#/components/schemas/BooleanType-item'
-          int: '#/components/schemas/IntegerType-item'
-          float: '#/components/schemas/FloatType-item'
-          string: '#/components/schemas/StringType-item'
-          enum: '#/components/schemas/EnumType-item'
+          bool: "#/components/schemas/BooleanType-item"
+          int: "#/components/schemas/IntegerType-item"
+          float: "#/components/schemas/FloatType-item"
+          string: "#/components/schemas/StringType-item"
+          enum: "#/components/schemas/EnumType-item"
         propertyName: type
       oneOf:
-      - $ref: '#/components/schemas/BooleanType-item'
-      - $ref: '#/components/schemas/IntegerType-item'
-      - $ref: '#/components/schemas/FloatType-item'
-      - $ref: '#/components/schemas/StringType-item'
-      - $ref: '#/components/schemas/EnumType-item'
+      - $ref: "#/components/schemas/BooleanType-item"
+      - $ref: "#/components/schemas/IntegerType-item"
+      - $ref: "#/components/schemas/FloatType-item"
+      - $ref: "#/components/schemas/StringType-item"
+      - $ref: "#/components/schemas/EnumType-item"
       properties:
         type:
           description: Discriminator property
@@ -6388,8 +7140,8 @@ components:
       - type
     template_ValidateAction_source:
       oneOf:
-      - $ref: '#/components/schemas/ValidateSourceGit'
-      - $ref: '#/components/schemas/ValidateSourceString'
+      - $ref: "#/components/schemas/ValidateSourceGit"
+      - $ref: "#/components/schemas/ValidateSourceString"
   securitySchemes:
     ApiKeyAuth:
       description: Value for the X-Auth-Token header parameter.

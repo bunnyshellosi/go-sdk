@@ -13,7 +13,9 @@ Name | Type | Description | Notes
 **ClusterStatus** | Pointer to **string** | Environment cluster status. | [optional] [readonly] 
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
 **KubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier. | [optional] [readonly] 
+**HostingRegion** | Pointer to **NullableString** | Kubernetes integration managed hosting region. | [optional] [readonly] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier for the ephemeral auto deploy cluster. | [optional] [readonly] 
+**EphemeralHostingRegion** | Pointer to **NullableString** | Hosting Region for the ephemeral auto deploy cluster. | [optional] [readonly] 
 **HasTerminationProtection** | Pointer to **bool** | Environment termination protection. | [optional] [readonly] 
 **HasAutoUpdate** | Pointer to **bool** | Environment auto update. | [optional] [readonly] 
 **HasRemoteDevelopmentAllowed** | Pointer to **bool** | Environment remote development allowed. | [optional] [readonly] 
@@ -277,6 +279,41 @@ HasKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentCollection) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetHostingRegion
+
+`func (o *EnvironmentCollection) GetHostingRegion() string`
+
+GetHostingRegion returns the HostingRegion field if non-nil, zero value otherwise.
+
+### GetHostingRegionOk
+
+`func (o *EnvironmentCollection) GetHostingRegionOk() (*string, bool)`
+
+GetHostingRegionOk returns a tuple with the HostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostingRegion
+
+`func (o *EnvironmentCollection) SetHostingRegion(v string)`
+
+SetHostingRegion sets HostingRegion field to given value.
+
+### HasHostingRegion
+
+`func (o *EnvironmentCollection) HasHostingRegion() bool`
+
+HasHostingRegion returns a boolean if a field has been set.
+
+### SetHostingRegionNil
+
+`func (o *EnvironmentCollection) SetHostingRegionNil(b bool)`
+
+ SetHostingRegionNil sets the value for HostingRegion to be an explicit nil
+
+### UnsetHostingRegion
+`func (o *EnvironmentCollection) UnsetHostingRegion()`
+
+UnsetHostingRegion ensures that no value is present for HostingRegion, not even an explicit nil
 ### GetEphemeralKubernetesIntegration
 
 `func (o *EnvironmentCollection) GetEphemeralKubernetesIntegration() string`
@@ -312,6 +349,41 @@ HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentCollection) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetEphemeralHostingRegion
+
+`func (o *EnvironmentCollection) GetEphemeralHostingRegion() string`
+
+GetEphemeralHostingRegion returns the EphemeralHostingRegion field if non-nil, zero value otherwise.
+
+### GetEphemeralHostingRegionOk
+
+`func (o *EnvironmentCollection) GetEphemeralHostingRegionOk() (*string, bool)`
+
+GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralHostingRegion
+
+`func (o *EnvironmentCollection) SetEphemeralHostingRegion(v string)`
+
+SetEphemeralHostingRegion sets EphemeralHostingRegion field to given value.
+
+### HasEphemeralHostingRegion
+
+`func (o *EnvironmentCollection) HasEphemeralHostingRegion() bool`
+
+HasEphemeralHostingRegion returns a boolean if a field has been set.
+
+### SetEphemeralHostingRegionNil
+
+`func (o *EnvironmentCollection) SetEphemeralHostingRegionNil(b bool)`
+
+ SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+
+### UnsetEphemeralHostingRegion
+`func (o *EnvironmentCollection) UnsetEphemeralHostingRegion()`
+
+UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
 ### GetHasTerminationProtection
 
 `func (o *EnvironmentCollection) GetHasTerminationProtection() bool`

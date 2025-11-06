@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **PortMapping** | Pointer to **[]string** | The port mapping for the container. | [optional] [readonly] 
 **Environ** | Pointer to **map[string]string** | The environ for the container. | [optional] [readonly] 
 **SyncPaths** | Pointer to [**[]SyncPathItem**](SyncPathItem.md) | The sync paths for the container. | [optional] [readonly] 
-**Requirements** | Pointer to [**NullableResourceRequirementItem**](ResourceRequirementItem.md) |  | [optional] 
+**Requirements** | Pointer to [**NullableResourceRequirementItem**](ResourceRequirementItem.md) |  | [optional] [readonly] 
 
 ## Methods
 

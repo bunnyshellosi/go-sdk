@@ -78,10 +78,13 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AiSandboxAPI* | [**AiSandboxConvertDockerCompose**](docs/AiSandboxAPI.md#aisandboxconvertdockercompose) | **Post** /v1/convert/docker-compose | Convert docker compose to bunnyshell.yaml.
 *ComponentAPI* | [**ComponentList**](docs/ComponentAPI.md#componentlist) | **Get** /v1/components | List service components matching any selected filters
 *ComponentAPI* | [**ComponentRemoteDevConfig**](docs/ComponentAPI.md#componentremotedevconfig) | **Get** /v1/components/{id}/remotedev/config | Get remote dev config
 *ComponentAPI* | [**ComponentRemoteDevProfile**](docs/ComponentAPI.md#componentremotedevprofile) | **Post** /v1/components/{id}/remotedev/profile | Parse, validate and interpolate the provided remoteDevProfile
 *ComponentAPI* | [**ComponentResources**](docs/ComponentAPI.md#componentresources) | **Get** /v1/components/{id}/resources | Get kubernetes resources
+*ComponentAPI* | [**ComponentSshCredentials**](docs/ComponentAPI.md#componentsshcredentials) | **Get** /v1/components/{id}/ssh/credentials | Get SSH credentials
+*ComponentAPI* | [**ComponentSshManageKeys**](docs/ComponentAPI.md#componentsshmanagekeys) | **Post** /v1/components/{id}/ssh/manage-keys | Manage SSH keys
 *ComponentAPI* | [**ComponentView**](docs/ComponentAPI.md#componentview) | **Get** /v1/components/{id} | View a specific service component
 *ComponentEndpointAPI* | [**ComponentEndpointList**](docs/ComponentEndpointAPI.md#componentendpointlist) | **Get** /v1/components/endpoint | List endpoints for service components matching any selected filters
 *ComponentEndpointAPI* | [**ComponentEndpointView**](docs/ComponentEndpointAPI.md#componentendpointview) | **Get** /v1/components/{id}/endpoint | View endpoints for a specific service component
@@ -100,6 +103,7 @@ Class | Method | HTTP request | Description
 *EnvironmentAPI* | [**EnvironmentEditBuildSettings**](docs/EnvironmentAPI.md#environmenteditbuildsettings) | **Patch** /v1/environments/{id}/build-settings | Edit the build settings of an environment.
 *EnvironmentAPI* | [**EnvironmentEditComponents**](docs/EnvironmentAPI.md#environmenteditcomponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
 *EnvironmentAPI* | [**EnvironmentEditConfiguration**](docs/EnvironmentAPI.md#environmenteditconfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
+*EnvironmentAPI* | [**EnvironmentEditDrunnerSettings**](docs/EnvironmentAPI.md#environmenteditdrunnersettings) | **Patch** /v1/environments/{id}/deployment-runner-settings | Edit the deployment runner settings of an environment.
 *EnvironmentAPI* | [**EnvironmentEditSettings**](docs/EnvironmentAPI.md#environmenteditsettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
 *EnvironmentAPI* | [**EnvironmentKubeConfig**](docs/EnvironmentAPI.md#environmentkubeconfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 *EnvironmentAPI* | [**EnvironmentList**](docs/EnvironmentAPI.md#environmentlist) | **Get** /v1/environments | List environments matching any selected filters.
@@ -122,6 +126,7 @@ Class | Method | HTTP request | Description
 *ProjectAPI* | [**ProjectCreate**](docs/ProjectAPI.md#projectcreate) | **Post** /v1/projects | Creates new project.
 *ProjectAPI* | [**ProjectDelete**](docs/ProjectAPI.md#projectdelete) | **Delete** /v1/projects/{id} | Delete a specific project.
 *ProjectAPI* | [**ProjectEditBuildSettings**](docs/ProjectAPI.md#projecteditbuildsettings) | **Patch** /v1/projects/{id}/build-settings | Edit the build settings of a project.
+*ProjectAPI* | [**ProjectEditDrunnerSettings**](docs/ProjectAPI.md#projecteditdrunnersettings) | **Patch** /v1/projects/{id}/deployment-runner-settings | Edit the deploymentRunner settings of a project.
 *ProjectAPI* | [**ProjectEditSettings**](docs/ProjectAPI.md#projecteditsettings) | **Patch** /v1/projects/{id}/settings | Edit a project.
 *ProjectAPI* | [**ProjectList**](docs/ProjectAPI.md#projectlist) | **Get** /v1/projects | List projects matching any selected filters.
 *ProjectAPI* | [**ProjectView**](docs/ProjectAPI.md#projectview) | **Get** /v1/projects/{id} | View a specific project.
@@ -140,6 +145,7 @@ Class | Method | HTTP request | Description
 *ServiceComponentVariableAPI* | [**ServiceComponentVariableEdit**](docs/ServiceComponentVariableAPI.md#servicecomponentvariableedit) | **Patch** /v1/service_component_variables/{id} | Edit a specific component variable.
 *ServiceComponentVariableAPI* | [**ServiceComponentVariableList**](docs/ServiceComponentVariableAPI.md#servicecomponentvariablelist) | **Get** /v1/service_component_variables | List component variables matching any selected filters.
 *ServiceComponentVariableAPI* | [**ServiceComponentVariableView**](docs/ServiceComponentVariableAPI.md#servicecomponentvariableview) | **Get** /v1/service_component_variables/{id} | View a specific component variable.
+*SshAPI* | [**SshConfig**](docs/SshAPI.md#sshconfig) | **Post** /v1/ssh/credentials | Get SSH config for given SSH domain.
 *TemplateAPI* | [**TemplateDefinition**](docs/TemplateAPI.md#templatedefinition) | **Get** /v1/templates/{id}/definition | View the environment definition.
 *TemplateAPI* | [**TemplateList**](docs/TemplateAPI.md#templatelist) | **Get** /v1/templates | List templates matching any selected filters.
 *TemplateAPI* | [**TemplateValidate**](docs/TemplateAPI.md#templatevalidate) | **Post** /v1/templates/validate | Validates a given template from an external source.
@@ -152,9 +158,12 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AiSandboxConvertDockerComposeAction](docs/AiSandboxConvertDockerComposeAction.md)
+ - [AiSandboxConvertDockerComposeActionSource](docs/AiSandboxConvertDockerComposeActionSource.md)
  - [BooleanTypeItem](docs/BooleanTypeItem.md)
  - [BooleanValueItem](docs/BooleanValueItem.md)
  - [BuildSettingsItem](docs/BuildSettingsItem.md)
+ - [BunnyshellYamlConvertDestinationString](docs/BunnyshellYamlConvertDestinationString.md)
  - [ClusterKubeConfigRead](docs/ClusterKubeConfigRead.md)
  - [ClusterWrapperKubeConfigRead](docs/ClusterWrapperKubeConfigRead.md)
  - [ComponentCollection](docs/ComponentCollection.md)
@@ -165,12 +174,17 @@ Class | Method | HTTP request | Description
  - [ComponentGitCollection](docs/ComponentGitCollection.md)
  - [ComponentGitItem](docs/ComponentGitItem.md)
  - [ComponentItem](docs/ComponentItem.md)
+ - [ComponentManageKeysAction](docs/ComponentManageKeysAction.md)
  - [ComponentProfileItem](docs/ComponentProfileItem.md)
  - [ComponentResourceItem](docs/ComponentResourceItem.md)
+ - [ComponentSSHCredentialsItem](docs/ComponentSSHCredentialsItem.md)
  - [ContainerConfigItem](docs/ContainerConfigItem.md)
  - [ContainerConfigItemProfile](docs/ContainerConfigItemProfile.md)
  - [ContextKubeConfigRead](docs/ContextKubeConfigRead.md)
  - [ContextWrapperKubeConfigRead](docs/ContextWrapperKubeConfigRead.md)
+ - [DeploymentRunnerSettingsItem](docs/DeploymentRunnerSettingsItem.md)
+ - [DockerComposeConvertSourceGit](docs/DockerComposeConvertSourceGit.md)
+ - [DockerComposeConvertSourceString](docs/DockerComposeConvertSourceString.md)
  - [Edit](docs/Edit.md)
  - [EmbeddedComponentCollection](docs/EmbeddedComponentCollection.md)
  - [EmbeddedComponentEndpointCollection](docs/EmbeddedComponentEndpointCollection.md)
@@ -205,6 +219,7 @@ Class | Method | HTTP request | Description
  - [EnvironmentEditComponentsActionFilter](docs/EnvironmentEditComponentsActionFilter.md)
  - [EnvironmentEditConfiguration](docs/EnvironmentEditConfiguration.md)
  - [EnvironmentEditConfigurationConfiguration](docs/EnvironmentEditConfigurationConfiguration.md)
+ - [EnvironmentEditDeploymentRunnerSettingsAction](docs/EnvironmentEditDeploymentRunnerSettingsAction.md)
  - [EnvironmentEditSettings](docs/EnvironmentEditSettings.md)
  - [EnvironmentEditSettingsEdit](docs/EnvironmentEditSettingsEdit.md)
  - [EnvironmentItem](docs/EnvironmentItem.md)
@@ -266,6 +281,7 @@ Class | Method | HTTP request | Description
  - [ProjectCollection](docs/ProjectCollection.md)
  - [ProjectCreateAction](docs/ProjectCreateAction.md)
  - [ProjectEditBuildSettingsAction](docs/ProjectEditBuildSettingsAction.md)
+ - [ProjectEditDeploymentRunnerSettingsAction](docs/ProjectEditDeploymentRunnerSettingsAction.md)
  - [ProjectEditSettingsAction](docs/ProjectEditSettingsAction.md)
  - [ProjectItem](docs/ProjectItem.md)
  - [ProjectVariableCollection](docs/ProjectVariableCollection.md)
@@ -286,6 +302,8 @@ Class | Method | HTTP request | Description
  - [ServiceComponentVariableEditAction](docs/ServiceComponentVariableEditAction.md)
  - [ServiceComponentVariableItem](docs/ServiceComponentVariableItem.md)
  - [SimpleResourceConfigItem](docs/SimpleResourceConfigItem.md)
+ - [SshCredentialsAction](docs/SshCredentialsAction.md)
+ - [SshSSHCredentialsItem](docs/SshSSHCredentialsItem.md)
  - [StageItem](docs/StageItem.md)
  - [StringTypeItem](docs/StringTypeItem.md)
  - [StringValueItem](docs/StringValueItem.md)
@@ -293,6 +311,9 @@ Class | Method | HTTP request | Description
  - [TemplateCollection](docs/TemplateCollection.md)
  - [TemplateItem](docs/TemplateItem.md)
  - [TemplateItemVariablesSchemaInner](docs/TemplateItemVariablesSchemaInner.md)
+ - [TemplateSettingsCreate](docs/TemplateSettingsCreate.md)
+ - [TemplateSettingsEdit](docs/TemplateSettingsEdit.md)
+ - [TemplateSettingsItem](docs/TemplateSettingsItem.md)
  - [TemplateValidateAction](docs/TemplateValidateAction.md)
  - [TemplateValidateActionSource](docs/TemplateValidateActionSource.md)
  - [TemplatesRepositoryCollection](docs/TemplatesRepositoryCollection.md)
@@ -303,6 +324,7 @@ Class | Method | HTTP request | Description
  - [ValidateSourceString](docs/ValidateSourceString.md)
  - [WorkflowCollection](docs/WorkflowCollection.md)
  - [WorkflowItem](docs/WorkflowItem.md)
+ - [Workspace](docs/Workspace.md)
 
 
 ## Documentation For Authorization

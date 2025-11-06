@@ -13,10 +13,12 @@ Name | Type | Description | Notes
 **TotalComponents** | Pointer to **int32** | Service component identifier | [optional] [readonly] 
 **OperationStatus** | Pointer to **string** | Environment operation status. | [optional] [readonly] 
 **ClusterStatus** | Pointer to **string** | Environment cluster status. | [optional] [readonly] 
-**BuildSettings** | Pointer to [**NullableBuildSettingsItem**](BuildSettingsItem.md) |  | [optional] 
+**BuildSettings** | Pointer to [**NullableBuildSettingsItem**](BuildSettingsItem.md) |  | [optional] [readonly] 
 **Project** | Pointer to **string** | Project identifier. | [optional] [readonly] 
 **KubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier. | [optional] [readonly] 
+**HostingRegion** | Pointer to **NullableString** | Kubernetes integration managed hosting region. | [optional] [readonly] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** | Kubernetes integration identifier for the ephemeral auto deploy cluster. | [optional] [readonly] 
+**EphemeralHostingRegion** | Pointer to **NullableString** | Hosting Region for the ephemeral auto deploy cluster. | [optional] [readonly] 
 **HasTerminationProtection** | Pointer to **bool** | Environment termination protection. | [optional] [readonly] 
 **HasAutoUpdate** | Pointer to **bool** | Environment auto update. | [optional] [readonly] 
 **HasRemoteDevelopmentAllowed** | Pointer to **bool** | Environment remote development allowed. | [optional] [readonly] 
@@ -25,6 +27,7 @@ Name | Type | Description | Notes
 **HasEphemeralDestroyOnPrClose** | Pointer to **bool** | Environment ephemeral destroy-on-PR close status. | [optional] [readonly] 
 **HasEphemeralBranchWhitelist** | Pointer to **bool** | Environment ephemeral branch whitelist status. | [optional] [readonly] 
 **EphemeralBranchWhitelistRegex** | Pointer to **NullableString** | Environment ephemeral branch whitelist regex. | [optional] [readonly] 
+**TemplateSettings** | Pointer to [**NullableTemplateSettingsItem**](TemplateSettingsItem.md) |  | [optional] [readonly] 
 
 ## Methods
 
@@ -365,6 +368,41 @@ HasKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentItem) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetHostingRegion
+
+`func (o *EnvironmentItem) GetHostingRegion() string`
+
+GetHostingRegion returns the HostingRegion field if non-nil, zero value otherwise.
+
+### GetHostingRegionOk
+
+`func (o *EnvironmentItem) GetHostingRegionOk() (*string, bool)`
+
+GetHostingRegionOk returns a tuple with the HostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostingRegion
+
+`func (o *EnvironmentItem) SetHostingRegion(v string)`
+
+SetHostingRegion sets HostingRegion field to given value.
+
+### HasHostingRegion
+
+`func (o *EnvironmentItem) HasHostingRegion() bool`
+
+HasHostingRegion returns a boolean if a field has been set.
+
+### SetHostingRegionNil
+
+`func (o *EnvironmentItem) SetHostingRegionNil(b bool)`
+
+ SetHostingRegionNil sets the value for HostingRegion to be an explicit nil
+
+### UnsetHostingRegion
+`func (o *EnvironmentItem) UnsetHostingRegion()`
+
+UnsetHostingRegion ensures that no value is present for HostingRegion, not even an explicit nil
 ### GetEphemeralKubernetesIntegration
 
 `func (o *EnvironmentItem) GetEphemeralKubernetesIntegration() string`
@@ -400,6 +438,41 @@ HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentItem) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetEphemeralHostingRegion
+
+`func (o *EnvironmentItem) GetEphemeralHostingRegion() string`
+
+GetEphemeralHostingRegion returns the EphemeralHostingRegion field if non-nil, zero value otherwise.
+
+### GetEphemeralHostingRegionOk
+
+`func (o *EnvironmentItem) GetEphemeralHostingRegionOk() (*string, bool)`
+
+GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralHostingRegion
+
+`func (o *EnvironmentItem) SetEphemeralHostingRegion(v string)`
+
+SetEphemeralHostingRegion sets EphemeralHostingRegion field to given value.
+
+### HasEphemeralHostingRegion
+
+`func (o *EnvironmentItem) HasEphemeralHostingRegion() bool`
+
+HasEphemeralHostingRegion returns a boolean if a field has been set.
+
+### SetEphemeralHostingRegionNil
+
+`func (o *EnvironmentItem) SetEphemeralHostingRegionNil(b bool)`
+
+ SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+
+### UnsetEphemeralHostingRegion
+`func (o *EnvironmentItem) UnsetEphemeralHostingRegion()`
+
+UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
 ### GetHasTerminationProtection
 
 `func (o *EnvironmentItem) GetHasTerminationProtection() bool`
@@ -610,6 +683,41 @@ HasEphemeralBranchWhitelistRegex returns a boolean if a field has been set.
 `func (o *EnvironmentItem) UnsetEphemeralBranchWhitelistRegex()`
 
 UnsetEphemeralBranchWhitelistRegex ensures that no value is present for EphemeralBranchWhitelistRegex, not even an explicit nil
+### GetTemplateSettings
+
+`func (o *EnvironmentItem) GetTemplateSettings() TemplateSettingsItem`
+
+GetTemplateSettings returns the TemplateSettings field if non-nil, zero value otherwise.
+
+### GetTemplateSettingsOk
+
+`func (o *EnvironmentItem) GetTemplateSettingsOk() (*TemplateSettingsItem, bool)`
+
+GetTemplateSettingsOk returns a tuple with the TemplateSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSettings
+
+`func (o *EnvironmentItem) SetTemplateSettings(v TemplateSettingsItem)`
+
+SetTemplateSettings sets TemplateSettings field to given value.
+
+### HasTemplateSettings
+
+`func (o *EnvironmentItem) HasTemplateSettings() bool`
+
+HasTemplateSettings returns a boolean if a field has been set.
+
+### SetTemplateSettingsNil
+
+`func (o *EnvironmentItem) SetTemplateSettingsNil(b bool)`
+
+ SetTemplateSettingsNil sets the value for TemplateSettings to be an explicit nil
+
+### UnsetTemplateSettings
+`func (o *EnvironmentItem) UnsetTemplateSettings()`
+
+UnsetTemplateSettings ensures that no value is present for TemplateSettings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

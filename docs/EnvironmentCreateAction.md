@@ -15,9 +15,12 @@ Name | Type | Description | Notes
 **DestroyEphemeralOnPrClose** | Pointer to **bool** |  | [optional] 
 **AutoDeployEphemeral** | Pointer to **bool** |  | [optional] 
 **KubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
+**HostingRegion** | Pointer to **NullableString** |  | [optional] 
 **EphemeralKubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
+**EphemeralHostingRegion** | Pointer to **NullableString** |  | [optional] 
 **Labels** | Pointer to **map[string]string** |  | [optional] 
 **PrimaryOptions** | Pointer to [**NullablePrimaryOptionsCreate**](PrimaryOptionsCreate.md) |  | [optional] 
+**TemplateSettings** | Pointer to [**NullableTemplateSettingsCreate**](TemplateSettingsCreate.md) |  | [optional] 
 
 ## Methods
 
@@ -313,6 +316,41 @@ HasKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentCreateAction) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetHostingRegion
+
+`func (o *EnvironmentCreateAction) GetHostingRegion() string`
+
+GetHostingRegion returns the HostingRegion field if non-nil, zero value otherwise.
+
+### GetHostingRegionOk
+
+`func (o *EnvironmentCreateAction) GetHostingRegionOk() (*string, bool)`
+
+GetHostingRegionOk returns a tuple with the HostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostingRegion
+
+`func (o *EnvironmentCreateAction) SetHostingRegion(v string)`
+
+SetHostingRegion sets HostingRegion field to given value.
+
+### HasHostingRegion
+
+`func (o *EnvironmentCreateAction) HasHostingRegion() bool`
+
+HasHostingRegion returns a boolean if a field has been set.
+
+### SetHostingRegionNil
+
+`func (o *EnvironmentCreateAction) SetHostingRegionNil(b bool)`
+
+ SetHostingRegionNil sets the value for HostingRegion to be an explicit nil
+
+### UnsetHostingRegion
+`func (o *EnvironmentCreateAction) UnsetHostingRegion()`
+
+UnsetHostingRegion ensures that no value is present for HostingRegion, not even an explicit nil
 ### GetEphemeralKubernetesIntegration
 
 `func (o *EnvironmentCreateAction) GetEphemeralKubernetesIntegration() string`
@@ -348,6 +386,41 @@ HasEphemeralKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentCreateAction) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetEphemeralHostingRegion
+
+`func (o *EnvironmentCreateAction) GetEphemeralHostingRegion() string`
+
+GetEphemeralHostingRegion returns the EphemeralHostingRegion field if non-nil, zero value otherwise.
+
+### GetEphemeralHostingRegionOk
+
+`func (o *EnvironmentCreateAction) GetEphemeralHostingRegionOk() (*string, bool)`
+
+GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralHostingRegion
+
+`func (o *EnvironmentCreateAction) SetEphemeralHostingRegion(v string)`
+
+SetEphemeralHostingRegion sets EphemeralHostingRegion field to given value.
+
+### HasEphemeralHostingRegion
+
+`func (o *EnvironmentCreateAction) HasEphemeralHostingRegion() bool`
+
+HasEphemeralHostingRegion returns a boolean if a field has been set.
+
+### SetEphemeralHostingRegionNil
+
+`func (o *EnvironmentCreateAction) SetEphemeralHostingRegionNil(b bool)`
+
+ SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+
+### UnsetEphemeralHostingRegion
+`func (o *EnvironmentCreateAction) UnsetEphemeralHostingRegion()`
+
+UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
 ### GetLabels
 
 `func (o *EnvironmentCreateAction) GetLabels() map[string]string`
@@ -408,6 +481,41 @@ HasPrimaryOptions returns a boolean if a field has been set.
 `func (o *EnvironmentCreateAction) UnsetPrimaryOptions()`
 
 UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
+### GetTemplateSettings
+
+`func (o *EnvironmentCreateAction) GetTemplateSettings() TemplateSettingsCreate`
+
+GetTemplateSettings returns the TemplateSettings field if non-nil, zero value otherwise.
+
+### GetTemplateSettingsOk
+
+`func (o *EnvironmentCreateAction) GetTemplateSettingsOk() (*TemplateSettingsCreate, bool)`
+
+GetTemplateSettingsOk returns a tuple with the TemplateSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSettings
+
+`func (o *EnvironmentCreateAction) SetTemplateSettings(v TemplateSettingsCreate)`
+
+SetTemplateSettings sets TemplateSettings field to given value.
+
+### HasTemplateSettings
+
+`func (o *EnvironmentCreateAction) HasTemplateSettings() bool`
+
+HasTemplateSettings returns a boolean if a field has been set.
+
+### SetTemplateSettingsNil
+
+`func (o *EnvironmentCreateAction) SetTemplateSettingsNil(b bool)`
+
+ SetTemplateSettingsNil sets the value for TemplateSettings to be an explicit nil
+
+### UnsetTemplateSettings
+`func (o *EnvironmentCreateAction) UnsetTemplateSettings()`
+
+UnsetTemplateSettings ensures that no value is present for TemplateSettings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -27,8 +27,9 @@ type ProjectItem struct {
 	// Project name.
 	Name *string `json:"name,omitempty"`
 	// Environment identifier.
-	TotalEnvironments *int32                    `json:"totalEnvironments,omitempty"`
-	BuildSettings     NullableBuildSettingsItem `json:"buildSettings,omitempty"`
+	TotalEnvironments        *int32                               `json:"totalEnvironments,omitempty"`
+	BuildSettings            NullableBuildSettingsItem            `json:"buildSettings,omitempty"`
+	DeploymentRunnerSettings NullableDeploymentRunnerSettingsItem `json:"deploymentRunnerSettings,omitempty"`
 	// Organization identifier.
 	Organization *string `json:"organization,omitempty"`
 }
@@ -221,6 +222,49 @@ func (o *ProjectItem) UnsetBuildSettings() {
 	o.BuildSettings.Unset()
 }
 
+// GetDeploymentRunnerSettings returns the DeploymentRunnerSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProjectItem) GetDeploymentRunnerSettings() DeploymentRunnerSettingsItem {
+	if o == nil || IsNil(o.DeploymentRunnerSettings.Get()) {
+		var ret DeploymentRunnerSettingsItem
+		return ret
+	}
+	return *o.DeploymentRunnerSettings.Get()
+}
+
+// GetDeploymentRunnerSettingsOk returns a tuple with the DeploymentRunnerSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProjectItem) GetDeploymentRunnerSettingsOk() (*DeploymentRunnerSettingsItem, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeploymentRunnerSettings.Get(), o.DeploymentRunnerSettings.IsSet()
+}
+
+// HasDeploymentRunnerSettings returns a boolean if a field has been set.
+func (o *ProjectItem) HasDeploymentRunnerSettings() bool {
+	if o != nil && o.DeploymentRunnerSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeploymentRunnerSettings gets a reference to the given NullableDeploymentRunnerSettingsItem and assigns it to the DeploymentRunnerSettings field.
+func (o *ProjectItem) SetDeploymentRunnerSettings(v DeploymentRunnerSettingsItem) {
+	o.DeploymentRunnerSettings.Set(&v)
+}
+
+// SetDeploymentRunnerSettingsNil sets the value for DeploymentRunnerSettings to be an explicit nil
+func (o *ProjectItem) SetDeploymentRunnerSettingsNil() {
+	o.DeploymentRunnerSettings.Set(nil)
+}
+
+// UnsetDeploymentRunnerSettings ensures that no value is present for DeploymentRunnerSettings, not even an explicit nil
+func (o *ProjectItem) UnsetDeploymentRunnerSettings() {
+	o.DeploymentRunnerSettings.Unset()
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *ProjectItem) GetOrganization() string {
 	if o == nil || IsNil(o.Organization) {
@@ -277,6 +321,9 @@ func (o ProjectItem) ToMap() (map[string]interface{}, error) {
 	}
 	if o.BuildSettings.IsSet() {
 		toSerialize["buildSettings"] = o.BuildSettings.Get()
+	}
+	if o.DeploymentRunnerSettings.IsSet() {
+		toSerialize["deploymentRunnerSettings"] = o.DeploymentRunnerSettings.Get()
 	}
 	if !IsNil(o.Organization) {
 		toSerialize["organization"] = o.Organization

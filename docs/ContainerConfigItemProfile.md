@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **PortMapping** | Pointer to **[]string** | The port mapping for the container. | [optional] [readonly] 
 **Environ** | Pointer to **map[string]string** | The environ for the container. | [optional] [readonly] 
 **SyncPaths** | Pointer to [**[]SyncPathItem**](SyncPathItem.md) | The sync paths for the container. | [optional] [readonly] 
-**Requirements** | Pointer to [**NullableResourceRequirementItem**](ResourceRequirementItem.md) |  | [optional] 
+**Requirements** | Pointer to [**ResourceRequirementItem**](ResourceRequirementItem.md) |  | [optional] 
 
 ## Methods
 
@@ -154,16 +154,6 @@ SetRequirements sets Requirements field to given value.
 
 HasRequirements returns a boolean if a field has been set.
 
-### SetRequirementsNil
-
-`func (o *ContainerConfigItemProfile) SetRequirementsNil(b bool)`
-
- SetRequirementsNil sets the value for Requirements to be an explicit nil
-
-### UnsetRequirements
-`func (o *ContainerConfigItemProfile) UnsetRequirements()`
-
-UnsetRequirements ensures that no value is present for Requirements, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

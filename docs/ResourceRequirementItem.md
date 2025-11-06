@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Requests** | Pointer to [**NullableResourceListItem**](ResourceListItem.md) |  | [optional] 
-**Limits** | Pointer to [**NullableResourceListItem**](ResourceListItem.md) |  | [optional] 
+**Requests** | Pointer to [**NullableResourceListItem**](ResourceListItem.md) |  | [optional] [readonly] 
+**Limits** | Pointer to [**NullableResourceListItem**](ResourceListItem.md) |  | [optional] [readonly] 
 
 ## Methods
 

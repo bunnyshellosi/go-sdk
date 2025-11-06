@@ -20,6 +20,7 @@ import (
 type EnvironmentEditSettingsEdit struct {
 	Ephemeral *Ephemeral
 	Primary   *Primary
+	Workspace *Workspace
 }
 
 // EphemeralAsEnvironmentEditSettingsEdit is a convenience function that returns Ephemeral wrapped in EnvironmentEditSettingsEdit
@@ -33,6 +34,13 @@ func EphemeralAsEnvironmentEditSettingsEdit(v *Ephemeral) EnvironmentEditSetting
 func PrimaryAsEnvironmentEditSettingsEdit(v *Primary) EnvironmentEditSettingsEdit {
 	return EnvironmentEditSettingsEdit{
 		Primary: v,
+	}
+}
+
+// WorkspaceAsEnvironmentEditSettingsEdit is a convenience function that returns Workspace wrapped in EnvironmentEditSettingsEdit
+func WorkspaceAsEnvironmentEditSettingsEdit(v *Workspace) EnvironmentEditSettingsEdit {
+	return EnvironmentEditSettingsEdit{
+		Workspace: v,
 	}
 }
 
@@ -66,10 +74,24 @@ func (dst *EnvironmentEditSettingsEdit) UnmarshalJSON(data []byte) error {
 		dst.Primary = nil
 	}
 
+	// try to unmarshal data into Workspace
+	err = newStrictDecoder(data).Decode(&dst.Workspace)
+	if err == nil {
+		jsonWorkspace, _ := json.Marshal(dst.Workspace)
+		if string(jsonWorkspace) == "{}" { // empty struct
+			dst.Workspace = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.Workspace = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.Ephemeral = nil
 		dst.Primary = nil
+		dst.Workspace = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(EnvironmentEditSettingsEdit)")
 	} else if match == 1 {
@@ -89,6 +111,10 @@ func (src EnvironmentEditSettingsEdit) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.Primary)
 	}
 
+	if src.Workspace != nil {
+		return json.Marshal(&src.Workspace)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -103,6 +129,10 @@ func (obj *EnvironmentEditSettingsEdit) GetActualInstance() interface{} {
 
 	if obj.Primary != nil {
 		return obj.Primary
+	}
+
+	if obj.Workspace != nil {
+		return obj.Workspace
 	}
 
 	// all schemas are nil

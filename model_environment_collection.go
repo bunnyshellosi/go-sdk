@@ -38,8 +38,12 @@ type EnvironmentCollection struct {
 	Project *string `json:"project,omitempty"`
 	// Kubernetes integration identifier.
 	KubernetesIntegration NullableString `json:"kubernetesIntegration,omitempty"`
+	// Kubernetes integration managed hosting region.
+	HostingRegion NullableString `json:"hostingRegion,omitempty"`
 	// Kubernetes integration identifier for the ephemeral auto deploy cluster.
 	EphemeralKubernetesIntegration NullableString `json:"ephemeralKubernetesIntegration,omitempty"`
+	// Hosting Region for the ephemeral auto deploy cluster.
+	EphemeralHostingRegion NullableString `json:"ephemeralHostingRegion,omitempty"`
 	// Environment termination protection.
 	HasTerminationProtection *bool `json:"hasTerminationProtection,omitempty"`
 	// Environment auto update.
@@ -374,6 +378,49 @@ func (o *EnvironmentCollection) UnsetKubernetesIntegration() {
 	o.KubernetesIntegration.Unset()
 }
 
+// GetHostingRegion returns the HostingRegion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentCollection) GetHostingRegion() string {
+	if o == nil || IsNil(o.HostingRegion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.HostingRegion.Get()
+}
+
+// GetHostingRegionOk returns a tuple with the HostingRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentCollection) GetHostingRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HostingRegion.Get(), o.HostingRegion.IsSet()
+}
+
+// HasHostingRegion returns a boolean if a field has been set.
+func (o *EnvironmentCollection) HasHostingRegion() bool {
+	if o != nil && o.HostingRegion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHostingRegion gets a reference to the given NullableString and assigns it to the HostingRegion field.
+func (o *EnvironmentCollection) SetHostingRegion(v string) {
+	o.HostingRegion.Set(&v)
+}
+
+// SetHostingRegionNil sets the value for HostingRegion to be an explicit nil
+func (o *EnvironmentCollection) SetHostingRegionNil() {
+	o.HostingRegion.Set(nil)
+}
+
+// UnsetHostingRegion ensures that no value is present for HostingRegion, not even an explicit nil
+func (o *EnvironmentCollection) UnsetHostingRegion() {
+	o.HostingRegion.Unset()
+}
+
 // GetEphemeralKubernetesIntegration returns the EphemeralKubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *EnvironmentCollection) GetEphemeralKubernetesIntegration() string {
 	if o == nil || IsNil(o.EphemeralKubernetesIntegration.Get()) {
@@ -415,6 +462,49 @@ func (o *EnvironmentCollection) SetEphemeralKubernetesIntegrationNil() {
 // UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
 func (o *EnvironmentCollection) UnsetEphemeralKubernetesIntegration() {
 	o.EphemeralKubernetesIntegration.Unset()
+}
+
+// GetEphemeralHostingRegion returns the EphemeralHostingRegion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EnvironmentCollection) GetEphemeralHostingRegion() string {
+	if o == nil || IsNil(o.EphemeralHostingRegion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.EphemeralHostingRegion.Get()
+}
+
+// GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentCollection) GetEphemeralHostingRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EphemeralHostingRegion.Get(), o.EphemeralHostingRegion.IsSet()
+}
+
+// HasEphemeralHostingRegion returns a boolean if a field has been set.
+func (o *EnvironmentCollection) HasEphemeralHostingRegion() bool {
+	if o != nil && o.EphemeralHostingRegion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEphemeralHostingRegion gets a reference to the given NullableString and assigns it to the EphemeralHostingRegion field.
+func (o *EnvironmentCollection) SetEphemeralHostingRegion(v string) {
+	o.EphemeralHostingRegion.Set(&v)
+}
+
+// SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+func (o *EnvironmentCollection) SetEphemeralHostingRegionNil() {
+	o.EphemeralHostingRegion.Set(nil)
+}
+
+// UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
+func (o *EnvironmentCollection) UnsetEphemeralHostingRegion() {
+	o.EphemeralHostingRegion.Unset()
 }
 
 // GetHasTerminationProtection returns the HasTerminationProtection field value if set, zero value otherwise.
@@ -721,8 +811,14 @@ func (o EnvironmentCollection) ToMap() (map[string]interface{}, error) {
 	if o.KubernetesIntegration.IsSet() {
 		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
 	}
+	if o.HostingRegion.IsSet() {
+		toSerialize["hostingRegion"] = o.HostingRegion.Get()
+	}
 	if o.EphemeralKubernetesIntegration.IsSet() {
 		toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
+	}
+	if o.EphemeralHostingRegion.IsSet() {
+		toSerialize["ephemeralHostingRegion"] = o.EphemeralHostingRegion.Get()
 	}
 	if !IsNil(o.HasTerminationProtection) {
 		toSerialize["hasTerminationProtection"] = o.HasTerminationProtection

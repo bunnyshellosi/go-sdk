@@ -62,54 +62,6 @@ func (dst *EnumTypeItemDefaultValue) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
 	}
 
-	// check if the discriminator value is 'BooleanValue-item'
-	if jsonDict["type"] == "BooleanValue-item" {
-		// try to unmarshal JSON data into BooleanValueItem
-		err = json.Unmarshal(data, &dst.BooleanValueItem)
-		if err == nil {
-			return nil // data stored in dst.BooleanValueItem, return on the first match
-		} else {
-			dst.BooleanValueItem = nil
-			return fmt.Errorf("failed to unmarshal EnumTypeItemDefaultValue as BooleanValueItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'FloatValue-item'
-	if jsonDict["type"] == "FloatValue-item" {
-		// try to unmarshal JSON data into FloatValueItem
-		err = json.Unmarshal(data, &dst.FloatValueItem)
-		if err == nil {
-			return nil // data stored in dst.FloatValueItem, return on the first match
-		} else {
-			dst.FloatValueItem = nil
-			return fmt.Errorf("failed to unmarshal EnumTypeItemDefaultValue as FloatValueItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'IntegerValue-item'
-	if jsonDict["type"] == "IntegerValue-item" {
-		// try to unmarshal JSON data into IntegerValueItem
-		err = json.Unmarshal(data, &dst.IntegerValueItem)
-		if err == nil {
-			return nil // data stored in dst.IntegerValueItem, return on the first match
-		} else {
-			dst.IntegerValueItem = nil
-			return fmt.Errorf("failed to unmarshal EnumTypeItemDefaultValue as IntegerValueItem: %s", err.Error())
-		}
-	}
-
-	// check if the discriminator value is 'StringValue-item'
-	if jsonDict["type"] == "StringValue-item" {
-		// try to unmarshal JSON data into StringValueItem
-		err = json.Unmarshal(data, &dst.StringValueItem)
-		if err == nil {
-			return nil // data stored in dst.StringValueItem, return on the first match
-		} else {
-			dst.StringValueItem = nil
-			return fmt.Errorf("failed to unmarshal EnumTypeItemDefaultValue as StringValueItem: %s", err.Error())
-		}
-	}
-
 	// check if the discriminator value is 'bool'
 	if jsonDict["type"] == "bool" {
 		// try to unmarshal JSON data into BooleanValueItem
