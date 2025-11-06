@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**ProjectCreate**](ProjectAPI.md#ProjectCreate) | **Post** /v1/projects | Creates new project.
 [**ProjectDelete**](ProjectAPI.md#ProjectDelete) | **Delete** /v1/projects/{id} | Delete a specific project.
 [**ProjectEditBuildSettings**](ProjectAPI.md#ProjectEditBuildSettings) | **Patch** /v1/projects/{id}/build-settings | Edit the build settings of a project.
+[**ProjectEditDrunnerSettings**](ProjectAPI.md#ProjectEditDrunnerSettings) | **Patch** /v1/projects/{id}/deployment-runner-settings | Edit the deploymentRunner settings of a project.
 [**ProjectEditSettings**](ProjectAPI.md#ProjectEditSettings) | **Patch** /v1/projects/{id}/settings | Edit a project.
 [**ProjectList**](ProjectAPI.md#ProjectList) | **Get** /v1/projects | List projects matching any selected filters.
 [**ProjectView**](ProjectAPI.md#ProjectView) | **Get** /v1/projects/{id} | View a specific project.
@@ -202,6 +203,78 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **projectEditBuildSettingsAction** | [**ProjectEditBuildSettingsAction**](ProjectEditBuildSettingsAction.md) | The updated project resource | 
+
+### Return type
+
+[**ProjectItem**](ProjectItem.md)
+
+### Authorization
+
+[JWT](../README.md#JWT), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ProjectEditDrunnerSettings
+
+> ProjectItem ProjectEditDrunnerSettings(ctx, id).ProjectEditDeploymentRunnerSettingsAction(projectEditDeploymentRunnerSettingsAction).Execute()
+
+Edit the deploymentRunner settings of a project.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "bunnyshell.com/sdk"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    projectEditDeploymentRunnerSettingsAction := *openapiclient.NewProjectEditDeploymentRunnerSettingsAction("KubernetesIntegration_example", "Cpu_example", NullableInt32(123), NullableInt32(123)) // ProjectEditDeploymentRunnerSettingsAction | The updated project resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProjectAPI.ProjectEditDrunnerSettings(context.Background(), id).ProjectEditDeploymentRunnerSettingsAction(projectEditDeploymentRunnerSettingsAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ProjectAPI.ProjectEditDrunnerSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ProjectEditDrunnerSettings`: ProjectItem
+    fmt.Fprintf(os.Stdout, "Response from `ProjectAPI.ProjectEditDrunnerSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiProjectEditDrunnerSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **projectEditDeploymentRunnerSettingsAction** | [**ProjectEditDeploymentRunnerSettingsAction**](ProjectEditDeploymentRunnerSettingsAction.md) | The updated project resource | 
 
 ### Return type
 

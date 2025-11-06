@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Primary type satisfies the MappedNullable interface at compile time
@@ -20,24 +22,27 @@ var _ MappedNullable = &Primary{}
 
 // Primary struct for Primary
 type Primary struct {
-	Type                           *string                    `json:"type,omitempty"`
-	AutoDeployEphemeral            NullableBool               `json:"autoDeployEphemeral,omitempty"`
-	TerminationProtection          NullableBool               `json:"terminationProtection,omitempty"`
-	CreateEphemeralOnPrCreate      NullableBool               `json:"createEphemeralOnPrCreate,omitempty"`
-	DestroyEphemeralOnPrClose      NullableBool               `json:"destroyEphemeralOnPrClose,omitempty"`
-	EphemeralKubernetesIntegration NullableString             `json:"ephemeralKubernetesIntegration"`
-	PrimaryOptions                 NullablePrimaryOptionsEdit `json:"primaryOptions,omitempty"`
+	Type                           *string                      `json:"type,omitempty"`
+	AutoDeployEphemeral            NullableBool                 `json:"autoDeployEphemeral,omitempty"`
+	TerminationProtection          NullableBool                 `json:"terminationProtection,omitempty"`
+	CreateEphemeralOnPrCreate      NullableBool                 `json:"createEphemeralOnPrCreate,omitempty"`
+	DestroyEphemeralOnPrClose      NullableBool                 `json:"destroyEphemeralOnPrClose,omitempty"`
+	EphemeralKubernetesIntegration NullableString               `json:"ephemeralKubernetesIntegration"`
+	EphemeralHostingRegion         NullableString               `json:"ephemeralHostingRegion"`
+	PrimaryOptions                 NullablePrimaryOptionsEdit   `json:"primaryOptions,omitempty"`
+	TemplateSettings               NullableTemplateSettingsEdit `json:"templateSettings,omitempty"`
 }
 
 // NewPrimary instantiates a new Primary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrimary(ephemeralKubernetesIntegration NullableString) *Primary {
+func NewPrimary(ephemeralKubernetesIntegration NullableString, ephemeralHostingRegion NullableString) *Primary {
 	this := Primary{}
 	var type_ string = "primary"
 	this.Type = &type_
 	this.EphemeralKubernetesIntegration = ephemeralKubernetesIntegration
+	this.EphemeralHostingRegion = ephemeralHostingRegion
 	return &this
 }
 
@@ -281,6 +286,32 @@ func (o *Primary) SetEphemeralKubernetesIntegration(v string) {
 	o.EphemeralKubernetesIntegration.Set(&v)
 }
 
+// GetEphemeralHostingRegion returns the EphemeralHostingRegion field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *Primary) GetEphemeralHostingRegion() string {
+	if o == nil || o.EphemeralHostingRegion.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.EphemeralHostingRegion.Get()
+}
+
+// GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Primary) GetEphemeralHostingRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EphemeralHostingRegion.Get(), o.EphemeralHostingRegion.IsSet()
+}
+
+// SetEphemeralHostingRegion sets field value
+func (o *Primary) SetEphemeralHostingRegion(v string) {
+	o.EphemeralHostingRegion.Set(&v)
+}
+
 // GetPrimaryOptions returns the PrimaryOptions field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Primary) GetPrimaryOptions() PrimaryOptionsEdit {
 	if o == nil || IsNil(o.PrimaryOptions.Get()) {
@@ -324,6 +355,49 @@ func (o *Primary) UnsetPrimaryOptions() {
 	o.PrimaryOptions.Unset()
 }
 
+// GetTemplateSettings returns the TemplateSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Primary) GetTemplateSettings() TemplateSettingsEdit {
+	if o == nil || IsNil(o.TemplateSettings.Get()) {
+		var ret TemplateSettingsEdit
+		return ret
+	}
+	return *o.TemplateSettings.Get()
+}
+
+// GetTemplateSettingsOk returns a tuple with the TemplateSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Primary) GetTemplateSettingsOk() (*TemplateSettingsEdit, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TemplateSettings.Get(), o.TemplateSettings.IsSet()
+}
+
+// HasTemplateSettings returns a boolean if a field has been set.
+func (o *Primary) HasTemplateSettings() bool {
+	if o != nil && o.TemplateSettings.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplateSettings gets a reference to the given NullableTemplateSettingsEdit and assigns it to the TemplateSettings field.
+func (o *Primary) SetTemplateSettings(v TemplateSettingsEdit) {
+	o.TemplateSettings.Set(&v)
+}
+
+// SetTemplateSettingsNil sets the value for TemplateSettings to be an explicit nil
+func (o *Primary) SetTemplateSettingsNil() {
+	o.TemplateSettings.Set(nil)
+}
+
+// UnsetTemplateSettings ensures that no value is present for TemplateSettings, not even an explicit nil
+func (o *Primary) UnsetTemplateSettings() {
+	o.TemplateSettings.Unset()
+}
+
 func (o Primary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -350,8 +424,12 @@ func (o Primary) ToMap() (map[string]interface{}, error) {
 		toSerialize["destroyEphemeralOnPrClose"] = o.DestroyEphemeralOnPrClose.Get()
 	}
 	toSerialize["ephemeralKubernetesIntegration"] = o.EphemeralKubernetesIntegration.Get()
+	toSerialize["ephemeralHostingRegion"] = o.EphemeralHostingRegion.Get()
 	if o.PrimaryOptions.IsSet() {
 		toSerialize["primaryOptions"] = o.PrimaryOptions.Get()
+	}
+	if o.TemplateSettings.IsSet() {
+		toSerialize["templateSettings"] = o.TemplateSettings.Get()
 	}
 	return toSerialize, nil
 }

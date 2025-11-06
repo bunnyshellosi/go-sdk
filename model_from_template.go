@@ -20,9 +20,9 @@ var _ MappedNullable = &FromTemplate{}
 
 // FromTemplate struct for FromTemplate
 type FromTemplate struct {
-	Type      *string                                `json:"type,omitempty"`
-	Variables *map[string]FromTemplateVariablesValue `json:"variables,omitempty"`
-	Template  *string                                `json:"template,omitempty"`
+	Type      *string                               `json:"type,omitempty"`
+	Variables map[string]FromTemplateVariablesValue `json:"variables,omitempty"`
+	Template  *string                               `json:"template,omitempty"`
 }
 
 // NewFromTemplate instantiates a new FromTemplate object
@@ -84,14 +84,14 @@ func (o *FromTemplate) GetVariables() map[string]FromTemplateVariablesValue {
 		var ret map[string]FromTemplateVariablesValue
 		return ret
 	}
-	return *o.Variables
+	return o.Variables
 }
 
 // GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FromTemplate) GetVariablesOk() (*map[string]FromTemplateVariablesValue, bool) {
+func (o *FromTemplate) GetVariablesOk() (map[string]FromTemplateVariablesValue, bool) {
 	if o == nil || IsNil(o.Variables) {
-		return nil, false
+		return map[string]FromTemplateVariablesValue{}, false
 	}
 	return o.Variables, true
 }
@@ -107,7 +107,7 @@ func (o *FromTemplate) HasVariables() bool {
 
 // SetVariables gets a reference to the given map[string]FromTemplateVariablesValue and assigns it to the Variables field.
 func (o *FromTemplate) SetVariables(v map[string]FromTemplateVariablesValue) {
-	o.Variables = &v
+	o.Variables = v
 }
 
 // GetTemplate returns the Template field value if set, zero value otherwise.

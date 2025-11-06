@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **Labels** | Pointer to **map[string]string** | Environment labels. | [optional] [readonly] 
 **Name** | Pointer to **string** | Project name. | [optional] [readonly] 
 **TotalEnvironments** | Pointer to **int32** | Environment identifier. | [optional] [readonly] 
-**BuildSettings** | Pointer to [**NullableBuildSettingsItem**](BuildSettingsItem.md) |  | [optional] 
+**BuildSettings** | Pointer to [**NullableBuildSettingsItem**](BuildSettingsItem.md) |  | [optional] [readonly] 
+**DeploymentRunnerSettings** | Pointer to [**NullableDeploymentRunnerSettingsItem**](DeploymentRunnerSettingsItem.md) |  | [optional] [readonly] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
 
 ## Methods
@@ -165,6 +166,41 @@ HasBuildSettings returns a boolean if a field has been set.
 `func (o *ProjectItem) UnsetBuildSettings()`
 
 UnsetBuildSettings ensures that no value is present for BuildSettings, not even an explicit nil
+### GetDeploymentRunnerSettings
+
+`func (o *ProjectItem) GetDeploymentRunnerSettings() DeploymentRunnerSettingsItem`
+
+GetDeploymentRunnerSettings returns the DeploymentRunnerSettings field if non-nil, zero value otherwise.
+
+### GetDeploymentRunnerSettingsOk
+
+`func (o *ProjectItem) GetDeploymentRunnerSettingsOk() (*DeploymentRunnerSettingsItem, bool)`
+
+GetDeploymentRunnerSettingsOk returns a tuple with the DeploymentRunnerSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeploymentRunnerSettings
+
+`func (o *ProjectItem) SetDeploymentRunnerSettings(v DeploymentRunnerSettingsItem)`
+
+SetDeploymentRunnerSettings sets DeploymentRunnerSettings field to given value.
+
+### HasDeploymentRunnerSettings
+
+`func (o *ProjectItem) HasDeploymentRunnerSettings() bool`
+
+HasDeploymentRunnerSettings returns a boolean if a field has been set.
+
+### SetDeploymentRunnerSettingsNil
+
+`func (o *ProjectItem) SetDeploymentRunnerSettingsNil(b bool)`
+
+ SetDeploymentRunnerSettingsNil sets the value for DeploymentRunnerSettings to be an explicit nil
+
+### UnsetDeploymentRunnerSettings
+`func (o *ProjectItem) UnsetDeploymentRunnerSettings()`
+
+UnsetDeploymentRunnerSettings ensures that no value is present for DeploymentRunnerSettings, not even an explicit nil
 ### GetOrganization
 
 `func (o *ProjectItem) GetOrganization() string`

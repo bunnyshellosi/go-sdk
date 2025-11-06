@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**EnvironmentEditBuildSettings**](EnvironmentAPI.md#EnvironmentEditBuildSettings) | **Patch** /v1/environments/{id}/build-settings | Edit the build settings of an environment.
 [**EnvironmentEditComponents**](EnvironmentAPI.md#EnvironmentEditComponents) | **Put** /v1/environments/{id}/components | Edit the components of an environment.
 [**EnvironmentEditConfiguration**](EnvironmentAPI.md#EnvironmentEditConfiguration) | **Put** /v1/environments/{id}/configuration | Edit an environment.
+[**EnvironmentEditDrunnerSettings**](EnvironmentAPI.md#EnvironmentEditDrunnerSettings) | **Patch** /v1/environments/{id}/deployment-runner-settings | Edit the deployment runner settings of an environment.
 [**EnvironmentEditSettings**](EnvironmentAPI.md#EnvironmentEditSettings) | **Put** /v1/environments/{id}/settings | Edit an environment.
 [**EnvironmentKubeConfig**](EnvironmentAPI.md#EnvironmentKubeConfig) | **Get** /v1/environments/{id}/kube-config | Download Kubernetes Config File
 [**EnvironmentList**](EnvironmentAPI.md#EnvironmentList) | **Get** /v1/environments | List environments matching any selected filters.
@@ -589,6 +590,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## EnvironmentEditDrunnerSettings
+
+> EnvironmentItem EnvironmentEditDrunnerSettings(ctx, id).EnvironmentEditDeploymentRunnerSettingsAction(environmentEditDeploymentRunnerSettingsAction).Execute()
+
+Edit the deployment runner settings of an environment.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "bunnyshell.com/sdk"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    environmentEditDeploymentRunnerSettingsAction := *openapiclient.NewEnvironmentEditDeploymentRunnerSettingsAction("KubernetesIntegration_example", "Cpu_example", NullableInt32(123), NullableInt32(123)) // EnvironmentEditDeploymentRunnerSettingsAction | The updated environment resource
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentEditDrunnerSettings(context.Background(), id).EnvironmentEditDeploymentRunnerSettingsAction(environmentEditDeploymentRunnerSettingsAction).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentEditDrunnerSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentEditDrunnerSettings`: EnvironmentItem
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentAPI.EnvironmentEditDrunnerSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentEditDrunnerSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **environmentEditDeploymentRunnerSettingsAction** | [**EnvironmentEditDeploymentRunnerSettingsAction**](EnvironmentEditDeploymentRunnerSettingsAction.md) | The updated environment resource | 
+
+### Return type
+
+[**EnvironmentItem**](EnvironmentItem.md)
+
+### Authorization
+
+[JWT](../README.md#JWT), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## EnvironmentEditSettings
 
 > EnvironmentItem EnvironmentEditSettings(ctx, id).EnvironmentEditSettings(environmentEditSettings).Execute()
@@ -611,7 +684,7 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    environmentEditSettings := *openapiclient.NewEnvironmentEditSettings() // EnvironmentEditSettings | The updated environment resource
+    environmentEditSettings := *openapiclient.NewEnvironmentEditSettings("KubernetesIntegration_example", "HostingRegion_example") // EnvironmentEditSettings | The updated environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** |  | [optional] 
 **RemoteDevelopmentAllowed** | Pointer to **NullableBool** |  | [optional] 
 **AutoUpdate** | Pointer to **NullableBool** |  | [optional] 
-**KubernetesIntegration** | Pointer to **NullableString** |  | [optional] 
+**KubernetesIntegration** | **NullableString** |  | 
+**HostingRegion** | **NullableString** |  | 
 **Edit** | Pointer to [**EnvironmentEditSettingsEdit**](EnvironmentEditSettingsEdit.md) |  | [optional] 
 **Labels** | Pointer to [**NullableEdit**](Edit.md) |  | [optional] 
 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewEnvironmentEditSettings
 
-`func NewEnvironmentEditSettings() *EnvironmentEditSettings`
+`func NewEnvironmentEditSettings(kubernetesIntegration NullableString, hostingRegion NullableString, ) *EnvironmentEditSettings`
 
 NewEnvironmentEditSettings instantiates a new EnvironmentEditSettings object
 This constructor will assign default values to properties that have it defined,
@@ -154,11 +155,6 @@ and a boolean to check if the value has been set.
 
 SetKubernetesIntegration sets KubernetesIntegration field to given value.
 
-### HasKubernetesIntegration
-
-`func (o *EnvironmentEditSettings) HasKubernetesIntegration() bool`
-
-HasKubernetesIntegration returns a boolean if a field has been set.
 
 ### SetKubernetesIntegrationNil
 
@@ -170,6 +166,36 @@ HasKubernetesIntegration returns a boolean if a field has been set.
 `func (o *EnvironmentEditSettings) UnsetKubernetesIntegration()`
 
 UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
+### GetHostingRegion
+
+`func (o *EnvironmentEditSettings) GetHostingRegion() string`
+
+GetHostingRegion returns the HostingRegion field if non-nil, zero value otherwise.
+
+### GetHostingRegionOk
+
+`func (o *EnvironmentEditSettings) GetHostingRegionOk() (*string, bool)`
+
+GetHostingRegionOk returns a tuple with the HostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostingRegion
+
+`func (o *EnvironmentEditSettings) SetHostingRegion(v string)`
+
+SetHostingRegion sets HostingRegion field to given value.
+
+
+### SetHostingRegionNil
+
+`func (o *EnvironmentEditSettings) SetHostingRegionNil(b bool)`
+
+ SetHostingRegionNil sets the value for HostingRegion to be an explicit nil
+
+### UnsetHostingRegion
+`func (o *EnvironmentEditSettings) UnsetHostingRegion()`
+
+UnsetHostingRegion ensures that no value is present for HostingRegion, not even an explicit nil
 ### GetEdit
 
 `func (o *EnvironmentEditSettings) GetEdit() EnvironmentEditSettingsEdit`

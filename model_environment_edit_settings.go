@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the EnvironmentEditSettings type satisfies the MappedNullable interface at compile time
@@ -23,7 +25,8 @@ type EnvironmentEditSettings struct {
 	Name                     NullableString               `json:"name,omitempty"`
 	RemoteDevelopmentAllowed NullableBool                 `json:"remoteDevelopmentAllowed,omitempty"`
 	AutoUpdate               NullableBool                 `json:"autoUpdate,omitempty"`
-	KubernetesIntegration    NullableString               `json:"kubernetesIntegration,omitempty"`
+	KubernetesIntegration    NullableString               `json:"kubernetesIntegration"`
+	HostingRegion            NullableString               `json:"hostingRegion"`
 	Edit                     *EnvironmentEditSettingsEdit `json:"edit,omitempty"`
 	Labels                   NullableEdit                 `json:"labels,omitempty"`
 }
@@ -32,8 +35,10 @@ type EnvironmentEditSettings struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentEditSettings() *EnvironmentEditSettings {
+func NewEnvironmentEditSettings(kubernetesIntegration NullableString, hostingRegion NullableString) *EnvironmentEditSettings {
 	this := EnvironmentEditSettings{}
+	this.KubernetesIntegration = kubernetesIntegration
+	this.HostingRegion = hostingRegion
 	return &this
 }
 
@@ -174,16 +179,18 @@ func (o *EnvironmentEditSettings) UnsetAutoUpdate() {
 	o.AutoUpdate.Unset()
 }
 
-// GetKubernetesIntegration returns the KubernetesIntegration field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetKubernetesIntegration returns the KubernetesIntegration field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentEditSettings) GetKubernetesIntegration() string {
-	if o == nil || IsNil(o.KubernetesIntegration.Get()) {
+	if o == nil || o.KubernetesIntegration.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.KubernetesIntegration.Get()
 }
 
-// GetKubernetesIntegrationOk returns a tuple with the KubernetesIntegration field value if set, nil otherwise
+// GetKubernetesIntegrationOk returns a tuple with the KubernetesIntegration field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentEditSettings) GetKubernetesIntegrationOk() (*string, bool) {
@@ -193,28 +200,35 @@ func (o *EnvironmentEditSettings) GetKubernetesIntegrationOk() (*string, bool) {
 	return o.KubernetesIntegration.Get(), o.KubernetesIntegration.IsSet()
 }
 
-// HasKubernetesIntegration returns a boolean if a field has been set.
-func (o *EnvironmentEditSettings) HasKubernetesIntegration() bool {
-	if o != nil && o.KubernetesIntegration.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetKubernetesIntegration gets a reference to the given NullableString and assigns it to the KubernetesIntegration field.
+// SetKubernetesIntegration sets field value
 func (o *EnvironmentEditSettings) SetKubernetesIntegration(v string) {
 	o.KubernetesIntegration.Set(&v)
 }
 
-// SetKubernetesIntegrationNil sets the value for KubernetesIntegration to be an explicit nil
-func (o *EnvironmentEditSettings) SetKubernetesIntegrationNil() {
-	o.KubernetesIntegration.Set(nil)
+// GetHostingRegion returns the HostingRegion field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *EnvironmentEditSettings) GetHostingRegion() string {
+	if o == nil || o.HostingRegion.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.HostingRegion.Get()
 }
 
-// UnsetKubernetesIntegration ensures that no value is present for KubernetesIntegration, not even an explicit nil
-func (o *EnvironmentEditSettings) UnsetKubernetesIntegration() {
-	o.KubernetesIntegration.Unset()
+// GetHostingRegionOk returns a tuple with the HostingRegion field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EnvironmentEditSettings) GetHostingRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HostingRegion.Get(), o.HostingRegion.IsSet()
+}
+
+// SetHostingRegion sets field value
+func (o *EnvironmentEditSettings) SetHostingRegion(v string) {
+	o.HostingRegion.Set(&v)
 }
 
 // GetEdit returns the Edit field value if set, zero value otherwise.
@@ -311,9 +325,8 @@ func (o EnvironmentEditSettings) ToMap() (map[string]interface{}, error) {
 	if o.AutoUpdate.IsSet() {
 		toSerialize["autoUpdate"] = o.AutoUpdate.Get()
 	}
-	if o.KubernetesIntegration.IsSet() {
-		toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
-	}
+	toSerialize["kubernetesIntegration"] = o.KubernetesIntegration.Get()
+	toSerialize["hostingRegion"] = o.HostingRegion.Get()
 	if !IsNil(o.Edit) {
 		toSerialize["edit"] = o.Edit
 	}

@@ -4,19 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to **string** |  | [optional] [default to "ephemeral"]
+**Type** | Pointer to **string** |  | [optional] [default to "workspace"]
 **AutoDeployEphemeral** | Pointer to **NullableBool** |  | [optional] 
 **TerminationProtection** | Pointer to **NullableBool** |  | [optional] 
 **CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
 **EphemeralKubernetesIntegration** | **NullableString** |  | 
-**PrimaryOptions** | Pointer to [**NullablePrimaryOptionsEdit**](PrimaryOptionsEdit.md) |  | [optional] 
+**EphemeralHostingRegion** | **NullableString** |  | 
+**PrimaryOptions** | Pointer to [**PrimaryOptionsEdit**](PrimaryOptionsEdit.md) |  | [optional] 
+**TemplateSettings** | Pointer to [**TemplateSettingsEdit**](TemplateSettingsEdit.md) |  | [optional] 
 
 ## Methods
 
 ### NewEnvironmentEditSettingsEdit
 
-`func NewEnvironmentEditSettingsEdit(ephemeralKubernetesIntegration NullableString, ) *EnvironmentEditSettingsEdit`
+`func NewEnvironmentEditSettingsEdit(ephemeralKubernetesIntegration NullableString, ephemeralHostingRegion NullableString, ) *EnvironmentEditSettingsEdit`
 
 NewEnvironmentEditSettingsEdit instantiates a new EnvironmentEditSettingsEdit object
 This constructor will assign default values to properties that have it defined,
@@ -226,6 +228,36 @@ SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to g
 `func (o *EnvironmentEditSettingsEdit) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetEphemeralHostingRegion
+
+`func (o *EnvironmentEditSettingsEdit) GetEphemeralHostingRegion() string`
+
+GetEphemeralHostingRegion returns the EphemeralHostingRegion field if non-nil, zero value otherwise.
+
+### GetEphemeralHostingRegionOk
+
+`func (o *EnvironmentEditSettingsEdit) GetEphemeralHostingRegionOk() (*string, bool)`
+
+GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralHostingRegion
+
+`func (o *EnvironmentEditSettingsEdit) SetEphemeralHostingRegion(v string)`
+
+SetEphemeralHostingRegion sets EphemeralHostingRegion field to given value.
+
+
+### SetEphemeralHostingRegionNil
+
+`func (o *EnvironmentEditSettingsEdit) SetEphemeralHostingRegionNil(b bool)`
+
+ SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+
+### UnsetEphemeralHostingRegion
+`func (o *EnvironmentEditSettingsEdit) UnsetEphemeralHostingRegion()`
+
+UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
 ### GetPrimaryOptions
 
 `func (o *EnvironmentEditSettingsEdit) GetPrimaryOptions() PrimaryOptionsEdit`
@@ -251,16 +283,31 @@ SetPrimaryOptions sets PrimaryOptions field to given value.
 
 HasPrimaryOptions returns a boolean if a field has been set.
 
-### SetPrimaryOptionsNil
+### GetTemplateSettings
 
-`func (o *EnvironmentEditSettingsEdit) SetPrimaryOptionsNil(b bool)`
+`func (o *EnvironmentEditSettingsEdit) GetTemplateSettings() TemplateSettingsEdit`
 
- SetPrimaryOptionsNil sets the value for PrimaryOptions to be an explicit nil
+GetTemplateSettings returns the TemplateSettings field if non-nil, zero value otherwise.
 
-### UnsetPrimaryOptions
-`func (o *EnvironmentEditSettingsEdit) UnsetPrimaryOptions()`
+### GetTemplateSettingsOk
 
-UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
+`func (o *EnvironmentEditSettingsEdit) GetTemplateSettingsOk() (*TemplateSettingsEdit, bool)`
+
+GetTemplateSettingsOk returns a tuple with the TemplateSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSettings
+
+`func (o *EnvironmentEditSettingsEdit) SetTemplateSettings(v TemplateSettingsEdit)`
+
+SetTemplateSettings sets TemplateSettings field to given value.
+
+### HasTemplateSettings
+
+`func (o *EnvironmentEditSettingsEdit) HasTemplateSettings() bool`
+
+HasTemplateSettings returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

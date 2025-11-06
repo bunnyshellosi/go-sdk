@@ -10,13 +10,15 @@ Name | Type | Description | Notes
 **CreateEphemeralOnPrCreate** | Pointer to **NullableBool** |  | [optional] 
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
 **EphemeralKubernetesIntegration** | **NullableString** |  | 
+**EphemeralHostingRegion** | **NullableString** |  | 
 **PrimaryOptions** | Pointer to [**NullablePrimaryOptionsEdit**](PrimaryOptionsEdit.md) |  | [optional] 
+**TemplateSettings** | Pointer to [**NullableTemplateSettingsEdit**](TemplateSettingsEdit.md) |  | [optional] 
 
 ## Methods
 
 ### NewPrimary
 
-`func NewPrimary(ephemeralKubernetesIntegration NullableString, ) *Primary`
+`func NewPrimary(ephemeralKubernetesIntegration NullableString, ephemeralHostingRegion NullableString, ) *Primary`
 
 NewPrimary instantiates a new Primary object
 This constructor will assign default values to properties that have it defined,
@@ -226,6 +228,36 @@ SetEphemeralKubernetesIntegration sets EphemeralKubernetesIntegration field to g
 `func (o *Primary) UnsetEphemeralKubernetesIntegration()`
 
 UnsetEphemeralKubernetesIntegration ensures that no value is present for EphemeralKubernetesIntegration, not even an explicit nil
+### GetEphemeralHostingRegion
+
+`func (o *Primary) GetEphemeralHostingRegion() string`
+
+GetEphemeralHostingRegion returns the EphemeralHostingRegion field if non-nil, zero value otherwise.
+
+### GetEphemeralHostingRegionOk
+
+`func (o *Primary) GetEphemeralHostingRegionOk() (*string, bool)`
+
+GetEphemeralHostingRegionOk returns a tuple with the EphemeralHostingRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEphemeralHostingRegion
+
+`func (o *Primary) SetEphemeralHostingRegion(v string)`
+
+SetEphemeralHostingRegion sets EphemeralHostingRegion field to given value.
+
+
+### SetEphemeralHostingRegionNil
+
+`func (o *Primary) SetEphemeralHostingRegionNil(b bool)`
+
+ SetEphemeralHostingRegionNil sets the value for EphemeralHostingRegion to be an explicit nil
+
+### UnsetEphemeralHostingRegion
+`func (o *Primary) UnsetEphemeralHostingRegion()`
+
+UnsetEphemeralHostingRegion ensures that no value is present for EphemeralHostingRegion, not even an explicit nil
 ### GetPrimaryOptions
 
 `func (o *Primary) GetPrimaryOptions() PrimaryOptionsEdit`
@@ -261,6 +293,41 @@ HasPrimaryOptions returns a boolean if a field has been set.
 `func (o *Primary) UnsetPrimaryOptions()`
 
 UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
+### GetTemplateSettings
+
+`func (o *Primary) GetTemplateSettings() TemplateSettingsEdit`
+
+GetTemplateSettings returns the TemplateSettings field if non-nil, zero value otherwise.
+
+### GetTemplateSettingsOk
+
+`func (o *Primary) GetTemplateSettingsOk() (*TemplateSettingsEdit, bool)`
+
+GetTemplateSettingsOk returns a tuple with the TemplateSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTemplateSettings
+
+`func (o *Primary) SetTemplateSettings(v TemplateSettingsEdit)`
+
+SetTemplateSettings sets TemplateSettings field to given value.
+
+### HasTemplateSettings
+
+`func (o *Primary) HasTemplateSettings() bool`
+
+HasTemplateSettings returns a boolean if a field has been set.
+
+### SetTemplateSettingsNil
+
+`func (o *Primary) SetTemplateSettingsNil(b bool)`
+
+ SetTemplateSettingsNil sets the value for TemplateSettings to be an explicit nil
+
+### UnsetTemplateSettings
+`func (o *Primary) UnsetTemplateSettings()`
+
+UnsetTemplateSettings ensures that no value is present for TemplateSettings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
