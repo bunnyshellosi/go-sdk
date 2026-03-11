@@ -12,9 +12,7 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the SshCredentialsAction type satisfies the MappedNullable interface at compile time
