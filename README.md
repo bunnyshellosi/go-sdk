@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
 *EnvironItemAPI* | [**EnvironItemEdit**](docs/EnvironItemAPI.md#environitemedit) | **Patch** /v1/environ_items/{id} | Edit a specific environment variable.
 *EnvironItemAPI* | [**EnvironItemList**](docs/EnvironItemAPI.md#environitemlist) | **Get** /v1/environ_items | List environment variables matching any selected filters.
 *EnvironItemAPI* | [**EnvironItemView**](docs/EnvironItemAPI.md#environitemview) | **Get** /v1/environ_items/{id} | View a specific environment variable.
+*EnvironmentAPI* | [**EnvironmentAbort**](docs/EnvironmentAPI.md#environmentabort) | **Post** /v1/environments/{id}/abort | Abort the current and queued environment workflows.
 *EnvironmentAPI* | [**EnvironmentClone**](docs/EnvironmentAPI.md#environmentclone) | **Post** /v1/environments/{id}/clone | Clone an environment.
 *EnvironmentAPI* | [**EnvironmentCreate**](docs/EnvironmentAPI.md#environmentcreate) | **Post** /v1/environments | Creates a new environment.
 *EnvironmentAPI* | [**EnvironmentDefinition**](docs/EnvironmentAPI.md#environmentdefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
@@ -154,6 +155,9 @@ Class | Method | HTTP request | Description
 *TemplatesRepositoryAPI* | [**TemplatesRepositoryView**](docs/TemplatesRepositoryAPI.md#templatesrepositoryview) | **Get** /v1/templates_repositories/{id} | View a specific templates repository.
 *WorkflowAPI* | [**WorkflowList**](docs/WorkflowAPI.md#workflowlist) | **Get** /v1/workflows | List workflows matching any selected filters.
 *WorkflowAPI* | [**WorkflowView**](docs/WorkflowAPI.md#workflowview) | **Get** /v1/workflows/{id} | View a specific Workflow.
+*WorkflowJobAPI* | [**WorkflowJobList**](docs/WorkflowJobAPI.md#workflowjoblist) | **Get** /v1/workflow_jobs | List workflow jobs matching any selected filters.
+*WorkflowJobAPI* | [**WorkflowJobLogs**](docs/WorkflowJobAPI.md#workflowjoblogs) | **Get** /v1/workflow_jobs/{id}/logs | View logs for a specific workflow job.
+*WorkflowJobAPI* | [**WorkflowJobView**](docs/WorkflowJobAPI.md#workflowjobview) | **Get** /v1/workflow_jobs/{id} | View a specific workflow job.
 
 
 ## Documentation For Models
@@ -203,6 +207,7 @@ Class | Method | HTTP request | Description
  - [EmbeddedTemplateCollection](docs/EmbeddedTemplateCollection.md)
  - [EmbeddedTemplatesRepositoryCollection](docs/EmbeddedTemplatesRepositoryCollection.md)
  - [EmbeddedWorkflowCollection](docs/EmbeddedWorkflowCollection.md)
+ - [EmbeddedWorkflowJobCollection](docs/EmbeddedWorkflowJobCollection.md)
  - [EnumTypeItem](docs/EnumTypeItem.md)
  - [EnumTypeItemDefaultValue](docs/EnumTypeItemDefaultValue.md)
  - [EnumTypeItemValuesInner](docs/EnumTypeItemValuesInner.md)
@@ -270,6 +275,7 @@ Class | Method | HTTP request | Description
  - [PaginatedTemplateCollection](docs/PaginatedTemplateCollection.md)
  - [PaginatedTemplatesRepositoryCollection](docs/PaginatedTemplatesRepositoryCollection.md)
  - [PaginatedWorkflowCollection](docs/PaginatedWorkflowCollection.md)
+ - [PaginatedWorkflowJobCollection](docs/PaginatedWorkflowJobCollection.md)
  - [PipelineCollection](docs/PipelineCollection.md)
  - [PipelineItem](docs/PipelineItem.md)
  - [Primary](docs/Primary.md)
@@ -324,6 +330,12 @@ Class | Method | HTTP request | Description
  - [ValidateSourceString](docs/ValidateSourceString.md)
  - [WorkflowCollection](docs/WorkflowCollection.md)
  - [WorkflowItem](docs/WorkflowItem.md)
+ - [WorkflowJobCollection](docs/WorkflowJobCollection.md)
+ - [WorkflowJobItem](docs/WorkflowJobItem.md)
+ - [WorkflowJobOutputItem](docs/WorkflowJobOutputItem.md)
+ - [WorkflowJobWorkflowJobLogsOutputItem](docs/WorkflowJobWorkflowJobLogsOutputItem.md)
+ - [WorkflowStepLogOutputItem](docs/WorkflowStepLogOutputItem.md)
+ - [WorkflowStepOutputItem](docs/WorkflowStepOutputItem.md)
  - [Workspace](docs/Workspace.md)
 
 

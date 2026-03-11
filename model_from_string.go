@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FromString type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,18 @@ var _ MappedNullable = &FromString{}
 // FromString struct for FromString
 type FromString struct {
 	Type *string `json:"type,omitempty"`
-	Yaml *string `json:"yaml,omitempty"`
+	Yaml string  `json:"yaml"`
 }
 
 // NewFromString instantiates a new FromString object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFromString() *FromString {
+func NewFromString(yaml string) *FromString {
 	this := FromString{}
 	var type_ string = "string"
 	this.Type = &type_
+	this.Yaml = yaml
 	return &this
 }
 
@@ -77,36 +80,28 @@ func (o *FromString) SetType(v string) {
 	o.Type = &v
 }
 
-// GetYaml returns the Yaml field value if set, zero value otherwise.
+// GetYaml returns the Yaml field value
 func (o *FromString) GetYaml() string {
-	if o == nil || IsNil(o.Yaml) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Yaml
+
+	return o.Yaml
 }
 
-// GetYamlOk returns a tuple with the Yaml field value if set, nil otherwise
+// GetYamlOk returns a tuple with the Yaml field value
 // and a boolean to check if the value has been set.
 func (o *FromString) GetYamlOk() (*string, bool) {
-	if o == nil || IsNil(o.Yaml) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Yaml, true
+	return &o.Yaml, true
 }
 
-// HasYaml returns a boolean if a field has been set.
-func (o *FromString) HasYaml() bool {
-	if o != nil && !IsNil(o.Yaml) {
-		return true
-	}
-
-	return false
-}
-
-// SetYaml gets a reference to the given string and assigns it to the Yaml field.
+// SetYaml sets field value
 func (o *FromString) SetYaml(v string) {
-	o.Yaml = &v
+	o.Yaml = v
 }
 
 func (o FromString) MarshalJSON() ([]byte, error) {
@@ -122,9 +117,7 @@ func (o FromString) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !IsNil(o.Yaml) {
-		toSerialize["yaml"] = o.Yaml
-	}
+	toSerialize["yaml"] = o.Yaml
 	return toSerialize, nil
 }
 

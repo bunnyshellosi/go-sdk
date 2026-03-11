@@ -5,19 +5,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "template"]
-**Url** | Pointer to **string** |  | [optional] 
-**Branch** | Pointer to **string** |  | [optional] 
-**YamlPath** | Pointer to **string** |  | [optional] 
-**Spec** | Pointer to **string** |  | [optional] 
-**Yaml** | Pointer to **string** |  | [optional] 
+**Url** | **string** |  | 
+**Branch** | **string** |  | 
+**YamlPath** | **string** |  | 
+**Spec** | **string** |  | 
+**Yaml** | **string** |  | 
 **Variables** | Pointer to [**map[string]FromTemplateVariablesValue**](FromTemplateVariablesValue.md) |  | [optional] 
-**Template** | Pointer to **string** |  | [optional] 
+**Template** | **string** |  | 
 
 ## Methods
 
 ### NewEnvironmentEditConfigurationConfiguration
 
-`func NewEnvironmentEditConfigurationConfiguration() *EnvironmentEditConfigurationConfiguration`
+`func NewEnvironmentEditConfigurationConfiguration(url string, branch string, yamlPath string, spec string, yaml string, template string, ) *EnvironmentEditConfigurationConfiguration`
 
 NewEnvironmentEditConfigurationConfiguration instantiates a new EnvironmentEditConfigurationConfiguration object
 This constructor will assign default values to properties that have it defined,
@@ -76,11 +76,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-### HasUrl
-
-`func (o *EnvironmentEditConfigurationConfiguration) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
 
 ### GetBranch
 
@@ -101,11 +96,6 @@ and a boolean to check if the value has been set.
 
 SetBranch sets Branch field to given value.
 
-### HasBranch
-
-`func (o *EnvironmentEditConfigurationConfiguration) HasBranch() bool`
-
-HasBranch returns a boolean if a field has been set.
 
 ### GetYamlPath
 
@@ -126,11 +116,6 @@ and a boolean to check if the value has been set.
 
 SetYamlPath sets YamlPath field to given value.
 
-### HasYamlPath
-
-`func (o *EnvironmentEditConfigurationConfiguration) HasYamlPath() bool`
-
-HasYamlPath returns a boolean if a field has been set.
 
 ### GetSpec
 
@@ -151,11 +136,6 @@ and a boolean to check if the value has been set.
 
 SetSpec sets Spec field to given value.
 
-### HasSpec
-
-`func (o *EnvironmentEditConfigurationConfiguration) HasSpec() bool`
-
-HasSpec returns a boolean if a field has been set.
 
 ### GetYaml
 
@@ -176,11 +156,6 @@ and a boolean to check if the value has been set.
 
 SetYaml sets Yaml field to given value.
 
-### HasYaml
-
-`func (o *EnvironmentEditConfigurationConfiguration) HasYaml() bool`
-
-HasYaml returns a boolean if a field has been set.
 
 ### GetVariables
 
@@ -226,11 +201,6 @@ and a boolean to check if the value has been set.
 
 SetTemplate sets Template field to given value.
 
-### HasTemplate
-
-`func (o *EnvironmentEditConfigurationConfiguration) HasTemplate() bool`
-
-HasTemplate returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

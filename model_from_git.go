@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FromGit type satisfies the MappedNullable interface at compile time
@@ -21,19 +23,22 @@ var _ MappedNullable = &FromGit{}
 // FromGit struct for FromGit
 type FromGit struct {
 	Type     *string `json:"type,omitempty"`
-	Url      *string `json:"url,omitempty"`
-	Branch   *string `json:"branch,omitempty"`
-	YamlPath *string `json:"yamlPath,omitempty"`
+	Url      string  `json:"url"`
+	Branch   string  `json:"branch"`
+	YamlPath string  `json:"yamlPath"`
 }
 
 // NewFromGit instantiates a new FromGit object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFromGit() *FromGit {
+func NewFromGit(url string, branch string, yamlPath string) *FromGit {
 	this := FromGit{}
 	var type_ string = "git"
 	this.Type = &type_
+	this.Url = url
+	this.Branch = branch
+	this.YamlPath = yamlPath
 	return &this
 }
 
@@ -79,100 +84,76 @@ func (o *FromGit) SetType(v string) {
 	o.Type = &v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value
 func (o *FromGit) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *FromGit) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *FromGit) SetUrl(v string) {
-	o.Url = &v
+	o.Url = v
 }
 
-// GetBranch returns the Branch field value if set, zero value otherwise.
+// GetBranch returns the Branch field value
 func (o *FromGit) GetBranch() string {
-	if o == nil || IsNil(o.Branch) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Branch
+
+	return o.Branch
 }
 
-// GetBranchOk returns a tuple with the Branch field value if set, nil otherwise
+// GetBranchOk returns a tuple with the Branch field value
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetBranchOk() (*string, bool) {
-	if o == nil || IsNil(o.Branch) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Branch, true
+	return &o.Branch, true
 }
 
-// HasBranch returns a boolean if a field has been set.
-func (o *FromGit) HasBranch() bool {
-	if o != nil && !IsNil(o.Branch) {
-		return true
-	}
-
-	return false
-}
-
-// SetBranch gets a reference to the given string and assigns it to the Branch field.
+// SetBranch sets field value
 func (o *FromGit) SetBranch(v string) {
-	o.Branch = &v
+	o.Branch = v
 }
 
-// GetYamlPath returns the YamlPath field value if set, zero value otherwise.
+// GetYamlPath returns the YamlPath field value
 func (o *FromGit) GetYamlPath() string {
-	if o == nil || IsNil(o.YamlPath) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.YamlPath
+
+	return o.YamlPath
 }
 
-// GetYamlPathOk returns a tuple with the YamlPath field value if set, nil otherwise
+// GetYamlPathOk returns a tuple with the YamlPath field value
 // and a boolean to check if the value has been set.
 func (o *FromGit) GetYamlPathOk() (*string, bool) {
-	if o == nil || IsNil(o.YamlPath) {
+	if o == nil {
 		return nil, false
 	}
-	return o.YamlPath, true
+	return &o.YamlPath, true
 }
 
-// HasYamlPath returns a boolean if a field has been set.
-func (o *FromGit) HasYamlPath() bool {
-	if o != nil && !IsNil(o.YamlPath) {
-		return true
-	}
-
-	return false
-}
-
-// SetYamlPath gets a reference to the given string and assigns it to the YamlPath field.
+// SetYamlPath sets field value
 func (o *FromGit) SetYamlPath(v string) {
-	o.YamlPath = &v
+	o.YamlPath = v
 }
 
 func (o FromGit) MarshalJSON() ([]byte, error) {
@@ -188,15 +169,9 @@ func (o FromGit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
-	if !IsNil(o.Branch) {
-		toSerialize["branch"] = o.Branch
-	}
-	if !IsNil(o.YamlPath) {
-		toSerialize["yamlPath"] = o.YamlPath
-	}
+	toSerialize["url"] = o.Url
+	toSerialize["branch"] = o.Branch
+	toSerialize["yamlPath"] = o.YamlPath
 	return toSerialize, nil
 }
 

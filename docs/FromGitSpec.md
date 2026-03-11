@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "git-spec"]
-**Spec** | Pointer to **string** |  | [optional] 
+**Spec** | **string** |  | 
 
 ## Methods
 
 ### NewFromGitSpec
 
-`func NewFromGitSpec() *FromGitSpec`
+`func NewFromGitSpec(spec string, ) *FromGitSpec`
 
 NewFromGitSpec instantiates a new FromGitSpec object
 This constructor will assign default values to properties that have it defined,
@@ -70,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetSpec sets Spec field to given value.
 
-### HasSpec
-
-`func (o *FromGitSpec) HasSpec() bool`
-
-HasSpec returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

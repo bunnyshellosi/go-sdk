@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the EnvironmentEditConfiguration type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,16 @@ var _ MappedNullable = &EnvironmentEditConfiguration{}
 
 // EnvironmentEditConfiguration An environment holds a collection of buildable and deployable components.
 type EnvironmentEditConfiguration struct {
-	Configuration *EnvironmentEditConfigurationConfiguration `json:"configuration,omitempty"`
+	Configuration EnvironmentEditConfigurationConfiguration `json:"configuration"`
 }
 
 // NewEnvironmentEditConfiguration instantiates a new EnvironmentEditConfiguration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentEditConfiguration() *EnvironmentEditConfiguration {
+func NewEnvironmentEditConfiguration(configuration EnvironmentEditConfigurationConfiguration) *EnvironmentEditConfiguration {
 	this := EnvironmentEditConfiguration{}
+	this.Configuration = configuration
 	return &this
 }
 
@@ -40,36 +43,28 @@ func NewEnvironmentEditConfigurationWithDefaults() *EnvironmentEditConfiguration
 	return &this
 }
 
-// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+// GetConfiguration returns the Configuration field value
 func (o *EnvironmentEditConfiguration) GetConfiguration() EnvironmentEditConfigurationConfiguration {
-	if o == nil || IsNil(o.Configuration) {
+	if o == nil {
 		var ret EnvironmentEditConfigurationConfiguration
 		return ret
 	}
-	return *o.Configuration
+
+	return o.Configuration
 }
 
-// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
+// GetConfigurationOk returns a tuple with the Configuration field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentEditConfiguration) GetConfigurationOk() (*EnvironmentEditConfigurationConfiguration, bool) {
-	if o == nil || IsNil(o.Configuration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Configuration, true
+	return &o.Configuration, true
 }
 
-// HasConfiguration returns a boolean if a field has been set.
-func (o *EnvironmentEditConfiguration) HasConfiguration() bool {
-	if o != nil && !IsNil(o.Configuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfiguration gets a reference to the given EnvironmentEditConfigurationConfiguration and assigns it to the Configuration field.
+// SetConfiguration sets field value
 func (o *EnvironmentEditConfiguration) SetConfiguration(v EnvironmentEditConfigurationConfiguration) {
-	o.Configuration = &v
+	o.Configuration = v
 }
 
 func (o EnvironmentEditConfiguration) MarshalJSON() ([]byte, error) {
@@ -82,9 +77,7 @@ func (o EnvironmentEditConfiguration) MarshalJSON() ([]byte, error) {
 
 func (o EnvironmentEditConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Configuration) {
-		toSerialize["configuration"] = o.Configuration
-	}
+	toSerialize["configuration"] = o.Configuration
 	return toSerialize, nil
 }
 

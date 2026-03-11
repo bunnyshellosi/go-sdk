@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Configuration** | Pointer to [**EnvironmentEditConfigurationConfiguration**](EnvironmentEditConfigurationConfiguration.md) |  | [optional] 
+**Configuration** | [**EnvironmentEditConfigurationConfiguration**](EnvironmentEditConfigurationConfiguration.md) |  | 
 
 ## Methods
 
 ### NewEnvironmentEditConfiguration
 
-`func NewEnvironmentEditConfiguration() *EnvironmentEditConfiguration`
+`func NewEnvironmentEditConfiguration(configuration EnvironmentEditConfigurationConfiguration, ) *EnvironmentEditConfiguration`
 
 NewEnvironmentEditConfiguration instantiates a new EnvironmentEditConfiguration object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetConfiguration sets Configuration field to given value.
 
-### HasConfiguration
-
-`func (o *EnvironmentEditConfiguration) HasConfiguration() bool`
-
-HasConfiguration returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

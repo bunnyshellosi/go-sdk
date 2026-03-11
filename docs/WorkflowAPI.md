@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## WorkflowList
 
-> PaginatedWorkflowCollection WorkflowList(ctx).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).Execute()
+> PaginatedWorkflowCollection WorkflowList(ctx).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).OrderCreatedAt(orderCreatedAt).Execute()
 
 List workflows matching any selected filters.
 
@@ -35,10 +35,11 @@ func main() {
     environment := "environment_example" // string | Filter by environment (optional)
     organization := "organization_example" // string | Filter by organization (optional)
     status := "queued" // string | Filter by status (optional)
+    orderCreatedAt := "desc" // string | Order by createdAt (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WorkflowAPI.WorkflowList(context.Background()).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).Execute()
+    resp, r, err := apiClient.WorkflowAPI.WorkflowList(context.Background()).Page(page).Event(event).Environment(environment).Organization(organization).Status(status).OrderCreatedAt(orderCreatedAt).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WorkflowAPI.WorkflowList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
  **environment** | **string** | Filter by environment | 
  **organization** | **string** | Filter by organization | 
  **status** | **string** | Filter by status | 
+ **orderCreatedAt** | **string** | Order by createdAt | 
 
 ### Return type
 
