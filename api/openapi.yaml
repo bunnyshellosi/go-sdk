@@ -3998,7 +3998,9 @@ components:
     BooleanType-item:
       properties:
         defaultValue:
-          $ref: "#/components/schemas/BooleanValue-item"
+          allOf:
+          - $ref: "#/components/schemas/BooleanValue-item"
+          nullable: true
         name:
           description: A variable used within the template.
           type: string
@@ -4093,13 +4095,7 @@ components:
           portMapping:
           - portMapping
           - portMapping
-          requirements:
-            requests:
-              memory: memory
-              cpu: cpu
-            limits:
-              memory: memory
-              cpu: cpu
+          requirements: ""
           syncPaths:
           - remotePath: remotePath
             localPath: localPath
@@ -4305,7 +4301,9 @@ components:
     FloatType-item:
       properties:
         defaultValue:
-          $ref: "#/components/schemas/FloatValue-item"
+          allOf:
+          - $ref: "#/components/schemas/FloatValue-item"
+          nullable: true
         name:
           description: A variable used within the template.
           type: string
@@ -4390,7 +4388,9 @@ components:
     IntegerType-item:
       properties:
         defaultValue:
-          $ref: "#/components/schemas/IntegerValue-item"
+          allOf:
+          - $ref: "#/components/schemas/IntegerValue-item"
+          nullable: true
         name:
           description: A variable used within the template.
           type: string
@@ -4434,9 +4434,13 @@ components:
           nullable: true
           type: string
         primaryOptions:
-          $ref: "#/components/schemas/PrimaryOptionsEdit"
+          allOf:
+          - $ref: "#/components/schemas/PrimaryOptionsEdit"
+          nullable: true
         templateSettings:
-          $ref: "#/components/schemas/TemplateSettingsEdit"
+          allOf:
+          - $ref: "#/components/schemas/TemplateSettingsEdit"
+          nullable: true
       required:
       - ephemeralHostingRegion
       - ephemeralKubernetesIntegration
@@ -4463,13 +4467,7 @@ components:
         portMapping:
         - portMapping
         - portMapping
-        requirements:
-          requests:
-            memory: memory
-            cpu: cpu
-          limits:
-            memory: memory
-            cpu: cpu
+        requirements: ""
         syncPaths:
         - remotePath: remotePath
           localPath: localPath
@@ -4506,12 +4504,12 @@ components:
           readOnly: true
           type: array
         requirements:
-          $ref: "#/components/schemas/ResourceRequirement-item"
+          allOf:
+          - $ref: "#/components/schemas/ResourceRequirement-item"
+          nullable: true
+          readOnly: true
       type: object
     ResourceList-item:
-      example:
-        memory: memory
-        cpu: cpu
       properties:
         cpu:
           description: The CPU resources for the container.
@@ -4525,18 +4523,17 @@ components:
           type: string
       type: object
     ResourceRequirement-item:
-      example:
-        requests:
-          memory: memory
-          cpu: cpu
-        limits:
-          memory: memory
-          cpu: cpu
       properties:
         requests:
-          $ref: "#/components/schemas/ResourceList-item"
+          allOf:
+          - $ref: "#/components/schemas/ResourceList-item"
+          nullable: true
+          readOnly: true
         limits:
-          $ref: "#/components/schemas/ResourceList-item"
+          allOf:
+          - $ref: "#/components/schemas/ResourceList-item"
+          nullable: true
+          readOnly: true
       type: object
     SimpleResourceConfig-item:
       example:
@@ -4547,13 +4544,7 @@ components:
               portMapping:
               - portMapping
               - portMapping
-              requirements:
-                requests:
-                  memory: memory
-                  cpu: cpu
-                limits:
-                  memory: memory
-                  cpu: cpu
+              requirements: ""
               syncPaths:
               - remotePath: remotePath
                 localPath: localPath
@@ -4610,7 +4601,9 @@ components:
     StringType-item:
       properties:
         defaultValue:
-          $ref: "#/components/schemas/StringValue-item"
+          allOf:
+          - $ref: "#/components/schemas/StringValue-item"
+          nullable: true
         name:
           description: A variable used within the template.
           type: string
@@ -4915,13 +4908,7 @@ components:
                 portMapping:
                 - portMapping
                 - portMapping
-                requirements:
-                  requests:
-                    memory: memory
-                    cpu: cpu
-                  limits:
-                    memory: memory
-                    cpu: cpu
+                requirements: ""
                 syncPaths:
                 - remotePath: remotePath
                   localPath: localPath
@@ -4939,13 +4926,7 @@ components:
                 portMapping:
                 - portMapping
                 - portMapping
-                requirements:
-                  requests:
-                    memory: memory
-                    cpu: cpu
-                  limits:
-                    memory: memory
-                    cpu: cpu
+                requirements: ""
                 syncPaths:
                 - remotePath: remotePath
                   localPath: localPath
@@ -4984,13 +4965,7 @@ components:
         portMapping:
         - portMapping
         - portMapping
-        requirements:
-          requests:
-            memory: memory
-            cpu: cpu
-          limits:
-            memory: memory
-            cpu: cpu
+        requirements: ""
         syncPaths:
         - remotePath: remotePath
           localPath: localPath
@@ -5027,7 +5002,10 @@ components:
           readOnly: true
           type: array
         requirements:
-          $ref: "#/components/schemas/ResourceRequirement-item"
+          allOf:
+          - $ref: "#/components/schemas/ResourceRequirement-item"
+          nullable: true
+          readOnly: true
       type: object
     component.Resource-item:
       description: A service component represents either an application or a group
@@ -5441,7 +5419,10 @@ components:
           readOnly: true
           type: string
         buildSettings:
-          $ref: "#/components/schemas/BuildSettings-item"
+          allOf:
+          - $ref: "#/components/schemas/BuildSettings-item"
+          nullable: true
+          readOnly: true
         project:
           description: Project identifier.
           readOnly: true
@@ -5501,7 +5482,10 @@ components:
           readOnly: true
           type: string
         templateSettings:
-          $ref: "#/components/schemas/TemplateSettings-item"
+          allOf:
+          - $ref: "#/components/schemas/TemplateSettings-item"
+          nullable: true
+          readOnly: true
       type: object
     environment.CloneAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -5553,9 +5537,13 @@ components:
             type: string
           type: object
         primaryOptions:
-          $ref: "#/components/schemas/PrimaryOptionsCreate"
+          allOf:
+          - $ref: "#/components/schemas/PrimaryOptionsCreate"
+          nullable: true
         templateSettings:
-          $ref: "#/components/schemas/TemplateSettingsCreate"
+          allOf:
+          - $ref: "#/components/schemas/TemplateSettingsCreate"
+          nullable: true
       required:
       - name
       - project
@@ -5687,7 +5675,9 @@ components:
         edit:
           $ref: "#/components/schemas/environment_EditSettings_edit"
         labels:
-          $ref: "#/components/schemas/Edit"
+          allOf:
+          - $ref: "#/components/schemas/Edit"
+          nullable: true
       required:
       - hostingRegion
       - kubernetesIntegration
@@ -6351,13 +6341,21 @@ components:
         self:
           $ref: "#/components/schemas/paginated_link"
         first:
-          $ref: "#/components/schemas/paginated_link"
+          allOf:
+          - $ref: "#/components/schemas/paginated_link"
+          nullable: true
         prev:
-          $ref: "#/components/schemas/paginated_link"
+          allOf:
+          - $ref: "#/components/schemas/paginated_link"
+          nullable: true
         next:
-          $ref: "#/components/schemas/paginated_link"
+          allOf:
+          - $ref: "#/components/schemas/paginated_link"
+          nullable: true
         last:
-          $ref: "#/components/schemas/paginated_link"
+          allOf:
+          - $ref: "#/components/schemas/paginated_link"
+          nullable: true
         item:
           items:
             $ref: "#/components/schemas/paginated_link"
@@ -6506,9 +6504,15 @@ components:
           readOnly: true
           type: integer
         buildSettings:
-          $ref: "#/components/schemas/BuildSettings-item"
+          allOf:
+          - $ref: "#/components/schemas/BuildSettings-item"
+          nullable: true
+          readOnly: true
         deploymentRunnerSettings:
-          $ref: "#/components/schemas/DeploymentRunnerSettings-item"
+          allOf:
+          - $ref: "#/components/schemas/DeploymentRunnerSettings-item"
+          nullable: true
+          readOnly: true
         organization:
           description: Organization identifier.
           readOnly: true
@@ -6624,7 +6628,9 @@ components:
           nullable: true
           type: string
         labels:
-          $ref: "#/components/schemas/Edit"
+          allOf:
+          - $ref: "#/components/schemas/Edit"
+          nullable: true
       required:
       - name
       type: object

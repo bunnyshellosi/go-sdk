@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **DestroyEphemeralOnPrClose** | Pointer to **NullableBool** |  | [optional] 
 **EphemeralKubernetesIntegration** | **NullableString** |  | 
 **EphemeralHostingRegion** | **NullableString** |  | 
-**PrimaryOptions** | Pointer to [**PrimaryOptionsEdit**](PrimaryOptionsEdit.md) |  | [optional] 
-**TemplateSettings** | Pointer to [**TemplateSettingsEdit**](TemplateSettingsEdit.md) |  | [optional] 
+**PrimaryOptions** | Pointer to [**NullablePrimaryOptionsEdit**](PrimaryOptionsEdit.md) |  | [optional] 
+**TemplateSettings** | Pointer to [**NullableTemplateSettingsEdit**](TemplateSettingsEdit.md) |  | [optional] 
 
 ## Methods
 
@@ -283,6 +283,16 @@ SetPrimaryOptions sets PrimaryOptions field to given value.
 
 HasPrimaryOptions returns a boolean if a field has been set.
 
+### SetPrimaryOptionsNil
+
+`func (o *EnvironmentEditSettingsEdit) SetPrimaryOptionsNil(b bool)`
+
+ SetPrimaryOptionsNil sets the value for PrimaryOptions to be an explicit nil
+
+### UnsetPrimaryOptions
+`func (o *EnvironmentEditSettingsEdit) UnsetPrimaryOptions()`
+
+UnsetPrimaryOptions ensures that no value is present for PrimaryOptions, not even an explicit nil
 ### GetTemplateSettings
 
 `func (o *EnvironmentEditSettingsEdit) GetTemplateSettings() TemplateSettingsEdit`
@@ -308,6 +318,16 @@ SetTemplateSettings sets TemplateSettings field to given value.
 
 HasTemplateSettings returns a boolean if a field has been set.
 
+### SetTemplateSettingsNil
+
+`func (o *EnvironmentEditSettingsEdit) SetTemplateSettingsNil(b bool)`
+
+ SetTemplateSettingsNil sets the value for TemplateSettings to be an explicit nil
+
+### UnsetTemplateSettings
+`func (o *EnvironmentEditSettingsEdit) UnsetTemplateSettings()`
+
+UnsetTemplateSettings ensures that no value is present for TemplateSettings, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
