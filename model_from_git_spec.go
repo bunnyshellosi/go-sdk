@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FromGitSpec type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,18 @@ var _ MappedNullable = &FromGitSpec{}
 // FromGitSpec struct for FromGitSpec
 type FromGitSpec struct {
 	Type *string `json:"type,omitempty"`
-	Spec *string `json:"spec,omitempty"`
+	Spec string  `json:"spec"`
 }
 
 // NewFromGitSpec instantiates a new FromGitSpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFromGitSpec() *FromGitSpec {
+func NewFromGitSpec(spec string) *FromGitSpec {
 	this := FromGitSpec{}
 	var type_ string = "git-spec"
 	this.Type = &type_
+	this.Spec = spec
 	return &this
 }
 
@@ -77,36 +80,28 @@ func (o *FromGitSpec) SetType(v string) {
 	o.Type = &v
 }
 
-// GetSpec returns the Spec field value if set, zero value otherwise.
+// GetSpec returns the Spec field value
 func (o *FromGitSpec) GetSpec() string {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Spec
+
+	return o.Spec
 }
 
-// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// GetSpecOk returns a tuple with the Spec field value
 // and a boolean to check if the value has been set.
 func (o *FromGitSpec) GetSpecOk() (*string, bool) {
-	if o == nil || IsNil(o.Spec) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spec, true
+	return &o.Spec, true
 }
 
-// HasSpec returns a boolean if a field has been set.
-func (o *FromGitSpec) HasSpec() bool {
-	if o != nil && !IsNil(o.Spec) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpec gets a reference to the given string and assigns it to the Spec field.
+// SetSpec sets field value
 func (o *FromGitSpec) SetSpec(v string) {
-	o.Spec = &v
+	o.Spec = v
 }
 
 func (o FromGitSpec) MarshalJSON() ([]byte, error) {
@@ -122,9 +117,7 @@ func (o FromGitSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !IsNil(o.Spec) {
-		toSerialize["spec"] = o.Spec
-	}
+	toSerialize["spec"] = o.Spec
 	return toSerialize, nil
 }
 

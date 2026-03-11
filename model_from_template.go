@@ -12,7 +12,9 @@ Contact: osi+support@bunnyshell.com
 package sdk
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the FromTemplate type satisfies the MappedNullable interface at compile time
@@ -22,17 +24,18 @@ var _ MappedNullable = &FromTemplate{}
 type FromTemplate struct {
 	Type      *string                               `json:"type,omitempty"`
 	Variables map[string]FromTemplateVariablesValue `json:"variables,omitempty"`
-	Template  *string                               `json:"template,omitempty"`
+	Template  string                                `json:"template"`
 }
 
 // NewFromTemplate instantiates a new FromTemplate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFromTemplate() *FromTemplate {
+func NewFromTemplate(template string) *FromTemplate {
 	this := FromTemplate{}
 	var type_ string = "template"
 	this.Type = &type_
+	this.Template = template
 	return &this
 }
 
@@ -110,36 +113,28 @@ func (o *FromTemplate) SetVariables(v map[string]FromTemplateVariablesValue) {
 	o.Variables = v
 }
 
-// GetTemplate returns the Template field value if set, zero value otherwise.
+// GetTemplate returns the Template field value
 func (o *FromTemplate) GetTemplate() string {
-	if o == nil || IsNil(o.Template) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Template
+
+	return o.Template
 }
 
-// GetTemplateOk returns a tuple with the Template field value if set, nil otherwise
+// GetTemplateOk returns a tuple with the Template field value
 // and a boolean to check if the value has been set.
 func (o *FromTemplate) GetTemplateOk() (*string, bool) {
-	if o == nil || IsNil(o.Template) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Template, true
+	return &o.Template, true
 }
 
-// HasTemplate returns a boolean if a field has been set.
-func (o *FromTemplate) HasTemplate() bool {
-	if o != nil && !IsNil(o.Template) {
-		return true
-	}
-
-	return false
-}
-
-// SetTemplate gets a reference to the given string and assigns it to the Template field.
+// SetTemplate sets field value
 func (o *FromTemplate) SetTemplate(v string) {
-	o.Template = &v
+	o.Template = v
 }
 
 func (o FromTemplate) MarshalJSON() ([]byte, error) {
@@ -158,9 +153,7 @@ func (o FromTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Variables) {
 		toSerialize["variables"] = o.Variables
 	}
-	if !IsNil(o.Template) {
-		toSerialize["template"] = o.Template
-	}
+	toSerialize["template"] = o.Template
 	return toSerialize, nil
 }
 

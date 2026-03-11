@@ -53,6 +53,8 @@ tags:
   name: template
 - description: Templates_repository Resource
   name: templates_repository
+- description: Workflow_job Resource
+  name: workflow_job
 - description: Workflow Resource
   name: workflow
 paths:
@@ -1417,6 +1419,52 @@ paths:
       summary: View a specific environment.
       tags:
       - environment
+  /v1/environments/{id}/abort:
+    post:
+      deprecated: false
+      description: Abort the current and queued environment workflows.
+      operationId: EnvironmentAbort
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Resource identifier
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: No Request Body
+        required: false
+      responses:
+        "202":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/event-item"
+          description: environment resource created
+        "400":
+          description: Invalid input
+        "422":
+          description: Unprocessable entity
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+        "204":
+          description: Nothing to abort
+      summary: Abort the current and queued environment workflows.
+      tags:
+      - environment
   /v1/environments/{id}/build-settings:
     patch:
       deprecated: false
@@ -2020,6 +2068,21 @@ paths:
         name: organization
         required: false
         schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Order by createdAt
+        example: desc
+        explode: false
+        in: query
+        name: "order[createdAt]"
+        required: false
+        schema:
+          enum:
+          - ASC
+          - DESC
           type: string
         style: form
       responses:
@@ -3632,6 +3695,160 @@ paths:
       summary: View a specific templates repository.
       tags:
       - templates_repository
+  /v1/workflow_jobs:
+    get:
+      deprecated: false
+      description: List workflow jobs matching any selected filters.
+      operationId: Workflow_jobList
+      parameters:
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter workflow jobs by workflow identifier.
+        explode: false
+        in: query
+        name: workflow
+        required: true
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: true
+        allowReserved: false
+        deprecated: false
+        description: The collection page number
+        explode: false
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter by status
+        example:
+        - pending
+        explode: true
+        in: query
+        name: "status[]"
+        required: false
+        schema:
+          items:
+            enum:
+            - pending
+            - queued
+            - in_progress
+            - failed
+            - abort_failed
+            - success
+            - skipped
+            - aborting
+            - aborted
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/paginated-workflow_job-collection"
+          description: workflow_job collection
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: List workflow jobs matching any selected filters.
+      tags:
+      - workflow_job
+  /v1/workflow_jobs/{id}:
+    get:
+      deprecated: false
+      description: View a specific workflow job.
+      operationId: Workflow_jobView
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Workflow job identifier.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/workflow_job-item"
+          description: workflow_job resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: View a specific workflow job.
+      tags:
+      - workflow_job
+  /v1/workflow_jobs/{id}/logs:
+    get:
+      deprecated: false
+      description: View logs for a specific workflow job.
+      operationId: Workflow_jobLogs
+      parameters:
+      - allowReserved: false
+        deprecated: false
+        description: Workflow job identifier.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Filter workflow steps by status.
+        explode: true
+        in: query
+        name: "stepStatus[]"
+        required: false
+        schema:
+          items:
+            enum:
+            - success
+            - failed
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/workflow_job.WorkflowJobLogsOutput-item"
+          description: workflow_job resource
+        "404":
+          description: Resource not found
+        "4XX":
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/problem.generic"
+          description: Request Error
+      summary: View logs for a specific workflow job.
+      tags:
+      - workflow_job
   /v1/workflows:
     get:
       deprecated: false
@@ -3702,6 +3919,21 @@ paths:
           - failed
           - aborting
           - aborted
+          type: string
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Order by createdAt
+        example: desc
+        explode: false
+        in: query
+        name: "order[createdAt]"
+        required: false
+        schema:
+          enum:
+          - ASC
+          - DESC
           type: string
         style: form
       responses:
@@ -4104,6 +4336,10 @@ components:
           type: string
         yamlPath:
           type: string
+      required:
+      - branch
+      - url
+      - yamlPath
       type: object
     FromGitSpec:
       properties:
@@ -4113,6 +4349,8 @@ components:
           type: string
         spec:
           type: string
+      required:
+      - spec
       type: object
     FromString:
       properties:
@@ -4122,6 +4360,8 @@ components:
           type: string
         yaml:
           type: string
+      required:
+      - yaml
       type: object
     FromTemplate:
       properties:
@@ -4135,6 +4375,8 @@ components:
           type: object
         template:
           type: string
+      required:
+      - template
       type: object
     GitInfo:
       properties:
@@ -4501,6 +4743,88 @@ components:
       required:
       - bunnyshellYaml
       - templateYaml
+      type: object
+    WorkflowJobOutput-item:
+      properties:
+        id:
+          description: Workflow job identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Workflow job name.
+          readOnly: true
+          type: string
+        type:
+          description: Workflow job type.
+          readOnly: true
+          type: string
+        status:
+          description: Workflow job status.
+          readOnly: true
+          type: string
+        allowedToFail:
+          description: Whether this workflow job is allowed to fail.
+          readOnly: true
+          type: boolean
+        startedAt:
+          description: Workflow job start date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        endedAt:
+          description: Workflow job end date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        duration:
+          description: Workflow job duration in seconds.
+          nullable: true
+          readOnly: true
+          type: integer
+        timeoutSeconds:
+          description: Workflow job timeout in seconds.
+          readOnly: true
+          type: integer
+      type: object
+    WorkflowStepLogOutput-item:
+      properties:
+        time:
+          description: Workflow step log creation date and time.
+          format: date-time
+          readOnly: true
+          type: string
+        log:
+          description: Workflow step log message.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowStepOutput-item:
+      properties:
+        name:
+          description: Workflow step name.
+          readOnly: true
+          type: string
+        status:
+          description: Workflow step status.
+          readOnly: true
+          type: string
+        exitCode:
+          description: Workflow step exit code.
+          readOnly: true
+          type: integer
+        time:
+          description: Workflow step execution date and time.
+          format: date-time
+          readOnly: true
+          type: string
+        logs:
+          description: Workflow step logs.
+          items:
+            $ref: "#/components/schemas/WorkflowStepLogOutput-item"
+          readOnly: true
+          type: array
       type: object
     Workspace:
       properties:
@@ -5294,6 +5618,8 @@ components:
       properties:
         configuration:
           $ref: "#/components/schemas/environment_EditConfiguration_configuration"
+      required:
+      - configuration
       type: object
     environment.EditDeploymentRunnerSettingsAction:
       description: An environment holds a collection of buildable and deployable components.
@@ -5994,6 +6320,23 @@ components:
           type: integer
         _embedded:
           $ref: "#/components/schemas/embedded_workflow_collection"
+      type: object
+    paginated-workflow_job-collection:
+      description: Paginated result
+      properties:
+        _links:
+          $ref: "#/components/schemas/paginated_links"
+        totalItems:
+          format: int32
+          type: integer
+        page:
+          format: int32
+          type: integer
+        itemsPerPage:
+          format: int32
+          type: integer
+        _embedded:
+          $ref: "#/components/schemas/embedded_workflow_job_collection"
       type: object
     paginated_itemsPerPage:
       format: int32
@@ -6813,6 +7156,23 @@ components:
           description: Workflow status.
           readOnly: true
           type: string
+        createdAt:
+          description: Workflow creation date and time.
+          format: date-time
+          readOnly: true
+          type: string
+        startedAt:
+          description: Workflow start date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        endedAt:
+          description: Workflow end date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         environment:
           description: Environment identifier.
           nullable: true
@@ -6859,6 +7219,23 @@ components:
           description: Workflow status.
           readOnly: true
           type: string
+        createdAt:
+          description: Workflow creation date and time.
+          format: date-time
+          readOnly: true
+          type: string
+        startedAt:
+          description: Workflow start date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        endedAt:
+          description: Workflow end date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         environment:
           description: Environment identifier.
           nullable: true
@@ -6889,6 +7266,116 @@ components:
           description: Workflow web URL.
           readOnly: true
           type: string
+      type: object
+    workflow_job-collection:
+      description: A workflow job.
+      properties:
+        id:
+          description: Workflow job identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Workflow job name.
+          readOnly: true
+          type: string
+        type:
+          description: Workflow job type.
+          readOnly: true
+          type: string
+        status:
+          description: Workflow job status.
+          readOnly: true
+          type: string
+        allowedToFail:
+          description: Whether this workflow job is allowed to fail.
+          readOnly: true
+          type: boolean
+        startedAt:
+          description: Workflow job start date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        endedAt:
+          description: Workflow job end date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        duration:
+          description: Workflow job duration in seconds.
+          nullable: true
+          readOnly: true
+          type: integer
+        timeoutSeconds:
+          description: Workflow job timeout in seconds.
+          readOnly: true
+          type: integer
+        workflow:
+          description: Workflow identifier.
+          readOnly: true
+          type: string
+      type: object
+    workflow_job-item:
+      description: A workflow job.
+      properties:
+        id:
+          description: Workflow job identifier.
+          readOnly: true
+          type: string
+        name:
+          description: Workflow job name.
+          readOnly: true
+          type: string
+        type:
+          description: Workflow job type.
+          readOnly: true
+          type: string
+        status:
+          description: Workflow job status.
+          readOnly: true
+          type: string
+        allowedToFail:
+          description: Whether this workflow job is allowed to fail.
+          readOnly: true
+          type: boolean
+        startedAt:
+          description: Workflow job start date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        endedAt:
+          description: Workflow job end date and time.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        duration:
+          description: Workflow job duration in seconds.
+          nullable: true
+          readOnly: true
+          type: integer
+        timeoutSeconds:
+          description: Workflow job timeout in seconds.
+          readOnly: true
+          type: integer
+        workflow:
+          description: Workflow identifier.
+          readOnly: true
+          type: string
+      type: object
+    workflow_job.WorkflowJobLogsOutput-item:
+      description: A workflow job.
+      properties:
+        workflowJob:
+          $ref: "#/components/schemas/WorkflowJobOutput-item"
+        steps:
+          description: Workflow job steps and logs.
+          items:
+            $ref: "#/components/schemas/WorkflowStepOutput-item"
+          readOnly: true
+          type: array
       type: object
     ContainerConfig_item_profile:
       description: A profile config or a profile name for local usage with rdev.yaml
@@ -7116,6 +7603,14 @@ components:
             $ref: "#/components/schemas/workflow-collection"
           type: array
       title: embedded-workflow-collection
+      type: object
+    embedded_workflow_job_collection:
+      properties:
+        item:
+          items:
+            $ref: "#/components/schemas/workflow_job-collection"
+          type: array
+      title: embedded-workflow_job-collection
       type: object
     template_item_variablesSchema_inner:
       discriminator:

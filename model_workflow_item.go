@@ -13,6 +13,7 @@ package sdk
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the WorkflowItem type satisfies the MappedNullable interface at compile time
@@ -26,6 +27,12 @@ type WorkflowItem struct {
 	Description *string `json:"description,omitempty"`
 	// Workflow status.
 	Status *string `json:"status,omitempty"`
+	// Workflow creation date and time.
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Workflow start date and time.
+	StartedAt NullableTime `json:"startedAt,omitempty"`
+	// Workflow end date and time.
+	EndedAt NullableTime `json:"endedAt,omitempty"`
 	// Environment identifier.
 	Environment NullableString `json:"environment,omitempty"`
 	// Event identifier.
@@ -153,6 +160,124 @@ func (o *WorkflowItem) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *WorkflowItem) SetStatus(v string) {
 	o.Status = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *WorkflowItem) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowItem) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *WorkflowItem) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *WorkflowItem) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetStartedAt returns the StartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowItem) GetStartedAt() time.Time {
+	if o == nil || IsNil(o.StartedAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.StartedAt.Get()
+}
+
+// GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowItem) GetStartedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StartedAt.Get(), o.StartedAt.IsSet()
+}
+
+// HasStartedAt returns a boolean if a field has been set.
+func (o *WorkflowItem) HasStartedAt() bool {
+	if o != nil && o.StartedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStartedAt gets a reference to the given NullableTime and assigns it to the StartedAt field.
+func (o *WorkflowItem) SetStartedAt(v time.Time) {
+	o.StartedAt.Set(&v)
+}
+
+// SetStartedAtNil sets the value for StartedAt to be an explicit nil
+func (o *WorkflowItem) SetStartedAtNil() {
+	o.StartedAt.Set(nil)
+}
+
+// UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
+func (o *WorkflowItem) UnsetStartedAt() {
+	o.StartedAt.Unset()
+}
+
+// GetEndedAt returns the EndedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowItem) GetEndedAt() time.Time {
+	if o == nil || IsNil(o.EndedAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.EndedAt.Get()
+}
+
+// GetEndedAtOk returns a tuple with the EndedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowItem) GetEndedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EndedAt.Get(), o.EndedAt.IsSet()
+}
+
+// HasEndedAt returns a boolean if a field has been set.
+func (o *WorkflowItem) HasEndedAt() bool {
+	if o != nil && o.EndedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEndedAt gets a reference to the given NullableTime and assigns it to the EndedAt field.
+func (o *WorkflowItem) SetEndedAt(v time.Time) {
+	o.EndedAt.Set(&v)
+}
+
+// SetEndedAtNil sets the value for EndedAt to be an explicit nil
+func (o *WorkflowItem) SetEndedAtNil() {
+	o.EndedAt.Set(nil)
+}
+
+// UnsetEndedAt ensures that no value is present for EndedAt, not even an explicit nil
+func (o *WorkflowItem) UnsetEndedAt() {
+	o.EndedAt.Unset()
 }
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -419,6 +544,15 @@ func (o WorkflowItem) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if o.StartedAt.IsSet() {
+		toSerialize["startedAt"] = o.StartedAt.Get()
+	}
+	if o.EndedAt.IsSet() {
+		toSerialize["endedAt"] = o.EndedAt.Get()
 	}
 	if o.Environment.IsSet() {
 		toSerialize["environment"] = o.Environment.Get()

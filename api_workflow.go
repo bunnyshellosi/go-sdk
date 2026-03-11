@@ -24,13 +24,14 @@ import (
 type WorkflowAPIService service
 
 type ApiWorkflowListRequest struct {
-	ctx          context.Context
-	ApiService   *WorkflowAPIService
-	page         *int32
-	event        *string
-	environment  *string
-	organization *string
-	status       *string
+	ctx            context.Context
+	ApiService     *WorkflowAPIService
+	page           *int32
+	event          *string
+	environment    *string
+	organization   *string
+	status         *string
+	orderCreatedAt *string
 }
 
 // The collection page number
@@ -60,6 +61,12 @@ func (r ApiWorkflowListRequest) Organization(organization string) ApiWorkflowLis
 // Filter by status
 func (r ApiWorkflowListRequest) Status(status string) ApiWorkflowListRequest {
 	r.status = &status
+	return r
+}
+
+// Order by createdAt
+func (r ApiWorkflowListRequest) OrderCreatedAt(orderCreatedAt string) ApiWorkflowListRequest {
+	r.orderCreatedAt = &orderCreatedAt
 	return r
 }
 
@@ -121,6 +128,9 @@ func (a *WorkflowAPIService) WorkflowListExecute(r ApiWorkflowListRequest) (*Pag
 	}
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
+	}
+	if r.orderCreatedAt != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order[createdAt]", r.orderCreatedAt, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

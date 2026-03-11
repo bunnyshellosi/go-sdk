@@ -4,6 +4,7 @@ All URIs are relative to *https://api.environments.bunnyshell.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**EnvironmentAbort**](EnvironmentAPI.md#EnvironmentAbort) | **Post** /v1/environments/{id}/abort | Abort the current and queued environment workflows.
 [**EnvironmentClone**](EnvironmentAPI.md#EnvironmentClone) | **Post** /v1/environments/{id}/clone | Clone an environment.
 [**EnvironmentCreate**](EnvironmentAPI.md#EnvironmentCreate) | **Post** /v1/environments | Creates a new environment.
 [**EnvironmentDefinition**](EnvironmentAPI.md#EnvironmentDefinition) | **Get** /v1/environments/{id}/definition | View the bunnyshell manifest for the environment
@@ -20,6 +21,78 @@ Method | HTTP request | Description
 [**EnvironmentStop**](EnvironmentAPI.md#EnvironmentStop) | **Post** /v1/environments/{id}/stop | Stop an environment.
 [**EnvironmentView**](EnvironmentAPI.md#EnvironmentView) | **Get** /v1/environments/{id} | View a specific environment.
 
+
+
+## EnvironmentAbort
+
+> EventItem EnvironmentAbort(ctx, id).Body(body).Execute()
+
+Abort the current and queued environment workflows.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "bunnyshell.com/sdk"
+)
+
+func main() {
+    id := "id_example" // string | Resource identifier
+    body := interface{}(987) // interface{} | No Request Body (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentAbort(context.Background(), id).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentAbort``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EnvironmentAbort`: EventItem
+    fmt.Fprintf(os.Stdout, "Response from `EnvironmentAPI.EnvironmentAbort`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Resource identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEnvironmentAbortRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **body** | **interface{}** | No Request Body | 
+
+### Return type
+
+[**EventItem**](EventItem.md)
+
+### Authorization
+
+[JWT](../README.md#JWT), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/hal+json, application/problem+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## EnvironmentClone
@@ -540,7 +613,7 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    environmentEditConfiguration := *openapiclient.NewEnvironmentEditConfiguration() // EnvironmentEditConfiguration | The updated environment resource
+    environmentEditConfiguration := *openapiclient.NewEnvironmentEditConfiguration(openapiclient.environment_EditConfiguration_configuration{FromGit: openapiclient.NewFromGit("Url_example", "Branch_example", "YamlPath_example")}) // EnvironmentEditConfiguration | The updated environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

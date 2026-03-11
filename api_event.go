@@ -24,13 +24,14 @@ import (
 type EventAPIService service
 
 type ApiEventListRequest struct {
-	ctx          context.Context
-	ApiService   *EventAPIService
-	page         *int32
-	type_        *string
-	status       *string
-	environment  *string
-	organization *string
+	ctx            context.Context
+	ApiService     *EventAPIService
+	page           *int32
+	type_          *string
+	status         *string
+	environment    *string
+	organization   *string
+	orderCreatedAt *string
 }
 
 // The collection page number
@@ -60,6 +61,12 @@ func (r ApiEventListRequest) Environment(environment string) ApiEventListRequest
 // Filter by organization
 func (r ApiEventListRequest) Organization(organization string) ApiEventListRequest {
 	r.organization = &organization
+	return r
+}
+
+// Order by createdAt
+func (r ApiEventListRequest) OrderCreatedAt(orderCreatedAt string) ApiEventListRequest {
+	r.orderCreatedAt = &orderCreatedAt
 	return r
 }
 
@@ -121,6 +128,9 @@ func (a *EventAPIService) EventListExecute(r ApiEventListRequest) (*PaginatedEve
 	}
 	if r.organization != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "organization", r.organization, "")
+	}
+	if r.orderCreatedAt != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "order[createdAt]", r.orderCreatedAt, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

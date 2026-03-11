@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** |  | [optional] [default to "string"]
-**Yaml** | Pointer to **string** |  | [optional] 
+**Yaml** | **string** |  | 
 
 ## Methods
 
 ### NewFromString
 
-`func NewFromString() *FromString`
+`func NewFromString(yaml string, ) *FromString`
 
 NewFromString instantiates a new FromString object
 This constructor will assign default values to properties that have it defined,
@@ -70,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetYaml sets Yaml field to given value.
 
-### HasYaml
-
-`func (o *FromString) HasYaml() bool`
-
-HasYaml returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

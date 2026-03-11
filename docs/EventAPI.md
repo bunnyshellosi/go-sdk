@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## EventList
 
-> PaginatedEventCollection EventList(ctx).Page(page).Type_(type_).Status(status).Environment(environment).Organization(organization).Execute()
+> PaginatedEventCollection EventList(ctx).Page(page).Type_(type_).Status(status).Environment(environment).Organization(organization).OrderCreatedAt(orderCreatedAt).Execute()
 
 List events matching any selected filters.
 
@@ -35,10 +35,11 @@ func main() {
     status := "new" // string | Filter by status (optional)
     environment := "environment_example" // string | Filter by environment (optional)
     organization := "organization_example" // string | Filter by organization (optional)
+    orderCreatedAt := "desc" // string | Order by createdAt (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EventAPI.EventList(context.Background()).Page(page).Type_(type_).Status(status).Environment(environment).Organization(organization).Execute()
+    resp, r, err := apiClient.EventAPI.EventList(context.Background()).Page(page).Type_(type_).Status(status).Environment(environment).Organization(organization).OrderCreatedAt(orderCreatedAt).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EventAPI.EventList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
  **status** | **string** | Filter by status | 
  **environment** | **string** | Filter by environment | 
  **organization** | **string** | Filter by organization | 
+ **orderCreatedAt** | **string** | Order by createdAt | 
 
 ### Return type
 

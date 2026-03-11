@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Workflow identifier. | [optional] [readonly] 
 **Description** | Pointer to **string** | Workflow description. | [optional] [readonly] 
 **Status** | Pointer to **string** | Workflow status. | [optional] [readonly] 
+**CreatedAt** | Pointer to **time.Time** | Workflow creation date and time. | [optional] [readonly] 
+**StartedAt** | Pointer to **NullableTime** | Workflow start date and time. | [optional] [readonly] 
+**EndedAt** | Pointer to **NullableTime** | Workflow end date and time. | [optional] [readonly] 
 **Environment** | Pointer to **NullableString** | Environment identifier. | [optional] [readonly] 
 **Event** | Pointer to **string** | Event identifier. | [optional] [readonly] 
 **Organization** | Pointer to **string** | Organization identifier. | [optional] [readonly] 
@@ -109,6 +112,101 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
+### GetCreatedAt
+
+`func (o *WorkflowCollection) GetCreatedAt() time.Time`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *WorkflowCollection) GetCreatedAtOk() (*time.Time, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *WorkflowCollection) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *WorkflowCollection) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
+
+### GetStartedAt
+
+`func (o *WorkflowCollection) GetStartedAt() time.Time`
+
+GetStartedAt returns the StartedAt field if non-nil, zero value otherwise.
+
+### GetStartedAtOk
+
+`func (o *WorkflowCollection) GetStartedAtOk() (*time.Time, bool)`
+
+GetStartedAtOk returns a tuple with the StartedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartedAt
+
+`func (o *WorkflowCollection) SetStartedAt(v time.Time)`
+
+SetStartedAt sets StartedAt field to given value.
+
+### HasStartedAt
+
+`func (o *WorkflowCollection) HasStartedAt() bool`
+
+HasStartedAt returns a boolean if a field has been set.
+
+### SetStartedAtNil
+
+`func (o *WorkflowCollection) SetStartedAtNil(b bool)`
+
+ SetStartedAtNil sets the value for StartedAt to be an explicit nil
+
+### UnsetStartedAt
+`func (o *WorkflowCollection) UnsetStartedAt()`
+
+UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
+### GetEndedAt
+
+`func (o *WorkflowCollection) GetEndedAt() time.Time`
+
+GetEndedAt returns the EndedAt field if non-nil, zero value otherwise.
+
+### GetEndedAtOk
+
+`func (o *WorkflowCollection) GetEndedAtOk() (*time.Time, bool)`
+
+GetEndedAtOk returns a tuple with the EndedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndedAt
+
+`func (o *WorkflowCollection) SetEndedAt(v time.Time)`
+
+SetEndedAt sets EndedAt field to given value.
+
+### HasEndedAt
+
+`func (o *WorkflowCollection) HasEndedAt() bool`
+
+HasEndedAt returns a boolean if a field has been set.
+
+### SetEndedAtNil
+
+`func (o *WorkflowCollection) SetEndedAtNil(b bool)`
+
+ SetEndedAtNil sets the value for EndedAt to be an explicit nil
+
+### UnsetEndedAt
+`func (o *WorkflowCollection) UnsetEndedAt()`
+
+UnsetEndedAt ensures that no value is present for EndedAt, not even an explicit nil
 ### GetEnvironment
 
 `func (o *WorkflowCollection) GetEnvironment() string`

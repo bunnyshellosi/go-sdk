@@ -91,6 +91,8 @@ type APIClient struct {
 	TemplatesRepositoryAPI *TemplatesRepositoryAPIService
 
 	WorkflowAPI *WorkflowAPIService
+
+	WorkflowJobAPI *WorkflowJobAPIService
 }
 
 type service struct {
@@ -129,6 +131,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.TemplateAPI = (*TemplateAPIService)(&c.common)
 	c.TemplatesRepositoryAPI = (*TemplatesRepositoryAPIService)(&c.common)
 	c.WorkflowAPI = (*WorkflowAPIService)(&c.common)
+	c.WorkflowJobAPI = (*WorkflowJobAPIService)(&c.common)
 
 	return c
 }

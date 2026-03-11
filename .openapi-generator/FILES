@@ -22,6 +22,7 @@ api_ssh.go
 api_template.go
 api_templates_repository.go
 api_workflow.go
+api_workflow_job.go
 client.go
 configuration.go
 docs/AiSandboxAPI.md
@@ -73,6 +74,7 @@ docs/EmbeddedServiceComponentVariableCollection.md
 docs/EmbeddedTemplateCollection.md
 docs/EmbeddedTemplatesRepositoryCollection.md
 docs/EmbeddedWorkflowCollection.md
+docs/EmbeddedWorkflowJobCollection.md
 docs/EnumTypeItem.md
 docs/EnumTypeItemDefaultValue.md
 docs/EnumTypeItemValuesInner.md
@@ -146,6 +148,7 @@ docs/PaginatedServiceComponentVariableCollection.md
 docs/PaginatedTemplateCollection.md
 docs/PaginatedTemplatesRepositoryCollection.md
 docs/PaginatedWorkflowCollection.md
+docs/PaginatedWorkflowJobCollection.md
 docs/PipelineAPI.md
 docs/PipelineCollection.md
 docs/PipelineItem.md
@@ -210,6 +213,13 @@ docs/ValidateSourceString.md
 docs/WorkflowAPI.md
 docs/WorkflowCollection.md
 docs/WorkflowItem.md
+docs/WorkflowJobAPI.md
+docs/WorkflowJobCollection.md
+docs/WorkflowJobItem.md
+docs/WorkflowJobOutputItem.md
+docs/WorkflowJobWorkflowJobLogsOutputItem.md
+docs/WorkflowStepLogOutputItem.md
+docs/WorkflowStepOutputItem.md
 docs/Workspace.md
 git_push.sh
 go.mod
@@ -259,6 +269,7 @@ model_embedded_service_component_variable_collection.go
 model_embedded_template_collection.go
 model_embedded_templates_repository_collection.go
 model_embedded_workflow_collection.go
+model_embedded_workflow_job_collection.go
 model_enum_type_item.go
 model_enum_type_item_default_value.go
 model_enum_type_item_values_inner.go
@@ -326,6 +337,7 @@ model_paginated_service_component_variable_collection.go
 model_paginated_template_collection.go
 model_paginated_templates_repository_collection.go
 model_paginated_workflow_collection.go
+model_paginated_workflow_job_collection.go
 model_pipeline_collection.go
 model_pipeline_item.go
 model_primary.go
@@ -380,8 +392,13 @@ model_validate_source_git.go
 model_validate_source_string.go
 model_workflow_collection.go
 model_workflow_item.go
+model_workflow_job_collection.go
+model_workflow_job_item.go
+model_workflow_job_output_item.go
+model_workflow_job_workflow_job_logs_output_item.go
+model_workflow_step_log_output_item.go
+model_workflow_step_output_item.go
 model_workspace.go
 response.go
-test/api_ai_sandbox_test.go
-test/api_ssh_test.go
+test/api_workflow_job_test.go
 utils.go
