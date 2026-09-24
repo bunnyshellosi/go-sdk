@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentDelete
 
-> EventItem EnvironmentDelete(ctx, id).Body(body).Execute()
+> EventItem EnvironmentDelete(ctx, id).QueueIfSomethingInProgress(queueIfSomethingInProgress).DeleteFromDatabaseOnly(deleteFromDatabaseOnly).Body(body).Execute()
 
 Delete a specific environment.
 
@@ -324,12 +324,14 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | Resource identifier
+    id := "id_example" // string | Resource identifier.
+    queueIfSomethingInProgress := true // bool | Queue the delete operation when another environment operation is in progress. (optional) (default to false)
+    deleteFromDatabaseOnly := true // bool | Delete only the database entries without destroying the environment resources. Cannot be combined with queueIfSomethingInProgress=true. (optional) (default to false)
     body := interface{}(987) // interface{} | No Request Body (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentAPI.EnvironmentDelete(context.Background(), id).Body(body).Execute()
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentDelete(context.Background(), id).QueueIfSomethingInProgress(queueIfSomethingInProgress).DeleteFromDatabaseOnly(deleteFromDatabaseOnly).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,7 +347,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Resource identifier | 
+**id** | **string** | Resource identifier. | 
 
 ### Other Parameters
 
@@ -355,6 +357,8 @@ Other parameters are passed through a pointer to a apiEnvironmentDeleteRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **queueIfSomethingInProgress** | **bool** | Queue the delete operation when another environment operation is in progress. | [default to false]
+ **deleteFromDatabaseOnly** | **bool** | Delete only the database entries without destroying the environment resources. Cannot be combined with queueIfSomethingInProgress&#x3D;true. | [default to false]
  **body** | **interface{}** | No Request Body | 
 
 ### Return type
@@ -1037,7 +1041,7 @@ Name | Type | Description  | Notes
 
 ## EnvironmentStop
 
-> EventItem EnvironmentStop(ctx, id).EnvironmentPartialAction(environmentPartialAction).Execute()
+> EventItem EnvironmentStop(ctx, id).EnvironmentPartialStopAction(environmentPartialStopAction).Execute()
 
 Stop an environment.
 
@@ -1057,11 +1061,11 @@ import (
 
 func main() {
     id := "id_example" // string | Resource identifier
-    environmentPartialAction := *openapiclient.NewEnvironmentPartialAction() // EnvironmentPartialAction | The new environment resource
+    environmentPartialStopAction := *openapiclient.NewEnvironmentPartialStopAction() // EnvironmentPartialStopAction | The new environment resource
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentAPI.EnvironmentStop(context.Background(), id).EnvironmentPartialAction(environmentPartialAction).Execute()
+    resp, r, err := apiClient.EnvironmentAPI.EnvironmentStop(context.Background(), id).EnvironmentPartialStopAction(environmentPartialStopAction).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentAPI.EnvironmentStop``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1087,7 +1091,7 @@ Other parameters are passed through a pointer to a apiEnvironmentStopRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **environmentPartialAction** | [**EnvironmentPartialAction**](EnvironmentPartialAction.md) | The new environment resource | 
+ **environmentPartialStopAction** | [**EnvironmentPartialStopAction**](EnvironmentPartialStopAction.md) | The new environment resource | 
 
 ### Return type
 

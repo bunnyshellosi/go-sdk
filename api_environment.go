@@ -621,10 +621,24 @@ func (a *EnvironmentAPIService) EnvironmentDefinitionExecute(r ApiEnvironmentDef
 }
 
 type ApiEnvironmentDeleteRequest struct {
-	ctx        context.Context
-	ApiService *EnvironmentAPIService
-	id         string
-	body       *interface{}
+	ctx                        context.Context
+	ApiService                 *EnvironmentAPIService
+	id                         string
+	queueIfSomethingInProgress *bool
+	deleteFromDatabaseOnly     *bool
+	body                       *interface{}
+}
+
+// Queue the delete operation when another environment operation is in progress.
+func (r ApiEnvironmentDeleteRequest) QueueIfSomethingInProgress(queueIfSomethingInProgress bool) ApiEnvironmentDeleteRequest {
+	r.queueIfSomethingInProgress = &queueIfSomethingInProgress
+	return r
+}
+
+// Delete only the database entries without destroying the environment resources. Cannot be combined with queueIfSomethingInProgress&#x3D;true.
+func (r ApiEnvironmentDeleteRequest) DeleteFromDatabaseOnly(deleteFromDatabaseOnly bool) ApiEnvironmentDeleteRequest {
+	r.deleteFromDatabaseOnly = &deleteFromDatabaseOnly
+	return r
 }
 
 // No Request Body
@@ -643,7 +657,7 @@ EnvironmentDelete Delete a specific environment.
 Delete a specific environment.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Resource identifier
+	@param id Resource identifier.
 	@return ApiEnvironmentDeleteRequest
 */
 func (a *EnvironmentAPIService) EnvironmentDelete(ctx context.Context, id string) ApiEnvironmentDeleteRequest {
@@ -677,6 +691,18 @@ func (a *EnvironmentAPIService) EnvironmentDeleteExecute(r ApiEnvironmentDeleteR
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.queueIfSomethingInProgress != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "queueIfSomethingInProgress", r.queueIfSomethingInProgress, "")
+	} else {
+		var defaultValue bool = false
+		r.queueIfSomethingInProgress = &defaultValue
+	}
+	if r.deleteFromDatabaseOnly != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "deleteFromDatabaseOnly", r.deleteFromDatabaseOnly, "")
+	} else {
+		var defaultValue bool = false
+		r.deleteFromDatabaseOnly = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -2243,15 +2269,15 @@ func (a *EnvironmentAPIService) EnvironmentStartExecute(r ApiEnvironmentStartReq
 }
 
 type ApiEnvironmentStopRequest struct {
-	ctx                      context.Context
-	ApiService               *EnvironmentAPIService
-	id                       string
-	environmentPartialAction *EnvironmentPartialAction
+	ctx                          context.Context
+	ApiService                   *EnvironmentAPIService
+	id                           string
+	environmentPartialStopAction *EnvironmentPartialStopAction
 }
 
 // The new environment resource
-func (r ApiEnvironmentStopRequest) EnvironmentPartialAction(environmentPartialAction EnvironmentPartialAction) ApiEnvironmentStopRequest {
-	r.environmentPartialAction = &environmentPartialAction
+func (r ApiEnvironmentStopRequest) EnvironmentPartialStopAction(environmentPartialStopAction EnvironmentPartialStopAction) ApiEnvironmentStopRequest {
+	r.environmentPartialStopAction = &environmentPartialStopAction
 	return r
 }
 
@@ -2298,8 +2324,8 @@ func (a *EnvironmentAPIService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.environmentPartialAction == nil {
-		return localVarReturnValue, nil, reportError("environmentPartialAction is required and must be specified")
+	if r.environmentPartialStopAction == nil {
+		return localVarReturnValue, nil, reportError("environmentPartialStopAction is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2320,7 +2346,7 @@ func (a *EnvironmentAPIService) EnvironmentStopExecute(r ApiEnvironmentStopReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.environmentPartialAction
+	localVarPostBody = r.environmentPartialStopAction
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
