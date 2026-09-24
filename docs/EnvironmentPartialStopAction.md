@@ -1,130 +1,104 @@
-# EnvironmentPartialStartAction
+# EnvironmentPartialStopAction
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**WithDependencies** | Pointer to **bool** |  | [optional] 
 **QueueIfSomethingInProgress** | Pointer to **bool** |  | [optional] 
 **IsPartial** | Pointer to **bool** |  | [optional] 
 **Components** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
-### NewEnvironmentPartialStartAction
+### NewEnvironmentPartialStopAction
 
-`func NewEnvironmentPartialStartAction() *EnvironmentPartialStartAction`
+`func NewEnvironmentPartialStopAction() *EnvironmentPartialStopAction`
 
-NewEnvironmentPartialStartAction instantiates a new EnvironmentPartialStartAction object
+NewEnvironmentPartialStopAction instantiates a new EnvironmentPartialStopAction object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewEnvironmentPartialStartActionWithDefaults
+### NewEnvironmentPartialStopActionWithDefaults
 
-`func NewEnvironmentPartialStartActionWithDefaults() *EnvironmentPartialStartAction`
+`func NewEnvironmentPartialStopActionWithDefaults() *EnvironmentPartialStopAction`
 
-NewEnvironmentPartialStartActionWithDefaults instantiates a new EnvironmentPartialStartAction object
+NewEnvironmentPartialStopActionWithDefaults instantiates a new EnvironmentPartialStopAction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetWithDependencies
-
-`func (o *EnvironmentPartialStartAction) GetWithDependencies() bool`
-
-GetWithDependencies returns the WithDependencies field if non-nil, zero value otherwise.
-
-### GetWithDependenciesOk
-
-`func (o *EnvironmentPartialStartAction) GetWithDependenciesOk() (*bool, bool)`
-
-GetWithDependenciesOk returns a tuple with the WithDependencies field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWithDependencies
-
-`func (o *EnvironmentPartialStartAction) SetWithDependencies(v bool)`
-
-SetWithDependencies sets WithDependencies field to given value.
-
-### HasWithDependencies
-
-`func (o *EnvironmentPartialStartAction) HasWithDependencies() bool`
-
-HasWithDependencies returns a boolean if a field has been set.
-
 ### GetQueueIfSomethingInProgress
 
-`func (o *EnvironmentPartialStartAction) GetQueueIfSomethingInProgress() bool`
+`func (o *EnvironmentPartialStopAction) GetQueueIfSomethingInProgress() bool`
 
 GetQueueIfSomethingInProgress returns the QueueIfSomethingInProgress field if non-nil, zero value otherwise.
 
 ### GetQueueIfSomethingInProgressOk
 
-`func (o *EnvironmentPartialStartAction) GetQueueIfSomethingInProgressOk() (*bool, bool)`
+`func (o *EnvironmentPartialStopAction) GetQueueIfSomethingInProgressOk() (*bool, bool)`
 
 GetQueueIfSomethingInProgressOk returns a tuple with the QueueIfSomethingInProgress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQueueIfSomethingInProgress
 
-`func (o *EnvironmentPartialStartAction) SetQueueIfSomethingInProgress(v bool)`
+`func (o *EnvironmentPartialStopAction) SetQueueIfSomethingInProgress(v bool)`
 
 SetQueueIfSomethingInProgress sets QueueIfSomethingInProgress field to given value.
 
 ### HasQueueIfSomethingInProgress
 
-`func (o *EnvironmentPartialStartAction) HasQueueIfSomethingInProgress() bool`
+`func (o *EnvironmentPartialStopAction) HasQueueIfSomethingInProgress() bool`
 
 HasQueueIfSomethingInProgress returns a boolean if a field has been set.
 
 ### GetIsPartial
 
-`func (o *EnvironmentPartialStartAction) GetIsPartial() bool`
+`func (o *EnvironmentPartialStopAction) GetIsPartial() bool`
 
 GetIsPartial returns the IsPartial field if non-nil, zero value otherwise.
 
 ### GetIsPartialOk
 
-`func (o *EnvironmentPartialStartAction) GetIsPartialOk() (*bool, bool)`
+`func (o *EnvironmentPartialStopAction) GetIsPartialOk() (*bool, bool)`
 
 GetIsPartialOk returns a tuple with the IsPartial field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsPartial
 
-`func (o *EnvironmentPartialStartAction) SetIsPartial(v bool)`
+`func (o *EnvironmentPartialStopAction) SetIsPartial(v bool)`
 
 SetIsPartial sets IsPartial field to given value.
 
 ### HasIsPartial
 
-`func (o *EnvironmentPartialStartAction) HasIsPartial() bool`
+`func (o *EnvironmentPartialStopAction) HasIsPartial() bool`
 
 HasIsPartial returns a boolean if a field has been set.
 
 ### GetComponents
 
-`func (o *EnvironmentPartialStartAction) GetComponents() []string`
+`func (o *EnvironmentPartialStopAction) GetComponents() []string`
 
 GetComponents returns the Components field if non-nil, zero value otherwise.
 
 ### GetComponentsOk
 
-`func (o *EnvironmentPartialStartAction) GetComponentsOk() (*[]string, bool)`
+`func (o *EnvironmentPartialStopAction) GetComponentsOk() (*[]string, bool)`
 
 GetComponentsOk returns a tuple with the Components field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComponents
 
-`func (o *EnvironmentPartialStartAction) SetComponents(v []string)`
+`func (o *EnvironmentPartialStopAction) SetComponents(v []string)`
 
 SetComponents sets Components field to given value.
 
 ### HasComponents
 
-`func (o *EnvironmentPartialStartAction) HasComponents() bool`
+`func (o *EnvironmentPartialStopAction) HasComponents() bool`
 
 HasComponents returns a boolean if a field has been set.
 

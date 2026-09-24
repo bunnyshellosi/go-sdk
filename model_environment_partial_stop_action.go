@@ -15,68 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the EnvironmentPartialStartAction type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &EnvironmentPartialStartAction{}
+// checks if the EnvironmentPartialStopAction type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EnvironmentPartialStopAction{}
 
-// EnvironmentPartialStartAction An environment holds a collection of buildable and deployable components.
-type EnvironmentPartialStartAction struct {
-	WithDependencies           *bool    `json:"withDependencies,omitempty"`
+// EnvironmentPartialStopAction An environment holds a collection of buildable and deployable components.
+type EnvironmentPartialStopAction struct {
 	QueueIfSomethingInProgress *bool    `json:"queueIfSomethingInProgress,omitempty"`
 	IsPartial                  *bool    `json:"isPartial,omitempty"`
 	Components                 []string `json:"components,omitempty"`
 }
 
-// NewEnvironmentPartialStartAction instantiates a new EnvironmentPartialStartAction object
+// NewEnvironmentPartialStopAction instantiates a new EnvironmentPartialStopAction object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentPartialStartAction() *EnvironmentPartialStartAction {
-	this := EnvironmentPartialStartAction{}
+func NewEnvironmentPartialStopAction() *EnvironmentPartialStopAction {
+	this := EnvironmentPartialStopAction{}
 	return &this
 }
 
-// NewEnvironmentPartialStartActionWithDefaults instantiates a new EnvironmentPartialStartAction object
+// NewEnvironmentPartialStopActionWithDefaults instantiates a new EnvironmentPartialStopAction object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewEnvironmentPartialStartActionWithDefaults() *EnvironmentPartialStartAction {
-	this := EnvironmentPartialStartAction{}
+func NewEnvironmentPartialStopActionWithDefaults() *EnvironmentPartialStopAction {
+	this := EnvironmentPartialStopAction{}
 	return &this
-}
-
-// GetWithDependencies returns the WithDependencies field value if set, zero value otherwise.
-func (o *EnvironmentPartialStartAction) GetWithDependencies() bool {
-	if o == nil || IsNil(o.WithDependencies) {
-		var ret bool
-		return ret
-	}
-	return *o.WithDependencies
-}
-
-// GetWithDependenciesOk returns a tuple with the WithDependencies field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EnvironmentPartialStartAction) GetWithDependenciesOk() (*bool, bool) {
-	if o == nil || IsNil(o.WithDependencies) {
-		return nil, false
-	}
-	return o.WithDependencies, true
-}
-
-// HasWithDependencies returns a boolean if a field has been set.
-func (o *EnvironmentPartialStartAction) HasWithDependencies() bool {
-	if o != nil && !IsNil(o.WithDependencies) {
-		return true
-	}
-
-	return false
-}
-
-// SetWithDependencies gets a reference to the given bool and assigns it to the WithDependencies field.
-func (o *EnvironmentPartialStartAction) SetWithDependencies(v bool) {
-	o.WithDependencies = &v
 }
 
 // GetQueueIfSomethingInProgress returns the QueueIfSomethingInProgress field value if set, zero value otherwise.
-func (o *EnvironmentPartialStartAction) GetQueueIfSomethingInProgress() bool {
+func (o *EnvironmentPartialStopAction) GetQueueIfSomethingInProgress() bool {
 	if o == nil || IsNil(o.QueueIfSomethingInProgress) {
 		var ret bool
 		return ret
@@ -86,7 +53,7 @@ func (o *EnvironmentPartialStartAction) GetQueueIfSomethingInProgress() bool {
 
 // GetQueueIfSomethingInProgressOk returns a tuple with the QueueIfSomethingInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EnvironmentPartialStartAction) GetQueueIfSomethingInProgressOk() (*bool, bool) {
+func (o *EnvironmentPartialStopAction) GetQueueIfSomethingInProgressOk() (*bool, bool) {
 	if o == nil || IsNil(o.QueueIfSomethingInProgress) {
 		return nil, false
 	}
@@ -94,7 +61,7 @@ func (o *EnvironmentPartialStartAction) GetQueueIfSomethingInProgressOk() (*bool
 }
 
 // HasQueueIfSomethingInProgress returns a boolean if a field has been set.
-func (o *EnvironmentPartialStartAction) HasQueueIfSomethingInProgress() bool {
+func (o *EnvironmentPartialStopAction) HasQueueIfSomethingInProgress() bool {
 	if o != nil && !IsNil(o.QueueIfSomethingInProgress) {
 		return true
 	}
@@ -103,12 +70,12 @@ func (o *EnvironmentPartialStartAction) HasQueueIfSomethingInProgress() bool {
 }
 
 // SetQueueIfSomethingInProgress gets a reference to the given bool and assigns it to the QueueIfSomethingInProgress field.
-func (o *EnvironmentPartialStartAction) SetQueueIfSomethingInProgress(v bool) {
+func (o *EnvironmentPartialStopAction) SetQueueIfSomethingInProgress(v bool) {
 	o.QueueIfSomethingInProgress = &v
 }
 
 // GetIsPartial returns the IsPartial field value if set, zero value otherwise.
-func (o *EnvironmentPartialStartAction) GetIsPartial() bool {
+func (o *EnvironmentPartialStopAction) GetIsPartial() bool {
 	if o == nil || IsNil(o.IsPartial) {
 		var ret bool
 		return ret
@@ -118,7 +85,7 @@ func (o *EnvironmentPartialStartAction) GetIsPartial() bool {
 
 // GetIsPartialOk returns a tuple with the IsPartial field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EnvironmentPartialStartAction) GetIsPartialOk() (*bool, bool) {
+func (o *EnvironmentPartialStopAction) GetIsPartialOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsPartial) {
 		return nil, false
 	}
@@ -126,7 +93,7 @@ func (o *EnvironmentPartialStartAction) GetIsPartialOk() (*bool, bool) {
 }
 
 // HasIsPartial returns a boolean if a field has been set.
-func (o *EnvironmentPartialStartAction) HasIsPartial() bool {
+func (o *EnvironmentPartialStopAction) HasIsPartial() bool {
 	if o != nil && !IsNil(o.IsPartial) {
 		return true
 	}
@@ -135,12 +102,12 @@ func (o *EnvironmentPartialStartAction) HasIsPartial() bool {
 }
 
 // SetIsPartial gets a reference to the given bool and assigns it to the IsPartial field.
-func (o *EnvironmentPartialStartAction) SetIsPartial(v bool) {
+func (o *EnvironmentPartialStopAction) SetIsPartial(v bool) {
 	o.IsPartial = &v
 }
 
 // GetComponents returns the Components field value if set, zero value otherwise.
-func (o *EnvironmentPartialStartAction) GetComponents() []string {
+func (o *EnvironmentPartialStopAction) GetComponents() []string {
 	if o == nil || IsNil(o.Components) {
 		var ret []string
 		return ret
@@ -150,7 +117,7 @@ func (o *EnvironmentPartialStartAction) GetComponents() []string {
 
 // GetComponentsOk returns a tuple with the Components field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EnvironmentPartialStartAction) GetComponentsOk() ([]string, bool) {
+func (o *EnvironmentPartialStopAction) GetComponentsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Components) {
 		return nil, false
 	}
@@ -158,7 +125,7 @@ func (o *EnvironmentPartialStartAction) GetComponentsOk() ([]string, bool) {
 }
 
 // HasComponents returns a boolean if a field has been set.
-func (o *EnvironmentPartialStartAction) HasComponents() bool {
+func (o *EnvironmentPartialStopAction) HasComponents() bool {
 	if o != nil && !IsNil(o.Components) {
 		return true
 	}
@@ -167,11 +134,11 @@ func (o *EnvironmentPartialStartAction) HasComponents() bool {
 }
 
 // SetComponents gets a reference to the given []string and assigns it to the Components field.
-func (o *EnvironmentPartialStartAction) SetComponents(v []string) {
+func (o *EnvironmentPartialStopAction) SetComponents(v []string) {
 	o.Components = v
 }
 
-func (o EnvironmentPartialStartAction) MarshalJSON() ([]byte, error) {
+func (o EnvironmentPartialStopAction) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -179,11 +146,8 @@ func (o EnvironmentPartialStartAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EnvironmentPartialStartAction) ToMap() (map[string]interface{}, error) {
+func (o EnvironmentPartialStopAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.WithDependencies) {
-		toSerialize["withDependencies"] = o.WithDependencies
-	}
 	if !IsNil(o.QueueIfSomethingInProgress) {
 		toSerialize["queueIfSomethingInProgress"] = o.QueueIfSomethingInProgress
 	}
@@ -196,38 +160,38 @@ func (o EnvironmentPartialStartAction) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableEnvironmentPartialStartAction struct {
-	value *EnvironmentPartialStartAction
+type NullableEnvironmentPartialStopAction struct {
+	value *EnvironmentPartialStopAction
 	isSet bool
 }
 
-func (v NullableEnvironmentPartialStartAction) Get() *EnvironmentPartialStartAction {
+func (v NullableEnvironmentPartialStopAction) Get() *EnvironmentPartialStopAction {
 	return v.value
 }
 
-func (v *NullableEnvironmentPartialStartAction) Set(val *EnvironmentPartialStartAction) {
+func (v *NullableEnvironmentPartialStopAction) Set(val *EnvironmentPartialStopAction) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableEnvironmentPartialStartAction) IsSet() bool {
+func (v NullableEnvironmentPartialStopAction) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableEnvironmentPartialStartAction) Unset() {
+func (v *NullableEnvironmentPartialStopAction) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableEnvironmentPartialStartAction(val *EnvironmentPartialStartAction) *NullableEnvironmentPartialStartAction {
-	return &NullableEnvironmentPartialStartAction{value: val, isSet: true}
+func NewNullableEnvironmentPartialStopAction(val *EnvironmentPartialStopAction) *NullableEnvironmentPartialStopAction {
+	return &NullableEnvironmentPartialStopAction{value: val, isSet: true}
 }
 
-func (v NullableEnvironmentPartialStartAction) MarshalJSON() ([]byte, error) {
+func (v NullableEnvironmentPartialStopAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableEnvironmentPartialStartAction) UnmarshalJSON(src []byte) error {
+func (v *NullableEnvironmentPartialStopAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

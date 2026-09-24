@@ -1687,7 +1687,7 @@ paths:
       parameters:
       - allowReserved: false
         deprecated: false
-        description: Resource identifier
+        description: Resource identifier.
         explode: false
         in: path
         name: id
@@ -1695,6 +1695,32 @@ paths:
         schema:
           type: string
         style: simple
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Queue the delete operation when another environment operation
+          is in progress.
+        explode: false
+        in: query
+        name: queueIfSomethingInProgress
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - allowEmptyValue: false
+        allowReserved: false
+        deprecated: false
+        description: Delete only the database entries without destroying the environment
+          resources. Cannot be combined with queueIfSomethingInProgress=true.
+        explode: false
+        in: query
+        name: deleteFromDatabaseOnly
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -1957,7 +1983,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/environment.PartialAction"
+              $ref: "#/components/schemas/environment.PartialStopAction"
         description: The new environment resource
         required: true
       responses:
@@ -2018,7 +2044,9 @@ paths:
           - env_clone
           - env_deploy
           - env_undeploy
+          - env_undeploy_skipped
           - env_delete
+          - env_delete_skipped
           - env_delete_ephemeral
           - env_start_manual
           - env_start_auto
@@ -5716,16 +5744,6 @@ components:
       - clusters
       - users
       type: object
-    environment.PartialAction:
-      description: An environment holds a collection of buildable and deployable components.
-      properties:
-        isPartial:
-          type: boolean
-        components:
-          items:
-            type: string
-          type: array
-      type: object
     environment.PartialDeployAction:
       description: An environment holds a collection of buildable and deployable components.
       properties:
@@ -5746,6 +5764,20 @@ components:
       description: An environment holds a collection of buildable and deployable components.
       properties:
         withDependencies:
+          type: boolean
+        queueIfSomethingInProgress:
+          type: boolean
+        isPartial:
+          type: boolean
+        components:
+          items:
+            type: string
+          type: array
+      type: object
+    environment.PartialStopAction:
+      description: An environment holds a collection of buildable and deployable components.
+      properties:
+        queueIfSomethingInProgress:
           type: boolean
         isPartial:
           type: boolean
