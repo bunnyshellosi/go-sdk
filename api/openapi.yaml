@@ -2018,7 +2018,9 @@ paths:
           - env_clone
           - env_deploy
           - env_undeploy
+          - env_undeploy_skipped
           - env_delete
+          - env_delete_skipped
           - env_delete_ephemeral
           - env_start_manual
           - env_start_auto
